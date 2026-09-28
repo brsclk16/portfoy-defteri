@@ -608,13 +608,16 @@ function render(scrollTop){
     else{v.innerHTML=sn+viewEnstruman();after=afterWatch}}
   else if(R.r==='teknik'){const sn=subnav('teknik',R.sub);
     if(R.sub==='tarama'){v.innerHTML=sn+`<div class="fade">${viewTarama()}</div>`}
+    else if(R.sub==='karsilastir'){v.innerHTML=sn+viewCmp();after=afterCmp}
+    else if(R.sub==='test'){v.innerHTML=sn+`<div class="fade">${viewBtAll()}</div>`;after=afterBtAll}
     else{const o=viewTeknikPanel(R.t);v.innerHTML=sn+(o.html||o);after=()=>afterTeknikPanel(o.t)}}
   else if(R.r==='analiz'){const sn=subnav('analiz',R.sub);v.innerHTML=sn+analizPart(R.sub);
-    after=()=>{if(R.sub==='simulator')afterSim();else if(R.sub==='beklenti')afterPortExpect();else if(R.sub!=='haftalik')afterAnaliz()}}
+    after=()=>{if(R.sub==='simulator')afterSim();else if(R.sub==='beklenti')afterPortExpect();else if(R.sub==='makro')afterMakro();else if(R.sub!=='haftalik')afterAnaliz()}}
   else{v.innerHTML=viewOzet();after=afterOzet}
   try{after()}catch(e){console.error(e)}
   $$('.ranges').forEach(g=>$$('button',g).forEach(b=>b.onclick=()=>{S.range[g.dataset.k]=b.dataset.r;render(false)}));
   applyCollapse();
+  try{checkNotify()}catch(e){}
   if(scrollTop!==false&&key!==lastRoute)window.scrollTo(0,0);else window.scrollTo(0,y);
   lastRoute=key;
   if(!scrollTop)$$('.fade').forEach(n=>n.classList.remove('fade'));
@@ -626,8 +629,8 @@ async function loadData(){
   const v='?t='+Math.floor(Date.now()/60000);
   const [d,p,h]=await Promise.all(['portfolio','prices','history'].map(n=>fetch('data/'+n+'.json'+v).then(r=>{if(!r.ok)throw new Error(n+'.json '+r.status);return r.json()})));
   const opt=n=>fetch('data/'+n+'.json'+v).then(r=>r.ok?r.json():null).catch(()=>null);
-  const [m,w,wl,er,ins,oh,mo]=await Promise.all([opt('macro'),opt('weekly'),opt('watchlist'),opt('earnings'),opt('insider'),opt('ohlc'),opt('monthly')]);
-  S.data=d;S.prices=p;S.hist=h;S.macro=m;S.weekly=w;if(wl)S.watch=wl;S.earn=er;S.insider=ins;S.ohlc=oh;S.monthly=mo;S.mcCache={};
+  const [m,w,wl,er,ins,oh,mo,mk]=await Promise.all([opt('macro'),opt('weekly'),opt('watchlist'),opt('earnings'),opt('insider'),opt('ohlc'),opt('monthly'),opt('markets')]);
+  S.data=d;S.prices=p;S.hist=h;S.macro=m;S.weekly=w;if(wl)S.watch=wl;S.earn=er;S.insider=ins;S.ohlc=oh;S.monthly=mo;S.markets=mk;S.mcCache={};
 }
 async function boot(){
   const th=lsGet('pd_theme');if(th)document.documentElement.dataset.theme=th;

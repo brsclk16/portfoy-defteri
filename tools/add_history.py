@@ -23,6 +23,6 @@ if all(k in hdr for k in ('open', 'high', 'low')):
         v = l.split(';'); d = v[di][:10]
         rows2[d] = [d] + [round(float(v[ix[k]]), 2) for k in ('open', 'high', 'low', 'close')] + [int(float(v[vi] or 0)) if vi is not None else 0]
     old2 = {r[0]: r for r in O.get(t, [])}; old2.update(rows2)
-    O[t] = [old2[d] for d in sorted(old2)][-400:]
+    O[t] = [old2[d] for d in sorted(old2)][-800:]
     json.dump(O, open(OP, 'w'), separators=(',', ':'))
 print(f'{t}: {len(H[t])} gün')

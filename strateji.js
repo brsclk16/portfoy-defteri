@@ -51,10 +51,10 @@ function seasonality(t){
 }
 
 /* ---------- işlem planı ---------- */
-function tradePlan(t){
-  const a=candles(t);if(a.length<120)return null;const cl=a.map(x=>x.c);const i=a.length-1,px=cl[i];
+function tradePlan(t,aIn){
+  const hist=!!aIn;const a=aIn||candles(t);if(a.length<120)return null;const cl=a.map(x=>x.c);const i=a.length-1,px=cl[i];
   const atr=atrS(a)[i]||px*0.02;const I=ichimoku(a);const s20=smaS(cl,20)[i],s50=smaS(cl,50)[i],s200=smaS(cl,200)[i];const B=bollinger(cl);
-  const fib=fibLevels(a);const sr=srLevels(a,px,atr);const vp=volProfile(a);const vw50=vwapN(a,50);const q=quote(t);
+  const fib=fibLevels(a);const sr=srLevels(a,px,atr);const vp=volProfile(a);const vw50=vwapN(a,50);const q=hist?{hi52:Math.max(...a.slice(-252).map(x=>x.h))}:quote(t);
   const cTop=Math.max(I.A[i]??-Infinity,I.B[i]??-Infinity),cBot=Math.min(I.A[i]??Infinity,I.B[i]??Infinity);
   const C=[];const add=(p,name,w)=>{if(isNum(p)&&p>0)C.push({p,name,w})};
   add(I.K[i],'Kijun',2);if(px>cTop){add(cTop,'Bulut üstü',2);add(cBot,'Bulut altı',1)}else add(cBot,'Bulut altı',1);add(I.T[i],'Tenkan',1);
@@ -77,7 +77,7 @@ function tradePlan(t){
   const R=[];const addR=(p,name)=>{if(isNum(p)&&p>px+atr*0.8)R.push({p,name})};
   sr.filter(l=>l.p>px).forEach(l=>addR(l.p,`Direnç (${l.touches} temas)`));addR(q.hi52,'52 hafta zirvesi');
   if(fib){if(fib.up)fib.ext.forEach(f=>addR(f.p,f.label));else fib.retr.forEach(f=>addR(f.p,f.label))}
-  addR(B.up[i],'Bollinger üst');const sg=sig(t);if(sg&&sg.target>0)addR(sg.target,'Analist ortalama hedefi');
+  addR(B.up[i],'Bollinger üst');const sg=hist?null:sig(t);if(sg&&sg.target>0)addR(sg.target,'Analist ortalama hedefi');
   R.sort((x,y)=>x.p-y.p);const merged=[];R.forEach(r=>{const m=merged[merged.length-1];if(m&&r.p-m.p<atr*0.8){m.name+=' + '+r.name}else merged.push({...r})});
   let tp1=merged[0],tp2=merged.find(r=>tp1&&r.p>tp1.p+atr*1.5);
   if(!tp1){tp1={p:px+atr*3,name:'3 ATR'}}if(!tp2){tp2={p:tp1.p+atr*3,name:'TP1 + 3 ATR'}}

@@ -4,8 +4,8 @@ const SECTIONS={
   ozet:{label:'Özet',icon:'M3 12l9-8 9 8M5 10v10h14V10'},
   portfoy:{label:'Portföyüm',icon:'M4 7h16v12H4zM8 7V5h8v2',subs:[['pozisyon','Pozisyonlar'],['defter','Günlük · plan · vergi']]},
   piyasa:{label:'Piyasa',icon:'M4 19V9M10 19V5M16 19v-7M22 19H2',subs:[['enstruman','Enstrümanlar'],['haber','Haberler'],['takvim','Takvim']]},
-  teknik:{label:'Teknik',icon:'M7 4v16M7 8h-2v6h2M17 4v16M17 7h-2v8h2M12 9v11M12 12h-2v4h2',subs:[['grafik','Grafik paneli'],['tarama','Teknik tarama']]},
-  analiz:{label:'Analiz',icon:'M4 20l5-6 4 3 7-9',subs:[['getiri','Reel getiri'],['risk','Risk'],['beklenti','Vade beklentisi'],['senaryo','Senaryo'],['dengeleme','Dengeleme'],['simulator','Eklesem ne olur?'],['haftalik','Haftalık rapor']]}
+  teknik:{label:'Teknik',icon:'M7 4v16M7 8h-2v6h2M17 4v16M17 7h-2v8h2M12 9v11M12 12h-2v4h2',subs:[['grafik','Grafik paneli'],['karsilastir','Karşılaştır · oran'],['test','Sinyal testi'],['tarama','Teknik tarama']]},
+  analiz:{label:'Analiz',icon:'M4 20l5-6 4 3 7-9',subs:[['getiri','Reel getiri'],['risk','Risk'],['makro','Makro'],['beklenti','Vade beklentisi'],['senaryo','Senaryo'],['dengeleme','Dengeleme'],['simulator','Eklesem ne olur?'],['haftalik','Haftalık rapor']]}
 };
 const LEGACY={pozisyon:['portfoy','pozisyon'],defter:['portfoy','defter'],enstruman:['piyasa','enstruman'],haber:['piyasa','haber'],takvim:['piyasa','takvim'],haftalik:['analiz','haftalik']};
 const ITABS=[['genel','Genel bakış'],['plan','Plan ve beklenti'],['teknik','Teknik'],['temel','Temel'],['haber','Haberler'],['iceriden','İçeriden işlemler']];
@@ -15,6 +15,7 @@ function route2(){
   if(LEGACY[parts[0]])return {r:LEGACY[parts[0]][0],sub:LEGACY[parts[0]][1]};
   if(parts[0]==='piyasa'&&parts[1]==='tarama')return {r:'teknik',sub:'tarama'};
   if(parts[0]==='teknik')return {r:'teknik',sub:parts[1]||'grafik',t:(parts[2]||'').toUpperCase()};
+  if(parts[0]==='piyasa'&&parts[1]==='karsilastir')return {r:'teknik',sub:'karsilastir'};
   const r=SECTIONS[parts[0]]?parts[0]:'ozet';const subs=SECTIONS[r].subs;return {r,sub:parts[1]||(subs?subs[0][0]:null)};
 }
 function navHTML(){return Object.entries(SECTIONS).map(([k,v])=>`<a href="#/${k}" data-r="${k}">${v.label}</a>`).join('')}
@@ -24,6 +25,7 @@ function markNav(r){$$('#tabs a,#bnav a').forEach(a=>a.classList.toggle('on',a.d
 
 /* ---------- Analiz alt sayfaları ---------- */
 function analizPart(part){
+  if(part==='makro')return viewMakro();
   if(part==='simulator')return viewSim();if(part==='haftalik')return viewHaftalik();if(part==='beklenti')return viewPortExpect()+viewInstExpectTable();
   const tmp=document.createElement('div');tmp.innerHTML=viewAnaliz();const root=tmp.firstElementChild||tmp;const kids=Array.from(root.children);
   const map={getiri:'Reel getiri',risk:'Risk paneli',senaryo:'Senaryo testi',dengeleme:'Dengeleme hesaplayıcı'};const want=map[part]||map.getiri;
@@ -67,7 +69,7 @@ function viewInstTabs(t,tab){
   const hasIns=kids.some(isIns);
   const tabs=ITABS.filter(([k])=>k!=='iceriden'||hasIns);
   let body='';
-  if(tab==='plan')body=planCard(t)+expectSection(t);
+  if(tab==='plan')body=planCard(t)+`<div class="sec">${psCard(t)}</div>`+expectSection(t)+btSection(t);
   else if(tab==='teknik')body=pick(isTech)+levelsSection(t);
   else if(tab==='temel')body=pick(isMetrics)+pick(isSW)+pick(isHold)+pick(isEarn);
   else if(tab==='haber')body=pick(isNews);
@@ -78,7 +80,7 @@ function viewInstTabs(t,tab){
 function afterInstTabs(t,tab){
   if(tab==='genel'){const s=sliceRange(series(t),S.range.inst);const c=s.length>1&&s[s.length-1][1]>=s[0][1]?'#2fe39a':'#ff5d7a';const el=$('#cInst');if(el)lineChart(el,[{name:t,color:c,pts:s}],{area:true,fmt:(v,ax)=>(isTRY(t)?'₺':'$')+nf(v,ax?0:2)})}
   if(tab==='teknik'){afterTech(t);afterLevels(t)}
-  if(tab==='plan')afterExpect(t);
+  if(tab==='plan'){afterExpect(t);afterPs(t);afterBt()}
 }
 
 /* ---------- uyarılar ---------- */
@@ -101,7 +103,7 @@ function alerts(){
   return out.sort((a,b)=>b.lvl-a.lvl);
 }
 function alertsCard(){const A=alerts();if(!A.length)return '';const show=A.slice(0,S.alAll?50:6);
-  return `<section class="card alerts"><h3>Dikkat edilecekler <span class="r muted">${A.length}</span></h3><div class="al">${show.map(a=>`<a class="ali l${a.lvl}" href="${a.href}"><span class="ic">${a.ic}</span><span>${esc(a.txt)}</span><i>→</i></a>`).join('')}</div>${A.length>6?`<button class="lnk2" id="alMore">${S.alAll?'Daha az göster':'Tümünü göster ('+A.length+')'}</button>`:''}</section>`}
+  return `<section class="card alerts"><h3>Dikkat edilecekler <span class="r">${'Notification' in window?`<button class="lnk2" id="nfBtn" style="margin:0 10px 0 0">${notifOn()?'🔔 Bildirimler açık':'🔕 Bildirimleri aç'}</button>`:''}<span class="muted">${A.length}</span></span></h3><div class="al">${show.map(a=>`<a class="ali l${a.lvl}" href="${a.href}"><span class="ic">${a.ic}</span><span>${esc(a.txt)}</span><i>→</i></a>`).join('')}</div>${A.length>6?`<button class="lnk2" id="alMore">${S.alAll?'Daha az göster':'Tümünü göster ('+A.length+')'}</button>`:''}</section>`}
 
 /* ---------- arama ---------- */
 function searchItems(){
@@ -128,7 +130,9 @@ function setupChrome(){
   $('#sres').addEventListener('click',()=>setTimeout(closeSearch,10));
   document.addEventListener('keydown',e=>{if(e.key==='/'&&!/input|textarea|select/i.test(document.activeElement.tagName)){e.preventDefault();openSearch()}});
   $('#view').addEventListener('click',e=>{const h=e.target.closest('.sec-t h2');if(h){const C=lsJSON('pd_col',{});const k=colKey(h);C[k]=!C[k];lsSet('pd_col',JSON.stringify(C));applyCollapse()}
-    if(e.target.id==='alMore'){S.alAll=!S.alAll;render(false)}});
+    if(e.target.id==='alMore'){S.alAll=!S.alAll;render(false)}
+    if(e.target.id==='nfBtn'){if(notifOn()){lsSet('pd_notif','0');toast('Bildirimler kapatıldı');render(false)}else notifEnable()}});
+  S.tf=lsGet('pd_tf')||'D';
 }
 
 /* ---------- Teknik: tam ekran grafik paneli ---------- */
@@ -143,7 +147,8 @@ function viewTeknikPanel(t0){
     <div class="px2"><b class="num">${pxf(t,q.price)}</b> ${chip(q.pct)}</div>
     <div class="tnav"><a class="btn ghost sm" href="#/teknik/grafik/${encodeURIComponent(prev)}" title="Önceki (←)">←</a><a class="btn ghost sm" href="#/teknik/grafik/${encodeURIComponent(next)}" title="Sonraki (→)">→</a><a class="btn ghost sm" href="#/t/${encodeURIComponent(t)}/plan">Plan ve beklenti</a><a class="btn ghost sm" href="#/t/${encodeURIComponent(t)}">Enstrüman sayfası</a></div></div>
   ${techSection(t)}
-  <div class="grid g2 sec" style="align-items:start">${planCard(t,true)}<div>${summaryCard(t)}</div></div>
+  <div class="grid g2 sec" style="align-items:start">${planCard(t,true)}<div class="grid" style="align-content:start">${summaryCard(t)}${psCard(t)}</div></div>
+  ${btSection(t)}
   ${levelsSection(t)}</div>`;
   S.techBig=false;return {html,t};
 }
@@ -154,6 +159,6 @@ function summaryCard(t){const s=techSignals(t);if(!s)return '';const x=tech(t);c
   <div class="votes">${votes.map(([k,v])=>`<div><span>${k}</span><b class="${v>0?'up':v<0?'down':'muted'}">${v>0?'▲ olumlu':v<0?'▼ olumsuz':'■ nötr'}</b></div>`).join('')}</div>
   ${P?`<p class="muted" style="font-size:13px;margin:12px 0 0;line-height:1.5">Plan durumu: <b class="${P.stc==='up'?'up':P.stc==='down'?'down':''}">${esc(P.state)}</b>. ${esc(P.msg)}</p>`:''}
   <p class="muted" style="font-size:12px;margin:8px 0 0">Oylama kısa vadeli teknik görünümü özetler; temel analiz ve haberleri içermez.</p></section>`}
-function afterTeknikPanel(t){S.techBig=true;try{afterTech(t);afterLevels(t)}finally{S.techBig=false}
+function afterTeknikPanel(t){S.techBig=true;try{afterTech(t);afterLevels(t)}finally{S.techBig=false}afterPs(t);afterBt();
   const L=techTickers();document.onkeydown=e=>{if(route2().r!=='teknik'||/input|textarea|select/i.test(document.activeElement.tagName))return;const i=L.indexOf(t);if(e.key==='ArrowRight')location.hash='#/teknik/grafik/'+L[(i+1)%L.length];if(e.key==='ArrowLeft')location.hash='#/teknik/grafik/'+L[(i-1+L.length)%L.length]};
   const on=$('.tpk.on'),bx=$('.tpick');if(on&&bx)bx.scrollLeft=on.offsetLeft-bx.clientWidth/2+on.clientWidth/2}

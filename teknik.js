@@ -33,8 +33,8 @@ function atrS(a,n=14){const tr=a.map((x,i)=>i?Math.max(x.h-x.l,Math.abs(x.h-a[i-
 function nextBizDays(d,n){const out=[];const x=new Date(d+'T12:00:00Z');while(out.length<n){x.setUTCDate(x.getUTCDate()+1);const w=x.getUTCDay();if(w&&w<6)out.push(x.toISOString().slice(0,10))}return out}
 
 /* ---------- sinyal özeti ---------- */
-function techSignals(t){
-  const a=candles(t);if(a.length<60)return null;const cl=a.map(x=>x.c);const n=a.length,i=n-1,px=cl[i];
+function techSignals(t,aIn){
+  const a=aIn||candles(t);if(a.length<60)return null;const cl=a.map(x=>x.c);const n=a.length,i=n-1,px=cl[i];
   const I=ichimoku(a);const cTop=Math.max(I.A[i]??-Infinity,I.B[i]??-Infinity),cBot=Math.min(I.A[i]??Infinity,I.B[i]??Infinity);
   const checks=[];
   const cloudPos=px>cTop?1:px<cBot?-1:0;checks.push({k:'Fiyat bulutun',v:cloudPos>0?'üstünde':cloudPos<0?'altında':'içinde',s:cloudPos});
@@ -57,13 +57,17 @@ function techSignals(t){
 function ichiChip(t){const s=techSignals(t);if(!s)return '';const I=s.ichi;return `<span class="tb ${I.cls}" title="Ichimoku skoru ${I.score>0?'+':''}${I.score} / 5">☁ ${esc(I.label)}</span>`}
 
 /* ---------- mum grafik ---------- */
+function toWeekly(a){const out=[];let cur=null,key=null;a.forEach(x=>{const dt=new Date(x.d+'T12:00:00Z');const wd=(dt.getUTCDay()+6)%7;const mon=new Date(dt-wd*864e5).toISOString().slice(0,10);if(mon!==key){key=mon;cur={d:x.d,o:x.o,h:x.h,l:x.l,c:x.c,v:x.v||0};out.push(cur)}else{cur.h=Math.max(cur.h,x.h);cur.l=Math.min(cur.l,x.l);cur.c=x.c;cur.v+=x.v||0;cur.d=x.d}});return out}
+function nextWeeks(d,n){const out=[];const x=new Date(d+'T12:00:00Z');for(let k=0;k<n;k++){x.setUTCDate(x.getUTCDate()+7);out.push(x.toISOString().slice(0,10))}return out}
+const TF_RANGES={D:['3A','6A','1Y','2Y','3Y'],W:['6A','1Y','2Y','3Y']};
+function techCandles(t){const a=candles(t);return S.tf==='W'?toWeekly(a):a}
 function techChart(el,t,range){
-  const all=candles(t);if(all.length<30){el.innerHTML='<div class="empty">Mum grafiği için OHLC verisi yok (yeni eklenen semboller ilk fiyat güncellemesinden sonra dolar).</div>';return}
+  const all=techCandles(t);const WK=S.tf==='W';if(all.length<30){el.innerHTML='<div class="empty">Mum grafiği için OHLC verisi yok (yeni eklenen semboller ilk fiyat güncellemesinden sonra dolar).</div>';return}
   const st=indState();const cl=all.map(x=>x.c);
   const I=st.ichi?ichimoku(all):null,B=st.boll?bollinger(cl):null,R=st.rsi?rsiS(cl):null,M=st.macd?macdS(cl):null,SK=st.stoch?stochS(all):null;
   const S20=st.sma?smaS(cl,20):null,S50=st.sma?smaS(cl,50):null,S200=st.sma?smaS(cl,200):null;
-  const nShow={'1A':22,'3A':63,'6A':126,'1Y':252}[range]||126;const start=Math.max(0,all.length-nShow);
-  const fut=st.ichi?26:0;const fdates=fut?nextBizDays(all[all.length-1].d,fut):[];
+  const nShow=(WK?{'6A':26,'1Y':52,'2Y':104,'3Y':156}:{'1A':22,'3A':63,'6A':126,'1Y':252,'2Y':504,'3Y':756})[range]||(WK?104:126);const start=Math.max(0,all.length-nShow);
+  const fut=st.ichi?26:0;const fdates=fut?(WK?nextWeeks(all[all.length-1].d,fut):nextBizDays(all[all.length-1].d,fut)):[];
   const N=all.length-start+fut;const W=el.clientWidth||900;
   const panels=[{k:'main',h:S.techBig?(innerWidth<760?360:520):340}];if(st.vol)panels.push({k:'vol',h:70});if(st.rsi)panels.push({k:'rsi',h:90});if(st.macd)panels.push({k:'macd',h:100});if(st.stoch)panels.push({k:'stoch',h:90});if(st.adx)panels.push({k:'adx',h:90});
   const gap=14,pl=6,pr=62;const H=panels.reduce((s,p)=>s+p.h+gap,0)+22;let yOff=6;panels.forEach(p=>{p.y=yOff;yOff+=p.h+gap});
@@ -96,13 +100,18 @@ function techChart(el,t,range){
   if(FB){FB.retr.concat(FB.ext).forEach(f=>{if(!near(f.p))return;svg+=`<line x1="${pl}" x2="${W-pr}" y1="${Y(f.p)}" y2="${Y(f.p)}" stroke="#ffd35c" stroke-opacity=".55" stroke-dasharray="2 4"/><text class="ax" x="${pl+4}" y="${Y(f.p)-3}" style="fill:#ffd35c">${esc(f.label)} ${esc(fmt(f.p))}</text>`})}
   if(PL){const zy1=Y(PL.zone.hi),zy2=Y(PL.zone.lo);svg+=`<rect x="${pl}" y="${zy1}" width="${W-pl-pr}" height="${Math.max(2,zy2-zy1)}" fill="rgba(92,211,255,.12)" stroke="rgba(92,211,255,.45)" stroke-dasharray="3 3"/><text class="ax" x="${W-pr-6}" y="${zy2-4}" text-anchor="end" style="fill:#5cd3ff">Alım bölgesi</text>`;
     [[PL.tp2.p,'TP2','#2fe39a'],[PL.tp1.p,'TP1','#2fe39a'],[PL.stop,'Stop','#ff5d7a']].forEach(([v,l,c])=>{if(!near(v))return;svg+=`<line x1="${pl}" x2="${W-pr}" y1="${Y(v)}" y2="${Y(v)}" stroke="${c}" stroke-width="1.2" stroke-dasharray="6 3"/><rect x="${W-pr+2}" y="${Y(v)-9}" width="${pr-4}" height="18" rx="4" fill="${c}" opacity=".9"/><text x="${W-pr+6}" y="${Y(v)+4}" style="fill:#0b0e13;font:600 10.5px var(--mono)">${l} ${esc(fmt(v))}</text>`})}
+  // kullanıcı çizimleri
+  const DR=drawsFor(t);const dts=all.map(x=>x.d);const idxOf=d=>{let k=dts.findIndex(x=>x>=d);return k<0?all.length-1:k};
+  DR.forEach((g,gi)=>{if(g.type==='h'){if(g.p<mn||g.p>mx)return;svg+=`<line x1="${pl}" x2="${W-pr}" y1="${Y(g.p)}" y2="${Y(g.p)}" stroke="${g.alarm?'#ffc35c':'#e7c6ff'}" stroke-width="1.5"/><text class="ax" x="${pl+4}" y="${Y(g.p)-4}" style="fill:${g.alarm?'#ffc35c':'#e7c6ff'}">${g.alarm?'🔔 ':''}${esc(fmt(g.p))}</text>`}
+    else if(g.type==='t'){const i1=idxOf(g.d1),i2=idxOf(g.d2);if(i2===i1)return;const sl=(g.p2-g.p1)/(i2-i1);const iE=all.length-1+fut;const x1=Math.max(i1,start);const y1=g.p1+sl*(x1-i1),yE=g.p1+sl*(iE-i1);svg+=`<line x1="${X(x1)}" y1="${Y(y1)}" x2="${X(iE)}" y2="${Y(yE)}" stroke="#e7c6ff" stroke-width="1.5"/><circle cx="${X(i1)}" cy="${Y(g.p1)}" r="3" fill="#e7c6ff"/><circle cx="${X(i2)}" cy="${Y(g.p2)}" r="3" fill="#e7c6ff"/>`}});
+  if(S.drawPend&&S.drawPend.t===t){const i1=idxOf(S.drawPend.d);svg+=`<circle cx="${X(i1)}" cy="${Y(S.drawPend.p)}" r="4" fill="#ffc35c"/>`}
   // mumlar
   const bw=Math.max(1,Math.min(9,cw*.66));
   for(let i=start;i<all.length;i++){const c=all[i];const up=c.c>=c.o;const col=up?'var(--up)':'var(--down)';const x=X(i);
     svg+=`<line x1="${x}" x2="${x}" y1="${Y(c.h)}" y2="${Y(c.l)}" stroke="${col}" stroke-width="1"/><rect x="${x-bw/2}" y="${Y(Math.max(c.o,c.c))}" width="${bw}" height="${Math.max(1,Math.abs(Y(c.o)-Y(c.c)))}" fill="${up?col:col}" ${up?'fill-opacity=".85"':''}/>`}
   // son fiyat etiketi
   const lp=all[all.length-1].c;svg+=`<line x1="${pl}" x2="${W-pr}" y1="${Y(lp)}" y2="${Y(lp)}" stroke="var(--muted)" stroke-dasharray="2 3" stroke-width=".8"/><rect x="${W-pr+2}" y="${Y(lp)-9}" width="${pr-4}" height="18" rx="4" fill="var(--text)"/><text x="${W-pr+6}" y="${Y(lp)+4}" style="fill:var(--bg);font:600 11px var(--mono)">${esc(fmt(lp))}</text>`;
-  if(fut)svg+=`<line x1="${X(all.length)-cw/2}" x2="${X(all.length)-cw/2}" y1="${main.y}" y2="${main.y+main.h}" stroke="var(--line2)" stroke-dasharray="4 4"/><text class="ax" x="${X(all.length)+4}" y="${main.y+12}">26 gün ileri bulut</text>`;
+  if(fut)svg+=`<line x1="${X(all.length)-cw/2}" x2="${X(all.length)-cw/2}" y1="${main.y}" y2="${main.y+main.h}" stroke="var(--line2)" stroke-dasharray="4 4"/><text class="ax" x="${X(all.length)+4}" y="${main.y+12}">26 ${WK?'hafta':'gün'} ileri bulut</text>`;
   // alt paneller
   const sub=(p,series,opt)=>{let lo=opt.lo,hi=opt.hi;if(hi==null&&lo!=null){hi=-Infinity;series.forEach(s=>{for(let i=start;i<all.length;i++){const v=s.a[i];if(v!=null)hi=Math.max(hi,v)}});hi=hi*1.08||1}if(lo==null){lo=Infinity;hi=-Infinity;series.forEach(s=>{for(let i=start;i<all.length;i++){const v=s.a[i];if(v!=null){lo=Math.min(lo,v);hi=Math.max(hi,v)}}});if(opt.zero){lo=Math.min(lo,0);hi=Math.max(hi,0)}const pd=(hi-lo)*.08||1;lo-=pd;hi+=pd}
     const Yp=v=>p.y+(1-(v-lo)/(hi-lo))*p.h;let g=`<rect x="${pl}" y="${p.y}" width="${W-pl-pr}" height="${p.h}" fill="none" stroke="var(--line)" rx="4"/><text class="ax" x="${pl+6}" y="${p.y+13}" style="fill:var(--muted)">${esc(opt.title)}</text>`;
@@ -138,21 +147,24 @@ function techChart(el,t,range){
     if(c&&c.v)h+=`<div class="li"><span>Hacim</span><b>${nf(c.v/1e6,2)} mn</b></div>`;
     tip.innerHTML=h;tip.hidden=false;const px=X(i)/W*r.width;const left=px>r.width/2?px-16:px+16;tip.style.left=left+'px';tip.style.top='8px';tip.style.transform=px>r.width/2?'translateX(-100%)':'none';tip.style.marginTop='0'};
   s.addEventListener('mousemove',mv);s.addEventListener('touchmove',mv,{passive:true});s.addEventListener('mouseleave',()=>{hov.style.display='none';tip.hidden=true});
+  s.style.cursor=S.drawMode?'crosshair':'';
+  s.addEventListener('click',ev=>{if(!S.drawMode)return;const r=s.getBoundingClientRect();const cx=(ev.clientX-r.left)*W/r.width,cy=(ev.clientY-r.top)*H/r.height;if(cy<main.y||cy>main.y+main.h)return;
+    const i=Math.max(start,Math.min(all.length-1,Math.floor((cx-pl)/cw)+start));const p=mn+(1-(cy-main.y)/main.h)*(mx-mn);drawClick(t,all[i].d,p)});
 }
 
 /* ---------- enstrüman sayfası: teknik analiz kartı ---------- */
 function techSection(t){
-  if(!S.ohlc||!(S.ohlc[t]||[]).length)return '';const st=indState();const sg=techSignals(t);const rg=S.range.tech||'6A';
+  if(!S.ohlc||!(S.ohlc[t]||[]).length)return '';const st=indState();let sg=techSignals(t);const rg=S.range.tech||'6A';
   const leg=st.ichi?`<div class="leg"><span><i style="background:#5cd3ff"></i>Tenkan (9)</span><span><i style="background:#ff9f5c"></i>Kijun (26)</span><span><i style="background:rgba(47,227,154,.5)"></i>Bulut (Senkou A/B)</span><span><i style="background:#c792ff"></i>Chikou</span></div>`:'';
   const legS=st.sma?`<div class="leg"><span><i style="background:#ffd35c"></i>20G</span><span><i style="background:#5cd3ff"></i>50G</span><span><i style="background:#ff6fd0"></i>200G</span></div>`:'';
-  return `<section class="card sec"><div class="th"><h3 style="margin:0">Teknik analiz${S.techBig?'':` <a class="lnk3" href="#/teknik/grafik/${encodeURIComponent(t)}">Teknik panelde aç ↗</a>`}</h3><div class="ranges" data-k="tech" style="margin:0">${(S.techBig?['1A','3A','6A','1Y']:['3A','6A','1Y']).map(r=>`<button data-r="${r}" class="${rg===r?'on':''}">${r}</button>`).join('')}</div></div>
-  <div class="indt" id="indT">${Object.entries(IND_DEF).map(([k,n])=>`<button data-ind="${k}" class="${st[k]?'on':''}">${n}</button>`).join('')}</div>${leg}${legS}
-  <div class="grid tgm"><div class="chart tchart" id="cTech"></div>${sg?`<aside class="sigs">
-    <div class="sig-h ${sg.ichi.cls}"><span>Ichimoku görünümü</span><b>${esc(sg.ichi.label)}</b><div class="sc">${[-5,-4,-3,-2,-1,0,1,2,3,4,5].map(v=>`<i class="${v===sg.ichi.score?'on':''} ${v>0?'p':v<0?'n':''}"></i>`).join('')}</div></div>
+  return `<section class="card sec"><div class="th"><h3 style="margin:0">Teknik analiz${S.techBig?'':` <a class="lnk3" href="#/teknik/grafik/${encodeURIComponent(t)}">Teknik panelde aç ↗</a>`}</h3><div class="ranges" data-k="tech" style="margin:0">${(S.tf==='W'?TF_RANGES.W:(S.techBig?['1A'].concat(TF_RANGES.D):TF_RANGES.D)).map(r=>`<button data-r="${r}" class="${rg===r?'on':''}">${r}</button>`).join('')}</div></div>
+  <div class="ttools"><div class="seg2" id="tfT"><button data-tf="D" class="${S.tf!=='W'?'on':''}">Günlük</button><button data-tf="W" class="${S.tf==='W'?'on':''}">Haftalık</button></div><div class="seg2" id="drT"><button data-dm="h" class="${S.drawMode==='h'?'on':''}" title="Grafiğe tıkla, yatay seviye ekle">— Seviye çiz</button><button data-dm="t" class="${S.drawMode==='t'?'on':''}" title="İki noktaya tıkla, trend çizgisi ekle">╱ Trend çiz</button></div>${S.drawMode?`<span class="dhint">${S.drawMode==='h'?'Grafikte seviyenin olduğu yere tıkla':S.drawPend?'İkinci noktaya tıkla':'Trendin ilk noktasına tıkla'} · <a href="#" id="drX">vazgeç</a></span>`:''}</div>${drawChips(t)}<div class="indt" id="indT">${Object.entries(IND_DEF).map(([k,n])=>`<button data-ind="${k}" class="${st[k]?'on':''}">${n}</button>`).join('')}</div>${leg}${legS}
+  <div class="grid tgm"><div class="chart tchart" id="cTech"></div>${(sg=S.tf==='W'?techSignals(t,techCandles(t)):sg)?`<aside class="sigs">
+    <div class="sig-h ${sg.ichi.cls}"><span>Ichimoku görünümü${S.tf==='W'?' · haftalık':''}</span><b>${esc(sg.ichi.label)}</b><div class="sc">${[-5,-4,-3,-2,-1,0,1,2,3,4,5].map(v=>`<i class="${v===sg.ichi.score?'on':''} ${v>0?'p':v<0?'n':''}"></i>`).join('')}</div></div>
     ${sg.ichi.checks.map(c=>`<div class="ck"><span>${esc(c.k)}</span><b class="${c.s>0?'up':c.s<0?'down':''}">${c.s>0?'▲':c.s<0?'▼':'■'} ${esc(c.v)}</b></div>`).join('')}
     <div class="ck"><span>Bulut aralığı</span><b class="num">${pxf(t,sg.ichi.cloudBot)} – ${pxf(t,sg.ichi.cloudTop)}</b></div>
     <div class="ck"><span>Kijun (destek/direnç)</span><b class="num">${pxf(t,sg.ichi.kijun)}</b></div>
-    ${sg.ichi.lastCross?`<div class="ck"><span>Son TK kesişimi</span><b class="${sg.ichi.lastCross.up?'up':'down'}">${sg.ichi.lastCross.up?'Yukarı':'Aşağı'} · ${sg.ichi.lastCross.ago?sg.ichi.lastCross.ago+" gün önce":"bugün"}</b></div>`:''}
+    ${sg.ichi.lastCross?`<div class="ck"><span>Son TK kesişimi</span><b class="${sg.ichi.lastCross.up?'up':'down'}">${sg.ichi.lastCross.up?'Yukarı':'Aşağı'} · ${sg.ichi.lastCross.ago?sg.ichi.lastCross.ago+(S.tf==="W"?" hafta":" gün")+" önce":(S.tf==="W"?"bu hafta":"bugün")}</b></div>`:''}
     <div class="sig-sep"></div>
     <div class="ck"><span>RSI (14)</span><b class="${sg.rsi>=70?'down':sg.rsi<=30?'up':''}">${nf(sg.rsi,0)} ${sg.rsi>=70?'· aşırı alım':sg.rsi<=30?'· aşırı satım':''}</b></div>
     <div class="ck"><span>MACD</span><b class="${sg.macd.h>0?'up':'down'}">${sg.macd.h>0?'Sinyalin üstünde':'Sinyalin altında'}${sg.macd.cross?' · bugün '+sg.macd.cross:''}${!sg.macd.cross?(sg.macd.rising?' · ivme artıyor':' · ivme azalıyor'):''}</b></div>
@@ -164,7 +176,11 @@ function techSection(t){
     <p class="muted" style="font-size:12px;margin:10px 0 0;line-height:1.5">Göstergeler geçmiş fiyattan hesaplanır, geleceği garanti etmez; tek başına alım-satım kararı için kullanılmamalı.</p>
   </aside>`:''}</div></section>`;
 }
-function afterTech(t){const el=$('#cTech');if(el)techChart(el,t,S.range.tech||'6A');
+function afterTech(t){const el=$('#cTech');const rg=S.range.tech||'6A';if(el)techChart(el,t,(S.tf==='W'?TF_RANGES.W:['1A'].concat(TF_RANGES.D)).includes(rg)?rg:(S.tf==='W'?'2Y':'6A'));
+  $$('#tfT button').forEach(b=>b.onclick=()=>{S.tf=b.dataset.tf;lsSet('pd_tf',S.tf);if(S.tf==='W'&&!TF_RANGES.W.includes(S.range.tech))S.range.tech='2Y';if(S.tf==='D'&&['2Y','3Y'].includes(S.range.tech))S.range.tech='6A';render(false)});
+  $$('#drT button').forEach(b=>b.onclick=()=>{S.drawMode=S.drawMode===b.dataset.dm?null:b.dataset.dm;S.drawPend=null;render(false)});
+  const x=$('#drX');if(x)x.onclick=e=>{e.preventDefault();S.drawMode=null;S.drawPend=null;render(false)};
+  $$('.dchip [data-del]').forEach(b=>b.onclick=()=>{drawDel(t,+b.dataset.del)});$$('.dchip [data-al]').forEach(b=>b.onclick=()=>{drawAlarm(t,+b.dataset.al)});
   $$('#indT button').forEach(b=>b.onclick=()=>{const st=indState();st[b.dataset.ind]=!st[b.dataset.ind];saveInd();render(false)})}
 
 /* ---------- teknik tarama (Analiz) ---------- */

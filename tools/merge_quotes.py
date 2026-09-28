@@ -23,7 +23,7 @@ def put_ohlc(t, q, day, px):
     a = O.setdefault(t, [])
     if a and a[-1][0] == day: a[-1] = row
     elif not a or day > a[-1][0]: a.append(row)
-    O[t] = a[-400:]
+    O[t] = a[-800:]
 H = json.load(open(os.path.join(D, 'history.json')))
 BENCH = {'SPY', 'USDTRY', 'XAUUSD'}  # sadece geçmişe yazılır (reel getiri ve risk için)
 n = 0; days = set()

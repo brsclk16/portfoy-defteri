@@ -1,6 +1,6 @@
 /* Portföy Defteri service worker: kabuk önbellekte, veri önce ağdan */
-const V='pd-v6';
-const SHELL=['./','index.html','style.css?v=6','analiz.js?v=6','ekler.js?v=6','teknik.js?v=6','strateji.js?v=6','duzen.js?v=6','app.js?v=6','manifest.webmanifest','icon-192.png','icon-512.png'];
+const V='pd-v7';
+const SHELL=['./','index.html','style.css?v=7','analiz.js?v=7','ekler.js?v=7','teknik.js?v=7','strateji.js?v=7','duzen.js?v=7','arac.js?v=7','app.js?v=7','manifest.webmanifest','icon-192.png','icon-512.png'];
 self.addEventListener('install',e=>{e.waitUntil(caches.open(V).then(c=>c.addAll(SHELL)).then(()=>self.skipWaiting()))});
 self.addEventListener('activate',e=>{e.waitUntil(caches.keys().then(ks=>Promise.all(ks.filter(k=>k!==V).map(k=>caches.delete(k)))).then(()=>self.clients.claim()))});
 self.addEventListener('fetch',e=>{
