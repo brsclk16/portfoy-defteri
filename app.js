@@ -455,6 +455,7 @@ function viewInst(t){
     </section>
   </div>
 
+  ${techSection(t)}
   <section class="card sec"><h3>Temel göstergeler</h3><div class="metrics">${metrics.map(m=>`<div class="mt ${m.hl?'hl':''}"><div class="l">${esc(m.label)}</div><div class="v">${esc(m.value)}</div>${m.note?`<div class="n">${esc(m.note)}</div>`:''}</div>`).join('')}</div></section>
 
   <div class="grid g-main sec">
@@ -483,6 +484,7 @@ function viewInst(t){
   </div></div>`;
 }
 function afterInst(t){
+  afterTech(t);
   const s=sliceRange(series(t),S.range.inst);const c=s.length>1&&s[s.length-1][1]>=s[0][1]?'#2fe39a':'#ff5d7a';
   const lots=S.lots.filter(l=>l.t===t);
   lineChart($('#cInst'),[{name:t,color:c,pts:s}],{area:true,fmt:(v,ax)=>'$'+nf(v,ax?0:2)});
@@ -600,7 +602,7 @@ function render(scrollTop){
   if(r==='t'){v.innerHTML=viewInst(a);afterInst(a)}
   else if(r==='pozisyon'){v.innerHTML=viewPozisyon();afterPozisyon()}
   else if(r==='enstruman'){v.innerHTML=viewEnstruman();afterWatch()}
-  else if(r==='analiz'){v.innerHTML=viewAnaliz()+viewSim();afterAnaliz();afterSim()}
+  else if(r==='analiz'){v.innerHTML=viewAnaliz()+viewScreener()+viewSim();afterAnaliz();afterSim()}
   else if(r==='haftalik'){v.innerHTML=viewHaftalik()}
   else if(r==='defter'){v.innerHTML=viewDefter();afterDefter()}
   else if(r==='haber'){v.innerHTML=viewHaber();$$('#nf button').forEach(b=>b.onclick=()=>{S.newsFilter=b.dataset.f;render(false)})}
@@ -618,8 +620,8 @@ async function loadData(){
   const v='?t='+Math.floor(Date.now()/60000);
   const [d,p,h]=await Promise.all(['portfolio','prices','history'].map(n=>fetch('data/'+n+'.json'+v).then(r=>{if(!r.ok)throw new Error(n+'.json '+r.status);return r.json()})));
   const opt=n=>fetch('data/'+n+'.json'+v).then(r=>r.ok?r.json():null).catch(()=>null);
-  const [m,w,wl,er,ins]=await Promise.all([opt('macro'),opt('weekly'),opt('watchlist'),opt('earnings'),opt('insider')]);
-  S.data=d;S.prices=p;S.hist=h;S.macro=m;S.weekly=w;if(wl)S.watch=wl;S.earn=er;S.insider=ins;
+  const [m,w,wl,er,ins,oh]=await Promise.all([opt('macro'),opt('weekly'),opt('watchlist'),opt('earnings'),opt('insider'),opt('ohlc')]);
+  S.data=d;S.prices=p;S.hist=h;S.macro=m;S.weekly=w;if(wl)S.watch=wl;S.earn=er;S.insider=ins;S.ohlc=oh;
 }
 async function boot(){
   const th=lsGet('pd_theme');if(th)document.documentElement.dataset.theme=th;

@@ -21,6 +21,7 @@ function tech(t){
 function techBadge(t){const x=tech(t);if(!x)return '<span class="dim">—</span>';
   const parts=[];if(x.rsi!=null)parts.push(`<span class="tb ${x.rc}" title="RSI(14) ${nf(x.rsi,0)}: ${x.rs}">RSI ${nf(x.rsi,0)}</span>`);
   if(x.d200!=null)parts.push(`<span class="tb ${x.hot?'down':x.d200<0?'warn':''}" title="200 günlük ortalamaya uzaklık">200G ${pct(x.d200,0)}</span>`);
+  if(typeof ichiChip==='function')parts.unshift(ichiChip(t));
   return parts.join(' ');}
 function techCard(t){const x=tech(t);if(!x)return '';
   return `<h3 style="margin-top:22px">Teknik görünüm <span class="r ${x.tc}">${esc(x.trend)}</span></h3>

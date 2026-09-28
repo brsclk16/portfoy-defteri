@@ -380,3 +380,35 @@ table.corr td{width:52px;height:34px;text-align:center;border-radius:6px;color:v
 @media (max-width:760px){.tgrid{grid-template-columns:repeat(3,minmax(0,1fr))}.ins{grid-template-columns:1fr}#planF{grid-template-columns:repeat(2,minmax(0,1fr))!important}}
 
 @media (max-width:1500px){#mkt>span{display:none}#mkt{padding:5px 8px}}
+
+/* v4: teknik analiz */
+.th{display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:10px}
+.indt{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:8px}
+.indt button{border:1px solid var(--line);background:var(--panel2);border-radius:99px;padding:5px 12px;font-size:12.5px;font-weight:600;color:var(--muted)}
+.indt button.on{background:color-mix(in srgb,var(--accent2) 22%,var(--panel2));border-color:var(--accent2);color:var(--text)}
+.leg{display:flex;flex-wrap:wrap;gap:4px 14px;font-size:12px;color:var(--muted);margin:2px 0 6px}
+.leg i{display:inline-block;width:14px;height:3px;border-radius:2px;margin-right:5px;vertical-align:middle}
+.tgm{grid-template-columns:minmax(0,1fr) 300px;align-items:start}
+.tchart{height:auto!important}
+.tchart svg{height:auto}
+.ax{fill:var(--dim);font:11px var(--mono)}
+.ttip{transform:none;min-width:190px}
+.sigs{background:var(--panel2);border:1px solid var(--line);border-radius:12px;padding:14px;display:flex;flex-direction:column;gap:2px}
+.sig-h{border-radius:10px;padding:10px 12px;margin-bottom:8px;background:var(--panel);border:1px solid var(--line)}
+.sig-h span{display:block;font-size:12px;color:var(--muted)}
+.sig-h b{font-size:19px;letter-spacing:-.02em}
+.sig-h.up{border-color:color-mix(in srgb,var(--up) 45%,var(--line))}.sig-h.up b{color:var(--up)}
+.sig-h.down{border-color:color-mix(in srgb,var(--down) 45%,var(--line))}.sig-h.down b{color:var(--down)}
+.sc{display:flex;gap:3px;margin-top:8px}
+.sc i{flex:1;height:6px;border-radius:3px;background:var(--line2)}
+.sc i.n{background:rgba(255,93,122,.25)}.sc i.p{background:rgba(47,227,154,.25)}
+.sc i.on{background:var(--text);box-shadow:0 0 0 2px var(--panel)}
+.ck{display:flex;justify-content:space-between;gap:10px;padding:6px 2px;border-bottom:1px dashed var(--line);font-size:13px}
+.ck span{color:var(--muted)}
+.ck b{text-align:right;font-weight:600}
+.sig-sep{height:8px}
+table.scr td.sc-c{font-size:13px;font-weight:600}
+table.scr td.sc-c.up{color:var(--up);background:rgba(47,227,154,.06)}
+table.scr td.sc-c.down{color:var(--down);background:rgba(255,93,122,.06)}
+table.scr td.sc-c.warn{color:var(--warn)}
+@media (max-width:1080px){.tgm{grid-template-columns:minmax(0,1fr)}}
