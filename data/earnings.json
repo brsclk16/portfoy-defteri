@@ -1,0 +1,89 @@
+{
+ "updatedAt": "2026-09-28T13:30:00Z",
+ "cards": [
+  {
+   "id": "DELL-2026Q2",
+   "t": "DELL",
+   "company": "Dell Technologies",
+   "date": "2026-09-01",
+   "quarter": "Q2 FY27",
+   "time": "piyasa sonrası",
+   "eps": {
+    "surprisePct": 43.4
+   },
+   "rev": {
+    "act": 47.0,
+    "unit": "mlr $",
+    "yoy": 58
+   },
+   "guidance": "Yıllık gelir beklentisi 192 milyar $'a (+%70), hisse başı kâr beklentisi 25,50 $'a yükseltildi.",
+   "reaction": {
+    "pct": 15.8,
+    "from": "2026-09-01",
+    "to": "2026-09-02"
+   },
+   "highlights": [
+    "Yapay zekâ sunucu geliri 16,4 milyar $ ile ikiye katlandı.",
+    "Çeyrekte 60,9 milyar $'lık AI sunucu siparişi alındı; sipariş birikimi 95 milyar $.",
+    "Hisse başı kâr beklentiyi %43 aştı."
+   ],
+   "affects": [
+    {
+     "t": "DELL",
+     "note": "doğrudan pozisyon"
+    }
+   ],
+   "summary": "Beklentinin çok üzerinde bir çeyrek ve yükseltilen yıllık rehberlik hisseyi ertesi gün %15,8 yukarı taşıdı. Sipariş birikimi önümüzdeki çeyrekler için görünürlüğü artırıyor; izlenecek nokta AI sunucu marjları ve bellek maliyetleri.",
+   "sources": [
+    {
+     "title": "Trefis — Dell",
+     "url": "https://www.trefis.com/data/companies/DELL"
+    }
+   ]
+  },
+  {
+   "id": "CRDO-2026Q1",
+   "t": "CRDO",
+   "company": "Credo Technology",
+   "date": "2026-09-01",
+   "quarter": "Q1 FY27",
+   "time": "piyasa sonrası",
+   "eps": {
+    "surprisePct": 2.6
+   },
+   "rev": {
+    "act": 479,
+    "unit": "mln $",
+    "yoy": 115
+   },
+   "guidance": "Q2 gelir beklentisi ~530 milyon $; piyasa beklentisinin üzerinde.",
+   "reaction": {
+    "pct": -20.0,
+    "from": "2026-09-01",
+    "to": "2026-09-02"
+   },
+   "highlights": [
+    "Gelir yıllık %115 arttı.",
+    "İlk üç müşteri gelirin %74'ünü oluşturuyor; yoğunlaşma endişesi satışı tetikledi.",
+    "Hisse sonraki üç haftada kaybın büyük kısmını geri aldı (25 Eylül: 210,97 $)."
+   ],
+   "affects": [
+    {
+     "t": "CRDO",
+     "note": "doğrudan pozisyon"
+    },
+    {
+     "t": "SOXX",
+     "note": "fonda ~%1,6 ağırlık"
+    }
+   ],
+   "summary": "Rakamlar ve rehberlik güçlüydü ama yüksek değerleme ve müşteri yoğunlaşması nedeniyle hisse bir günde %20 düştü. Güçlü sonuca rağmen düşüş, beklentinin ne kadar yüksek fiyatlandığını gösteriyor.",
+   "sources": [
+    {
+     "title": "The Motley Fool — Credo neden %20 düştü",
+     "url": "https://www.fool.com/investing/2026/09/02/why-credo-technology-stock-plunged-20-today/"
+    }
+   ]
+  }
+ ]
+}

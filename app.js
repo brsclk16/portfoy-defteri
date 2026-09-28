@@ -108,7 +108,7 @@ function positions(){
   const lots=S.lots.slice().sort((a,b)=>a.date<b.date?-1:a.date>b.date?1:0);
   for(const l of lots){
     const t=l.t; const m=map[t]||(map[t]={t,qty:0,cost:0,costTRY:0,realized:0,realizedTRY:0,first:l.date,n:0});
-    const q=+l.q,p=+l.p,fee=+l.fee||0,rate=+l.fx||fx()||0; m.n++;
+    const q=+l.q,rate=+l.fx||fx()||0,tq=isTRY(t)?(rate||1):1,p=+l.p/tq,fee=(+l.fee||0)/tq; m.n++;
     if(l.side==='S'){
       if(m.qty<=0)continue; const qq=Math.min(q,m.qty); const avg=m.cost/m.qty, avgT=m.costTRY/m.qty;
       m.realized+=qq*(p-avg)-fee; m.realizedTRY+=qq*(p*rate-avgT)-fee*rate;
@@ -117,8 +117,8 @@ function positions(){
   }
   const out=[];let total=0;
   for(const m of Object.values(map)){
-    const qt=quote(m.t); m.price=qt.price; m.value=m.qty*(qt.price||0); m.avg=m.qty>0?m.cost/m.qty:0;
-    m.pnl=m.value-m.cost; m.pnlPct=m.cost>0?m.pnl/m.cost*100:null; m.day=m.qty*(qt.chg||0); m.dayPct=qt.pct;
+    const qt=quote(m.t); const cv=isTRY(m.t)&&fx()?fx():1; m.price=qt.price/cv; m.value=m.qty*(qt.price||0); m.avg=m.qty>0?m.cost/m.qty:0;
+    m.pnl=m.value-m.cost; m.pnlPct=m.cost>0?m.pnl/m.cost*100:null; m.day=m.qty*(qt.chg||0)/cv; m.dayPct=qt.pct;
     m.pnlTRY = fx()? m.value*fx()-m.costTRY : null;
     total+=m.value; out.push(m);
   }
@@ -145,7 +145,7 @@ function portfolioSeries(){
     for(const d of dates){
       if(d<first)continue; let v=0;
       const held={}; for(const l of lots){ if(l.date>d)break; held[l.t]=(held[l.t]||0)+(l.side==='S'?-l.q:+l.q); }
-      for(const t in held){ const px=idx[t]&&idx[t].get(d); if(px)lastPx[t]=px; v+=held[t]*(lastPx[t]||+(lots.find(l=>l.t===t)||{}).p||0); }
+      for(const t in held){ let px=idx[t]&&idx[t].get(d); if(px&&isTRY(t))px=px/(fxAt(d)||1); if(px)lastPx[t]=px; v+=held[t]*(lastPx[t]||+(lots.find(l=>l.t===t)||{}).p||0); }
       out.push([d,v]);
     }
     return {pts:out,real:true};
@@ -314,9 +314,9 @@ function autoLive(){
 
 /* ---------- chrome ---------- */
 function renderTop(){
-  const ms=marketState();const m=$('#mkt');m.classList.toggle('open',ms.open);m.lastElementChild.textContent=ms.msg;
+  const ms=marketState();const m=$('#mkt');m.classList.toggle('open',ms.open);m.lastElementChild.textContent=ms.msg;m.title=ms.msg;
   $$('#ccy span').forEach(s=>s.classList.toggle('on',s.dataset.c===S.ccy));
-  const items=tickers().map(t=>{const q=quote(t);return `<a class="tk" href="#/t/${t}"><b>${t}</b><span class="num">${usd(q.price)}</span><span class="num ${cls(q.pct)}">${pct(q.pct)}</span></a>`}).join('');
+  const items=tickers().map(t=>{const q=quote(t);return `<a class="tk" href="#/t/${t}"><b>${t}</b><span class="num">${pxf(t,q.price)}</span><span class="num ${cls(q.pct)}">${pct(q.pct)}</span></a>`}).join('');
   const fxItem=S.fx?`<span class="tk"><b>USD/TRY</b><span class="num">${nf(S.fx,4)}</span></span>`:'';
   $('#tapeIn').innerHTML=(items+fxItem).repeat(2);
   const p=S.prices||{};const live=S.liveAt?` · canlı ${ago(S.liveAt)}`:'';
@@ -339,7 +339,7 @@ function viewOzet(){
   const heroVal=real?money(T.value):money(hs.length?hs[hs.length-1][1]:null);
   const wk=S.weekly&&S.weekly.reports&&S.weekly.reports[0];
   return `<div class="fade">
-  ${realLine()}
+  ${realLine()}${journalBanner()}${planBanner()}
   <div class="grid g-hero">
     <section class="card hero">
       <div class="lbl">${real?'Portföy değeri':'Model portföy · 1 yıl önce $10.000 ('+esc(W.src)+')'}</div>
@@ -362,18 +362,19 @@ function viewOzet(){
   </div>
 
   ${weeklyCard(wk,false)}
+  ${viewEarnSection()}
   <div class="sec-t"><div><h2>Bugün piyasada</h2><p>Günlük değişim · karo boyu eşit, renk yoğunluğu hareketin büyüklüğü</p></div></div>
-  <div class="heat">${ts.map(t=>{const q=quote(t);const s=sliceRange(series(t),'1A');return `<a class="tile" href="#/t/${t}" style="background:${heatBg(q.pct)}"><div><b>${t}</b><div class="p">${usd(q.price)}</div></div><div class="c">${pct(q.pct)}</div>${spark(s,120,40,'rgba(255,255,255,.9)')}</a>`}).join('')}</div>
+  <div class="heat">${ts.map(t=>{const q=quote(t);const s=sliceRange(series(t),'1A');return `<a class="tile" href="#/t/${t}" style="background:${heatBg(q.pct)}"><div><b>${t}</b><div class="p">${pxf(t,q.price)}</div></div><div class="c">${pct(q.pct)}</div>${spark(s,120,40,'rgba(255,255,255,.9)')}</a>`}).join('')}</div>
 
   <div class="sec-t"><div><h2>Karşılaştırmalı performans</h2><p>Seçili dönemin başına göre yüzde getiri</p></div>${rangeBtns('perf')}</div>
   <section class="card"><div class="filters" id="perfSel">${ts.map(t=>`<button data-t="${t}" class="${(S.perfSel||ts).includes(t)?'on':''}" style="${(S.perfSel||ts).includes(t)?`background:${color(t)};border-color:${color(t)};color:#0b0e13`:''}">${t}</button>`).join('')}</div><div class="chart" id="cPerf" style="height:320px"></div></section>
 
   <div class="sec-t"><div><h2>Değerleme ve sinyaller</h2><p>PEG, analist hedefi ve 52 haftalık aralıktaki konum</p></div></div>
-  <section class="card"><div class="tscroll"><table class="tbl"><thead><tr><th>Enstrüman</th><th class="r">Fiyat</th><th class="r">Gün</th><th class="r">YBB</th><th class="r">1 yıl</th><th>3 ay</th><th style="min-width:130px">52 hafta konumu</th><th class="r">PEG</th><th class="r">Hedefe</th>${real?'<th class="r">Ağırlık</th>':''}</tr></thead><tbody>
+  <section class="card"><div class="tscroll"><table class="tbl"><thead><tr><th>Enstrüman</th><th class="r">Fiyat</th><th class="r">Gün</th><th class="r">YBB</th><th class="r">1 yıl</th><th>3 ay</th><th style="min-width:130px">52 hafta konumu</th><th>Teknik</th><th class="r">PEG</th><th class="r">Hedefe</th>${real?'<th class="r">Ağırlık</th>':''}</tr></thead><tbody>
   ${ts.map(t=>{const i=inst(t),q=quote(t),p5=pos52(t),pg=pegNum(t),u=upside(t),pm=P.list.find(m=>m.t===t);return `<tr onclick="location.hash='#/t/${t}'" style="cursor:pointer"><td><div class="sym">${logo(t)}<div><div class="n">${t}</div><div class="d">${esc(i.name)}</div></div></div></td>
-  <td class="r num">${usd(q.price)}</td><td class="r num ${cls(q.pct)}">${pct(q.pct)}</td><td class="r num ${cls(ytd(t))}">${pct(ytd(t),1)}</td><td class="r num ${cls(perf(t,'1Y'))}">${pct(perf(t,'1Y'),1)}</td>
+  <td class="r num">${pxf(t,q.price)}</td><td class="r num ${cls(q.pct)}">${pct(q.pct)}</td><td class="r num ${cls(ytd(t))}">${pct(ytd(t),1)}</td><td class="r num ${cls(perf(t,'1Y'))}">${pct(perf(t,'1Y'),1)}</td>
   <td>${spark(sliceRange(series(t),'3A'))}</td><td>${p5==null?'—':`<div class="meter" style="height:6px"><i style="left:${p5*100}%;width:11px;height:11px"></i></div>`}</td>
-  <td class="r num ${pg==null?'':pg<1?'up':pg>2?'down':''}">${esc(pegTxt(i))}</td><td class="r num ${cls(u)}">${u==null?'<span class="dim">fon</span>':pct(u,1)}</td>${real?`<td class="r num">${pm?'%'+nf(pm.w,1):'—'}</td>`:''}</tr>`}).join('')}
+  <td class="tcell">${techBadge(t)}</td><td class="r num ${pg==null?'':pg<1?'up':pg>2?'down':''}">${esc(pegTxt(i))}</td><td class="r num ${cls(u)}">${u==null?'<span class="dim">fon</span>':pct(u,1)}</td>${real?`<td class="r num">${pm?'%'+nf(pm.w,1):'—'}</td>`:''}</tr>`}).join('')}
   </tbody></table></div></section>
 
   <div class="grid g2 sec">
@@ -417,7 +418,7 @@ function viewEnstruman(){
   ${THEMES.map(th=>{const ts=th.t.filter(t=>inst(t));if(!ts.length)return '';return `<h3 class="muted" style="font-size:13px;letter-spacing:.08em;text-transform:uppercase;margin:22px 0 10px;display:flex;gap:8px;align-items:center"><i style="width:10px;height:10px;border-radius:3px;background:${th.c}"></i>${esc(th.name)}</h3>
   <div class="icards">${ts.map(t=>{const i=inst(t),q=quote(t),s=sliceRange(series(t),'6A');return `<a class="card ic" href="#/t/${t}">
     <div class="row"><div class="sym">${logo(t)}<div><div class="n">${t}</div><div class="d">${esc(i.name)}</div></div></div><span class="tag">${esc(i.type||'')}</span></div>
-    <div class="row"><span class="px">${usd(q.price)}</span>${chip(q.pct)}</div>
+    <div class="row"><span class="px">${pxf(t,q.price)}</span>${chip(q.pct)}</div>
     ${spark(s,300,56,color(t))}
     <div class="ft"><span class="tag">YBB ${pct(ytd(t),1)}</span><span class="tag">1Y ${pct(perf(t,'1Y'),1)}</span>${i.peg?`<span class="tag">PEG ${esc(pegTxt(i))}</span>`:''}${upside(t)!=null?`<span class="tag">Hedefe ${pct(upside(t),1)}</span>`:''}</div></a>`}).join('')}</div>`}).join('')}${viewWatch()}</div>`;
 }
@@ -433,17 +434,18 @@ function viewInst(t){
   return `<div class="fade">
   <a class="back" href="#/enstruman">← Enstrümanlar</a>
   <div class="ihead">${logo(t)}<div><h1>${esc(i.name)}</h1><div class="sub">${esc(t)} · ${esc(i.issuer||'')} · ${esc(i.type||'')}</div></div>
-    <div class="px"><div class="big">${usd(q.price)}</div><div class="chg" style="display:flex;gap:8px;justify-content:inherit;margin-top:8px;flex-wrap:wrap">${chip(q.pct)}<span class="chip n">YBB ${pct(ytd(t),1)}</span><span class="chip n">1Y ${pct(perf(t,'1Y'),1)}</span></div><div class="dim" style="font-size:12px;margin-top:6px">${esc(q.day?trDate(q.day+'T12:00:00Z'):'')} · ${esc(q.src||'')}</div></div></div>
+    <div class="px"><div class="big">${pxf(t,q.price)}</div><div class="chg" style="display:flex;gap:8px;justify-content:inherit;margin-top:8px;flex-wrap:wrap">${chip(q.pct)}<span class="chip n">YBB ${pct(ytd(t),1)}</span><span class="chip n">1Y ${pct(perf(t,'1Y'),1)}</span></div><div class="dim" style="font-size:12px;margin-top:6px">${esc(q.day?trDate(q.day+'T12:00:00Z'):'')} · ${esc(q.src||'')}</div></div></div>
 
   <div class="grid g-main">
     <section class="card">${rangeBtns('inst')}<div class="chart" id="cInst" style="height:330px"></div></section>
     <section class="card">
       <h3>52 haftalık aralık</h3>
-      ${p5==null?'<div class="muted">—</div>':`<div class="meter"><i style="left:${p5*100}%"></i></div><div class="meter-l"><span>${usd(q.lo52)}</span><span>${usd(q.hi52)}</span></div><div class="muted" style="font-size:13px;margin-top:8px">Zirveden uzaklık <b class="num ${cls(offHigh)}">${pct(offHigh,1)}</b> · dipten <b class="num up">${pct((q.price/q.lo52-1)*100,1)}</b></div>`}
+      ${p5==null?'<div class="muted">—</div>':`<div class="meter"><i style="left:${p5*100}%"></i></div><div class="meter-l"><span>${pxf(t,q.lo52)}</span><span>${pxf(t,q.hi52)}</span></div><div class="muted" style="font-size:13px;margin-top:8px">Zirveden uzaklık <b class="num ${cls(offHigh)}">${pct(offHigh,1)}</b> · dipten <b class="num up">${pct((q.price/q.lo52-1)*100,1)}</b></div>`}
       <h3 style="margin-top:22px">Dönemsel getiri</h3><div class="rets">${['1A','3A','6A','YTD','1Y'].map(r=>{const v=perf(t,r);return `<div><span>${r==='YTD'?'YBB':r}</span><b class="${cls(v)}">${pct(v,1)}</b></div>`}).join('')}</div>
+      ${techCard(t)}
       ${s&&s.target>0?`<h3 style="margin-top:22px">Analist hedefi <span class="r num ${cls(u)}">${pct(u,1)}</span></h3>
       <div class="gauge">${(()=>{const lo=Math.min(s.targetLow||s.target,q.price),hi=Math.max(s.targetHigh||s.target,q.price);const X=v=>((v-lo)/(hi-lo||1)*100);return `<div class="tr"><div class="rng" style="left:${X(s.targetLow||s.target)}%;right:${100-X(s.targetHigh||s.target)}%"></div><span class="tm" style="left:${X(s.target)}%" title="Ortalama hedef"></span><span class="pm" style="left:${X(q.price)}%" title="Fiyat"></span></div>`})()}
-      <div class="meter-l"><span>düşük ${usd(s.targetLow,0)}</span><span>ort. ${usd(s.target,0)}</span><span>yüksek ${usd(s.targetHigh,0)}</span></div></div>
+      <div class="meter-l"><span>düşük ${pxf(t,s.targetLow,0)}</span><span>ort. ${pxf(t,s.target,0)}</span><span>yüksek ${pxf(t,s.targetHigh,0)}</span></div></div>
       <div class="muted" style="font-size:13px;margin-top:10px">Haber tonu <b class="${s.sentimentDir==='UP'?'up':s.sentimentDir==='DOWN'?'down':''}">${nf(s.sentiment,2)} ${s.sentimentDir==='UP'?'↑':s.sentimentDir==='DOWN'?'↓':'→'}</b>${isNum(s.epsSurprise)?` · son EPS sürprizi <b class="${cls(s.epsSurprise)}">${pct(s.epsSurprise,1)}</b> (${esc(s.epsPeriod||'')})`:''}</div>`:''}
       ${pm&&pm.qty>0?`<h3 style="margin-top:22px">Pozisyonun</h3><div class="kpis">
         <div class="kpi"><div class="l">Adet · ort. maliyet</div><div class="v" style="font-size:18px">${nf(pm.qty,pm.qty%1?4:0)} · ${usd(pm.avg)}</div></div>
@@ -470,6 +472,8 @@ function viewInst(t){
       ${(i.countries||[]).length?`<h3 style="margin-top:22px">Ülkeler</h3><div class="bars">${i.countries.map(g=>`<div class="bar"><span class="t">${esc(g.name)}</span><div class="tr"><div class="f" style="width:${g.w}%"></div></div><span class="v">%${nf(g.w,1)}</span></div>`).join('')}</div>`:''}</section>
   </div>`:(i.segments||[]).length?`<section class="card sec"><h3>Yapı</h3><div class="bars">${i.segments.map(g=>`<div class="bar"><span class="t">${esc(g.name)}</span><div class="tr"><div class="f" style="width:${g.w}%"></div></div><span class="v">%${nf(g.w,1)}</span></div>`).join('')}</div></section>`:''}
 
+  ${earningsFor(t).length?`<div class="grid g2 sec">${earningsFor(t).map(earnCard).join('')}</div>`:''}
+  ${insiderCard(t)}
   <div class="grid g-main sec">
     <section class="card"><h3>İlgili haberler <span class="r muted">${news.length}</span></h3><div class="news">${news.map(nwRow).join('')||'<div class="muted">Şimdilik ilgili haber yok.</div>'}</div></section>
     <div class="grid" style="align-content:start">
@@ -510,17 +514,20 @@ function viewPozisyon(){
       <label>Enstrüman<select name="t">${allTickers().map(t=>`<option>${t}</option>`).join('')}</select></label>
       <label>Yön<select name="side"><option value="B">Alış</option><option value="S">Satış</option></select></label>
       <label>Adet<input type="number" name="q" step="any" min="0" required placeholder="10"></label>
-      <label>Fiyat ($)<input type="number" name="p" step="any" min="0" required placeholder="${nf(quote(ts[0]).price,2).replace('.','').replace(',','.')}"></label>
+      <label>Fiyat ($ · BIST'te ₺)<input type="number" name="p" step="any" min="0" required placeholder="${nf(quote(ts[0]).price,2).replace('.','').replace(',','.')}"></label>
       <label>Komisyon ($)<input type="number" name="fee" step="any" min="0" value="0"></label>
       <label>USD/TRY (işlem günü)<input type="number" name="fx" step="any" min="0" placeholder="${S.fx?nf(S.fx,4).replace(',','.'):''}"></label>
       <label style="grid-column:span 4">Not<input name="note" placeholder="opsiyonel"></label>
+      <label style="grid-column:span 3">Neden aldım? (karar günlüğü)<input name="thesis" placeholder="ör. AI veri merkezi soğutma talebi 2027'ye kadar güçlü"></label>
+      <label>Hedef fiyat<input name="target" type="number" step="any" min="0"></label>
+      <label style="grid-column:span 2">Hangi durumda satarım?<input name="exitRule" placeholder="ör. iki çeyrek üst üste sipariş düşerse"></label>
       <button class="btn" type="submit">Ekle</button>
     </form>
   </section>
 
   <section class="card sec"><h3>İşlem geçmişi <span class="r"><button class="btn ghost sm" id="expJSON">Dışa aktar</button> <label class="btn ghost sm" style="display:inline-block">İçe aktar<input type="file" id="impJSON" accept="application/json" hidden></label></span></h3>
     ${lots.length?`<div class="tscroll"><table class="tbl"><thead><tr><th>Tarih</th><th>Enstrüman</th><th>Yön</th><th class="r">Adet</th><th class="r">Fiyat</th><th class="r">Tutar</th><th class="r">Kur</th><th>Not</th><th></th></tr></thead><tbody>
-    ${lots.map(l=>`<tr><td class="num">${esc(trDate(l.date+'T12:00:00Z'))}</td><td><b>${esc(l.t)}</b></td><td><span class="tag" style="${l.side==='S'?'color:var(--down)':'color:var(--up)'}">${l.side==='S'?'Satış':'Alış'}</span></td><td class="r num">${nf(+l.q,(+l.q)%1?4:0)}</td><td class="r num">${usd(+l.p)}</td><td class="r num">${usd(l.q*l.p)}</td><td class="r num">${l.fx?nf(+l.fx,4):'—'}</td><td class="muted">${esc(l.note||'')}</td><td class="r"><button class="lnk" data-del="${esc(l.id)}" title="Sil">✕</button></td></tr>`).join('')}
+    ${lots.map(l=>`<tr><td class="num">${esc(trDate(l.date+'T12:00:00Z'))}</td><td><b>${esc(l.t)}</b></td><td><span class="tag" style="${l.side==='S'?'color:var(--down)':'color:var(--up)'}">${l.side==='S'?'Satış':'Alış'}</span></td><td class="r num">${nf(+l.q,(+l.q)%1?4:0)}</td><td class="r num">${pxf(l.t,+l.p)}</td><td class="r num">${pxf(l.t,l.q*l.p)}</td><td class="r num">${l.fx?nf(+l.fx,4):'—'}</td><td class="muted">${esc(l.note||'')}</td><td class="r"><button class="lnk" data-del="${esc(l.id)}" title="Sil">✕</button></td></tr>`).join('')}
     </tbody></table></div>`:'<div class="empty"><b>İşlem yok</b>İlk alışını yukarıdan ekle.</div>'}
   </section>
 
@@ -547,11 +554,13 @@ function afterPozisyon(){
   const f=$('#lotForm');
   if(f){
     f.t.onchange=()=>{f.p.placeholder=String(quote(f.t.value).price||'')};f.t.onchange();
+    if(S.prefill){const pf=S.prefill;f.t.value=pf.t;f.q.value=pf.q;f.p.value=pf.p;f.note.value=pf.note||'';S.prefillUsed={planId:pf.planId,planI:pf.planI};S.prefill=null;f.scrollIntoView({behavior:'smooth',block:'center'});toast('Plan taksiti forma işlendi; fiyatı kontrol edip ekle')}
     f.onsubmit=async e=>{e.preventDefault();const d=Object.fromEntries(new FormData(f));
       const lot={id:Date.now().toString(36)+Math.random().toString(36).slice(2,6),date:d.date,t:d.t,side:d.side,q:+d.q,p:+d.p,fee:+d.fee||0,fx:+d.fx||(S.fx?+S.fx.toFixed(4):null),note:d.note||''};
+      if(d.thesis&&d.side==='B'){lot.thesis=d.thesis.trim();lot.target=+d.target||null;lot.exitRule=(d.exitRule||'').trim();lot.reviewAt=addDays(d.date,90)}
       if(!(lot.q>0&&lot.p>0)){toast('Adet ve fiyat gir');return}
       if(lot.side==='S'){const m=positions().list.find(x=>x.t===lot.t);if(!m||m.qty<lot.q-1e-9){toast('Elindeki adetten fazla satılamaz');return}}
-      S.lots.push(lot);await saveLots();toast('İşlem eklendi');render(true)};
+      S.lots.push(lot);await saveLots();if(S.prefillUsed)await planMarkDone();toast('İşlem eklendi');render(true)};
   }
   $$('[data-del]').forEach(b=>b.onclick=async()=>{if(!confirm('Bu işlem silinsin mi?'))return;S.lots=S.lots.filter(l=>l.id!==b.dataset.del);await saveLots();render(true)});
   $$('[data-tw]').forEach(inp=>inp.onchange=async()=>{const v=inp.value===''?null:+inp.value;S.settings.targets=S.settings.targets||{};if(v==null)delete S.settings.targets[inp.dataset.tw];else S.settings.targets[inp.dataset.tw]=v;await saveSettings();render(false)});
@@ -591,8 +600,9 @@ function render(scrollTop){
   if(r==='t'){v.innerHTML=viewInst(a);afterInst(a)}
   else if(r==='pozisyon'){v.innerHTML=viewPozisyon();afterPozisyon()}
   else if(r==='enstruman'){v.innerHTML=viewEnstruman();afterWatch()}
-  else if(r==='analiz'){v.innerHTML=viewAnaliz();afterAnaliz()}
+  else if(r==='analiz'){v.innerHTML=viewAnaliz()+viewSim();afterAnaliz();afterSim()}
   else if(r==='haftalik'){v.innerHTML=viewHaftalik()}
+  else if(r==='defter'){v.innerHTML=viewDefter();afterDefter()}
   else if(r==='haber'){v.innerHTML=viewHaber();$$('#nf button').forEach(b=>b.onclick=()=>{S.newsFilter=b.dataset.f;render(false)})}
   else if(r==='takvim'){v.innerHTML=viewTakvim()}
   else{v.innerHTML=viewOzet();afterOzet()}
@@ -608,8 +618,8 @@ async function loadData(){
   const v='?t='+Math.floor(Date.now()/60000);
   const [d,p,h]=await Promise.all(['portfolio','prices','history'].map(n=>fetch('data/'+n+'.json'+v).then(r=>{if(!r.ok)throw new Error(n+'.json '+r.status);return r.json()})));
   const opt=n=>fetch('data/'+n+'.json'+v).then(r=>r.ok?r.json():null).catch(()=>null);
-  const [m,w,wl]=await Promise.all([opt('macro'),opt('weekly'),opt('watchlist')]);
-  S.data=d;S.prices=p;S.hist=h;S.macro=m;S.weekly=w;if(wl)S.watch=wl;
+  const [m,w,wl,er,ins]=await Promise.all([opt('macro'),opt('weekly'),opt('watchlist'),opt('earnings'),opt('insider')]);
+  S.data=d;S.prices=p;S.hist=h;S.macro=m;S.weekly=w;if(wl)S.watch=wl;S.earn=er;S.insider=ins;
 }
 async function boot(){
   const th=lsGet('pd_theme');if(th)document.documentElement.dataset.theme=th;

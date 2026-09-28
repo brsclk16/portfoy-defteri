@@ -190,11 +190,11 @@ function watchPending(){const have=new Set(Object.keys(S.data.instruments));retu
 function viewWatch(){
   const docs=watchDocs(),pend=watchPending();
   return `<div class="sec-t"><div><h2>İzleme listesi</h2><p>Almayı düşündüğün hisse ve fonlar · analiz, fiyat, PEG ve haberler otomatik takip edilir</p></div></div>
-  <section class="card"><form class="wadd" id="wAdd"><input name="t" placeholder="Ticker (ör. NVDA, ANET, GLD)" maxlength="10" required><input name="note" placeholder="Not (ops.)"><button class="btn" type="submit">Listeye ekle</button></form>
+  <section class="card"><form class="wadd" id="wAdd"><input name="t" placeholder="Sembol (ör. NVDA, GLD · BIST için THYAO:BIST)" maxlength="10" required><input name="note" placeholder="Not (ops.)"><button class="btn" type="submit">Listeye ekle</button></form>
   ${S.settings.ghToken?'':`<div class="note" style="margin-top:10px">Eklediğin sembollerin otomatik görevlere ulaşması için Pozisyonlar → Ayarlar'a GitHub anahtarını bir kez girmen gerekiyor. <a href="#/pozisyon">Nasıl? →</a></div>`}
-  ${pend.length?`<div class="pend">${pend.map(w=>`<div class="pd"><b>${esc(w.t)}</b>${S.live[w.t]?`<span class="num">${usd(S.live[w.t].price)}</span><span class="num ${cls(S.live[w.t].pct)}">${pct(S.live[w.t].pct)}</span>`:''}<span class="muted">${esc(w.note||'')} · analiz sıradaki sabah taramasında hazırlanacak</span><button class="lnk" data-wdel="${esc(w.t)}" title="Kaldır">✕</button></div>`).join('')}</div>`:''}
+  ${pend.length?`<div class="pend">${pend.map(w=>`<div class="pd"><b>${esc(w.t)}</b>${S.live[w.t]?`<span class="num">${pxf(w.t,S.live[w.t].price)}</span><span class="num ${cls(S.live[w.t].pct)}">${pct(S.live[w.t].pct)}</span>`:''}<span class="muted">${esc(w.note||'')} · analiz sıradaki sabah taramasında hazırlanacak</span><button class="lnk" data-wdel="${esc(w.t)}" title="Kaldır">✕</button></div>`).join('')}</div>`:''}
   ${docs.length?`<div class="icards" style="margin-top:14px">${docs.map(t=>{const i=inst(t),q=quote(t),s=sliceRange(series(t),'6A');return `<div class="card ic wcard"><a href="#/t/${t}" style="text-decoration:none;display:flex;flex-direction:column;gap:10px"><div class="row"><div class="sym">${logo(t)}<div><div class="n">${t}</div><div class="d">${esc(i.name)}</div></div></div><span class="tag">İzleme</span></div>
-    <div class="row"><span class="px">${usd(q.price)}</span>${chip(q.pct)}</div>${spark(s,300,56,color(t))}
+    <div class="row"><span class="px">${pxf(t,q.price)}</span>${chip(q.pct)}</div>${spark(s,300,56,color(t))}
     <div class="ft"><span class="tag">YBB ${pct(ytd(t),1)}</span>${i.peg?`<span class="tag">PEG ${esc(pegTxt(i))}</span>`:''}${upside(t)!=null?`<span class="tag">Hedefe ${pct(upside(t),1)}</span>`:''}</div></a><button class="lnk wx" data-wdel="${t}" title="Listeden çıkar">✕</button></div>`}).join('')}</div>`:(pend.length?'':'<div class="empty" style="margin-top:12px">Liste boş. Yukarıdan bir sembol ekle.</div>')}
   </section>`;
 }
