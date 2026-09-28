@@ -299,7 +299,7 @@ async function fetchLive(manual){
       if(d&&d.code&&d.status==='error'){S.liveErr=d.message||'Twelve Data hatası';break}
       const obj=chunks[c].length===1?{[chunks[c][0]]:d}:d;
       for(const t of chunks[c]){const q=obj[t];if(!q||q.status==='error'||!(+q.close>0))continue;
-        S.live[t]={price:+q.close,chg:+q.change,pct:+q.percent_change,day:q.datetime,hi52:q.fifty_two_week?+q.fifty_two_week.high:undefined,lo52:q.fifty_two_week?+q.fifty_two_week.low:undefined,open:!!q.is_market_open}}
+        S.live[t]={price:+q.close,chg:+q.change,pct:+q.percent_change,day:q.datetime,hi52:q.fifty_two_week?+q.fifty_two_week.high:undefined,lo52:q.fifty_two_week?+q.fifty_two_week.low:undefined,open:!!q.is_market_open,o:+q.open,high:+q.high,low:+q.low,vol:+q.volume}}
       S.liveAt=Date.now();render(false);
     }
   }catch(e){S.liveErr=e.message}

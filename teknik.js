@@ -10,7 +10,7 @@ function candles(t){
   const c=raw.map(r=>({d:r[0],o:r[1],h:r[2],l:r[3],c:r[4],v:r[5]||0}));
   const q=quote(t);if(q&&q.price>0&&q.day){const last=c[c.length-1];
     if(last.d===q.day){last.c=q.price;last.h=Math.max(last.h,q.price);last.l=Math.min(last.l,q.price)}
-    else if(q.day>last.d){const o=isNum(q.open)&&q.open>0?q.open:last.c;c.push({d:q.day,o,h:Math.max(o,q.price,q.high||0),l:Math.min(o,q.price,q.low||Infinity),c:q.price,v:q.vol||0})}}
+    else if(q.day>last.d){const o=isNum(q.o)&&q.o>0?q.o:last.c;c.push({d:q.day,o,h:Math.max(o,q.price,q.high||0),l:Math.min(o,q.price,q.low||Infinity),c:q.price,v:q.vol||0})}}
   return c;
 }
 /* ---------- göstergeler ---------- */
