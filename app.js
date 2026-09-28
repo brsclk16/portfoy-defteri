@@ -339,7 +339,7 @@ function viewOzet(){
   const heroVal=real?money(T.value):money(hs.length?hs[hs.length-1][1]:null);
   const wk=S.weekly&&S.weekly.reports&&S.weekly.reports[0];
   return `<div class="fade">
-  ${realLine()}${journalBanner()}${planBanner()}
+  ${alertsCard()}${realLine()}
   <div class="grid g-hero">
     <section class="card hero">
       <div class="lbl">${real?'Portföy değeri':'Model portföy · 1 yıl önce $10.000 ('+esc(W.src)+')'}</div>
@@ -424,7 +424,7 @@ function viewEnstruman(){
 }
 
 function viewInst(t){
-  const i=inst(t);if(!i)return `<div class="empty"><b>${esc(t)} bulunamadı</b><a href="#/enstruman">Enstrümanlara dön</a></div>`;
+  const i=inst(t);if(!i)return `<div class="empty"><b>${esc(t)} bulunamadı</b><a href="#/piyasa">Piyasaya dön</a></div>`;
   const q=quote(t),p5=pos52(t),s=sig(t),u=upside(t),P=positions(),pm=P.list.find(m=>m.t===t);
   const news=(S.data.news||[]).filter(n=>(n.tickers||[]).includes(t)||(n.holdings||[]).includes(t));
   const evs=(S.data.events||[]).filter(e=>(e.tickers||[]).includes(t)&&new Date(e.date)>=new Date(Date.now()-864e5));
@@ -432,7 +432,7 @@ function viewInst(t){
   const hold=(i.holdings||[]).slice(0,15);const hmax=hold.length?Math.max(...hold.map(h=>h.w)):1;
   const offHigh=q.hi52>0?(q.price/q.hi52-1)*100:null;
   return `<div class="fade">
-  <a class="back" href="#/enstruman">← Enstrümanlar</a>
+  <a class="back" href="#/piyasa/enstruman">← Piyasa</a>
   <div class="ihead">${logo(t)}<div><h1>${esc(i.name)}</h1><div class="sub">${esc(t)} · ${esc(i.issuer||'')} · ${esc(i.type||'')}</div></div>
     <div class="px"><div class="big">${pxf(t,q.price)}</div><div class="chg" style="display:flex;gap:8px;justify-content:inherit;margin-top:8px;flex-wrap:wrap">${chip(q.pct)}<span class="chip n">YBB ${pct(ytd(t),1)}</span><span class="chip n">1Y ${pct(perf(t,'1Y'),1)}</span></div><div class="dim" style="font-size:12px;margin-top:6px">${esc(q.day?trDate(q.day+'T12:00:00Z'):'')} · ${esc(q.src||'')}</div></div></div>
 
@@ -487,7 +487,7 @@ function afterInst(t){
   afterTech(t);
   const s=sliceRange(series(t),S.range.inst);const c=s.length>1&&s[s.length-1][1]>=s[0][1]?'#2fe39a':'#ff5d7a';
   const lots=S.lots.filter(l=>l.t===t);
-  lineChart($('#cInst'),[{name:t,color:c,pts:s}],{area:true,fmt:(v,ax)=>'$'+nf(v,ax?0:2)});
+  lineChart($('#cInst'),[{name:t,color:c,pts:s}],{area:true,fmt:(v,ax)=>(isTRY(t)?'₺':'$')+nf(v,ax?0:2)});
 }
 
 function viewPozisyon(){
@@ -595,20 +595,24 @@ function route(){const h=location.hash.replace(/^#\/?/,'')||'ozet';const [r,a]=h
 let lastRoute='';
 function render(scrollTop){
   if(!S.data)return;
-  const {r,a}=route();const key=r+'/'+(a||'');
+  const R=route2();const key=R.r+'/'+(R.t||'')+'/'+(R.sub||'');
   const y=window.scrollY;
-  setTabs(r);renderTop();renderUser();
-  const v=$('#view');
-  if(r==='t'){v.innerHTML=viewInst(a);afterInst(a)}
-  else if(r==='pozisyon'){v.innerHTML=viewPozisyon();afterPozisyon()}
-  else if(r==='enstruman'){v.innerHTML=viewEnstruman();afterWatch()}
-  else if(r==='analiz'){v.innerHTML=viewAnaliz()+viewScreener()+viewSim();afterAnaliz();afterSim()}
-  else if(r==='haftalik'){v.innerHTML=viewHaftalik()}
-  else if(r==='defter'){v.innerHTML=viewDefter();afterDefter()}
-  else if(r==='haber'){v.innerHTML=viewHaber();$$('#nf button').forEach(b=>b.onclick=()=>{S.newsFilter=b.dataset.f;render(false)})}
-  else if(r==='takvim'){v.innerHTML=viewTakvim()}
-  else{v.innerHTML=viewOzet();afterOzet()}
+  markNav(R.r);renderTop();renderUser();
+  const v=$('#view');let after=()=>{};
+  if(R.r==='t'){v.innerHTML=viewInstTabs(R.t,R.sub);after=()=>afterInstTabs(R.t,R.sub)}
+  else if(R.r==='portfoy'){const sn=subnav('portfoy',R.sub);
+    if(R.sub==='defter'){v.innerHTML=sn+viewDefter();after=afterDefter}else{v.innerHTML=sn+viewPozisyon();after=afterPozisyon}}
+  else if(R.r==='piyasa'){const sn=subnav('piyasa',R.sub);
+    if(R.sub==='tarama'){v.innerHTML=sn+`<div class="fade">${viewTarama()}</div>`}
+    else if(R.sub==='haber'){v.innerHTML=sn+viewHaber();after=()=>$$('#nf button').forEach(b=>b.onclick=()=>{S.newsFilter=b.dataset.f;render(false)})}
+    else if(R.sub==='takvim'){v.innerHTML=sn+viewTakvim()}
+    else{v.innerHTML=sn+viewEnstruman();after=afterWatch}}
+  else if(R.r==='analiz'){const sn=subnav('analiz',R.sub);v.innerHTML=sn+analizPart(R.sub);
+    after=()=>{if(R.sub==='simulator')afterSim();else if(R.sub==='beklenti')afterPortExpect();else if(R.sub!=='haftalik')afterAnaliz()}}
+  else{v.innerHTML=viewOzet();after=afterOzet}
+  try{after()}catch(e){console.error(e)}
   $$('.ranges').forEach(g=>$$('button',g).forEach(b=>b.onclick=()=>{S.range[g.dataset.k]=b.dataset.r;render(false)}));
+  applyCollapse();
   if(scrollTop!==false&&key!==lastRoute)window.scrollTo(0,0);else window.scrollTo(0,y);
   lastRoute=key;
   if(!scrollTop)$$('.fade').forEach(n=>n.classList.remove('fade'));
@@ -620,8 +624,8 @@ async function loadData(){
   const v='?t='+Math.floor(Date.now()/60000);
   const [d,p,h]=await Promise.all(['portfolio','prices','history'].map(n=>fetch('data/'+n+'.json'+v).then(r=>{if(!r.ok)throw new Error(n+'.json '+r.status);return r.json()})));
   const opt=n=>fetch('data/'+n+'.json'+v).then(r=>r.ok?r.json():null).catch(()=>null);
-  const [m,w,wl,er,ins,oh]=await Promise.all([opt('macro'),opt('weekly'),opt('watchlist'),opt('earnings'),opt('insider'),opt('ohlc')]);
-  S.data=d;S.prices=p;S.hist=h;S.macro=m;S.weekly=w;if(wl)S.watch=wl;S.earn=er;S.insider=ins;S.ohlc=oh;
+  const [m,w,wl,er,ins,oh,mo]=await Promise.all([opt('macro'),opt('weekly'),opt('watchlist'),opt('earnings'),opt('insider'),opt('ohlc'),opt('monthly')]);
+  S.data=d;S.prices=p;S.hist=h;S.macro=m;S.weekly=w;if(wl)S.watch=wl;S.earn=er;S.insider=ins;S.ohlc=oh;S.monthly=mo;S.mcCache={};
 }
 async function boot(){
   const th=lsGet('pd_theme');if(th)document.documentElement.dataset.theme=th;
@@ -633,6 +637,7 @@ async function boot(){
   $('#login').onclick=e=>{if(e.target.id==='login')$('#login').hidden=true};
   const go=async()=>{const err=$('#lErr');err.hidden=true;try{await login($('#lEmail').value.trim(),$('#lPass').value);$('#login').hidden=true;await cloudLoad();toast('Hoş geldin');render(false);fetchLive(false)}catch(e){err.textContent=e.message;err.hidden=false}};
   $('#lGo').onclick=go;$('#lPass').onkeydown=e=>{if(e.key==='Enter')go()};
+  setupChrome();
   try{await loadData()}catch(e){$('#view').innerHTML=`<div class="empty"><b>Veri yüklenemedi</b>${esc(e.message)}</div>`;return}
   await Promise.all([loadFX(),loadSession().then(s=>s&&cloudLoad())]);
   render(true);

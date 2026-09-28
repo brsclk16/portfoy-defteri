@@ -1,7 +1,7 @@
 /* Portföy Defteri — teknik analiz: mum grafik, Ichimoku, Bollinger, MACD, RSI, Stokastik, hacim, ATR ve teknik tarama */
 "use strict";
-const IND_DEF={ichi:'Ichimoku',boll:'Bollinger',sma:'Ort. 20/50/200',vol:'Hacim',rsi:'RSI',macd:'MACD',stoch:'Stokastik'};
-function indState(){if(!S.ind){try{S.ind=JSON.parse(localStorage.getItem('pd_ind'))}catch(e){}if(!S.ind)S.ind={ichi:true,boll:false,sma:false,vol:true,rsi:true,macd:true,stoch:false}}return S.ind}
+const IND_DEF={lvl:'Plan seviyeleri',ichi:'Ichimoku',fib:'Fibonacci',boll:'Bollinger',sma:'Ort. 20/50/200',vwap:'VWAP',vp:'Hacim profili',vol:'Hacim',rsi:'RSI',macd:'MACD',stoch:'Stokastik',adx:'ADX'};
+function indState(){if(!S.ind){try{S.ind=JSON.parse(localStorage.getItem('pd_ind'))}catch(e){}if(!S.ind)S.ind={lvl:true,ichi:true,fib:false,boll:false,sma:false,vwap:false,vp:false,vol:true,rsi:true,macd:true,stoch:false,adx:false};['lvl','fib','vwap','vp','adx'].forEach(k=>{if(!(k in S.ind))S.ind[k]=k==='lvl'})}return S.ind}
 function saveInd(){try{localStorage.setItem('pd_ind',JSON.stringify(S.ind))}catch(e){}}
 
 /* ---------- veri ---------- */
@@ -65,7 +65,7 @@ function techChart(el,t,range){
   const nShow={'3A':63,'6A':126,'1Y':252}[range]||126;const start=Math.max(0,all.length-nShow);
   const fut=st.ichi?26:0;const fdates=fut?nextBizDays(all[all.length-1].d,fut):[];
   const N=all.length-start+fut;const W=el.clientWidth||900;
-  const panels=[{k:'main',h:340}];if(st.vol)panels.push({k:'vol',h:70});if(st.rsi)panels.push({k:'rsi',h:90});if(st.macd)panels.push({k:'macd',h:100});if(st.stoch)panels.push({k:'stoch',h:90});
+  const panels=[{k:'main',h:340}];if(st.vol)panels.push({k:'vol',h:70});if(st.rsi)panels.push({k:'rsi',h:90});if(st.macd)panels.push({k:'macd',h:100});if(st.stoch)panels.push({k:'stoch',h:90});if(st.adx)panels.push({k:'adx',h:90});
   const gap=14,pl=6,pr=62;const H=panels.reduce((s,p)=>s+p.h+gap,0)+22;let yOff=6;panels.forEach(p=>{p.y=yOff;yOff+=p.h+gap});
   const cw=(W-pl-pr)/N;const X=i=>pl+(i-start+0.5)*cw;
   let svg='';
@@ -74,6 +74,10 @@ function techChart(el,t,range){
   const inc=v=>{if(v!=null&&isFinite(v)){mn=Math.min(mn,v);mx=Math.max(mx,v)}};
   if(I)for(let i=start;i<all.length+fut;i++){inc(I.A[i]);inc(I.B[i])}
   if(B)for(let i=start;i<all.length;i++){inc(B.up[i]);inc(B.lo[i])}
+  const PL=st.lvl&&typeof tradePlan==='function'?tradePlan(t):null;const FB=st.fib&&typeof fibLevels==='function'?fibLevels(all):null;
+  const lastC=all[all.length-1].c;const near=v=>v!=null&&Math.abs(v/lastC-1)<0.35;
+  if(PL)[PL.stop,PL.tp1.p,PL.tp2.p,PL.zone.lo,PL.zone.hi].forEach(v=>{if(near(v))inc(v)});
+  if(FB)FB.retr.concat(FB.ext).forEach(f=>{if(near(f.p))inc(f.p)});
   const pad=(mx-mn)*.05;mn-=pad;mx+=pad;const Y=v=>main.y+(1-(v-mn)/(mx-mn))*main.h;
   const fmt=v=>pxf(t,v,v>=1000?0:2);
   const lastPx=all[all.length-1].c;niceTicks(mn,mx,5).forEach(v=>{if(v<mn||v>mx)return;if(Math.abs(Y(v)-Y(lastPx))<14){svg+=`<line class="gridl" x1="${pl}" x2="${W-pr}" y1="${Y(v)}" y2="${Y(v)}"/>`;return}svg+=`<line class="gridl" x1="${pl}" x2="${W-pr}" y1="${Y(v)}" y2="${Y(v)}"/><text class="ax" x="${W-pr+6}" y="${Y(v)+4}">${esc(fmt(v))}</text>`});
@@ -87,6 +91,11 @@ function techChart(el,t,range){
     let area='';for(let i=start;i<all.length;i++)if(B.up[i]!=null)area+=`${area?'L':'M'}${X(i).toFixed(1)},${Y(B.up[i]).toFixed(1)}`;for(let i=all.length-1;i>=start;i--)if(B.lo[i]!=null)area+=`L${X(i).toFixed(1)},${Y(B.lo[i]).toFixed(1)}`;
     svg+=`<path d="${area}Z" fill="rgba(139,123,255,.07)"/>`+ln(B.up,'#8b7bff')+ln(B.lo,'#8b7bff')+ln(B.mid,'#8b7bff','4 3')}
   if(S20){const ln=(arr,c)=>{let d='';for(let i=start;i<all.length;i++){if(arr[i]==null)continue;d+=`${d?'L':'M'}${X(i).toFixed(1)},${Y(arr[i]).toFixed(1)}`}return d?`<path d="${d}" fill="none" stroke="${c}" stroke-width="1.4"/>`:''};svg+=ln(S20,'#ffd35c')+ln(S50,'#5cd3ff')+ln(S200,'#ff6fd0')}
+  if(st.vp&&typeof volProfile==='function'){const vp=volProfile(all.slice(start));if(vp){const maxW=(W-pl-pr)*0.22;const bh=Math.abs(Y(vp.lo)-Y(vp.lo+vp.step));vp.bins.forEach((v,k)=>{const p0=vp.lo+k*vp.step;const inVA=p0+vp.step/2>=vp.vaL&&p0+vp.step/2<=vp.vaH;svg+=`<rect x="${W-pr-v/vp.max*maxW}" y="${Y(p0+vp.step)}" width="${v/vp.max*maxW}" height="${Math.max(1,bh-1)}" fill="${inVA?'rgba(139,123,255,.28)':'rgba(139,123,255,.12)'}"/>`});svg+=`<line x1="${pl}" x2="${W-pr}" y1="${Y(vp.poc)}" y2="${Y(vp.poc)}" stroke="#8b7bff" stroke-width="1" stroke-dasharray="6 3"/><text class="ax" x="${W-pr-4}" y="${Y(vp.poc)-4}" text-anchor="end" style="fill:#8b7bff">POC</text>`}}
+  if(st.vwap&&typeof vwapSeries==='function'){const vw=vwapSeries(all,20);let d='';for(let i=start;i<all.length;i++){if(vw[i]==null)continue;d+=`${d?'L':'M'}${X(i).toFixed(1)},${Y(vw[i]).toFixed(1)}`}svg+=`<path d="${d}" fill="none" stroke="#e7c6ff" stroke-width="1.4" stroke-dasharray="1 0"/>`}
+  if(FB){FB.retr.concat(FB.ext).forEach(f=>{if(!near(f.p))return;svg+=`<line x1="${pl}" x2="${W-pr}" y1="${Y(f.p)}" y2="${Y(f.p)}" stroke="#ffd35c" stroke-opacity=".55" stroke-dasharray="2 4"/><text class="ax" x="${pl+4}" y="${Y(f.p)-3}" style="fill:#ffd35c">${esc(f.label)} ${esc(fmt(f.p))}</text>`})}
+  if(PL){const zy1=Y(PL.zone.hi),zy2=Y(PL.zone.lo);svg+=`<rect x="${pl}" y="${zy1}" width="${W-pl-pr}" height="${Math.max(2,zy2-zy1)}" fill="rgba(92,211,255,.12)" stroke="rgba(92,211,255,.45)" stroke-dasharray="3 3"/><text class="ax" x="${W-pr-6}" y="${zy2-4}" text-anchor="end" style="fill:#5cd3ff">Alım bölgesi</text>`;
+    [[PL.tp2.p,'TP2','#2fe39a'],[PL.tp1.p,'TP1','#2fe39a'],[PL.stop,'Stop','#ff5d7a']].forEach(([v,l,c])=>{if(!near(v))return;svg+=`<line x1="${pl}" x2="${W-pr}" y1="${Y(v)}" y2="${Y(v)}" stroke="${c}" stroke-width="1.2" stroke-dasharray="6 3"/><rect x="${W-pr+2}" y="${Y(v)-9}" width="${pr-4}" height="18" rx="4" fill="${c}" opacity=".9"/><text x="${W-pr+6}" y="${Y(v)+4}" style="fill:#0b0e13;font:600 10.5px var(--mono)">${l} ${esc(fmt(v))}</text>`})}
   // mumlar
   const bw=Math.max(1,Math.min(9,cw*.66));
   for(let i=start;i<all.length;i++){const c=all[i];const up=c.c>=c.o;const col=up?'var(--up)':'var(--down)';const x=X(i);
@@ -108,6 +117,7 @@ function techChart(el,t,range){
     if(p.k==='rsi')svg+=sub(p,[{a:R,c:'#ffd35c'}],{title:'RSI (14)',lo:0,hi:100,lines:[30,70],band:[30,70],dec:0});
     if(p.k==='macd')svg+=sub(p,[{a:M.h,bars:true,base:0,op:.55},{a:M.m,c:'#5cd3ff'},{a:M.sig,c:'#ff9f5c'}],{title:'MACD (12, 26, 9)',zero:true,dec:2});
     if(p.k==='stoch')svg+=sub(p,[{a:SK.k,c:'#5cd3ff'},{a:SK.d,c:'#ff9f5c'}],{title:'Stokastik (14, 3, 3)',lo:0,hi:100,lines:[20,80],band:[20,80],dec:0});
+    if(p.k==='adx'){const AD=adxS(all);svg+=sub(p,[{a:AD.adx,c:'#e7c6ff'},{a:AD.pdi,c:'#2fe39a'},{a:AD.mdi,c:'#ff5d7a'}],{title:'ADX (14) · +DI yeşil / −DI kırmızı',lo:0,hi:Math.max(50,...AD.adx.filter(x=>x!=null).slice(-300)),lines:[25],dec:0})}
   });
   // x ekseni
   const dates=all.map(x=>x.d).concat(fdates);const nx=Math.max(3,Math.floor((W-pl-pr)/120));
@@ -142,7 +152,7 @@ function techSection(t){
     ${sg.ichi.checks.map(c=>`<div class="ck"><span>${esc(c.k)}</span><b class="${c.s>0?'up':c.s<0?'down':''}">${c.s>0?'▲':c.s<0?'▼':'■'} ${esc(c.v)}</b></div>`).join('')}
     <div class="ck"><span>Bulut aralığı</span><b class="num">${pxf(t,sg.ichi.cloudBot)} – ${pxf(t,sg.ichi.cloudTop)}</b></div>
     <div class="ck"><span>Kijun (destek/direnç)</span><b class="num">${pxf(t,sg.ichi.kijun)}</b></div>
-    ${sg.ichi.lastCross?`<div class="ck"><span>Son TK kesişimi</span><b class="${sg.ichi.lastCross.up?'up':'down'}">${sg.ichi.lastCross.up?'Yukarı':'Aşağı'} · ${sg.ichi.lastCross.ago} gün önce</b></div>`:''}
+    ${sg.ichi.lastCross?`<div class="ck"><span>Son TK kesişimi</span><b class="${sg.ichi.lastCross.up?'up':'down'}">${sg.ichi.lastCross.up?'Yukarı':'Aşağı'} · ${sg.ichi.lastCross.ago?sg.ichi.lastCross.ago+" gün önce":"bugün"}</b></div>`:''}
     <div class="sig-sep"></div>
     <div class="ck"><span>RSI (14)</span><b class="${sg.rsi>=70?'down':sg.rsi<=30?'up':''}">${nf(sg.rsi,0)} ${sg.rsi>=70?'· aşırı alım':sg.rsi<=30?'· aşırı satım':''}</b></div>
     <div class="ck"><span>MACD</span><b class="${sg.macd.h>0?'up':'down'}">${sg.macd.h>0?'Sinyalin üstünde':'Sinyalin altında'}${sg.macd.cross?' · bugün '+sg.macd.cross:''}${!sg.macd.cross?(sg.macd.rising?' · ivme artıyor':' · ivme azalıyor'):''}</b></div>
