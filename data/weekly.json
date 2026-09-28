@@ -1,0 +1,80 @@
+{
+ "reports": [
+  {
+   "id": "2026-W39",
+   "weekEnd": "2026-09-25",
+   "range": "21–25 Eylül 2026",
+   "publishedAt": "2026-09-28T12:45:00Z",
+   "title": "Çipler koştu, metaller ve biyotek geride kaldı",
+   "movers": [
+    {
+     "t": "CRDO",
+     "pct": 19.94
+    },
+    {
+     "t": "AMD",
+     "pct": 12.65
+    },
+    {
+     "t": "SOXX",
+     "pct": 7.43
+    },
+    {
+     "t": "SMH",
+     "pct": 5.86
+    },
+    {
+     "t": "VRT",
+     "pct": 1.56
+    },
+    {
+     "t": "AGNG",
+     "pct": -0.08
+    },
+    {
+     "t": "COPX",
+     "pct": -0.63
+    },
+    {
+     "t": "DELL",
+     "pct": -0.91
+    },
+    {
+     "t": "XBI",
+     "pct": -1.08
+    },
+    {
+     "t": "IAU",
+     "pct": -1.91
+    },
+    {
+     "t": "SLV",
+     "pct": -2.99
+    }
+   ],
+   "summary": [
+    "Hafta tamamen yarı iletkenlerin haftasıydı. SOXX %7,4, SMH %5,9 yükseldi; S&P 500'ün %1,3'lük artışının çok üzerinde. Tek hisselerde Credo %19,9 ile Eylül başındaki sert düşüşün önemli bir kısmını geri aldı, AMD %12,7 ile rekor bölgesinde (630 $) haftayı kapattı. Çip tarafındaki bu yükseliş, Trump–Xi görüşmesi öncesindeki temkinliliğe rağmen geldi.",
+    "Savunma tarafı zayıftı. Altın (IAU) %1,9, gümüş (SLV) %3,0 geriledi; ons altın 4.380 $'dan 4.287 $'a indi. XBI %1,1 düştü: Fed'in faiz artırımı ve yüksek tahvil faizleri küçük biyotekleri baskılamaya devam ediyor. Bakır madencileri (COPX) yatay kapattı.",
+    "Dolar/TL haftada %0,4 yükselerek 48,95'e geldi; TL bazında bakınca portföydeki tüm enstrümanlara bu kadar ek getiri yansıdı. Çip ağırlıklı bir portföy bu haftayı güçlü kapatırken, metal ve biyotek pozisyonları çeşitlendirme görevini yaptı ama getiriye katkı vermedi."
+   ],
+   "highlights": [
+    "Credo (+%19,9): 1 Eylül'deki %20'lik düşüşten sonra toparlanma sürüyor; analist ortalama hedefi (~271 $) hâlâ fiyatın %28 üzerinde.",
+    "AMD (+%12,7): OpenAI ve Oracle anlaşmalarının etkisiyle 639 $'lık 52 haftalık zirvenin hemen altında; fiyat artık analist ortalamasının üstünde.",
+    "Çip fonları (SOXX +%7,4, SMH +%5,9): 14 Eylül'deki 'yapay zekâ yavaşlama' satışının tamamı geri alındı.",
+    "Obezite cephesinde Lilly öne geçti; Lilly, Novo ve AbbVie teknoloji platformu satın alımlarına yöneldi (AGNG ve XBI için orta vadeli olumlu).",
+    "AbbVie'nin yeni nesil Parkinson tedavisi FDA onayı aldı (AGNG'nin en büyük pozisyonu)."
+   ],
+   "nextWeek": [
+    "30 Eylül Salı: ABD çekirdek PCE enflasyonu (beklenti yıllık %3,4) — faiz beklentileri, altın ve XBI için kritik.",
+    "30 Eylül Salı akşamı: Micron bilançosu — çip fonları için haftanın en önemli olayı; beklenti çok yüksek.",
+    "2 Ekim Cuma: ABD tarım dışı istihdam verisi.",
+    "Trump–Xi görüşmesinden çıkacak çip ihracatı ve tarife mesajları."
+   ],
+   "watch": [
+    "Çip ağırlığı yüksek: SMH, SOXX, AMD ve CRDO birlikte hareket ediyor. Micron'dan gelecek zayıf bir rehberlik hepsini aynı anda etkiler.",
+    "AMD analist ortalama hedefinin üzerinde işlem görüyor; yeni bir katalizör olmadan yukarı alan sınırlı olabilir.",
+    "PCE beklentinin üzerinde gelirse faiz baskısı XBI ve altın üzerinde devam edebilir."
+   ]
+  }
+ ]
+}

@@ -71,7 +71,8 @@ function marketState(){
 
 /* ---------- data access ---------- */
 function inst(t){return S.data&&S.data.instruments[t]}
-function tickers(){const all=Object.keys(S.data.instruments);return ORDER.filter(t=>all.includes(t)).concat(all.filter(t=>!ORDER.includes(t)).sort())}
+function allTickers(){return tickers().concat(Object.values(S.data.instruments).filter(i=>i.watchlist).map(i=>i.ticker)).concat(((S.watch&&S.watch.tickers)||[]).map(w=>w.t).filter(t=>!S.data.instruments[t]))}
+function tickers(){const all=Object.keys(S.data.instruments).filter(t=>!S.data.instruments[t].watchlist);return ORDER.filter(t=>all.includes(t)).concat(all.filter(t=>!ORDER.includes(t)).sort())}
 function quote(t){
   const i=inst(t)||{}, p=(S.prices&&S.prices.quotes[t])||{}, l=S.live[t];
   const base={price:p.price??i.price, chg:p.chg??i.dayChange, pct:p.pct??i.dayChangePct, day:p.day||(i.priceAsOf||'').slice(0,10), hi52:p.hi52??i.high52, lo52:p.lo52??i.low52, src:S.prices?S.prices.source:''};
@@ -265,6 +266,7 @@ async function cloudLoad(){
     if(Array.isArray(m.portfoy_lots)){S.lots=m.portfoy_lots;lsSet('pd_lots',JSON.stringify(S.lots))}
     else if(localLots.length){await cloudSave('portfoy_lots',localLots);toast('Yerel pozisyonlar hesabına taşındı')}
     if(m.portfoy_settings&&typeof m.portfoy_settings==='object'){S.settings={targets:{},tdKey:'',...m.portfoy_settings};lsSet('pd_settings',JSON.stringify(S.settings))}
+    if(!S.watch&&Array.isArray(S.settings.watchLocal))S.watch={tickers:S.settings.watchLocal};
     S.cloudOK=true;
   }catch(e){S.cloudOK=false;S.cloudErr=e.message;console.warn(e)}
 }
@@ -288,7 +290,7 @@ async function fetchLive(manual){
   const key=(S.settings.tdKey||'').trim();
   if(!key){if(manual){toast('Canlı fiyat için Pozisyonlar → Ayarlar’dan Twelve Data anahtarı ekle');}return}
   if(S.liveBusy)return;S.liveBusy=true;S.liveErr='';$('#refresh').classList.add('spin');
-  const list=tickers();const chunks=[];for(let i=0;i<list.length;i+=8)chunks.push(list.slice(i,i+8));
+  const list=allTickers();const chunks=[];for(let i=0;i<list.length;i+=8)chunks.push(list.slice(i,i+8));
   try{
     for(let c=0;c<chunks.length;c++){
       if(c)await sleep(61000);
@@ -335,7 +337,9 @@ function viewOzet(){
   const up=(S.data.events||[]).filter(e=>new Date(e.date)>=new Date(Date.now()-864e5)).slice(0,6);
   const news=(S.data.news||[]).slice(0,5);
   const heroVal=real?money(T.value):money(hs.length?hs[hs.length-1][1]:null);
+  const wk=S.weekly&&S.weekly.reports&&S.weekly.reports[0];
   return `<div class="fade">
+  ${realLine()}
   <div class="grid g-hero">
     <section class="card hero">
       <div class="lbl">${real?'Portföy değeri':'Model portföy · 1 yıl önce $10.000 ('+esc(W.src)+')'}</div>
@@ -357,6 +361,7 @@ function viewOzet(){
     </section>
   </div>
 
+  ${weeklyCard(wk,false)}
   <div class="sec-t"><div><h2>Bugün piyasada</h2><p>Günlük değişim · karo boyu eşit, renk yoğunluğu hareketin büyüklüğü</p></div></div>
   <div class="heat">${ts.map(t=>{const q=quote(t);const s=sliceRange(series(t),'1A');return `<a class="tile" href="#/t/${t}" style="background:${heatBg(q.pct)}"><div><b>${t}</b><div class="p">${usd(q.price)}</div></div><div class="c">${pct(q.pct)}</div>${spark(s,120,40,'rgba(255,255,255,.9)')}</a>`}).join('')}</div>
 
@@ -414,7 +419,7 @@ function viewEnstruman(){
     <div class="row"><div class="sym">${logo(t)}<div><div class="n">${t}</div><div class="d">${esc(i.name)}</div></div></div><span class="tag">${esc(i.type||'')}</span></div>
     <div class="row"><span class="px">${usd(q.price)}</span>${chip(q.pct)}</div>
     ${spark(s,300,56,color(t))}
-    <div class="ft"><span class="tag">YBB ${pct(ytd(t),1)}</span><span class="tag">1Y ${pct(perf(t,'1Y'),1)}</span>${i.peg?`<span class="tag">PEG ${esc(pegTxt(i))}</span>`:''}${upside(t)!=null?`<span class="tag">Hedefe ${pct(upside(t),1)}</span>`:''}</div></a>`}).join('')}</div>`}).join('')}</div>`;
+    <div class="ft"><span class="tag">YBB ${pct(ytd(t),1)}</span><span class="tag">1Y ${pct(perf(t,'1Y'),1)}</span>${i.peg?`<span class="tag">PEG ${esc(pegTxt(i))}</span>`:''}${upside(t)!=null?`<span class="tag">Hedefe ${pct(upside(t),1)}</span>`:''}</div></a>`}).join('')}</div>`}).join('')}${viewWatch()}</div>`;
 }
 
 function viewInst(t){
@@ -502,7 +507,7 @@ function viewPozisyon(){
   <section class="card sec"><h3>İşlem ekle</h3>
     <form class="form" id="lotForm" autocomplete="off">
       <label>Tarih<input type="date" name="date" value="${today}" max="${today}" required></label>
-      <label>Enstrüman<select name="t">${ts.map(t=>`<option>${t}</option>`).join('')}</select></label>
+      <label>Enstrüman<select name="t">${allTickers().map(t=>`<option>${t}</option>`).join('')}</select></label>
       <label>Yön<select name="side"><option value="B">Alış</option><option value="S">Satış</option></select></label>
       <label>Adet<input type="number" name="q" step="any" min="0" required placeholder="10"></label>
       <label>Fiyat ($)<input type="number" name="p" step="any" min="0" required placeholder="${nf(quote(ts[0]).price,2).replace('.','').replace(',','.')}"></label>
@@ -529,6 +534,11 @@ function viewPozisyon(){
         <div style="display:flex;gap:8px"><input id="tdKey" type="password" value="${esc(S.settings.tdKey||'')}" placeholder="twelvedata.com → API Keys"><button class="btn ghost" id="tdSave">Kaydet</button></div></label>
       <p class="muted" style="font-size:13px;margin:10px 0 0">Anahtar sadece senin hesabında (Supabase) ve bu tarayıcıda saklanır; GitHub'a asla yazılmaz. Anahtar yoksa site, saatlik güncellenen fiyat dosyasını kullanır. Ücretsiz plan dakikada 8 sembol çektiği için 11 sembol yaklaşık 1 dakikada tamamlanır; piyasa açıkken 10 dakikada bir yenilenir.</p>
       ${S.liveErr?`<div class="note warn" style="margin-top:10px">Son canlı çekim: ${esc(S.liveErr)}</div>`:''}
+      <label class="muted" style="font-size:13px;display:flex;flex-direction:column;gap:6px;margin-top:18px">Mevduat faizi karşılaştırması (yıllık brüt %)
+        <div style="display:flex;gap:8px"><input id="depR" type="number" step="0.5" min="0" value="${esc(S.settings.depositRate??'')}" placeholder="varsayılan %${esc(S.macro&&S.macro.deposit?S.macro.deposit.annualGross:40)}"><button class="btn ghost" id="depSave">Kaydet</button></div></label>
+      <label class="muted" style="font-size:13px;display:flex;flex-direction:column;gap:6px;margin-top:18px">GitHub anahtarı (izleme listesini otomatik görevlere iletmek için)
+        <div style="display:flex;gap:8px"><input id="ghTok" type="password" value="${esc(S.settings.ghToken||'')}" placeholder="github_pat_..."><button class="btn ghost" id="ghSave">Kaydet</button></div></label>
+      <p class="muted" style="font-size:12.5px;margin:8px 0 0">GitHub → Settings → Developer settings → Fine-grained tokens → Generate. Repository access: sadece <b>portfoy-defteri</b>. Permissions → Contents: <b>Read and write</b>. Anahtar yalnızca senin hesabında ve bu tarayıcıda saklanır.</p>
       <div class="row-end" style="justify-content:flex-start"><button class="btn ghost sm" id="liveNow">Şimdi canlı çek</button>${S.session?'<button class="btn ghost sm" id="logout2">Çıkış yap</button>':''}</div>
     </section>
   </div></div>`;
@@ -546,6 +556,8 @@ function afterPozisyon(){
   $$('[data-del]').forEach(b=>b.onclick=async()=>{if(!confirm('Bu işlem silinsin mi?'))return;S.lots=S.lots.filter(l=>l.id!==b.dataset.del);await saveLots();render(true)});
   $$('[data-tw]').forEach(inp=>inp.onchange=async()=>{const v=inp.value===''?null:+inp.value;S.settings.targets=S.settings.targets||{};if(v==null)delete S.settings.targets[inp.dataset.tw];else S.settings.targets[inp.dataset.tw]=v;await saveSettings();render(false)});
   const ts=$('#tdSave');if(ts)ts.onclick=async()=>{S.settings.tdKey=$('#tdKey').value.trim();await saveSettings();toast('Anahtar kaydedildi');fetchLive(true)};
+  const dr=$('#depSave');if(dr)dr.onclick=async()=>{const v=$('#depR').value;S.settings.depositRate=v===''?null:+v;await saveSettings();toast('Kaydedildi')};
+  const gs=$('#ghSave');if(gs)gs.onclick=async()=>{S.settings.ghToken=$('#ghTok').value.trim();await saveSettings();toast('GitHub anahtarı kaydedildi')};
   const ln=$('#liveNow');if(ln)ln.onclick=()=>fetchLive(true);
   const lo=$('#logout2');if(lo)lo.onclick=()=>{logout();render(true)};
   const gl=$('#goLogin');if(gl)gl.onclick=e=>{e.preventDefault();openLogin()};
@@ -578,7 +590,9 @@ function render(scrollTop){
   const v=$('#view');
   if(r==='t'){v.innerHTML=viewInst(a);afterInst(a)}
   else if(r==='pozisyon'){v.innerHTML=viewPozisyon();afterPozisyon()}
-  else if(r==='enstruman'){v.innerHTML=viewEnstruman()}
+  else if(r==='enstruman'){v.innerHTML=viewEnstruman();afterWatch()}
+  else if(r==='analiz'){v.innerHTML=viewAnaliz();afterAnaliz()}
+  else if(r==='haftalik'){v.innerHTML=viewHaftalik()}
   else if(r==='haber'){v.innerHTML=viewHaber();$$('#nf button').forEach(b=>b.onclick=()=>{S.newsFilter=b.dataset.f;render(false)})}
   else if(r==='takvim'){v.innerHTML=viewTakvim()}
   else{v.innerHTML=viewOzet();afterOzet()}
@@ -593,7 +607,9 @@ function openLogin(){$('#login').hidden=false;setTimeout(()=>$('#lEmail').focus(
 async function loadData(){
   const v='?t='+Math.floor(Date.now()/60000);
   const [d,p,h]=await Promise.all(['portfolio','prices','history'].map(n=>fetch('data/'+n+'.json'+v).then(r=>{if(!r.ok)throw new Error(n+'.json '+r.status);return r.json()})));
-  S.data=d;S.prices=p;S.hist=h;
+  const opt=n=>fetch('data/'+n+'.json'+v).then(r=>r.ok?r.json():null).catch(()=>null);
+  const [m,w,wl]=await Promise.all([opt('macro'),opt('weekly'),opt('watchlist')]);
+  S.data=d;S.prices=p;S.hist=h;S.macro=m;S.weekly=w;if(wl)S.watch=wl;
 }
 async function boot(){
   const th=lsGet('pd_theme');if(th)document.documentElement.dataset.theme=th;
