@@ -62,10 +62,10 @@ function techChart(el,t,range){
   const st=indState();const cl=all.map(x=>x.c);
   const I=st.ichi?ichimoku(all):null,B=st.boll?bollinger(cl):null,R=st.rsi?rsiS(cl):null,M=st.macd?macdS(cl):null,SK=st.stoch?stochS(all):null;
   const S20=st.sma?smaS(cl,20):null,S50=st.sma?smaS(cl,50):null,S200=st.sma?smaS(cl,200):null;
-  const nShow={'3A':63,'6A':126,'1Y':252}[range]||126;const start=Math.max(0,all.length-nShow);
+  const nShow={'1A':22,'3A':63,'6A':126,'1Y':252}[range]||126;const start=Math.max(0,all.length-nShow);
   const fut=st.ichi?26:0;const fdates=fut?nextBizDays(all[all.length-1].d,fut):[];
   const N=all.length-start+fut;const W=el.clientWidth||900;
-  const panels=[{k:'main',h:340}];if(st.vol)panels.push({k:'vol',h:70});if(st.rsi)panels.push({k:'rsi',h:90});if(st.macd)panels.push({k:'macd',h:100});if(st.stoch)panels.push({k:'stoch',h:90});if(st.adx)panels.push({k:'adx',h:90});
+  const panels=[{k:'main',h:S.techBig?(innerWidth<760?360:520):340}];if(st.vol)panels.push({k:'vol',h:70});if(st.rsi)panels.push({k:'rsi',h:90});if(st.macd)panels.push({k:'macd',h:100});if(st.stoch)panels.push({k:'stoch',h:90});if(st.adx)panels.push({k:'adx',h:90});
   const gap=14,pl=6,pr=62;const H=panels.reduce((s,p)=>s+p.h+gap,0)+22;let yOff=6;panels.forEach(p=>{p.y=yOff;yOff+=p.h+gap});
   const cw=(W-pl-pr)/N;const X=i=>pl+(i-start+0.5)*cw;
   let svg='';
@@ -145,7 +145,7 @@ function techSection(t){
   if(!S.ohlc||!(S.ohlc[t]||[]).length)return '';const st=indState();const sg=techSignals(t);const rg=S.range.tech||'6A';
   const leg=st.ichi?`<div class="leg"><span><i style="background:#5cd3ff"></i>Tenkan (9)</span><span><i style="background:#ff9f5c"></i>Kijun (26)</span><span><i style="background:rgba(47,227,154,.5)"></i>Bulut (Senkou A/B)</span><span><i style="background:#c792ff"></i>Chikou</span></div>`:'';
   const legS=st.sma?`<div class="leg"><span><i style="background:#ffd35c"></i>20G</span><span><i style="background:#5cd3ff"></i>50G</span><span><i style="background:#ff6fd0"></i>200G</span></div>`:'';
-  return `<section class="card sec"><div class="th"><h3 style="margin:0">Teknik analiz</h3><div class="ranges" data-k="tech" style="margin:0">${['3A','6A','1Y'].map(r=>`<button data-r="${r}" class="${rg===r?'on':''}">${r}</button>`).join('')}</div></div>
+  return `<section class="card sec"><div class="th"><h3 style="margin:0">Teknik analiz${S.techBig?'':` <a class="lnk3" href="#/teknik/grafik/${encodeURIComponent(t)}">Teknik panelde aç ↗</a>`}</h3><div class="ranges" data-k="tech" style="margin:0">${(S.techBig?['1A','3A','6A','1Y']:['3A','6A','1Y']).map(r=>`<button data-r="${r}" class="${rg===r?'on':''}">${r}</button>`).join('')}</div></div>
   <div class="indt" id="indT">${Object.entries(IND_DEF).map(([k,n])=>`<button data-ind="${k}" class="${st[k]?'on':''}">${n}</button>`).join('')}</div>${leg}${legS}
   <div class="grid tgm"><div class="chart tchart" id="cTech"></div>${sg?`<aside class="sigs">
     <div class="sig-h ${sg.ichi.cls}"><span>Ichimoku görünümü</span><b>${esc(sg.ichi.label)}</b><div class="sc">${[-5,-4,-3,-2,-1,0,1,2,3,4,5].map(v=>`<i class="${v===sg.ichi.score?'on':''} ${v>0?'p':v<0?'n':''}"></i>`).join('')}</div></div>
@@ -174,7 +174,7 @@ function viewScreener(){
   const cell=(v,c,title)=>`<td class="sc-c ${c}" title="${esc(title||'')}">${v}</td>`;
   return `<div class="sec-t"><div><h2>Teknik tarama</h2><p>Tüm enstrümanların göstergeleri tek tabloda · satıra tıkla, grafiği aç</p></div></div>
   <section class="card"><div class="tscroll"><table class="tbl scr"><thead><tr><th>Enstrüman</th><th>Ichimoku</th><th>Bulut</th><th>TK</th><th>Trend (50/200)</th><th class="r">RSI</th><th>MACD</th><th class="r">Bollinger %B</th><th class="r">Stok. %K</th><th class="r">ATR %</th><th class="r">Hacim</th></tr></thead><tbody>
-  ${rows.map(({t,s,x})=>`<tr onclick="location.hash='#/t/${t}'" style="cursor:pointer"><td><div class="sym">${logo(t)}<b>${esc(dispT(t))}</b>${inst(t)&&inst(t).watchlist?' <span class="tag">izleme</span>':''}</div></td>
+  ${rows.map(({t,s,x})=>`<tr onclick="location.hash='#/teknik/grafik/${t}'" style="cursor:pointer"><td><div class="sym">${logo(t)}<b>${esc(dispT(t))}</b>${inst(t)&&inst(t).watchlist?' <span class="tag">izleme</span>':''}</div></td>
     ${cell(`${esc(s.ichi.label)} <span class="dim">${s.ichi.score>0?'+':''}${s.ichi.score}</span>`,s.ichi.cls)}
     ${cell(s.ichi.cloudPos>0?'Üstünde':s.ichi.cloudPos<0?'Altında':'İçinde',s.ichi.cloudPos>0?'up':s.ichi.cloudPos<0?'down':'')}
     ${cell(s.ichi.checks[1].s>0?'▲':'▼',s.ichi.checks[1].s>0?'up':'down',s.ichi.lastCross?`Son kesişim ${s.ichi.lastCross.ago} gün önce`:'')}

@@ -603,10 +603,12 @@ function render(scrollTop){
   else if(R.r==='portfoy'){const sn=subnav('portfoy',R.sub);
     if(R.sub==='defter'){v.innerHTML=sn+viewDefter();after=afterDefter}else{v.innerHTML=sn+viewPozisyon();after=afterPozisyon}}
   else if(R.r==='piyasa'){const sn=subnav('piyasa',R.sub);
-    if(R.sub==='tarama'){v.innerHTML=sn+`<div class="fade">${viewTarama()}</div>`}
-    else if(R.sub==='haber'){v.innerHTML=sn+viewHaber();after=()=>$$('#nf button').forEach(b=>b.onclick=()=>{S.newsFilter=b.dataset.f;render(false)})}
+    if(R.sub==='haber'){v.innerHTML=sn+viewHaber();after=()=>$$('#nf button').forEach(b=>b.onclick=()=>{S.newsFilter=b.dataset.f;render(false)})}
     else if(R.sub==='takvim'){v.innerHTML=sn+viewTakvim()}
     else{v.innerHTML=sn+viewEnstruman();after=afterWatch}}
+  else if(R.r==='teknik'){const sn=subnav('teknik',R.sub);
+    if(R.sub==='tarama'){v.innerHTML=sn+`<div class="fade">${viewTarama()}</div>`}
+    else{const o=viewTeknikPanel(R.t);v.innerHTML=sn+(o.html||o);after=()=>afterTeknikPanel(o.t)}}
   else if(R.r==='analiz'){const sn=subnav('analiz',R.sub);v.innerHTML=sn+analizPart(R.sub);
     after=()=>{if(R.sub==='simulator')afterSim();else if(R.sub==='beklenti')afterPortExpect();else if(R.sub!=='haftalik')afterAnaliz()}}
   else{v.innerHTML=viewOzet();after=afterOzet}

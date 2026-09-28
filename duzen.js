@@ -3,7 +3,8 @@
 const SECTIONS={
   ozet:{label:'Özet',icon:'M3 12l9-8 9 8M5 10v10h14V10'},
   portfoy:{label:'Portföyüm',icon:'M4 7h16v12H4zM8 7V5h8v2',subs:[['pozisyon','Pozisyonlar'],['defter','Günlük · plan · vergi']]},
-  piyasa:{label:'Piyasa',icon:'M4 19V9M10 19V5M16 19v-7M22 19H2',subs:[['enstruman','Enstrümanlar'],['tarama','Teknik tarama'],['haber','Haberler'],['takvim','Takvim']]},
+  piyasa:{label:'Piyasa',icon:'M4 19V9M10 19V5M16 19v-7M22 19H2',subs:[['enstruman','Enstrümanlar'],['haber','Haberler'],['takvim','Takvim']]},
+  teknik:{label:'Teknik',icon:'M7 4v16M7 8h-2v6h2M17 4v16M17 7h-2v8h2M12 9v11M12 12h-2v4h2',subs:[['grafik','Grafik paneli'],['tarama','Teknik tarama']]},
   analiz:{label:'Analiz',icon:'M4 20l5-6 4 3 7-9',subs:[['getiri','Reel getiri'],['risk','Risk'],['beklenti','Vade beklentisi'],['senaryo','Senaryo'],['dengeleme','Dengeleme'],['simulator','Eklesem ne olur?'],['haftalik','Haftalık rapor']]}
 };
 const LEGACY={pozisyon:['portfoy','pozisyon'],defter:['portfoy','defter'],enstruman:['piyasa','enstruman'],haber:['piyasa','haber'],takvim:['piyasa','takvim'],haftalik:['analiz','haftalik']};
@@ -12,6 +13,8 @@ function route2(){
   const h=location.hash.replace(/^#\/?/,'')||'ozet';const parts=h.split('/').map(decodeURIComponent);
   if(parts[0]==='t')return {r:'t',t:(parts[1]||'').toUpperCase(),sub:parts[2]||'genel'};
   if(LEGACY[parts[0]])return {r:LEGACY[parts[0]][0],sub:LEGACY[parts[0]][1]};
+  if(parts[0]==='piyasa'&&parts[1]==='tarama')return {r:'teknik',sub:'tarama'};
+  if(parts[0]==='teknik')return {r:'teknik',sub:parts[1]||'grafik',t:(parts[2]||'').toUpperCase()};
   const r=SECTIONS[parts[0]]?parts[0]:'ozet';const subs=SECTIONS[r].subs;return {r,sub:parts[1]||(subs?subs[0][0]:null)};
 }
 function navHTML(){return Object.entries(SECTIONS).map(([k,v])=>`<a href="#/${k}" data-r="${k}">${v.label}</a>`).join('')}
@@ -40,7 +43,7 @@ function viewInstExpectTable(){
 function viewTarama(){
   let h=viewScreener();if(!h)return '<div class="empty">Veri yok</div>';
   h=h.replace('<th class="r">Hacim</th></tr>','<th class="r">Hacim</th><th class="r">Alım bölgesi</th><th class="r">Stop</th><th class="r">TP1</th><th class="r">R/R</th></tr>');
-  h=h.replace(/<tr onclick="location.hash='#\/t\/([^']+)'"([\s\S]*?)<\/tr>/g,(m,t,body)=>`<tr onclick="location.hash='#/t/${t}/plan'"${body}${planCells(t)}</tr>`);
+  h=h.replace(/<tr onclick="location.hash='#\/teknik\/grafik\/([^']+)'"([\s\S]*?)<\/tr>/g,(m,t,body)=>`<tr onclick="location.hash='#/teknik/grafik/${t}'"${body}${planCells(t)}</tr>`);
   return h.replace('class="sec-t"','class="sec-t" style="margin-top:0"');
 }
 
@@ -127,3 +130,30 @@ function setupChrome(){
   $('#view').addEventListener('click',e=>{const h=e.target.closest('.sec-t h2');if(h){const C=lsJSON('pd_col',{});const k=colKey(h);C[k]=!C[k];lsSet('pd_col',JSON.stringify(C));applyCollapse()}
     if(e.target.id==='alMore'){S.alAll=!S.alAll;render(false)}});
 }
+
+/* ---------- Teknik: tam ekran grafik paneli ---------- */
+function techTickers(){return allTickers().filter(t=>S.ohlc&&(S.ohlc[t]||[]).length>=30)}
+function techPick(t){const L=techTickers();if(t&&L.includes(t)){lsSet('pd_tt',t);return t}const m=lsGet('pd_tt');return L.includes(m)?m:L[0]}
+function viewTeknikPanel(t0){
+  const L=techTickers();if(!L.length)return '<div class="empty">OHLC verisi yok</div>';const t=techPick(t0);S.techBig=true;
+  const i=inst(t)||{};const q=quote(t);const idx=L.indexOf(t);const prev=L[(idx-1+L.length)%L.length],next=L[(idx+1)%L.length];
+  const chips=L.map(x=>{const s=techSignals(x);const qq=quote(x);return `<a href="#/teknik/grafik/${encodeURIComponent(x)}" class="tpk ${x===t?'on':''}"><i class="dot ${s?s.ichi.cls:''}"></i><b>${esc(dispT(x))}</b><span class="${cls(qq.pct)}">${pct(qq.pct,1)}</span></a>`}).join('');
+  const html=`<div class="fade"><div class="tpick">${chips}</div>
+  <div class="thead2"><div class="sym">${logo(t)}<div><b style="font-size:20px">${esc(dispT(t))}</b><div class="muted" style="font-size:13px">${esc(i.name||'')}</div></div></div>
+    <div class="px2"><b class="num">${pxf(t,q.price)}</b> ${chip(q.pct)}</div>
+    <div class="tnav"><a class="btn ghost sm" href="#/teknik/grafik/${encodeURIComponent(prev)}" title="Önceki (←)">←</a><a class="btn ghost sm" href="#/teknik/grafik/${encodeURIComponent(next)}" title="Sonraki (→)">→</a><a class="btn ghost sm" href="#/t/${encodeURIComponent(t)}/plan">Plan ve beklenti</a><a class="btn ghost sm" href="#/t/${encodeURIComponent(t)}">Enstrüman sayfası</a></div></div>
+  ${techSection(t)}
+  <div class="grid g2 sec" style="align-items:start">${planCard(t,true)}<div>${summaryCard(t)}</div></div>
+  ${levelsSection(t)}</div>`;
+  S.techBig=false;return {html,t};
+}
+function summaryCard(t){const s=techSignals(t);if(!s)return '';const x=tech(t);const P=tradePlan(t);
+  const votes=[['Ichimoku',s.ichi.score>=2?1:s.ichi.score<=-2?-1:0],['Trend (50/200)',x?(x.tc==='up'?1:x.tc==='down'?-1:0):0],['MACD',s.macd.h>0?1:-1],['RSI',s.rsi>=70?-1:s.rsi<=30?1:s.rsi>50?1:-1],['Stokastik',s.stoch.k>=80?-1:s.stoch.k<=20?1:0],['Bollinger %B',s.boll.pb>1?-1:s.boll.pb<0?1:0]];
+  const sc=votes.reduce((a,v)=>a+v[1],0);const lab=sc>=3?'Güçlü al bölgesi sinyalleri':sc>=1?'Olumlu':sc<=-3?'Zayıf':sc<=-1?'Olumsuz':'Kararsız';const c=sc>0?'up':sc<0?'down':'';
+  return `<section class="card"><h3>Gösterge oylaması <span class="r ${c}">${sc>0?'+':''}${sc} / 6</span></h3><div class="vote-h ${c}">${lab}</div>
+  <div class="votes">${votes.map(([k,v])=>`<div><span>${k}</span><b class="${v>0?'up':v<0?'down':'muted'}">${v>0?'▲ olumlu':v<0?'▼ olumsuz':'■ nötr'}</b></div>`).join('')}</div>
+  ${P?`<p class="muted" style="font-size:13px;margin:12px 0 0;line-height:1.5">Plan durumu: <b class="${P.stc==='up'?'up':P.stc==='down'?'down':''}">${esc(P.state)}</b>. ${esc(P.msg)}</p>`:''}
+  <p class="muted" style="font-size:12px;margin:8px 0 0">Oylama kısa vadeli teknik görünümü özetler; temel analiz ve haberleri içermez.</p></section>`}
+function afterTeknikPanel(t){S.techBig=true;try{afterTech(t);afterLevels(t)}finally{S.techBig=false}
+  const L=techTickers();document.onkeydown=e=>{if(route2().r!=='teknik'||/input|textarea|select/i.test(document.activeElement.tagName))return;const i=L.indexOf(t);if(e.key==='ArrowRight')location.hash='#/teknik/grafik/'+L[(i+1)%L.length];if(e.key==='ArrowLeft')location.hash='#/teknik/grafik/'+L[(i-1+L.length)%L.length]};
+  const on=$('.tpk.on'),bx=$('.tpick');if(on&&bx)bx.scrollLeft=on.offsetLeft-bx.clientWidth/2+on.clientWidth/2}
