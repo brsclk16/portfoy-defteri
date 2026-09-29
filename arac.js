@@ -12,8 +12,8 @@ function drawClick(t,d,p){
     const a=S.drawPend;const [p1,p2]=a.d<=d?[a,{d,p}]:[{d,p},a];if(p1.d===p2.d){toast('İki farklı gün seç');return}
     D[t].push({type:'t',d1:p1.d,p1:+p1.p.toFixed(3),d2:p2.d,p2:+p2.p.toFixed(3)});S.drawPend=null;S.drawMode=null;drawSave();toast('Trend çizgisi eklendi');render(false)}
 }
-function drawDel(t,i){const D=drawAll();(D[t]||[]).splice(i,1);drawSave();render(false)}
-function drawAlarm(t,i){const g=drawsFor(t)[i];if(!g)return;g.alarm=!g.alarm;g.side=quote(t).price>g.p?'up':'down';drawSave();
+function drawDel(t,i){const D=drawAll();const g=(D[t]||[])[i];(D[t]||[]).splice(i,1);drawSave();if(g&&g.alarm&&S.settings&&S.settings.ghToken&&typeof syncRemoteAlarms==='function')syncRemoteAlarms();render(false)}
+function drawAlarm(t,i){const g=drawsFor(t)[i];if(!g)return;g.alarm=!g.alarm;g.side=quote(t).price>g.p?'up':'down';drawSave();if(typeof syncRemoteAlarms==='function'&&S.settings&&S.settings.ghToken)syncRemoteAlarms();
   if(g.alarm&&!notifOn())toast('Alarm kuruldu. Telefon/masaüstü bildirimi için Özet’teki “Bildirimleri aç” düğmesine bas.');else toast(g.alarm?'Alarm kuruldu':'Alarm kaldırıldı');render(false)}
 function drawChips(t){const D=drawsFor(t);if(!D.length)return '';
   return `<div class="dchips">${D.map((g,i)=>`<span class="dchip">${g.type==='h'?`— ${esc(pxf(t,g.p))}`:`╱ ${esc(trDate(g.d1+'T12:00:00Z',{day:'numeric',month:'short'}))} → ${esc(trDate(g.d2+'T12:00:00Z',{day:'numeric',month:'short'}))}`}${g.type==='h'?`<button data-al="${i}" class="${g.alarm?'on':''}" title="Fiyat bu seviyeyi geçince bildir">🔔</button>`:''}<button data-del="${i}" title="Sil">✕</button></span>`).join('')}</div>`}

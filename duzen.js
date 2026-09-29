@@ -2,10 +2,10 @@
 "use strict";
 const SECTIONS={
   ozet:{label:'Özet',icon:'M3 12l9-8 9 8M5 10v10h14V10'},
-  portfoy:{label:'Portföyüm',icon:'M4 7h16v12H4zM8 7V5h8v2',subs:[['pozisyon','Pozisyonlar'],['defter','Günlük · plan · vergi']]},
+  portfoy:{label:'Portföyüm',icon:'M4 7h16v12H4zM8 7V5h8v2',subs:[['pozisyon','Pozisyonlar'],['karne','İşlem karnesi'],['defter','Günlük · plan · vergi']]},
   piyasa:{label:'Piyasa',icon:'M4 19V9M10 19V5M16 19v-7M22 19H2',subs:[['enstruman','Enstrümanlar'],['haber','Haberler'],['takvim','Takvim']]},
-  teknik:{label:'Teknik',icon:'M7 4v16M7 8h-2v6h2M17 4v16M17 7h-2v8h2M12 9v11M12 12h-2v4h2',subs:[['grafik','Grafik paneli'],['karsilastir','Karşılaştır · oran'],['test','Sinyal testi'],['tarama','Teknik tarama']]},
-  analiz:{label:'Analiz',icon:'M4 20l5-6 4 3 7-9',subs:[['getiri','Reel getiri'],['risk','Risk'],['makro','Makro'],['beklenti','Vade beklentisi'],['senaryo','Senaryo'],['dengeleme','Dengeleme'],['simulator','Eklesem ne olur?'],['haftalik','Haftalık rapor']]}
+  teknik:{label:'Teknik',icon:'M7 4v16M7 8h-2v6h2M17 4v16M17 7h-2v8h2M12 9v11M12 12h-2v4h2',subs:[['grafik','Grafik paneli'],['karsilastir','Karşılaştır · oran'],['test','Sinyal testi'],['lab','Strateji lab'],['tarama','Teknik tarama']]},
+  analiz:{label:'Analiz',icon:'M4 20l5-6 4 3 7-9',subs:[['getiri','Reel getiri'],['risk','Risk'],['makro','Makro'],['beklenti','Vade beklentisi'],['senaryo','Senaryo'],['stres','Stres testi'],['degerleme','Değerleme'],['duzenli','Düzenli alım'],['dengeleme','Dengeleme'],['simulator','Eklesem ne olur?'],['haftalik','Haftalık rapor']]}
 };
 const LEGACY={pozisyon:['portfoy','pozisyon'],defter:['portfoy','defter'],enstruman:['piyasa','enstruman'],haber:['piyasa','haber'],takvim:['piyasa','takvim'],haftalik:['analiz','haftalik']};
 const ITABS=[['genel','Genel bakış'],['plan','Plan ve beklenti'],['teknik','Teknik'],['temel','Temel'],['haber','Haberler'],['iceriden','İçeriden işlemler']];
@@ -26,6 +26,9 @@ function markNav(r){$$('#tabs a,#bnav a').forEach(a=>a.classList.toggle('on',a.d
 /* ---------- Analiz alt sayfaları ---------- */
 function analizPart(part){
   if(part==='makro')return viewMakro();
+  if(part==='stres')return viewStress();
+  if(part==='degerleme')return viewValuation();
+  if(part==='duzenli')return viewDca();
   if(part==='simulator')return viewSim();if(part==='haftalik')return viewHaftalik();if(part==='beklenti')return viewPortExpect()+viewInstExpectTable();
   const tmp=document.createElement('div');tmp.innerHTML=viewAnaliz();const root=tmp.firstElementChild||tmp;const kids=Array.from(root.children);
   const map={getiri:'Reel getiri',risk:'Risk paneli',senaryo:'Senaryo testi',dengeleme:'Dengeleme hesaplayıcı'};const want=map[part]||map.getiri;
@@ -86,6 +89,7 @@ function afterInstTabs(t,tab){
 /* ---------- uyarılar ---------- */
 function alerts(){
   const out=[];const P=positions();const held=new Set(P.list.filter(m=>m.qty>0).map(m=>m.t));const scope=held.size?Array.from(held):tickers();
+  driftAlerts().forEach(a=>out.push(a));
   journalDue().forEach(l=>out.push({lvl:2,ic:'📓',txt:`${dispT(l.t)} alışının tezini gözden geçirme zamanı`,href:'#/portfoy/defter'}));
   planDue().forEach(x=>out.push({lvl:2,ic:'🗓️',txt:`${dispT(x.p.t)} alım planı ${x.i+1}/${x.p.n} taksiti zamanı`,href:'#/portfoy/defter'}));
   const soon=(S.data.events||[]).filter(e=>{const d=new Date(e.date)-Date.now();return d>-3600e3&&d<48*3600e3});
