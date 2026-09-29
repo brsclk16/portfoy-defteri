@@ -571,7 +571,7 @@ function afterPozisyon(){
   $$('[data-tw]').forEach(inp=>inp.onchange=async()=>{const v=inp.value===''?null:+inp.value;S.settings.targets=S.settings.targets||{};if(v==null)delete S.settings.targets[inp.dataset.tw];else S.settings.targets[inp.dataset.tw]=v;await saveSettings();render(false)});
   const ts=$('#tdSave');if(ts)ts.onclick=async()=>{S.settings.tdKey=$('#tdKey').value.trim();await saveSettings();toast('Anahtar kaydedildi');fetchLive(true)};
   const dr=$('#depSave');if(dr)dr.onclick=async()=>{const v=$('#depR').value;S.settings.depositRate=v===''?null:+v;await saveSettings();toast('Kaydedildi')};
-  const gs=$('#ghSave');if(gs)gs.onclick=async()=>{S.settings.ghToken=$('#ghTok').value.trim();await saveSettings();toast('GitHub anahtarı kaydedildi')};
+  const gs=$('#ghSave');if(gs)gs.onclick=async()=>{S.settings.ghToken=$('#ghTok').value.trim();await saveSettings();if(!S.settings.ghToken){toast('GitHub anahtarı silindi');return}toast('Anahtar deneniyor…');let ok=false;try{ok=await syncRemoteAlarms()}catch(e){}toast(ok?'Anahtar çalışıyor: alarmlar ve kurallar görevlere gönderildi':'Anahtar repoya yazamadı. İzin: portfoy-defteri → Contents: Read and write olmalı')};
   const ln=$('#liveNow');if(ln)ln.onclick=()=>fetchLive(true);
   const lo=$('#logout2');if(lo)lo.onclick=()=>{logout();render(true)};
   const gl=$('#goLogin');if(gl)gl.onclick=e=>{e.preventDefault();openLogin()};
