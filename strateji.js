@@ -35,7 +35,7 @@ function adxS(a,n=14){
   const adx=Array(len).fill(null);let s=null,c=0;for(let i=0;i<len;i++){if(dx[i]==null)continue;c++;if(c<n)continue;if(s==null){let t=0;for(let j=i-n+1;j<=i;j++)t+=dx[j];s=t/n}else s=(s*(n-1)+dx[i])/n;adx[i]=s}
   return {adx,pdi,mdi};
 }
-function peerOf(t){const i=inst(t)||{};if((i.holdings||[]).length||!/hisse/i.test(i.type||''))return 'SPY';return ['AMD','CRDO','NVDA','MU','AVGO','TSM','INTC'].includes(t)?'SMH':'SPY'}
+function peerOf(t){const i=inst(t)||{};if((i.holdings||[]).length||!/hisse/i.test(i.type||''))return 'SPY';return ['AMD','CRDO','NVDA','MU','AVGO','TSM','INTC','ASML'].includes(t)?'SMH':'SPY'}
 function relStrength(t){
   const s=series(t),sp=S.hist.SPY||[],peer=peerOf(t),pp=peer==='SPY'?sp:series(peer);if(s.length<60||!sp.length)return null;
   const ret=(arr,n)=>{if(arr.length<n+1)return null;return (arr[arr.length-1][1]/arr[arr.length-1-n][1]-1)*100};

@@ -92,7 +92,7 @@ function checkNotify(){
 }
 
 /* ---------- karşılaştırma ve oran ---------- */
-const CMP_PRESETS=[['SLV','IAU','Gümüş / altın'],['SMH','SPY','Çip / S&P 500'],['SOXX','SMH','SOXX / SMH'],['XBI','SPY','Biyotek / S&P 500'],['COPX','IAU','Bakır / altın (risk iştahı)'],['AMD','SMH','AMD / çip sektörü'],['CRDO','SMH','CRDO / çip sektörü'],['VRT','SPY','VRT / S&P 500']];
+const CMP_PRESETS=[['SLV','IAU','Gümüş / altın'],['SMH','SPY','Çip / S&P 500'],['SOXX','SMH','SOXX / SMH'],['XBI','SPY','Biyotek / S&P 500'],['COPX','IAU','Bakır / altın (risk iştahı)'],['AMD','SMH','AMD / çip sektörü'],['CRDO','SMH','CRDO / çip sektörü'],['ASML','SMH','ASML / çip sektörü'],['VRT','SPY','VRT / S&P 500']];
 function closeSeries(t){const o=S.ohlc&&S.ohlc[t];if(o&&o.length>60)return o.map(r=>[r[0],r[4]]);return (S.hist&&S.hist[t])||series(t)}
 function cmpTickers(){return techTickers().concat(['SPY']).filter((x,i,a)=>a.indexOf(x)===i)}
 function viewCmp(){

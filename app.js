@@ -5,13 +5,13 @@ const SUPA_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsI
 
 const COLORS = {SMH:'#b8f25c',SOXX:'#8b7bff',AMD:'#ff6b6b',CRDO:'#ff6fd0',VRT:'#2fe39a',DELL:'#4d9bff',XBI:'#5cd3ff',AGNG:'#ffa45c',COPX:'#e58b5a',IAU:'#ffd35c',SLV:'#c6ceda'};
 const THEMES = [
-  {name:'Yarı iletken', t:['SMH','SOXX','AMD','CRDO'], c:'#b8f25c'},
+  {name:'Yarı iletken', t:['SMH','SOXX','AMD','CRDO','ASML'], c:'#b8f25c'},
   {name:'AI altyapı', t:['VRT','DELL'], c:'#4d9bff'},
   {name:'Biyotek & sağlık', t:['XBI','AGNG'], c:'#5cd3ff'},
   {name:'Değerli metal', t:['IAU','SLV'], c:'#ffd35c'},
   {name:'Sanayi metali', t:['COPX'], c:'#e58b5a'}
 ];
-const ORDER = ['SMH','SOXX','AMD','CRDO','VRT','DELL','XBI','AGNG','COPX','IAU','SLV'];
+const ORDER = ['SMH','SOXX','AMD','CRDO','ASML','VRT','DELL','XBI','AGNG','COPX','IAU','SLV'];
 const IMPACT = {olumlu:'Olumlu',olumsuz:'Olumsuz',karisik:'Karışık',notr:'Nötr'};
 const KIND = {bilanco:'Bilanço',makro:'Makro',fed:'Fed',politika:'Politika',fda:'FDA',etkinlik:'Etkinlik'};
 
