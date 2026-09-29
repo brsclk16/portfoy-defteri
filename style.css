@@ -654,3 +654,4 @@ body.sade #sade{color:var(--accent);box-shadow:inset 0 0 0 1px var(--accent)}
 .sent-b{height:8px;border-radius:99px;background:var(--panel2);overflow:hidden}.sent-b i{display:block;height:100%;background:var(--muted)}.sent-b i.up{background:var(--up)}.sent-b i.down{background:var(--down)}
 @media (max-width:760px){.sent-c{grid-template-columns:minmax(0,1fr) 70px 30px}.ms-x{min-width:78px}}
 .gmini svg{width:100%;max-width:110px;height:auto}.gcard .g3s{min-width:0}.gmini{min-width:0}.gcard h3{flex-wrap:wrap;gap:6px}
+.wadd select{min-width:0}

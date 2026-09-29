@@ -190,9 +190,14 @@ function watchPending(){const have=new Set(Object.keys(S.data.instruments));retu
 function viewWatch(){
   const docs=watchDocs(),pend=watchPending();
   return `<div class="sec-t"><div><h2>İzleme listesi</h2><p>Almayı düşündüğün hisse ve fonlar · analiz, fiyat, PEG ve haberler otomatik takip edilir</p></div></div>
-  <section class="card"><form class="wadd" id="wAdd"><input name="t" placeholder="Sembol (ör. NVDA, GLD · BIST için THYAO:BIST)" maxlength="10" required><input name="note" placeholder="Not (ops.)"><button class="btn" type="submit">Listeye ekle</button></form>
+  <section class="card"><form class="wadd" id="wAdd"><input name="t" placeholder="Sembol (ör. NVDA, GLD · BIST için THYAO:BIST)" maxlength="14" required>
+    <select name="kind" id="wKind"><option value="watch">İzleme listesine</option><option value="port">Portföye (pozisyon açacağım)</option></select>
+    <select name="theme" id="wTheme" style="display:none">${THEMES.map(x=>`<option>${esc(x.name)}</option>`).join('')}<option value="__new">+ Yeni tema…</option></select>
+    <input name="themeNew" id="wThemeNew" placeholder="Yeni tema adı" style="display:none">
+    <input name="note" placeholder="Not (ops.)"><button class="btn" type="submit">Ekle</button></form>
+  <p class="muted" style="font-size:12.5px;margin:8px 0 0">Eklediğin hisse ya da fon için ekleme görevi en geç 1 saat içinde her şeyi hazırlar: fiyat geçmişi ve grafik, teknik plan, şirket/fon analizi, analist hedefi, değerleme, temettü, bilanço geçmişi, kurumsal yatırımcılar ve haber taraması. ${S.settings.tdKey?'Twelve Data anahtarın kayıtlı olduğu için fiyat geçmişi ekler eklemez çekilir.':'Pozisyonlar → Ayarlar\'a Twelve Data anahtarını girersen fiyat geçmişi ekler eklemez çekilir.'}</p>
   ${S.settings.ghToken?'':`<div class="note" style="margin-top:10px">Eklediğin sembollerin otomatik görevlere ulaşması için Pozisyonlar → Ayarlar'a GitHub anahtarını bir kez girmen gerekiyor. <a href="#/pozisyon">Nasıl? →</a></div>`}
-  ${pend.length?`<div class="pend">${pend.map(w=>`<div class="pd"><b>${esc(w.t)}</b>${S.live[w.t]?`<span class="num">${pxf(w.t,S.live[w.t].price)}</span><span class="num ${cls(S.live[w.t].pct)}">${pct(S.live[w.t].pct)}</span>`:''}<span class="muted">${esc(w.note||'')} · analiz sıradaki sabah taramasında hazırlanacak</span><button class="lnk" data-wdel="${esc(w.t)}" title="Kaldır">✕</button></div>`).join('')}</div>`:''}
+  ${pend.length?`<div class="pend">${pend.map(w=>`<div class="pd"><b>${esc(w.t)}</b>${S.live[w.t]?`<span class="num">${pxf(w.t,S.live[w.t].price)}</span><span class="num ${cls(S.live[w.t].pct)}">${pct(S.live[w.t].pct)}</span>`:''}<span class="tag">${w.kind==='port'?'Portföy · '+esc(w.theme||''):'İzleme'}</span><span class="muted">${esc(w.note||'')} · ekleme görevi hazırlıyor (en geç 1 saat)${w.seed?' · fiyat geçmişi alındı':''}</span><button class="lnk" data-wdel="${esc(w.t)}" title="Kaldır">✕</button></div>`).join('')}</div>`:''}
   ${docs.length?`<div class="icards" style="margin-top:14px">${docs.map(t=>{const i=inst(t),q=quote(t),s=sliceRange(series(t),'6A');return `<div class="card ic wcard"><a href="#/t/${t}" style="text-decoration:none;display:flex;flex-direction:column;gap:10px"><div class="row"><div class="sym">${logo(t)}<div><div class="n">${t}</div><div class="d">${esc(i.name)}</div></div></div><span class="tag">İzleme</span></div>
     <div class="row"><span class="px">${pxf(t,q.price)}</span>${chip(q.pct)}</div>${spark(s,300,56,color(t))}
     <div class="ft"><span class="tag">YBB ${pct(ytd(t),1)}</span>${i.peg?`<span class="tag">PEG ${esc(pegTxt(i))}</span>`:''}${upside(t)!=null?`<span class="tag">Hedefe ${pct(upside(t),1)}</span>`:''}</div></a><button class="lnk wx" data-wdel="${t}" title="Listeden çıkar">✕</button></div>`}).join('')}</div>`:(pend.length?'':'<div class="empty" style="margin-top:12px">Liste boş. Yukarıdan bir sembol ekle.</div>')}
@@ -206,14 +211,24 @@ async function ghWatchSave(list){
   const body={message:'İzleme listesi güncellendi (site)',content:b64utf8(JSON.stringify({updatedAt:new Date().toISOString(),tickers:list},null,1)+'\n'),branch:'main'};if(sha)body.sha=sha;
   const p=await fetch(url,{method:'PUT',headers:{...h,'Content-Type':'application/json'},body:JSON.stringify(body)});if(!p.ok)throw new Error('GitHub '+p.status+' '+(await p.text()).slice(0,120));
 }
+async function seedFetch(t){const key=(S.settings.tdKey||'').trim();if(!key)return false;const base='https://api.twelvedata.com/';const q=`symbol=${encodeURIComponent(t)}&apikey=${encodeURIComponent(key)}`;
+  const qt=await (await fetch(base+'quote?'+q)).json();if(qt.status==='error'){if(/not found|invalid|symbol/i.test(qt.message||''))throw new Error('yok');throw new Error(qt.message)}
+  const d=await (await fetch(base+'time_series?interval=1day&outputsize=800&'+q)).json();const m=await (await fetch(base+'time_series?interval=1month&outputsize=130&'+q)).json();
+  if(!d.values)return false;const obj={t,fetchedAt:new Date().toISOString(),meta:d.meta||null,daily:d.values,monthly:m.values||[],quote:qt};
+  return await ghPutJSON('data/seed/'+t.replace(':','_')+'.json',obj,t+' fiyat geçmişi (site)')}
 async function liveOne(t){const key=(S.settings.tdKey||'').trim();if(!key)return;try{const r=await fetch(`https://api.twelvedata.com/quote?symbol=${encodeURIComponent(t)}&apikey=${encodeURIComponent(key)}`);const q=await r.json();if(+q.close>0)S.live[t]={price:+q.close,chg:+q.change,pct:+q.percent_change,day:q.datetime,name:q.name}}catch(e){}}
 function afterWatch(){
-  const f=$('#wAdd');if(f)f.onsubmit=async e=>{e.preventDefault();const t=f.t.value.trim().toUpperCase().replace(/[^A-Z0-9.\-]/g,'');if(!t)return;
-    const cur=(S.watch&&S.watch.tickers)||[];if(cur.some(w=>w.t===t)||S.data.instruments[t]&&!S.data.instruments[t].watchlistlist){toast(t+' zaten takipte');return}
-    const list=cur.concat({t,note:f.note.value.trim(),added:new Date().toISOString().slice(0,10)});
+  const f=$('#wAdd');if(f){const k=$('#wKind'),th=$('#wTheme'),tn=$('#wThemeNew');k.onchange=()=>{th.style.display=k.value==='port'?'':'none';tn.style.display=k.value==='port'&&th.value==='__new'?'':'none'};th.onchange=k.onchange;
+   f.onsubmit=async e=>{e.preventDefault();const t=f.t.value.trim().toUpperCase().replace(/[^A-Z0-9.:\-]/g,'');if(!t)return;
+    const cur=(S.watch&&S.watch.tickers)||[];if(cur.some(w=>w.t===t)||S.data.instruments[t]){toast(t+' zaten takipte');return}
+    if(!(S.settings.ghToken||'').trim()){toast('Önce Pozisyonlar → Ayarlar\'a GitHub anahtarını gir');return}
+    const kind=k.value,theme=kind==='port'?(th.value==='__new'?(tn.value.trim()||'Diğer'):th.value):null;
+    const btn=f.querySelector('button[type=submit]');btn.disabled=true;btn.textContent='Ekleniyor…';let seeded=false;
+    try{seeded=await seedFetch(t)}catch(err){if(err.message==='yok'){toast(t+' Twelve Data\'da bulunamadı; sembolü kontrol et');btn.disabled=false;btn.textContent='Ekle';return}console.warn(err)}
+    const list=cur.concat({t,note:f.note.value.trim(),added:new Date().toISOString().slice(0,10),kind,theme,seed:seeded});
     S.watch={...(S.watch||{}),tickers:list};S.settings.watchLocal=list;
-    try{await ghWatchSave(list);toast(t+' eklendi · sabah taramasında analiz edilecek')}catch(err){toast('Yerelde eklendi: '+err.message)}
-    await saveSettings();await liveOne(t);render(false)};
+    try{await ghWatchSave(list);toast(t+' eklendi · tüm veriler en geç 1 saat içinde hazır')}catch(err){toast('Kaydedilemedi: '+err.message)}
+    await saveSettings();await liveOne(t);render(false)}};
   $$('[data-wdel]').forEach(b=>b.onclick=async()=>{const t=b.dataset.wdel;if(!confirm(t+' izleme listesinden çıkarılsın mı?'))return;
     const list=((S.watch&&S.watch.tickers)||[]).filter(w=>w.t!==t);S.watch={...(S.watch||{}),tickers:list};S.settings.watchLocal=list;
     try{await ghWatchSave(list);toast(t+' çıkarıldı')}catch(err){toast('Yerelde çıkarıldı: '+err.message)}await saveSettings();render(false)});

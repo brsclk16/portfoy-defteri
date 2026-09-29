@@ -638,7 +638,7 @@ async function loadData(){
   const [d,p,h]=await Promise.all(['portfolio','prices','history'].map(n=>fetch('data/'+n+'.json'+v).then(r=>{if(!r.ok)throw new Error(n+'.json '+r.status);return r.json()})));
   const opt=n=>fetch('data/'+n+'.json'+v).then(r=>r.ok?r.json():null).catch(()=>null);
   const [m,w,wl,er,ins,oh,mo,mk,va,lg,br,dv,i13,eh,un,ec,ms]=await Promise.all([opt('macro'),opt('weekly'),opt('watchlist'),opt('earnings'),opt('insider'),opt('ohlc'),opt('monthly'),opt('markets'),opt('valuation'),opt('long'),opt('brief'),opt('dividends'),opt('inst13f'),opt('earnhist'),opt('universe'),opt('econ'),opt('mstrip')]);
-  S.data=d;S.prices=p;S.hist=h;S.macro=m;S.weekly=w;if(wl)S.watch=wl;S.earn=er;S.insider=ins;S.ohlc=oh;S.monthly=mo;S.markets=mk;S.valuation=va;S.long=lg;S.brief=br;S.divs=dv;S.inst13=i13;S.ehist=eh;S.univ=un;S.econ=ec;S.mstrip=ms;S.labCache={};S.mcCache={};
+  S.data=d;S.prices=p;try{Object.values(d.instruments).forEach(i=>{if(i.watchlist||!i.theme||THEMES.some(x=>x.t.includes(i.ticker)))return;let T=THEMES.find(x=>x.name===i.theme);if(!T){T={name:i.theme,t:[],c:['#c792ff','#ff9f5c','#7ee0c3','#f58fd0','#a3b8ff'][THEMES.length%5]};THEMES.push(T)}T.t.push(i.ticker)})}catch(e){}S.hist=h;S.macro=m;S.weekly=w;if(wl)S.watch=wl;S.earn=er;S.insider=ins;S.ohlc=oh;S.monthly=mo;S.markets=mk;S.valuation=va;S.long=lg;S.brief=br;S.divs=dv;S.inst13=i13;S.ehist=eh;S.univ=un;S.econ=ec;S.mstrip=ms;S.labCache={};S.mcCache={};
 }
 async function boot(){
   const th=lsGet('pd_theme');if(th)document.documentElement.dataset.theme=th;
