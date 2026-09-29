@@ -339,7 +339,7 @@ function viewOzet(){
   const heroVal=real?money(T.value):money(hs.length?hs[hs.length-1][1]:null);
   const wk=S.weekly&&S.weekly.reports&&S.weekly.reports[0];
   return `<div class="fade">
-  ${briefCard()}${alertsCard()}${realLine()}
+  ${briefCard()}${alertsCard()}${viewEarnPre(7,true)}${realLine()}
   <div class="grid g-hero">
     <section class="card hero">
       <div class="lbl">${real?'Portföy değeri':'Model portföy · 1 yıl önce $10.000 ('+esc(W.src)+')'}</div>
@@ -564,6 +564,7 @@ function afterPozisyon(){
       if(d.side==='B'&&+d.stop>0)lot.stop=+d.stop;
       if(!(lot.q>0&&lot.p>0)){toast('Adet ve fiyat gir');return}
       if(lot.side==='S'){const m=positions().list.find(x=>x.t===lot.t);if(!m||m.qty<lot.q-1e-9){toast('Elindeki adetten fazla satılamaz');return}}
+      if(!(await pretradeConfirm(lot)))return;
       S.lots.push(lot);await saveLots();if(S.prefillUsed)await planMarkDone();toast('İşlem eklendi');render(true)};
   }
   $$('[data-del]').forEach(b=>b.onclick=async()=>{if(!confirm('Bu işlem silinsin mi?'))return;S.lots=S.lots.filter(l=>l.id!==b.dataset.del);await saveLots();render(true)});
@@ -607,12 +608,13 @@ function render(scrollTop){
     else if(R.sub==='karne'){v.innerHTML=sn+viewKarne()}else if(R.sub==='temettu'){v.innerHTML=sn+viewTemettu();after=afterTemettu}else if(R.sub==='rapor'){v.innerHTML=sn+viewRapor();after=afterRapor}else{v.innerHTML=sn+viewPozisyon();after=afterPozisyon}}
   else if(R.r==='piyasa'){const sn=subnav('piyasa',R.sub);
     if(R.sub==='haber'){v.innerHTML=sn+viewHaber();after=()=>$$('#nf button').forEach(b=>b.onclick=()=>{S.newsFilter=b.dataset.f;render(false)})}
-    else if(R.sub==='takvim'){v.innerHTML=sn+viewTakvim()}else if(R.sub==='kurumsal'){v.innerHTML=sn+viewKurumsal()}
+    else if(R.sub==='takvim'){v.innerHTML=sn+`<div style="margin-bottom:18px">${viewEarnPre(10)}</div>`+viewTakvim()}else if(R.sub==='kurumsal'){v.innerHTML=sn+viewKurumsal()}
     else{v.innerHTML=sn+viewEnstruman();after=afterWatch}}
   else if(R.r==='teknik'){const sn=subnav('teknik',R.sub);
     if(R.sub==='tarama'){v.innerHTML=sn+`<div class="fade">${viewTarama()}</div>`}
     else if(R.sub==='karsilastir'){v.innerHTML=sn+viewCmp();after=afterCmp}
     else if(R.sub==='guc'){v.innerHTML=sn+viewGuc()}
+    else if(R.sub==='kural'){v.innerHTML=sn+viewKural();after=afterKural}
     else if(R.sub==='lab'){v.innerHTML=sn+`<div class="fade">${viewLab()}</div>`;after=afterLab}
     else if(R.sub==='test'){v.innerHTML=sn+`<div class="fade">${viewBtAll()}</div>`;after=afterBtAll}
     else{const o=viewTeknikPanel(R.t);v.innerHTML=sn+(o.html||o);after=()=>afterTeknikPanel(o.t)}}
@@ -634,8 +636,8 @@ async function loadData(){
   const v='?t='+Math.floor(Date.now()/60000);
   const [d,p,h]=await Promise.all(['portfolio','prices','history'].map(n=>fetch('data/'+n+'.json'+v).then(r=>{if(!r.ok)throw new Error(n+'.json '+r.status);return r.json()})));
   const opt=n=>fetch('data/'+n+'.json'+v).then(r=>r.ok?r.json():null).catch(()=>null);
-  const [m,w,wl,er,ins,oh,mo,mk,va,lg,br,dv,i13]=await Promise.all([opt('macro'),opt('weekly'),opt('watchlist'),opt('earnings'),opt('insider'),opt('ohlc'),opt('monthly'),opt('markets'),opt('valuation'),opt('long'),opt('brief'),opt('dividends'),opt('inst13f')]);
-  S.data=d;S.prices=p;S.hist=h;S.macro=m;S.weekly=w;if(wl)S.watch=wl;S.earn=er;S.insider=ins;S.ohlc=oh;S.monthly=mo;S.markets=mk;S.valuation=va;S.long=lg;S.brief=br;S.divs=dv;S.inst13=i13;S.labCache={};S.mcCache={};
+  const [m,w,wl,er,ins,oh,mo,mk,va,lg,br,dv,i13,eh]=await Promise.all([opt('macro'),opt('weekly'),opt('watchlist'),opt('earnings'),opt('insider'),opt('ohlc'),opt('monthly'),opt('markets'),opt('valuation'),opt('long'),opt('brief'),opt('dividends'),opt('inst13f'),opt('earnhist')]);
+  S.data=d;S.prices=p;S.hist=h;S.macro=m;S.weekly=w;if(wl)S.watch=wl;S.earn=er;S.insider=ins;S.ohlc=oh;S.monthly=mo;S.markets=mk;S.valuation=va;S.long=lg;S.brief=br;S.divs=dv;S.inst13=i13;S.ehist=eh;S.labCache={};S.mcCache={};
 }
 async function boot(){
   const th=lsGet('pd_theme');if(th)document.documentElement.dataset.theme=th;

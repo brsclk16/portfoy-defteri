@@ -1,6 +1,6 @@
 /* Portföy Defteri service worker: kabuk önbellekte, veri önce ağdan */
-const V='pd-v9';
-const SHELL=['./','index.html','style.css?v=9','analiz.js?v=9','ekler.js?v=9','teknik.js?v=9','strateji.js?v=9','duzen.js?v=9','arac.js?v=9','lab.js?v=9','ileri.js?v=9','app.js?v=9','manifest.webmanifest','icon-192.png','icon-512.png'];
+const V='pd-v10';
+const SHELL=['./','index.html','style.css?v=10','analiz.js?v=10','ekler.js?v=10','teknik.js?v=10','strateji.js?v=10','duzen.js?v=10','arac.js?v=10','lab.js?v=10','ileri.js?v=10','kural.js?v=10','kontrol.js?v=10','app.js?v=10','manifest.webmanifest','icon-192.png','icon-512.png'];
 self.addEventListener('install',e=>{e.waitUntil(caches.open(V).then(c=>c.addAll(SHELL)).then(()=>self.skipWaiting()))});
 self.addEventListener('activate',e=>{e.waitUntil(caches.keys().then(ks=>Promise.all(ks.filter(k=>k!==V).map(k=>caches.delete(k)))).then(()=>self.clients.claim()))});
 self.addEventListener('fetch',e=>{

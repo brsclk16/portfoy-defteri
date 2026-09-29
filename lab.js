@@ -171,7 +171,7 @@ async function ghPutJSON(path,obj,msg){const tok=(S.settings.ghToken||'').trim()
   const g=await fetch(url+'?ref=main',{headers:h});let sha;if(g.ok)sha=(await g.json()).sha;const body={message:msg,content:b64utf8(JSON.stringify(obj,null,1)+'\n'),branch:'main'};if(sha)body.sha=sha;
   const p=await fetch(url,{method:'PUT',headers:{...h,'Content-Type':'application/json'},body:JSON.stringify(body)});return p.ok}
 async function syncRemoteAlarms(){const D=drawAll();const levels=[];Object.entries(D).forEach(([t,arr])=>arr.forEach(g=>{if(g.type==='h'&&g.alarm)levels.push({t,p:g.p})}));
-  const obj={updatedAt:new Date().toISOString(),levels,planAlerts:S.settings.planAlerts!==false,brief:true};
+  const obj={updatedAt:new Date().toISOString(),levels,planAlerts:S.settings.planAlerts!==false,brief:true,rules:(Array.isArray(S.settings.rules)?S.settings.rules:[]).filter(r=>r.on!==false).map(r=>({id:r.id,t:r.t,logic:r.logic,name:r.name,conds:r.conds}))};
   try{const ok=await ghPutJSON('data/alarms.json',obj,'Alarm seviyeleri güncellendi (site)');if(ok)toast('Alarmlar telefona bildirim için kaydedildi');return ok}catch(e){return false}}
 
 /* ---------- sabah brifingi kartı (zamanlanmış görev yazar: data/brief.json) ---------- */
