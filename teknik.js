@@ -1,7 +1,7 @@
 /* Portföy Defteri — teknik analiz: mum grafik, Ichimoku, Bollinger, MACD, RSI, Stokastik, hacim, ATR ve teknik tarama */
 "use strict";
-const IND_DEF={lvl:'Plan seviyeleri',ichi:'Ichimoku',fib:'Fibonacci',boll:'Bollinger',sma:'Ort. 20/50/200',vwap:'VWAP',vp:'Hacim profili',vol:'Hacim',rsi:'RSI',macd:'MACD',stoch:'Stokastik',adx:'ADX'};
-function indState(){if(!S.ind){try{S.ind=JSON.parse(localStorage.getItem('pd_ind'))}catch(e){}if(!S.ind)S.ind={lvl:true,ichi:true,fib:false,boll:false,sma:false,vwap:false,vp:false,vol:true,rsi:true,macd:true,stoch:false,adx:false};['lvl','fib','vwap','vp','adx'].forEach(k=>{if(!(k in S.ind))S.ind[k]=k==='lvl'})}return S.ind}
+const IND_DEF={lvl:'Plan seviyeleri',ichi:'Ichimoku',fib:'Fibonacci',boll:'Bollinger',sma:'Ort. 20/50/200',vwap:'VWAP',vp:'Hacim profili',evt:'Olaylar',vol:'Hacim',rsi:'RSI',macd:'MACD',stoch:'Stokastik',adx:'ADX'};
+function indState(){if(!S.ind){try{S.ind=JSON.parse(localStorage.getItem('pd_ind'))}catch(e){}if(!S.ind)S.ind={lvl:true,ichi:true,fib:false,boll:false,sma:false,vwap:false,vp:false,vol:true,rsi:true,macd:true,stoch:false,adx:false};['lvl','fib','vwap','vp','adx','evt'].forEach(k=>{if(!(k in S.ind))S.ind[k]=k==='lvl'||k==='evt'})}return S.ind}
 function saveInd(){try{localStorage.setItem('pd_ind',JSON.stringify(S.ind))}catch(e){}}
 
 /* ---------- veri ---------- */
@@ -109,6 +109,7 @@ function techChart(el,t,range){
   const bw=Math.max(1,Math.min(9,cw*.66));
   for(let i=start;i<all.length;i++){const c=all[i];const up=c.c>=c.o;const col=up?'var(--up)':'var(--down)';const x=X(i);
     svg+=`<line x1="${x}" x2="${x}" y1="${Y(c.h)}" y2="${Y(c.l)}" stroke="${col}" stroke-width="1"/><rect x="${x-bw/2}" y="${Y(Math.max(c.o,c.c))}" width="${bw}" height="${Math.max(1,Math.abs(Y(c.o)-Y(c.c)))}" fill="${up?col:col}" ${up?'fill-opacity=".85"':''}/>`}
+  if(st.evt&&typeof chartEvents==='function')try{svg+=chartEvents(t,all,start,X,Y,main,WK)}catch(e){console.error(e)}
   // son fiyat etiketi
   const lp=all[all.length-1].c;svg+=`<line x1="${pl}" x2="${W-pr}" y1="${Y(lp)}" y2="${Y(lp)}" stroke="var(--muted)" stroke-dasharray="2 3" stroke-width=".8"/><rect x="${W-pr+2}" y="${Y(lp)-9}" width="${pr-4}" height="18" rx="4" fill="var(--text)"/><text x="${W-pr+6}" y="${Y(lp)+4}" style="fill:var(--bg);font:600 11px var(--mono)">${esc(fmt(lp))}</text>`;
   if(fut)svg+=`<line x1="${X(all.length)-cw/2}" x2="${X(all.length)-cw/2}" y1="${main.y}" y2="${main.y+main.h}" stroke="var(--line2)" stroke-dasharray="4 4"/><text class="ax" x="${X(all.length)+4}" y="${main.y+12}">26 ${WK?'hafta':'gün'} ileri bulut</text>`;

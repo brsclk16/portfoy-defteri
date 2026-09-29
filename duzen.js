@@ -3,9 +3,9 @@
 const SECTIONS={
   ozet:{label:'Özet',icon:'M3 12l9-8 9 8M5 10v10h14V10'},
   portfoy:{label:'Portföyüm',icon:'M4 7h16v12H4zM8 7V5h8v2',subs:[['pozisyon','Pozisyonlar'],['karne','İşlem karnesi'],['temettu','Temettü'],['rapor','Aylık rapor'],['defter','Günlük · plan · vergi']]},
-  piyasa:{label:'Piyasa',icon:'M4 19V9M10 19V5M16 19v-7M22 19H2',subs:[['enstruman','Enstrümanlar'],['haber','Haberler'],['takvim','Takvim'],['kurumsal','Kurumsal (13F)']]},
-  teknik:{label:'Teknik',icon:'M7 4v16M7 8h-2v6h2M17 4v16M17 7h-2v8h2M12 9v11M12 12h-2v4h2',subs:[['grafik','Grafik paneli'],['karsilastir','Karşılaştır · oran'],['test','Sinyal testi'],['lab','Strateji lab'],['guc','Göreli güç'],['kural','Alarm kuralları'],['tarama','Teknik tarama']]},
-  analiz:{label:'Analiz',icon:'M4 20l5-6 4 3 7-9',subs:[['getiri','Reel getiri'],['risk','Risk'],['makro','Makro'],['beklenti','Vade beklentisi'],['senaryo','Senaryo'],['stres','Stres testi'],['degerleme','Değerleme'],['duzenli','Düzenli alım'],['dengeleme','Dengeleme'],['simulator','Eklesem ne olur?'],['haftalik','Haftalık rapor']]}
+  piyasa:{label:'Piyasa',icon:'M4 19V9M10 19V5M16 19v-7M22 19H2',subs:[['enstruman','Enstrümanlar'],['haber','Haberler'],['takvim','Takvim'],['kurumsal','Kurumsal (13F)'],['isi','Isı haritası'],['tarayici','Fikir tarayıcı']]},
+  teknik:{label:'Teknik',icon:'M7 4v16M7 8h-2v6h2M17 4v16M17 7h-2v8h2M12 9v11M12 12h-2v4h2',subs:[['grafik','Grafik paneli'],['karsilastir','Karşılaştır · oran'],['test','Sinyal testi'],['lab','Strateji lab'],['oynat','Geçmişi oynat'],['guc','Göreli güç'],['kural','Alarm kuralları'],['tarama','Teknik tarama']]},
+  analiz:{label:'Analiz',icon:'M4 20l5-6 4 3 7-9',subs:[['getiri','Reel getiri'],['risk','Risk'],['makro','Makro'],['duyarlilik','Duyarlılık'],['beklenti','Vade beklentisi'],['senaryo','Senaryo'],['stres','Stres testi'],['degerleme','Değerleme'],['duzenli','Düzenli alım'],['dengeleme','Dengeleme'],['simulator','Eklesem ne olur?'],['haftalik','Haftalık rapor']]}
 };
 const LEGACY={pozisyon:['portfoy','pozisyon'],defter:['portfoy','defter'],enstruman:['piyasa','enstruman'],haber:['piyasa','haber'],takvim:['piyasa','takvim'],haftalik:['analiz','haftalik']};
 const ITABS=[['genel','Genel bakış'],['plan','Plan ve beklenti'],['teknik','Teknik'],['temel','Temel'],['haber','Haberler'],['iceriden','İçeriden işlemler']];
@@ -26,6 +26,7 @@ function markNav(r){$$('#tabs a,#bnav a').forEach(a=>a.classList.toggle('on',a.d
 /* ---------- Analiz alt sayfaları ---------- */
 function analizPart(part){
   if(part==='makro')return viewMakro();
+  if(part==='duyarlilik')return viewSent();
   if(part==='senaryo')return viewScn2();
   if(part==='stres')return viewStress();
   if(part==='degerleme')return viewValuation();
@@ -153,7 +154,7 @@ function viewTeknikPanel(t0){
     <div class="px2"><b class="num">${pxf(t,q.price)}</b> ${chip(q.pct)}</div>
     <div class="tnav"><a class="btn ghost sm" href="#/teknik/grafik/${encodeURIComponent(prev)}" title="Önceki (←)">←</a><a class="btn ghost sm" href="#/teknik/grafik/${encodeURIComponent(next)}" title="Sonraki (→)">→</a><a class="btn ghost sm" href="#/t/${encodeURIComponent(t)}/plan">Plan ve beklenti</a><a class="btn ghost sm" href="#/t/${encodeURIComponent(t)}">Enstrüman sayfası</a></div></div>
   ${techSection(t)}
-  <div class="grid g2 sec" style="align-items:start">${planCard(t,true)}<div class="grid" style="align-content:start">${summaryCard(t)}${psCard(t)}</div></div>
+  <div class="grid g2 sec" style="align-items:start">${planCard(t,true)}<div class="grid" style="align-content:start">${gaugeCard(t)}${summaryCard(t)}${psCard(t)}</div></div>
   ${btSection(t)}
   ${levelsSection(t)}</div>`;
   S.techBig=false;return {html,t};
@@ -165,6 +166,6 @@ function summaryCard(t){const s=techSignals(t);if(!s)return '';const x=tech(t);c
   <div class="votes">${votes.map(([k,v])=>`<div><span>${k}</span><b class="${v>0?'up':v<0?'down':'muted'}">${v>0?'▲ olumlu':v<0?'▼ olumsuz':'■ nötr'}</b></div>`).join('')}</div>
   ${P?`<p class="muted" style="font-size:13px;margin:12px 0 0;line-height:1.5">Plan durumu: <b class="${P.stc==='up'?'up':P.stc==='down'?'down':''}">${esc(P.state)}</b>. ${esc(P.msg)}</p>`:''}
   <p class="muted" style="font-size:12px;margin:8px 0 0">Oylama kısa vadeli teknik görünümü özetler; temel analiz ve haberleri içermez.</p></section>`}
-function afterTeknikPanel(t){S.techBig=true;try{afterTech(t);afterLevels(t)}finally{S.techBig=false}afterPs(t);afterBt();
+function afterTeknikPanel(t){S.techBig=true;try{afterTech(t);afterLevels(t)}finally{S.techBig=false}afterPs(t);afterBt();afterGauge();
   const L=techTickers();document.onkeydown=e=>{if(route2().r!=='teknik'||/input|textarea|select/i.test(document.activeElement.tagName))return;const i=L.indexOf(t);if(e.key==='ArrowRight')location.hash='#/teknik/grafik/'+L[(i+1)%L.length];if(e.key==='ArrowLeft')location.hash='#/teknik/grafik/'+L[(i-1+L.length)%L.length]};
   const on=$('.tpk.on'),bx=$('.tpick');if(on&&bx)bx.scrollLeft=on.offsetLeft-bx.clientWidth/2+on.clientWidth/2}
