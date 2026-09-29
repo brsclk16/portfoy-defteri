@@ -617,6 +617,7 @@ function render(scrollTop){
     else if(R.sub==='kural'){v.innerHTML=sn+viewKural();after=afterKural}
     else if(R.sub==='coklu'){v.innerHTML=sn+viewMulti();after=afterMulti}
     else if(R.sub==='oynat'){v.innerHTML=sn+viewReplay();after=afterReplay}
+    else if(R.sub==='dogrula'){v.innerHTML=sn+viewDogrula();after=afterDogrula}
     else if(R.sub==='lab'){v.innerHTML=sn+`<div class="fade">${viewLab()}</div>`;after=afterLab}
     else if(R.sub==='test'){v.innerHTML=sn+`<div class="fade">${viewBtAll()}</div>`;after=afterBtAll}
     else{const o=viewTeknikPanel(R.t);v.innerHTML=sn+(o.html||o);after=()=>afterTeknikPanel(o.t)}}

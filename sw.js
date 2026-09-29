@@ -1,6 +1,6 @@
 /* Portföy Defteri service worker: kabuk önbellekte, veri önce ağdan */
-const V='pd-v16';
-const SHELL=['./','index.html','style.css?v=16','analiz.js?v=16','ekler.js?v=16','teknik.js?v=16','strateji.js?v=16','duzen.js?v=16','arac.js?v=16','lab.js?v=16','ileri.js?v=16','kural.js?v=16','kontrol.js?v=16','pro.js?v=16','icgoru.js?v=16','deger.js?v=16','komut.js?v=16','orion.js?v=16','app.js?v=16','manifest.webmanifest','icon-192.png','icon-512.png'];
+const V='pd-v17';
+const SHELL=['./','index.html','style.css?v=17','analiz.js?v=17','ekler.js?v=17','teknik.js?v=17','strateji.js?v=17','duzen.js?v=17','arac.js?v=17','lab.js?v=17','ileri.js?v=17','kural.js?v=17','kontrol.js?v=17','pro.js?v=17','icgoru.js?v=17','deger.js?v=17','komut.js?v=17','orion.js?v=17','dogrula.js?v=17','app.js?v=17','manifest.webmanifest','icon-192.png','icon-512.png'];
 self.addEventListener('install',e=>{e.waitUntil(caches.open(V).then(c=>c.addAll(SHELL)).then(()=>self.skipWaiting()))});
 self.addEventListener('activate',e=>{e.waitUntil(caches.keys().then(ks=>Promise.all(ks.filter(k=>k!==V).map(k=>caches.delete(k)))).then(()=>self.clients.claim()))});
 self.addEventListener('fetch',e=>{
