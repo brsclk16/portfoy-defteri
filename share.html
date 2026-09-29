@@ -1,0 +1,30 @@
+<!doctype html>
+<html lang="tr"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="robots" content="noindex">
+<title>Portföy özeti</title>
+<style>
+:root{--bg:#0b0e13;--panel:#131821;--line:#232a36;--text:#e8edf3;--muted:#8b95a5;--up:#2fe39a;--down:#ff5d7a;--acc:#b8f25c}
+@media (prefers-color-scheme:light){:root{--bg:#f6f7f9;--panel:#fff;--line:#e3e6ea;--text:#1b1f27;--muted:#5b6472;--up:#11793b;--down:#b3261e;--acc:#4d7c0f}}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--text);font:15px/1.5 system-ui,-apple-system,Segoe UI,Roboto,sans-serif}
+main{max-width:760px;margin:0 auto;padding:24px 16px 40px}h1{font-size:24px;margin:0 0 4px}.muted{color:var(--muted)}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:16px;margin-top:14px}
+.kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:10px}.kpi .l{font-size:12.5px;color:var(--muted)}.kpi .v{font:700 22px ui-monospace,Menlo,monospace}
+.up{color:var(--up)}.down{color:var(--down)}table{width:100%;border-collapse:collapse}td,th{padding:8px 6px;border-bottom:1px solid var(--line);text-align:left;font-size:14px}th{font-size:12px;color:var(--muted);font-weight:600;text-transform:uppercase;letter-spacing:.04em}
+.r{text-align:right}.num{font-family:ui-monospace,Menlo,monospace}.bar{height:8px;border-radius:99px;background:var(--acc);display:block}
+.th{display:flex;gap:8px;align-items:center;margin:6px 0}.th span:first-child{min-width:140px}.th .t{flex:1;background:var(--line);border-radius:99px;overflow:hidden}
+footer{margin-top:18px;font-size:12px;color:var(--muted)}
+</style></head><body><main id="m"><p class="muted">Yükleniyor…</p></main>
+<script>
+"use strict";
+const $=s=>document.querySelector(s);const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const nf=(v,d=1)=>typeof v==='number'&&isFinite(v)?v.toLocaleString('tr-TR',{minimumFractionDigits:d,maximumFractionDigits:d}):'—';
+const pct=v=>typeof v==='number'?(v>0?'+':v<0?'−':'')+'%'+nf(Math.abs(v)):'—';const cls=v=>typeof v!=='number'||!v?'':v>0?'up':'down';
+try{const h=location.hash.slice(1).replace(/-/g,'+').replace(/_/g,'/');const o=JSON.parse(decodeURIComponent(escape(atob(h+'==='.slice((h.length+3)%4)))));
+  const P=Object.entries(o.pos||{}).sort((a,b)=>b[1][0]-a[1][0]);const th={};P.forEach(([t,[w,,n]])=>{th[n]=(th[n]||0)+w});
+  document.title=(o.name||'Portföy özeti');
+  $('#m').innerHTML=`<h1>${esc(o.name||'Portföy özeti')}</h1><div class="muted">${esc(o.d)} tarihli anlık görüntü · sadece yüzdeler</div>
+  ${o.tl!=null?`<div class="card kpis"><div class="kpi"><div class="l">TL bazında getiri</div><div class="v ${cls(o.tl)}">${pct(o.tl)}</div></div><div class="kpi"><div class="l">Enflasyona göre reel</div><div class="v ${cls(o.real)}">${pct(o.real)}</div></div><div class="kpi"><div class="l">S&amp;P 500'e göre</div><div class="v ${cls(o.vsSpy)}">${pct(o.vsSpy)}</div></div><div class="kpi"><div class="l">Gram altına göre</div><div class="v ${cls(o.vsGold)}">${pct(o.vsGold)}</div></div></div>`:''}
+  <div class="card"><b>Temalar</b>${Object.entries(th).sort((a,b)=>b[1]-a[1]).map(([n,w])=>`<div class="th"><span>${esc(n)}</span><span class="t"><i class="bar" style="width:${Math.min(100,w)}%"></i></span><span class="num">%${nf(w)}</span></div>`).join('')}</div>
+  <div class="card"><table><thead><tr><th>Enstrüman</th><th>Tema</th><th class="r">Ağırlık</th><th class="r">Getiri</th></tr></thead><tbody>${P.map(([t,[w,r,n]])=>`<tr><td><b>${esc(t)}</b></td><td class="muted">${esc(n)}</td><td class="r num">%${nf(w)}</td><td class="r num ${cls(r)}">${pct(r)}</td></tr>`).join('')}</tbody></table></div>
+  <footer>Portföy Defteri ile oluşturuldu · Tutar, adet ve maliyet bilgisi içermez · Yatırım tavsiyesi değildir.</footer>`;
+}catch(e){$('#m').innerHTML='<h1>Bağlantı okunamadı</h1><p class="muted">Paylaşım bağlantısı eksik ya da bozuk.</p>'}
+</script></body></html>

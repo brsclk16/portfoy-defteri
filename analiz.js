@@ -217,7 +217,7 @@ async function seedFetch(t){const key=(S.settings.tdKey||'').trim();if(!key)retu
   if(!d.values)return false;const obj={t,fetchedAt:new Date().toISOString(),meta:d.meta||null,daily:d.values,monthly:m.values||[],quote:qt};
   return await ghPutJSON('data/seed/'+t.replace(':','_')+'.json',obj,t+' fiyat geçmişi (site)')}
 async function liveOne(t){const key=(S.settings.tdKey||'').trim();if(!key)return;try{const r=await fetch(`https://api.twelvedata.com/quote?symbol=${encodeURIComponent(t)}&apikey=${encodeURIComponent(key)}`);const q=await r.json();if(+q.close>0)S.live[t]={price:+q.close,chg:+q.change,pct:+q.percent_change,day:q.datetime,name:q.name}}catch(e){}}
-function afterWatch(){
+function afterWatch(){if(S.wPrefill){const i=$('#wAdd input[name=t]');if(i){i.value=S.wPrefill;i.focus()}S.wPrefill=null}
   const f=$('#wAdd');if(f){const k=$('#wKind'),th=$('#wTheme'),tn=$('#wThemeNew');k.onchange=()=>{th.style.display=k.value==='port'?'':'none';tn.style.display=k.value==='port'&&th.value==='__new'?'':'none'};th.onchange=k.onchange;
    f.onsubmit=async e=>{e.preventDefault();const t=f.t.value.trim().toUpperCase().replace(/[^A-Z0-9.:\-]/g,'');if(!t)return;
     const cur=(S.watch&&S.watch.tickers)||[];if(cur.some(w=>w.t===t)||S.data.instruments[t]){toast(t+' zaten takipte');return}

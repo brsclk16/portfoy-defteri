@@ -662,3 +662,14 @@ body.sade #sade{color:var(--accent);box-shadow:inset 0 0 0 1px var(--accent)}
 tr.sel td{background:color-mix(in srgb,var(--accent) 10%,transparent)}
 .bar.attr{grid-template-columns:minmax(150px,300px) minmax(0,1fr) 92px}
 @media (max-width:760px){.askf{flex-direction:column}.bar.attr{grid-template-columns:minmax(0,1fr) 80px 70px}}
+/* v15: komut, çoklu grafik, notlar, DCF, mali tablolar, sağlık */
+.cmdf{display:flex;gap:8px;align-items:center;padding:8px 10px;margin:10px 0 0}.cmdf input{flex:1;min-width:0;border:0;background:transparent;color:var(--text);font:inherit;outline:none}.cmd-i{font-weight:700;color:var(--accent)}
+.mcgrid{display:grid;gap:12px}.mcgrid.n2{grid-template-columns:repeat(2,minmax(0,1fr))}.mcgrid.n4{grid-template-columns:repeat(2,minmax(0,1fr))}.mcc{padding:10px}.mcc select{margin-bottom:6px}.mcch{height:300px}
+.grd{display:inline-grid;place-items:center;width:30px;height:26px;border-radius:7px;font:700 14px var(--mono);color:#0b0e13}.grd.gA{background:#2fe39a}.grd.gB{background:#9be86a}.grd.gC{background:#ffd35c}.grd.gD{background:#ff9f5c}.grd.gF{background:#ff5d7a}.grd.gn{background:var(--panel2);color:var(--muted)}
+th.c,td.c{text-align:center}
+.snowgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:12px}.snowc{display:flex;flex-direction:column;align-items:center;gap:4px;text-decoration:none;color:var(--text);padding:10px}
+.notes2{display:grid;grid-template-columns:200px minmax(0,1fr);gap:16px;align-items:center}.notes2 .pt-r{grid-template-columns:minmax(0,1fr) auto 0 34px}
+.stgrid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px}
+.hlist{display:flex;flex-direction:column}.hitem{display:grid;grid-template-columns:14px minmax(0,1fr) auto;gap:12px;align-items:center;padding:11px 0;border-bottom:1px solid var(--line)}
+.hitem i{width:12px;height:12px;border-radius:50%}.hitem.hg i{background:var(--up)}.hitem.hy i{background:var(--warn)}.hitem.hr i{background:var(--down)}.hitem.hi i{background:#5cd3ff}.hitem .num{font-size:13px;text-align:right}
+@media (max-width:760px){.mcgrid.n2,.mcgrid.n4{grid-template-columns:minmax(0,1fr)}.mcch{height:240px}.stgrid{grid-template-columns:repeat(2,minmax(0,1fr))}.notes2{grid-template-columns:minmax(0,1fr);justify-items:center}}
