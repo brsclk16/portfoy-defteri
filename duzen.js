@@ -2,9 +2,9 @@
 "use strict";
 const SECTIONS={
   ozet:{label:'Özet',icon:'M3 12l9-8 9 8M5 10v10h14V10'},
-  portfoy:{label:'Portföyüm',icon:'M4 7h16v12H4zM8 7V5h8v2',subs:[['pozisyon','Pozisyonlar'],['karne','İşlem karnesi'],['defter','Günlük · plan · vergi']]},
-  piyasa:{label:'Piyasa',icon:'M4 19V9M10 19V5M16 19v-7M22 19H2',subs:[['enstruman','Enstrümanlar'],['haber','Haberler'],['takvim','Takvim']]},
-  teknik:{label:'Teknik',icon:'M7 4v16M7 8h-2v6h2M17 4v16M17 7h-2v8h2M12 9v11M12 12h-2v4h2',subs:[['grafik','Grafik paneli'],['karsilastir','Karşılaştır · oran'],['test','Sinyal testi'],['lab','Strateji lab'],['tarama','Teknik tarama']]},
+  portfoy:{label:'Portföyüm',icon:'M4 7h16v12H4zM8 7V5h8v2',subs:[['pozisyon','Pozisyonlar'],['karne','İşlem karnesi'],['temettu','Temettü'],['rapor','Aylık rapor'],['defter','Günlük · plan · vergi']]},
+  piyasa:{label:'Piyasa',icon:'M4 19V9M10 19V5M16 19v-7M22 19H2',subs:[['enstruman','Enstrümanlar'],['haber','Haberler'],['takvim','Takvim'],['kurumsal','Kurumsal (13F)']]},
+  teknik:{label:'Teknik',icon:'M7 4v16M7 8h-2v6h2M17 4v16M17 7h-2v8h2M12 9v11M12 12h-2v4h2',subs:[['grafik','Grafik paneli'],['karsilastir','Karşılaştır · oran'],['test','Sinyal testi'],['lab','Strateji lab'],['guc','Göreli güç'],['tarama','Teknik tarama']]},
   analiz:{label:'Analiz',icon:'M4 20l5-6 4 3 7-9',subs:[['getiri','Reel getiri'],['risk','Risk'],['makro','Makro'],['beklenti','Vade beklentisi'],['senaryo','Senaryo'],['stres','Stres testi'],['degerleme','Değerleme'],['duzenli','Düzenli alım'],['dengeleme','Dengeleme'],['simulator','Eklesem ne olur?'],['haftalik','Haftalık rapor']]}
 };
 const LEGACY={pozisyon:['portfoy','pozisyon'],defter:['portfoy','defter'],enstruman:['piyasa','enstruman'],haber:['piyasa','haber'],takvim:['piyasa','takvim'],haftalik:['analiz','haftalik']};
@@ -26,6 +26,7 @@ function markNav(r){$$('#tabs a,#bnav a').forEach(a=>a.classList.toggle('on',a.d
 /* ---------- Analiz alt sayfaları ---------- */
 function analizPart(part){
   if(part==='makro')return viewMakro();
+  if(part==='senaryo')return viewScn2();
   if(part==='stres')return viewStress();
   if(part==='degerleme')return viewValuation();
   if(part==='duzenli')return viewDca();
@@ -34,7 +35,7 @@ function analizPart(part){
   const map={getiri:'Reel getiri',risk:'Risk paneli',senaryo:'Senaryo testi',dengeleme:'Dengeleme hesaplayıcı'};const want=map[part]||map.getiri;
   let on=false;const keep=[];for(const el of kids){const h2=el.classList.contains('sec-t')?el.querySelector('h2'):null;if(h2){on=h2.textContent.trim()===want}if(on)keep.push(el.outerHTML)}
   keep.forEach((x,i)=>{if(i===0)keep[0]=x.replace('class="sec-t"','class="sec-t" style="margin-top:0"')});
-  return `<div class="fade">${keep.join('')}</div>`;
+  return `<div class="fade">${keep.join('')}${part==='risk'?viewRiskPlus():''}</div>`;
 }
 function viewInstExpectTable(){
   const ts=allTickers().filter(t=>series(t).length>60);const rows=ts.map(t=>({t,E:expectation(t)})).filter(r=>r.E&&r.E.mc);
