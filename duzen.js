@@ -3,7 +3,7 @@
 const SECTIONS={
   ozet:{label:'Özet',icon:'M3 12l9-8 9 8M5 10v10h14V10'},
   portfoy:{label:'Portföyüm',icon:'M4 7h16v12H4zM8 7V5h8v2',subs:[['pozisyon','Pozisyonlar'],['karne','İşlem karnesi'],['temettu','Temettü'],['rapor','Aylık rapor'],['defter','Günlük · plan · vergi']]},
-  piyasa:{label:'Piyasa',icon:'M4 19V9M10 19V5M16 19v-7M22 19H2',subs:[['enstruman','Enstrümanlar'],['haber','Haberler'],['takvim','Takvim'],['kurumsal','Kurumsal (13F)'],['isi','Isı haritası'],['icgoru','İçgörüler'],['notlar','Hisse notları'],['tarayici','Fikir tarayıcı']]},
+  piyasa:{label:'Piyasa',icon:'M4 19V9M10 19V5M16 19v-7M22 19H2',subs:[['enstruman','Enstrümanlar'],['arastirma','ORION araştırma'],['haber','Haberler'],['takvim','Takvim'],['kurumsal','Kurumsal (13F)'],['isi','Isı haritası'],['icgoru','İçgörüler'],['notlar','Hisse notları'],['tarayici','Fikir tarayıcı']]},
   teknik:{label:'Teknik',icon:'M7 4v16M7 8h-2v6h2M17 4v16M17 7h-2v8h2M12 9v11M12 12h-2v4h2',subs:[['grafik','Grafik paneli'],['karsilastir','Karşılaştır · oran'],['test','Sinyal testi'],['lab','Strateji lab'],['oynat','Geçmişi oynat'],['coklu','Çoklu grafik'],['guc','Göreli güç'],['kural','Alarm kuralları'],['tarama','Teknik tarama']]},
   analiz:{label:'Analiz',icon:'M4 20l5-6 4 3 7-9',subs:[['getiri','Reel getiri'],['kaynak','Getiri kaynağı'],['saglik','Sağlık kontrolü'],['asistan','Asistan'],['risk','Risk'],['makro','Makro'],['duyarlilik','Duyarlılık'],['makroev','Makro olaylar'],['beklenti','Vade beklentisi'],['senaryo','Senaryo'],['stres','Stres testi'],['degerleme','Değerleme'],['duzenli','Düzenli alım'],['dengeleme','Dengeleme'],['simulator','Eklesem ne olur?'],['haftalik','Haftalık rapor']]}
 };
@@ -83,14 +83,14 @@ function viewInstTabs(t,tab){
   else if(tab==='temel')body=pick(isMetrics)+pick(isSW)+pick(isHold)+fundSection(t,true)+notesSection(t)+statementsSection(t)+dcfSection(t)+callsSection(t)+analystSection(t)+peersSection(t)+pick(isEarn);
   else if(tab==='haber')body=pick(isNews);
   else if(tab==='iceriden')body=pick(isIns);
-  else body=pick(isMain)+planCard(t)+pick(isSummary)+askCard(t);
+  else body=pick(isMain)+planCard(t)+pick(isSummary)+orionInstCard(t)+askCard(t);
   return `<div class="fade">${pick(isHead)}<nav class="subnav itabs">${tabs.map(([k,l])=>`<a href="#/t/${encodeURIComponent(t)}/${k}" class="${k===tab?'on':''}">${l}</a>`).join('')}</nav>${body}</div>`;
 }
 function afterInstTabs(t,tab){
   if(tab==='genel'){const s=sliceRange(series(t),S.range.inst);const c=s.length>1&&s[s.length-1][1]>=s[0][1]?'#2fe39a':'#ff5d7a';const el=$('#cInst');if(el)lineChart(el,[{name:t,color:c,pts:s}],{area:true,fmt:(v,ax)=>(isTRY(t)?'₺':'$')+nf(v,ax?0:2)})}
   if(tab==='teknik'){afterTech(t);afterLevels(t)}
   if(tab==='temel'){try{afterAnalyst(t)}catch(e){}afterDcf2()}
-  if(tab==='genel')afterAsk();
+  if(tab==='genel'){afterAsk();afterOrionInst()}
   if(tab==='plan'){afterExpect(t);afterPs(t);afterBt()}
 }
 

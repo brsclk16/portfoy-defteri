@@ -1,6 +1,6 @@
 /* Portföy Defteri service worker: kabuk önbellekte, veri önce ağdan */
-const V='pd-v15';
-const SHELL=['./','index.html','style.css?v=15','analiz.js?v=15','ekler.js?v=15','teknik.js?v=15','strateji.js?v=15','duzen.js?v=15','arac.js?v=15','lab.js?v=15','ileri.js?v=15','kural.js?v=15','kontrol.js?v=15','pro.js?v=15','icgoru.js?v=15','deger.js?v=15','komut.js?v=15','app.js?v=15','manifest.webmanifest','icon-192.png','icon-512.png'];
+const V='pd-v16';
+const SHELL=['./','index.html','style.css?v=16','analiz.js?v=16','ekler.js?v=16','teknik.js?v=16','strateji.js?v=16','duzen.js?v=16','arac.js?v=16','lab.js?v=16','ileri.js?v=16','kural.js?v=16','kontrol.js?v=16','pro.js?v=16','icgoru.js?v=16','deger.js?v=16','komut.js?v=16','orion.js?v=16','app.js?v=16','manifest.webmanifest','icon-192.png','icon-512.png'];
 self.addEventListener('install',e=>{e.waitUntil(caches.open(V).then(c=>c.addAll(SHELL)).then(()=>self.skipWaiting()))});
 self.addEventListener('activate',e=>{e.waitUntil(caches.keys().then(ks=>Promise.all(ks.filter(k=>k!==V).map(k=>caches.delete(k)))).then(()=>self.clients.claim()))});
 self.addEventListener('fetch',e=>{
