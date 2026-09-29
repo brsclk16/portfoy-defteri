@@ -1,0 +1,403 @@
+{
+ "id": "orion0vrt",
+ "mode": "deep",
+ "tickers": [
+  "VRT"
+ ],
+ "title": "Vertiv Holdings (VRT) — derin analiz",
+ "asOf": "2026-09-29",
+ "createdAt": "2026-09-29T22:02:50.505204+00:00",
+ "answeredAt": "2026-09-30T01:11:18+03:00",
+ "verdict": {
+  "stance": "nötr",
+  "conviction": "orta",
+  "text": "Operasyonel tez (talep, marj, nakit üretimi) bozulmadı; kırılan şey öngörülebilirlik ve çarpan — hisse artık 21 Ekim'deki 3. çeyrek raporunda 'gelir kayması' açıklamasının kanıtını bekliyor."
+ },
+ "timeframes": {
+  "trader": {
+   "stance": "temkinli",
+   "text": "Fiyat ($248) 20/50/100/200 günlük ortalamaların altında, 50 ve 200 günlük ortalamalar ~$264'te birbirine yapışmış durumda; ATR ~$11,6 (%4,7) ve 21 Ekim bilançosu öncesi yön belirsiz. Kısa vadede $227–234 desteği ile $255/$264 direnci arasında dalgalı bir bant öne çıkıyor."
+  },
+  "swing": {
+   "stance": "nötr",
+   "text": "1–6 ay ufkunu 3. çeyrek belirleyecek: $3,75 milyar satış rehberinin tutması ve yıllık hedefin korunması $280–295 bandına dönüşü destekler; ikinci bir kayma ise Temmuz gap dibi $221'i test ettirebilir. Son 9 bilançoda ortalama mutlak günlük tepki ~%9."
+  },
+  "investor": {
+   "stance": "olumlu",
+   "text": "1–3 yılda yapısal tablo güçlü: TTM FCF marjı ~%25, ROIC ~%38, 2027 konsensüs HBK'sına göre ~27x F/K. Ana risk, hiper ölçekli yatırım döngüsünde bir sindirim dönemi; beta 2,07 bu senaryoda sert düşüşler anlamına gelir."
+  }
+ },
+ "summary": "Vertiv, zirvesi olan $379,94'ten (14 Mayıs) yaklaşık %35 geride, $248 civarında işlem görüyor. Düşüşün iki ayağı var: 29 Temmuz'da açıklanan 2. çeyrekte satışlar $3,27 milyar ile konsensüsün (~$3,38 milyar) altında kaldı ve yönetim bunu çok aşamalı projeler ile tedarik zinciri sıkışıklığına bağlı 'zamanlama kayması' olarak açıkladı (hisse o gün %17 düştü); Eylül'de ise yapay zekâ yatırımlarının yavaşlayabileceği tartışması altyapı hisselerini yeniden baskıladı. Buna karşın faaliyet verileri güçlü: düzeltilmiş faaliyet marjı yıllık 410 baz puan artışla %22,6, çeyreklik FCF $925 milyon, ertelenmiş gelir (müşteri avansları) altı ayda yaklaşık iki katına çıkarak $3,63 milyara ulaştı ve yıllık rehberlik tüm kalemlerde yükseltildi.\n\nSoruya cevap: **Temel tez büyük ölçüde sağlam, ama artık 'kanıtla' aşamasında.** Rehberlik, ikinci yarıda ~%45, 4. çeyrekte ise ima edilen ~%50 yıllık satış artışı gerektiriyor; bu, yılın son çeyreğine yüklenmiş agresif bir takvim. Değerleme (2026 için ~31x, 2027 için ~27x ileri F/K) rakiplerin (Eaton ~29x, nVent ~28x, Trane ~27x) biraz üzerinde ve daha hızlı büyüme ile savunulabilir; fakat bu prim, hata payını dar tutuyor. Olasılık ağırlıklı senaryo getirisi sıfıra yakın çıktığı için genel görüş nötr; uzun vadeli görünüm olumlu, kısa vadeli görünüm temkinli.",
+ "sections": [
+  {
+   "k": "market",
+   "h": "Piyasa bağlamı",
+   "body": "Vertiv yüksek betalı (2,07) bir yapay zekâ altyapı hissesi; bu yüzden fiyat, şirket verisinden çok 'yapay zekâ yatırım döngüsü' algısıyla hareket ediyor. 17 Temmuz'da yarı iletken kaynaklı küresel teknoloji satışı, 14 Eylül civarında ise önde gelen yapay zekâ laboratuvarlarının model geliştirmede yavaşlama çağrıları sonrası çip hisselerinde ~%6'lık düşüş yaşandı (Fortune). Aynı haberde hiper ölçekli şirketlerin gerekirse yeni veri merkezi inşasını durdurup mevcut kapasiteyi sindirebileceği görüşü dile getirildi — bu, Vertiv için doğrudan talep riskidir.\n\nSektör içi rotasyon da dikkat çekici: son bir ayda Eaton %7,4 yükselirken Vertiv %3,1 geriledi; son üç ayda Vertiv -%18,8, Eaton +%5,9 (repo universe verisi). Piyasa, veri merkezine saf maruz kalan isimlerden daha çeşitlendirilmiş elektrik ekipmanı şirketlerine kayıyor. Faiz, dolar ve likidite için bu çalışmada güvenilir güncel veri toplanamadı."
+  },
+  {
+   "k": "quality",
+   "h": "İş kalitesi",
+   "body": "Vertiv, veri merkezleri için güç (UPS, dağıtım, yakında 800V DC mimarisi) ve termal yönetim (sıvı soğutma, chiller) altyapısı sağlıyor. **Son 4 çeyrek (TTM)**: gelir $11,48 milyar (bir önceki 4 çeyreğe göre +%26), GAAP faaliyet marjı ~%19,1, FCF $2,92 milyar (FCF marjı ~%25,5). Stockanalysis verisine göre brüt marj %38, ROIC %37,6, ROE %43,9.\n\n2. çeyrek 2026: satış $3.274 milyon (+%24; organik +%17,8, satın almalar ~5 puan), GAAP HBK $1,27, düzeltilmiş HBK $1,52 (+%60). Bölgesel: Amerika +%29 (düzeltilmiş marj %27,6), Asya-Pasifik +%28,5 (%13,3), EMEA +%1,7 (organik -%2). Bilanço: nakit $3,11 milyar, borç ~$3,26–3,34 milyar — yaklaşık net nötr (şirket 'net nakit' pozisyonu bildirdi). Hisse sayısı yıllık ~%0,6–1 arttı; sulanma sınırlı.\n\nFiyatlama gücü: yönetim tarifeler dahil 2026'da pozitif fiyat-maliyet dengesi bekliyor. Kapasite: Amerika'da beş büyük tesis genişlemesi, Malezya Johor'da yeni tesis, EMEA'da chiller kapasitesi artışı."
+  },
+  {
+   "k": "thesis",
+   "h": "Piyasanın mevcut tezi",
+   "body": "Piyasa şu an Vertiv'i 'talebi güçlü ama teslimatı öngörülemez' bir şirket olarak fiyatlıyor. 29 analistin ortalama hedefi ~$338 (stockanalysis; MarketBeat ortalaması ~$357), en düşük hedef $236; konsensüs 2026 için $14,02 milyar gelir/$6,73 HBK, 2027 için $18,24 milyar/$9,16 HBK bekliyor. Yani analist tahminleri düşmedi — düşen, bu tahminlere ödenen çarpan.\n\n2. çeyrekte HBK beklentiyi ($1,43) aştı ama gelir kaçırıldı; piyasa bu kombinasyonu, primli çarpanla işlem gören bir büyüme hissesinde 'gelir kalitesi' sorunu olarak okudu. Ek olarak Temmuz sonrası duyurulan UtilityInnovation Group (UIG) satın alması ($1,45 milyar peşin + $1,15 milyara kadar kazanç bazlı ek ödeme) ve Q2 bülteninde sipariş/birikmiş iş rakamlarının yer almaması (üçüncü taraf analizi) belirsizliği artırdı."
+  },
+  {
+   "k": "gap",
+   "h": "Konsensüs nerede yanılıyor olabilir",
+   "body": "**Olumlu yönde:** Bilanço, gelir tablosundan daha güçlü bir talep sinyali veriyor. Ertelenmiş gelir 2025 sonundaki ~$1,8 milyardan 2. çeyrekte $3,63 milyara çıktı (sadece 2. çeyrekte ~$1,17 milyar artış); stok ~$2,52 milyara yükseldi. Müşteriler avans ödüyor ve şirket sevkiyat için ürün biriktiriyor — 'zamanlama' açıklamasıyla tutarlı bir tablo. Bu gerçekleşirse ikinci yarı rehberi ihtiyatlı kalabilir; yönetim de ikinci yarı tahminini ihtiyatlı kurduğunu söylüyor.\n\n**Olumsuz yönde:** Yıllık $14 milyar rehberi, ilk yarı $5,92 milyar gerçekleştiği için ikinci yarıda $8,08 milyar (+%45) ve 3. çeyrek $3,75 milyar varsayımıyla 4. çeyrekte ~$4,33 milyar (+%50) gerektiriyor. Tedarik zinciri sıkışıklığı bir çeyrekte gelir kaydırdıysa, 4. çeyreğe yüklenmiş bu takvim yeni bir kayma için en kırılgan nokta. Konsensüsün doğrusal ekstrapolasyonu, çok aşamalı projelerin dağınık gelir tanıma yapısını hafife alıyor olabilir.\n\nNet: Beklenti farkı gelirin **büyüklüğünden çok zamanlamasında**; 12 aylık bakışta olumlu, 1–3 aylık bakışta riskli."
+  },
+  {
+   "k": "valuation",
+   "h": "Değerleme",
+   "body": "Fiyat ~$248; piyasa değeri ~$95,6 milyar, işletme değeri ~$95,8 milyar. TTM F/K ~56, 2026 ileri F/K ~31,5, 2027 konsensüsüne göre ~27x. EV/FAVÖK (TTM) ~36, EV/Satış ~8,3, Fiyat/FCF ~32,7, FCF getirisi ~%3,1 (stockanalysis). PEG ~0,7–1,0 (kaynağa göre).\n\nRakiplerle (ileri F/K / EV-FAVÖK TTM): Eaton 28,7x / 28,5x; nVent 28,0x / 26,3x; Trane 27,4x / 24,0x; Modine 22,2x / 22,9x. Vertiv'in ileri F/K primi ~%10–15 ve TTM FCF marjı (%25,5) rakiplerin (%3–16) belirgin üzerinde; büyüme de daha yüksek. Bu açıdan prim makul. Ancak EV/FAVÖK'te prim daha belirgin ve bu çarpanlar, döngü zirvesine yakın marjlar üzerine kurulu.\n\nTarihsel: zirvede ($380) hisse aynı 2026 HBK tahminiyle ~56x ileri F/K'ya yakın işlem görüyordu; bugünkü ~31x, çarpanın büyük bölümünün sıkıştığını gösteriyor."
+  },
+  {
+   "k": "catalysts",
+   "h": "Katalizörler",
+   "body": "**0–30 gün:** 21 Ekim 2026 — 3. çeyrek sonuçları (teyitli). Rehber: $3,65–3,85 milyar satış, %34–36 organik büyüme, %24–25 düzeltilmiş faaliyet marjı, $1,77–1,83 HBK. Aynı dönemde hiper ölçekli bulut şirketlerinin 3. çeyrek sonuçları ve yatırım harcaması yönlendirmeleri (olası; tarihler bu çalışmada doğrulanmadı).\n\n**1–3 ay:** UIG satın almasının 4. çeyrekte kapanması (olası); 4. çeyrek teslimatlarında ima edilen ~%50 büyüme; Şubat 2027 civarında 2027 ilk yıllık rehberi (olası).\n\n**3–12 ay:** 800V DC güç mimarisinin 2027'de ilk müşteri kurulumları (olası; veri salonu ölçeğinde 2028); yeni tesislerin devreye girmesiyle kapasite artışı (olası); yapay zekâ yatırımlarında yavaşlama tartışmasının gerçek harcama kesintisine dönüşmesi (spekülatif)."
+  },
+  {
+   "k": "technical",
+   "h": "Teknik / pozisyonlanma",
+   "body": "Son kapanış $248,42 (29 Eylül). Hareketli ortalamalar: SMA20 $253,4, SMA50 $264,2, SMA100 $292,4, SMA200 $263,4 — fiyat hepsinin altında; SMA50, SMA200'ün hemen üzerinde ve aşağı dönüyor (olası 'ölüm kesişimi'). RSI(14) ~42, ATR(14) $11,6 (~%4,7), 20 günlük gerçekleşen oynaklık yıllık ~%62.\n\nSeviyeler: destek $234 (15 Eylül dibi), $227 (20 günlük dip) ve $221 (29 Temmuz bilanço günü dibi); direnç $255, $264–265 (SMA50/200 kümesi), $281 (4 Eylül tepesi) ve $292–295 (SMA100 ve 20 günlük tepe). 29 Temmuz'daki 21,3 milyon lotluk kırılım hacmi, sonraki toparlanma günlerinin hacimlerinden belirgin yüksek; 10 Eylül'deki ~10 milyon lotluk satış da dağıtım işaretiydi. Son 20 günde ortalama hacim (5,3 milyon) 100 günlük ortalamanın (5,8 milyon) altında — satış baskısı azalıyor ama alıcı iştahı da zayıf.\n\nGöreli performans: 3 ayda VRT -%18,8, Eaton +%5,9, GE Vernova -%13,1. Yıl başından beri hâlâ +%54. Pozisyonlanma: kurumsal sahiplik ~%90, açığa satış yüzdesi ~%3,7 — kalabalık bir kurumsal hisse; kısa sıkışma potansiyeli sınırlı."
+  },
+  {
+   "k": "bull",
+   "h": "Boğa tezi",
+   "body": "1) Ertelenmiş gelirin iki katına çıkması ve stok birikimi, 2. çeyrekteki eksikliğin talep değil teslimat sorunu olduğunu destekliyor; 3. çeyrekte rehber tutarsa 'zamanlama' hikâyesi doğrulanır.\n\n2) Marj genişlemesi sürüyor: düzeltilmiş faaliyet marjı +410 bp ile %22,6; yıl rehberi %23,3–24,3.\n\n3) Nakit üretimi olağanüstü: TTM FCF ~$2,9 milyar, yıl rehberi $2,4–2,6 milyar; bilanço net nötr, satın almaları finanse edebilecek güçte.\n\n4) 800V DC ve UIG (şebeke bağlantısından rafa kadar güç) megavat başına içerik fırsatını büyütebilir; UIG 2027 FAVÖK'ünün ~13 katı fiyatlanmış ve ilk yıl HBK'ya katkı beklentisi var.\n\n5) 2027 HBK'sına göre ~27x ile, 2026'da %60, 2027'de ~%36 HBK büyümesi bekleyen bir şirket için çarpan rakiplere yakın."
+  },
+  {
+   "k": "bear",
+   "h": "Ayı tezi",
+   "body": "1) **Döngü riski:** Vertiv'in talebi büyük ölçüde hiper ölçekli ve kolokasyon yatırımlarına bağlı. Yapay zekâ harcamalarında bir 'sindirim' dönemi, siparişleri hızla düşürebilir; beta 2,07 bunu fiyatta büyütür.\n\n2) **Görünürlük azaldı:** Q2 bülteninde sipariş ve birikmiş iş rakamı paylaşılmadığı bildiriliyor; önceki çeyreklerde öne çıkarılan bir göstergenin kaybolması yatırımcıların talep ivmesini doğrulamasını zorlaştırıyor.\n\n3) **4. çeyreğe yüklenmiş rehber:** Yıllık hedef için 4. çeyrekte ~%50 büyüme gerekiyor; tedarik zinciri sıkışıklığı sürerse ikinci bir kayma olası.\n\n4) **Organik büyüme manşetin gerisinde:** Q2'de organik %17,8 iken manşet %24; EMEA organik olarak küçüldü. UIG ile birlikte satın alma katkısı artacak, bu da organik eğilimi okumayı zorlaştırabilir.\n\n5) **İşletme sermayesi:** Stok altı ayda ~%73 arttı; teslimat gecikirse stok ve nakit dönüşümü bozulabilir.\n\n6) **İçeriden satış:** Son 90 günde 9 satış (~$4,4 milyon) ve 1 alım (~$0,18 milyon); bir yönetim kurulu üyesi payının ~%48'ini sattı. Tutar şirket büyüklüğüne göre küçük ama sinyal olumsuz.\n\n7) **Değerleme hâlâ primli:** EV/FAVÖK ~36 ve F/FCF ~33, marjların döngü zirvesinde olduğu varsayımına dayanıyor."
+  },
+  {
+   "k": "scenarios",
+   "h": "Senaryo analizi",
+   "body": "12 aylık ufukta, 2027 tahminleri üzerinden üç senaryo (mevcut fiyat ~$248). **Ayı (%30):** yatırım sindirimi, 2027 geliri ~$15,5 milyar, marj ~%22, HBK ~$7,2, 22x → ~$158 (-%36). **Baz (%45):** 2026 rehberi küçük gecikmelerle tutuyor, 2027 geliri ~$17,5 milyar, marj ~%24,5, HBK ~$8,8, 30x → ~$264 (+%6). **Boğa (%25):** ikinci yarı rehberi aşılıyor, 800V DC ve UIG erken katkı, 2027 geliri ~$19,5 milyar, marj ~%26, HBK ~$10,2, 34x → ~$347 (+%40).\n\nOlasılık ağırlıklı beklenen getiri ~+%2 — asimetri belirgin değil. Bu varsayımlar ORION tahminidir; konsensüs 2027 HBK'sı $9,16."
+  },
+  {
+   "k": "change",
+   "h": "Tezi ne değiştirir",
+   "body": "Daha olumluya: 3. çeyrek satışının $3,75 milyarın üzerinde gelmesi ve yıllık rehberin korunması/yükseltilmesi; sipariş veya birikmiş iş rakamlarının yeniden ve güçlü biçimde açıklanması; fiyatın yüksek hacimle $292 (SMA100) üzerine çıkması.\n\nDaha olumsuza: 3. çeyrekte satışın $3,65 milyarın altında kalması ya da yıllık rehberin düşürülmesi; ertelenmiş gelirde gerileme; hiper ölçekli şirketlerden yatırım harcaması kesintisi; brüt marjın %36'nın altına inmesi; $221 desteğinin kapanış bazında kırılması."
+  },
+  {
+   "k": "metrics",
+   "h": "İzlenecek metrikler",
+   "body": "Çeyreklik satış ve organik büyüme (rehber: 3Ç %34–36); sipariş/birikmiş iş açıklaması; ertelenmiş gelir ve stok eğilimi; düzeltilmiş faaliyet marjı (3Ç rehber %24–25); FCF ve nakit dönüşümü; EMEA organik büyümesi; UIG kapanış ve finansmanı; hiper ölçekli yatırım yönlendirmeleri; içeriden işlem akışı; SMA50/200 ilişkisi ve $221–234 destek bandı."
+  },
+  {
+   "k": "verdict",
+   "h": "Araştırma kararı",
+   "body": "**Nötr, orta güven.** Zirveden düşüş, şirketin iş modelinde bir bozulmadan çok, primli çarpanla işlem gören bir hissede gelir zamanlamasının şaşırtması ve sektör genelindeki 'yapay zekâ yavaşlaması' korkusundan kaynaklanıyor. Talep göstergeleri (avanslar, rehber artışı, marj, FCF) tezin sağlam olduğunu söylüyor; ancak sipariş verisinin paylaşılmaması ve 4. çeyreğe yüklenmiş takvim, tezin henüz kanıtlanmadığını gösteriyor.\n\nZaman ufkuna göre: işlemci için temkinli (düşen trend, bilanço öncesi belirsizlik), swing için nötr (21 Ekim belirleyici), yatırımcı için olumlu (yapısal büyüme, yüksek getiri oranları, rakiplere yakın ileri çarpan). Harika bir şirket, ama bu fiyattan 'ucuz' değil — makul."
+  }
+ ],
+ "scenarios": [
+  {
+   "name": "Ayı",
+   "prob": 30,
+   "rev": "2027 ~$15,5 milyar (+%11); yatırım sindirimi, sipariş yavaşlaması",
+   "margin": "Düzeltilmiş faaliyet marjı ~%22",
+   "eps": "~$7,2 (2027)",
+   "multiple": "22x ileri F/K",
+   "value": "$158",
+   "upside": -36,
+   "drivers": "Hiper ölçekli yatırım kesintileri, 3Ç/4Ç'de ikinci gelir kayması, rehber indirimi"
+  },
+  {
+   "name": "Baz",
+   "prob": 45,
+   "rev": "2026 ~$14 milyar; 2027 ~$17,5 milyar (+%25)",
+   "margin": "~%24,5",
+   "eps": "~$8,8 (2027)",
+   "multiple": "30x ileri F/K",
+   "value": "$264",
+   "upside": 6,
+   "drivers": "Rehberin küçük gecikmelerle tutması, ertelenmiş gelirin satışa dönüşmesi"
+  },
+  {
+   "name": "Boğa",
+   "prob": 25,
+   "rev": "2027 ~$19,5 milyar (+%39)",
+   "margin": "~%26",
+   "eps": "~$10,2 (2027)",
+   "multiple": "34x ileri F/K",
+   "value": "$347",
+   "upside": 40,
+   "drivers": "İkinci yarının rehberi aşması, 800V DC ve UIG erken katkısı, sipariş verisinin güçlü açıklanması"
+  }
+ ],
+ "catalysts": [
+  {
+   "window": "0-30g",
+   "date": "2026-10-21",
+   "what": "3. çeyrek 2026 sonuçları (rehber: $3,65–3,85 milyar satış, $1,77–1,83 HBK)",
+   "cls": "teyitli"
+  },
+  {
+   "window": "0-30g",
+   "date": "",
+   "what": "Hiper ölçekli bulut şirketlerinin 3Ç sonuçları ve yatırım harcaması yönlendirmeleri",
+   "cls": "olası"
+  },
+  {
+   "window": "1-3a",
+   "date": "",
+   "what": "UtilityInnovation Group satın almasının kapanışı (4Ç 2026 hedefi)",
+   "cls": "olası"
+  },
+  {
+   "window": "1-3a",
+   "date": "",
+   "what": "4. çeyrekte ima edilen ~%50 satış artışının teslimatı; 2027 ilk rehberi",
+   "cls": "olası"
+  },
+  {
+   "window": "3-12a",
+   "date": "",
+   "what": "800V DC güç mimarisinin ilk müşteri kurulumları (2027)",
+   "cls": "olası"
+  },
+  {
+   "window": "3-12a",
+   "date": "",
+   "what": "Yapay zekâ yatırımlarında yavaşlama tartışmasının fiili harcama kesintisine dönüşmesi",
+   "cls": "spekülatif"
+  }
+ ],
+ "redflags": [
+  {
+   "flag": "Gelir düşüşü / durgunluk",
+   "status": "yok",
+   "note": "TTM gelir +%26; ancak Q2 konsensüsün altında kaldı ve EMEA organik -%2."
+  },
+  {
+   "flag": "Brüt marj daralması",
+   "status": "yok",
+   "note": "Brüt marj ~%38; düzeltilmiş faaliyet marjı yıllık +410 bp."
+  },
+  {
+   "flag": "Bozulan FCF",
+   "status": "yok",
+   "note": "TTM FCF ~$2,9 milyar, marj ~%25,5."
+  },
+  {
+   "flag": "Sulanma / aşırı SBC",
+   "status": "yok",
+   "note": "Hisse sayısı yıllık ~%0,6–1 artış."
+  },
+  {
+   "flag": "Artan kaldıraç",
+   "status": "izle",
+   "note": "Şu an net nötr; UIG için $1,45 milyar peşin + $1,15 milyara kadar ek ödeme nakdi azaltacak."
+  },
+  {
+   "flag": "Düşen ROIC",
+   "status": "yok",
+   "note": "ROIC ~%37,6."
+  },
+  {
+   "flag": "Müşteri yoğunlaşması",
+   "status": "izle",
+   "note": "Hiper ölçekli müşterilere bağımlılık yüksek; yoğunlaşma rakamı açıklanmıyor."
+  },
+  {
+   "flag": "İçeriden satış",
+   "status": "izle",
+   "note": "90 günde 9 satış (~$4,4 milyon) vs 1 alım (~$0,18 milyon)."
+  },
+  {
+   "flag": "Denetçi / muhasebe sorunları",
+   "status": "yok",
+   "note": "Bilinen bir sorun bulunamadı."
+  },
+  {
+   "flag": "Agresif non-GAAP düzeltmeleri",
+   "status": "izle",
+   "note": "Q2 GAAP HBK $1,27 vs düzeltilmiş $1,52; GAAP faaliyet marjı %19,5 vs düzeltilmiş %22,6."
+  },
+  {
+   "flag": "Satışlardan hızlı artan stok/alacak",
+   "status": "var",
+   "note": "Stok altı ayda ~%73 artışla ~$2,52 milyar; kısmen artan müşteri avanslarıyla dengeleniyor."
+  },
+  {
+   "flag": "Organik zayıflığı gizleyen satın almalar",
+   "status": "izle",
+   "note": "Q2 manşet +%24, organik +%17,8; UIG ile satın alma katkısı artacak."
+  },
+  {
+   "flag": "Görünürlük / açıklama değişikliği",
+   "status": "izle",
+   "note": "Q2 bülteninde sipariş ve birikmiş iş rakamı yer almadığı bildiriliyor."
+  },
+  {
+   "flag": "Sürdürülemez değerleme varsayımları",
+   "status": "izle",
+   "note": "EV/FAVÖK ~36, F/FCF ~33; zirve marjlara dayanıyor."
+  }
+ ],
+ "peers": [
+  {
+   "t": "VRT",
+   "revG": 26.2,
+   "gm": 38.0,
+   "opm": 20.0,
+   "fcfm": 25.5,
+   "pe": 56.2,
+   "share": "koruyor"
+  },
+  {
+   "t": "ETN",
+   "revG": 21.0,
+   "gm": 36.0,
+   "opm": 18.2,
+   "fcfm": 13.1,
+   "pe": 43.9,
+   "share": "koruyor"
+  },
+  {
+   "t": "NVT",
+   "revG": 46.2,
+   "gm": 36.5,
+   "opm": 16.9,
+   "fcfm": 12.0,
+   "pe": 44.3,
+   "share": "koruyor"
+  },
+  {
+   "t": "TT",
+   "revG": 7.0,
+   "gm": 35.4,
+   "opm": 17.8,
+   "fcfm": 16.0,
+   "pe": 33.7,
+   "share": "koruyor"
+  },
+  {
+   "t": "MOD",
+   "revG": 29.5,
+   "gm": 22.2,
+   "opm": 10.9,
+   "fcfm": 3.0,
+   "pe": 68.5,
+   "share": "koruyor"
+  }
+ ],
+ "metrics": [
+  "3Ç satış vs $3,75 milyar rehber ortası ve organik büyüme (%34–36)",
+  "Sipariş / birikmiş iş rakamlarının yeniden açıklanıp açıklanmadığı",
+  "Ertelenmiş gelir ($3,63 milyar) ve stok ($2,52 milyar) eğilimi",
+  "Düzeltilmiş faaliyet marjı (3Ç rehber %24–25)",
+  "FCF ve yıllık $2,4–2,6 milyar hedefi",
+  "EMEA organik büyümesi",
+  "Hiper ölçekli yatırım harcaması yönlendirmeleri",
+  "UIG kapanışı ve finansmanı",
+  "İçeriden işlem akışı",
+  "Fiyatın $221–234 destek ve $264 / $292 direnç seviyelerine göre konumu"
+ ],
+ "changeMind": [
+  "3Ç satışının $3,65 milyarın altında kalması veya yıllık rehberin düşürülmesi (olumsuz)",
+  "Ertelenmiş gelirde gerileme (olumsuz)",
+  "Büyük bulut şirketlerinden yatırım harcaması kesintisi (olumsuz)",
+  "Brüt marjın %36'nın altına inmesi (olumsuz)",
+  "$221'in kapanış bazında kırılması (olumsuz)",
+  "Güçlü sipariş/birikmiş iş verisinin açıklanması ve rehberin aşılması (olumlu)",
+  "Fiyatın yüksek hacimle $292 üzerine çıkması (olumlu)"
+ ],
+ "sources": [
+  {
+   "title": "Vertiv Reports Strong Second Quarter 2026 (PR Newswire)",
+   "url": "https://www.prnewswire.com/news-releases/vertiv-reports-strong-second-quarter-2026-with-diluted-eps-growth-of-53-adjusted-diluted-eps-growth-of-60-raises-full-year-2026-guidance-across-all-key-metrics-302837598.html",
+   "date": "2026-07-29"
+  },
+  {
+   "title": "Vertiv (VRT) Q2 2026 Earnings Call Transcript (Motley Fool)",
+   "url": "https://www.fool.com/earnings/call-transcripts/2026/08/07/vertiv-vrt-q2-2026-earnings-call-transcript/",
+   "date": "2026-08-07"
+  },
+  {
+   "title": "Vertiv Announces Agreement to Acquire UtilityInnovation Group (PR Newswire)",
+   "url": "https://www.prnewswire.com/news-releases/vertiv-announces-agreement-to-acquire-utilityinnovation-group-to-accelerate-time-to-power-for-ai-data-centers-302867612.html",
+   "date": ""
+  },
+  {
+   "title": "Vertiv Q2 2026 earnings: revenue miss sinks stock (Quartz)",
+   "url": "https://qz.com/vertiv-stock-earnings-revenue-miss-guidance-072926",
+   "date": "2026-07-29"
+  },
+  {
+   "title": "VRT Stock After the Q2 Selloff (TOPONE Markets)",
+   "url": "https://www.top1markets.com/news/vrt-stock-vertiv-q2-2026-backlog-analysis",
+   "date": ""
+  },
+  {
+   "title": "Vertiv Stock Fell Nearly 10% in a Day (TIKR)",
+   "url": "https://www.tikr.com/blog/vertiv-stock-fell-nearly-10-in-a-day-heres-whether-the-selloff-went-too-far",
+   "date": ""
+  },
+  {
+   "title": "How Much Further Could Vertiv Stock Fall? (Trefis)",
+   "url": "https://www.trefis.com/stock/vrt/articles/616600/how-much-further-could-vertiv-stock-fall/2026-09-25",
+   "date": "2026-09-25"
+  },
+  {
+   "title": "Vertiv (NYSE:VRT) Shares Down 3.4% (MarketBeat)",
+   "url": "https://www.marketbeat.com/instant-alerts/price-vertiv-nyse-vrt-shares-down-34-should-you-sell-2026-09-28/",
+   "date": "2026-09-28"
+  },
+  {
+   "title": "Wall Street's AI doomsday trade is here (Fortune)",
+   "url": "https://fortune.com/2026/09/14/ai-slowdown-stocks-nvidia-meta/",
+   "date": "2026-09-14"
+  },
+  {
+   "title": "Tech stocks lead steep global selloff (Fortune)",
+   "url": "https://fortune.com/2026/07/17/tech-stocks-global-selloff-as-investors-ai-semiconductor-chips/",
+   "date": "2026-07-17"
+  },
+  {
+   "title": "Vertiv Holdings (VRT) Statistics & Valuation (stockanalysis)",
+   "url": "https://stockanalysis.com/stocks/vrt/statistics/",
+   "date": "2026-09-29"
+  },
+  {
+   "title": "Vertiv Holdings (VRT) Stock Forecast (stockanalysis)",
+   "url": "https://stockanalysis.com/stocks/vrt/forecast/",
+   "date": "2026-09-29"
+  },
+  {
+   "title": "Eaton (ETN) Statistics (stockanalysis)",
+   "url": "https://stockanalysis.com/stocks/etn/statistics/",
+   "date": "2026-09-29"
+  },
+  {
+   "title": "nVent (NVT) Statistics (stockanalysis)",
+   "url": "https://stockanalysis.com/stocks/nvt/statistics/",
+   "date": "2026-09-29"
+  },
+  {
+   "title": "Modine (MOD) Statistics (stockanalysis)",
+   "url": "https://stockanalysis.com/stocks/mod/statistics/",
+   "date": "2026-09-29"
+  },
+  {
+   "title": "Trane Technologies (TT) Statistics (stockanalysis)",
+   "url": "https://stockanalysis.com/stocks/tt/statistics/",
+   "date": "2026-09-29"
+  },
+  {
+   "title": "Eaton Reports Record Second Quarter 2026 Results (Business Wire)",
+   "url": "https://www.businesswire.com/news/home/20260730561562/en/Eaton-Reports-Record-Second-Quarter-2026-Results-with-Strong-Organic-Growth-Accelerating-Orders-and-Backlog-and-Raises-Organic-Growth-Guidance",
+   "date": "2026-07-30"
+  },
+  {
+   "title": "Portföy Defteri repo verileri (fund, universe, valuation, earnhist, insider, calls, ohlc)",
+   "url": "https://github.com/brsclk16/portfoy-defteri/tree/main/data",
+   "date": "2026-09-29"
+  }
+ ]
+}
