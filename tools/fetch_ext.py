@@ -161,8 +161,23 @@ def near(dct, e, days=12):
 def edgar():
     T = tickers()
     stocks = [t for t, ty in T.items() if not re.search(r'ETF|tröst|fon|Emtia|Kripto|Döviz', ty or '', re.I)]
-    m = jget('https://www.sec.gov/files/company_tickers.json')
-    cik = {v['ticker'].upper(): int(v['cik_str']) for v in m.values()}
+    probe = {}
+    for ua in [UA, 'Portfoy Defteri research portfoy.defteri@gmail.com', 'Mozilla/5.0 (compatible; PortfoyDefteri/1.0; +https://github.com/brsclk16/portfoy-defteri)']:
+        for u in ('https://www.sec.gov/files/company_tickers.json', 'https://data.sec.gov/api/xbrl/companyfacts/CIK0000002488.json', 'https://www.sec.gov/include/ticker.txt'):
+            try:
+                get(u, {'User-Agent': ua}, tries=1)
+                probe[f'{ua[:30]}|{u[-30:]}'] = 'ok'
+            except Exception as e:
+                probe[f'{ua[:30]}|{u[-30:]}'] = str(e)[:60]
+            time.sleep(0.3)
+    DIAG['edgar_probe'] = probe
+    cik = {}
+    try:
+        m = jget('https://www.sec.gov/files/company_tickers.json')
+        cik = {v['ticker'].upper(): int(v['cik_str']) for v in m.values()}
+    except Exception:
+        txt = get('https://www.sec.gov/include/ticker.txt')
+        cik = {a.upper(): int(b) for a, b in (l.split() for l in txt.splitlines() if l.strip())}
     fund = rd('fund.json', {'updatedAt': None, 'data': {}}) or {'data': {}}
     fund.setdefault('data', {})
     done, skipped = [], {}
@@ -383,12 +398,12 @@ def pm_list(x):
 
 def pm():
     evs = []
-    for off in range(0, 1500, 500):
-        page = jget(f'https://gamma-api.polymarket.com/events?active=true&closed=false&limit=500&offset={off}&order=volume&ascending=false')
+    for off in range(0, 2000, 100):
+        page = jget(f'https://gamma-api.polymarket.com/events?active=true&closed=false&limit=100&offset={off}&order=volume&ascending=false')
         if not page:
             break
         evs += page
-        time.sleep(0.4)
+        time.sleep(0.25)
     sel = [e for e in evs if PM_RE.search(e.get('title', '') or '') and float(e.get('volume') or 0) > 200000]
     sel.sort(key=lambda e: -float(e.get('volume') or 0))
     old = rd('pm.json', {}) or {}
