@@ -9,7 +9,8 @@ const VF=[
   ['mom3','Momentum 3 ay','Son 3 ayın getirisi',63],
   ['lowvol','Düşük oynaklık','Son 60 günün günlük oynaklığı ne kadar düşükse o kadar iyi',60],
   ['trend','Trend','Fiyatın 200 günlük ortalamaya uzaklığı',200],
-  ['high','52 hafta zirveye yakınlık','Fiyat / son 1 yılın en yükseği',252]];
+  ['high','52 hafta zirveye yakınlık','Fiyat / son 1 yılın en yükseği',252],
+  ['qual','Nakit akışı kalitesi','Son 4 çeyrek faaliyet nakit akışı / toplam varlık. Yalnızca o tarihte SEC\'e dosyalanmış bilançolar kullanılır; ETF\'ler ve dosyalama tarihi olmayan veriler dışarıda kalır',0]];
 const VCRIT_DEF={excess:0,excess2x:0,maxdd:30,sharpe:1,top:40,alpha:0,dsr:90};
 const VCRIT_TXT={excess:['SPY\'ı maliyet sonrası geçmeli','puan'],excess2x:['2x maliyette de SPY\'ı geçmeli','puan'],maxdd:['En büyük düşüş en fazla','%'],sharpe:['Sharpe (yıllık, %4 risksiz faiz) en az',''],top:['Tek enstrümanın getiriye katkısı en fazla','%'],alpha:['Beta düzeltmeli alfa (yıllık) en az','%'],dsr:['Deneme sayısına göre düzeltilmiş Sharpe güveni en az','%']};
 const RF=0.04;
@@ -21,7 +22,8 @@ function vData(){const O=S.ohlc||{};const spy=O.SPY||[];if(spy.length<300)return
 function vUniverse(){const D=vData();if(!D)return [];return Object.keys(D.px).filter(t=>t!=='SPY'&&D.px[t].filter(v=>v!=null).length>=300)}
 
 /* ---------- faktörler (yalnızca i gününe kadarki kapanışlar) ---------- */
-function vFactor(k,a,i){const c=a[i];if(c==null)return null;const at=j=>j>=0?a[j]:null;
+function vFactor(k,a,i,t,d){const c=a[i];if(c==null)return null;
+  if(k==='qual'){const F=typeof fundOf==='function'?fundOf(t):null;if(!F||!F.q||!d)return null;const Q=F.q.filter(x=>x.f&&x.f<=d);if(Q.length<4)return null;const L4=Q.slice(-4);if(!L4.every(x=>isNum(x.ocf)))return null;const A=Q[Q.length-1].assets;return isNum(A)&&A>0?L4.reduce((s,x)=>s+x.ocf,0)/A:null}const at=j=>j>=0?a[j]:null;
   if(k==='mom61'){const x=at(i-21),y=at(i-126);return x&&y?x/y-1:null}
   if(k==='mom121'){const x=at(i-21),y=at(i-252);return x&&y?x/y-1:null}
   if(k==='mom3'){const y=at(i-63);return y?c/y-1:null}
@@ -47,9 +49,10 @@ function vBacktest(cfg,from,to,opt={}){const D=vData();if(!D)return null;const {
       if(pending){const all=new Set(Object.keys(hold).concat(Object.keys(pending)));let tv=0;all.forEach(t=>tv+=Math.abs((pending[t]||0)-(hold[t]||0)));const cst=tv*bps;r-=cst;costTot+=cst;turn+=tv;hold=pending;pending=null;rebs++}
       eq*=1+r;spyEq*=1+sr;rets.push(r);spyR.push(sr)}
     curve.push([dates[i],eq*100]);spyCurve.push([dates[i],spyEq*100]);
-    if(i<to&&isReb(i)){const sc={};const R={};fk.forEach(k=>{const v={};U.forEach(t=>v[t]=vFactor(k,px[t],i));R[k]=vRanks(v)});
+    if(i<to&&isReb(i)){const sc={};const R={};fk.forEach(k=>{const v={};U.forEach(t=>v[t]=vFactor(k,px[t],i,t,dates[i]));R[k]=vRanks(v)});
       U.forEach(t=>{if(fk.some(k=>R[k][t]==null))return;sc[t]=fk.reduce((s,k)=>s+R[k][t]*cfg.w[k],0)/wsum});
       let order=Object.entries(sc).sort((x,y)=>y[1]-x[1]).map(x=>x[0]);
+      if(cfg.regF&&typeof regimeAt==='function'&&S.fred&&regimeAt(dates[i]).score<=-2)order=[];
       if(cfg.trendF)order=order.filter(t=>{const v=vFactor('trend',px[t],i);return v!=null&&v>0});
       let pick=order.slice(0,N);const band=cfg.band||0;
       if(band>0){const keep=Object.keys(hold).filter(t=>order.indexOf(t)>-1&&order.indexOf(t)<N+band);pick=keep.slice(0,N);for(const t of order){if(pick.length>=N)break;if(!pick.includes(t))pick.push(t)}}
@@ -84,10 +87,11 @@ function vDSR(st,trialSR){if(!st)return null;const N=Math.max(1,trialSR.length);
 function vStudy(){if(!S.settings.vstudy)S.settings.vstudy={id:Date.now().toString(36),created:new Date().toISOString(),crit:{...VCRIT_DEF},hold:126,trials:[],opened:null};return S.settings.vstudy}
 function vCfgDefault(){const U=vUniverse();return {uni:U,w:{mom61:60,lowvol:25,trend:15},topN:3,reb:'m',band:1,cost:15,trendF:false}}
 function vCfg(){if(!S.vcfg)S.vcfg=(S.settings.vcfg&&S.settings.vcfg.uni)?JSON.parse(JSON.stringify(S.settings.vcfg)):vCfgDefault();return S.vcfg}
-function vHash(c){return String(hashStr(JSON.stringify([c.uni.slice().sort(),VF.map(f=>c.w[f[0]]||0),c.topN,c.reb,c.band,c.cost,!!c.trendF])))}
-function vCfgTxt(c){return VF.filter(f=>(c.w[f[0]]||0)>0).map(f=>f[1]+' '+c.w[f[0]]).join(' + ')+` · ilk ${c.topN} · ${c.reb==='w'?'haftalık':'aylık'}${c.band?` · bant ${c.band}`:''}${c.trendF?' · trend filtresi':''} · ${c.cost} bp · ${c.uni.length} enstrüman`}
+function vHash(c){return String(hashStr(JSON.stringify([c.uni.slice().sort(),VF.map(f=>c.w[f[0]]||0),c.topN,c.reb,c.band,c.cost,!!c.trendF,!!c.regF])))}
+function vCfgTxt(c){return VF.filter(f=>(c.w[f[0]]||0)>0).map(f=>f[1]+' '+c.w[f[0]]).join(' + ')+` · ilk ${c.topN} · ${c.reb==='w'?'haftalık':'aylık'}${c.band?` · bant ${c.band}`:''}${c.trendF?' · trend filtresi':''}${c.regF?' · rejim filtresi':''} · ${c.cost} bp · ${c.uni.length} enstrüman`}
 function vPeriods(cfg){const D=vData();if(!D)return null;const n=D.dates.length;const st=vStudy();const warm=vWarm(cfg);const hEnd=n-1,hStart=n-1-st.hold;return {warm,devFrom:warm,devTo:hStart,hFrom:hStart,hTo:hEnd,dates:D.dates}}
-function vEvaluate(cfg){const P=vPeriods(cfg);if(!P||P.devTo-P.devFrom<120)return {err:'Geliştirme dönemi çok kısa: faktör ısınma süresi + saklı dönem veriyi tüketiyor. Daha kısa bakışlı faktör ya da daha kısa saklı dönem seç.'};
+function vEvaluate(cfg){if((cfg.w.qual||0)>0&&!cfg.uni.some(t=>{const F=typeof fundOf==='function'?fundOf(t):null;return F&&F.q&&F.q.some(x=>x.f)}))return {err:'Nakit akışı kalitesi faktörü için SEC\'e dosyalama tarihli bilanço gerekiyor; SEC kaynağı açılınca (SEC_UA ayarı) kullanılabilir. Bu faktörün ağırlığını 0 yap.'};
+  const P=vPeriods(cfg);if(!P||P.devTo-P.devFrom<120)return {err:'Geliştirme dönemi çok kısa: faktör ısınma süresi + saklı dönem veriyi tüketiyor. Daha kısa bakışlı faktör ya da daha kısa saklı dönem seç.'};
   const B=vBacktest(cfg,P.devFrom,P.devTo);const st=vStats(B);if(!st)return {err:'Backtest çalışmadı (evren ya da faktör seçimi boş).'};
   const B2=vBacktest(cfg,P.devFrom,P.devTo,{costMult:2});const st2=vStats(B2);
   const Bx=st.topT?vBacktest(cfg,P.devFrom,P.devTo,{exclude:[st.topT]}):null;const stx=vStats(Bx);
@@ -122,7 +126,7 @@ function viewDogrula(){const U=vUniverse();if(!U.length)return `<div class="empt
     <label><span>Yeniden dengeleme</span><select data-p="reb"><option value="m" ${cfg.reb==='m'?'selected':''}>aylık</option><option value="w" ${cfg.reb==='w'?'selected':''}>haftalık</option></select><em></em></label>
     <label><span>İşlem yapmama bandı</span><input type="number" min="0" max="5" data-p="band" value="${cfg.band}"><em>sıra payı</em></label>
     <label><span>Maliyet + kayma</span><input type="number" min="0" max="200" data-p="cost" value="${cfg.cost}"><em>bp / işlem</em></label>
-    <label class="vchk"><input type="checkbox" data-p="trendF" ${cfg.trendF?'checked':''}> <span>Mutlak trend filtresi (200G altı → nakit)</span></label></div>
+    <label class="vchk"><input type="checkbox" data-p="trendF" ${cfg.trendF?'checked':''}> <span>Mutlak trend filtresi (200G altı → nakit)</span></label>${S.fred?`<label class="vchk"><input type="checkbox" data-p="regF" ${cfg.regF?'checked':''}> <span>Makro rejim filtresi (risk kapalı → nakit)</span></label>`:''}</div>
    ${P?`<p class="muted" style="font-size:12px;margin:6px 0">Geliştirme dönemi: <b>${fmt(P.dates[P.devFrom])} – ${fmt(P.dates[P.devTo])}</b> (${P.devTo-P.devFrom} gün; ilk ${P.warm} gün faktör ısınması) · Saklı dönem: <b>${fmt(P.dates[P.hFrom])} – ${fmt(P.dates[P.hTo])}</b> ${st.opened?'<span class="chip warnc">açıldı</span>':'<span class="chip n">🔒 kapalı</span>'}</p>`:''}
    <button class="btn" id="vRun">Geliştirme döneminde test et</button> <span class="muted" style="font-size:12px">Her farklı ayar bir deneme sayılır.</span></section>
 
@@ -142,7 +146,9 @@ function viewDogrula(){const U=vUniverse();if(!U.length)return `<div class="empt
 
   <section class="card sec"><h3>5 · Saklı dönem ${st.opened?'<span class="chip warnc">açıldı</span>':''}</h3>
    ${st.opened?vOpenedHTML(st.opened):`<p class="muted" style="font-size:13px;margin:0 0 8px">Geliştirme dönemindeki tüm kriterleri geçen bir strateji, geliştirme sırasında hiç görülmemiş son dönemde <b>bir kez</b> test edilir. Açıldıktan sonra yapılan her değişiklik "saklı dönem görüldü" olarak işaretlenir; artık gerçek bir örneklem dışı test yoktur.</p>
-   <button class="btn" id="vOpen" ${allOk&&cur?'':'disabled'}>Saklı dönemi aç (tek sefer)</button> ${allOk&&cur?'':'<span class="muted" style="font-size:12px">Önce tüm kriterleri geçen bir deneme gerekli.</span>'}`}</section>
+   <button class="btn" id="vOpen" ${allOk&&cur?'':'disabled'}>Saklı dönemi aç (tek sefer)</button> ${allOk&&cur?'':'<span class="muted" style="font-size:12px">Önce tüm kriterleri geçen bir deneme gerekli.</span>'}`}
+   ${st.opened&&st.opened.excess>0&&st.opened.h===vHash(cfg)?`<div style="margin-top:10px"><button class="btn" id="vPaper">Canlı takibe al</button> <span class="muted" style="font-size:12px">Bugünden itibaren gerçek günlerle izlenir.</span></div>`:''}</section>
+  ${typeof paperCard==='function'?paperCard():''}
 
   <section class="card sec"><h3>Ret günlüğü <span class="r muted" style="font-size:12px">${st.trials.filter(t=>t.ok).length} kabul · ${st.trials.filter(t=>!t.ok).length} ret</span></h3>
    ${st.trials.length?`<div class="tscroll"><table class="tbl"><thead><tr><th>#</th><th>Ayar</th><th class="r">Fark</th><th class="r">Sharpe</th><th class="r">Düşüş</th><th>Kriterler</th><th>Karar</th></tr></thead><tbody>${st.trials.slice().reverse().map((t,i)=>`<tr><td class="muted">${st.trials.length-i}</td><td style="font-size:12.5px">${esc(t.txt)}${t.post?' <span class="chip warnc">saklı sonrası</span>':''}</td><td class="r num ${cls(t.excess)}">${pct(t.excess,1)}</td><td class="r num">${nf(t.sharpe,2)}</td><td class="r num">%${nf(-t.maxdd,1)}</td><td style="white-space:nowrap">${(t.chk||'').split('').map(c=>c==='1'?'✅':'❌').join('')}</td><td>${t.ok?'<span class="chip up">KABUL</span>':'<span class="chip down">RED</span>'}</td></tr>`).join('')}</tbody></table></div>`:'<p class="muted">Henüz deneme yok.</p>'}</section>
@@ -168,4 +174,5 @@ function afterDogrula(){const st=vStudy(),cfg=vCfg();const E=S.vEval;
   const ob=$('#vOpen');if(ob)ob.onclick=()=>{if(!confirm('Saklı dönem yalnızca bir kez açılır. Bu ayarla açılsın mı?'))return;const P=vPeriods(cfg);const B=vBacktest(cfg,P.hFrom,P.hTo);const s=vStats(B);
     if(!s){toast('Saklı dönem hesaplanamadı');return}st.opened={at:new Date().toISOString(),h:vHash(cfg),txt:vCfgTxt(cfg),tot:s.tot,spy:s.spy,excess:s.excess,sharpe:s.sharpe,maxdd:s.maxdd,beta:s.beta,curve:B.curve.filter((_,i)=>i%2===0),spyCurve:B.spyCurve.filter((_,i)=>i%2===0)};
     try{saveSettings()}catch(e){}render(false)};
+  const pb=$('#vPaper');if(pb)pb.onclick=async()=>{pb.disabled=true;const ok=await paperAdd(cfg,vCfgTxt(cfg));pb.disabled=false;if(ok)render(false)};
   if(E&&E.B){const el=$('#cV');if(el)lineChart(el,[{name:'Strateji',color:'#b8f25c',pts:E.B.curve},{name:'SPY',color:'#8b95a5',pts:E.B.spyCurve}],{fmt:(v)=>nf(v,0)})}}

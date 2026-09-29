@@ -9,7 +9,7 @@ import csv, datetime as dt, io, json, math, os, re, sys, time, traceback, urllib
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 DATA = os.path.join(ROOT, 'data')
 TODAY = dt.date.today()
-UA = os.environ.get('SEC_UA') or 'PortfoyDefteri portfoy-bot@users.noreply.github.com'
+UA = os.environ.get('SEC_UA', '').strip() or 'PortfoyDefteri (github.com/brsclk16/portfoy-defteri)'
 DIAG = {}
 
 
@@ -161,16 +161,8 @@ def near(dct, e, days=12):
 def edgar():
     T = tickers()
     stocks = [t for t, ty in T.items() if not re.search(r'ETF|tröst|fon|Emtia|Kripto|Döviz', ty or '', re.I)]
-    probe = {}
-    for ua in [UA, 'Portfoy Defteri research portfoy.defteri@gmail.com', 'Mozilla/5.0 (compatible; PortfoyDefteri/1.0; +https://github.com/brsclk16/portfoy-defteri)']:
-        for u in ('https://www.sec.gov/files/company_tickers.json', 'https://data.sec.gov/api/xbrl/companyfacts/CIK0000002488.json', 'https://www.sec.gov/include/ticker.txt'):
-            try:
-                get(u, {'User-Agent': ua}, tries=1)
-                probe[f'{ua[:30]}|{u[-30:]}'] = 'ok'
-            except Exception as e:
-                probe[f'{ua[:30]}|{u[-30:]}'] = str(e)[:60]
-            time.sleep(0.3)
-    DIAG['edgar_probe'] = probe
+    if not os.environ.get('SEC_UA', '').strip():
+        return {'skipped': 'SEC_UA secret tanımlı değil (SEC, "Ad Soyad eposta@adres" biçiminde gerçek iletişim bilgisi istiyor)'}
     cik = {}
     try:
         m = jget('https://www.sec.gov/files/company_tickers.json')
@@ -384,7 +376,8 @@ def cboe():
 
 
 # ---------------------------------------------------------------- Polymarket
-PM_RE = re.compile(r'\b(Fed|FOMC|rate cut|rate hike|interest rate|recession|inflation|CPI|tariff|Turkey|Türkiye|Erdo[gğ]an|S&P|Nasdaq|gold|oil|Nvidia|semiconductor|chip|Taiwan|China|shutdown|unemployment|GDP|Powell|Treasury|stock market|AI)\b', re.I)
+PM_RE = re.compile(r'\b(Fed|FOMC|rate cuts?|rate hikes?|interest rates?|recession|inflation|CPI|tariffs?|Turkey|Türkiye|Erdo[gğ]an|S&P ?500|Nasdaq|crude|oil price|WTI|Brent|Nvidia|semiconductors?|chips?|Taiwan|shutdown|unemployment|GDP|Powell|Treasury|stock market|gold price|silver|copper|Bitcoin price)\b', re.I)
+PM_NO = re.compile(r'FDV|memecoin|token|Arena|AI model|AI Agent|Gold Card|charged|indicted|sentenced|tweet|Elon', re.I)
 
 
 def pm_list(x):
@@ -404,7 +397,7 @@ def pm():
             break
         evs += page
         time.sleep(0.25)
-    sel = [e for e in evs if PM_RE.search(e.get('title', '') or '') and float(e.get('volume') or 0) > 200000]
+    sel = [e for e in evs if PM_RE.search(e.get('title', '') or '') and not PM_NO.search(e.get('title', '') or '') and float(e.get('volume') or 0) > 200000]
     sel.sort(key=lambda e: -float(e.get('volume') or 0))
     old = rd('pm.json', {}) or {}
     hist = old.get('hist') or {}

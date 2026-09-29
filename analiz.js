@@ -39,12 +39,12 @@ function realReturn(){
   const ps=portfolioSeries();const pMap=new Map(ps.pts);
   const dates=series('SMH').map(p=>p[0]).filter(d=>d>=flows[0].d);
   const today=new Date().toISOString().slice(0,10);if(dates.length&&dates[dates.length-1]<today)dates.push(today);
-  const cpi=cpiFn();const r=((S.settings.depositRate!=null&&S.settings.depositRate!=='')?+S.settings.depositRate:((S.macro&&S.macro.deposit&&S.macro.deposit.annualGross)||40))/100;
+  const cpi=cpiFn();const DR=typeof depRateFn==='function'?depRateFn():null;const r=(DR?DR.last:((S.settings.depositRate!=null&&S.settings.depositRate!=='')?+S.settings.depositRate:((S.macro&&S.macro.deposit&&S.macro.deposit.annualGross)||40)))/100;
   const acc={usd:0,spy:0,gold:0,dep:0,cpi:0};let wd=0,inTL=0,fi=0,prev=null,lastPort=null;
   const out={port:[],dep:[],gold:[],spy:[],usd:[],cpi:[]};
   for(const d of dates){
     const f=fxAt(d),spy=lastLE(S.hist.SPY||[],d),g=goldGramTL(d);
-    if(prev){acc.dep*=Math.pow(1+r,daysBetween(prev,d)/365);acc.cpi*=cpi(d)/cpi(prev)}
+    if(prev){acc.dep*=Math.pow(1+(DR?DR.fn(prev)/100:r),daysBetween(prev,d)/365);acc.cpi*=cpi(d)/cpi(prev)}
     while(fi<flows.length&&flows[fi].d<=d){const fl=flows[fi++];
       if(fl.tl>0)inTL+=fl.tl;else wd+=-fl.tl;
       acc.usd+=fl.tl/f; if(spy)acc.spy+=fl.tl/(spy*f); if(g)acc.gold+=fl.tl/g; acc.dep+=fl.tl; acc.cpi+=fl.tl;}
@@ -56,7 +56,7 @@ function realReturn(){
     out.gold.push([d,W(acc.gold*(g||0))]);out.dep.push([d,W(acc.dep)]);out.cpi.push([d,W(acc.cpi)]);
   }
   const end=k=>out[k].length?out[k][out[k].length-1][1]:null;
-  const res={series:out,inTL,wd,rate:r*100,real:!!S.lots.length,start:flows[0].d,est:cpiEstimated(today)};
+  const res={series:out,inTL,wd,rate:r*100,depSrc:DR&&DR.src,real:!!S.lots.length,start:flows[0].d,est:cpiEstimated(today)};
   ['port','dep','gold','spy','usd','cpi'].forEach(k=>res[k]={end:end(k),ret:inTL>0?(end(k)/inTL-1)*100:null});
   res.realVsCpi=(res.port.end/res.cpi.end-1)*100;
   return res;
@@ -134,7 +134,7 @@ function viewAnaliz(){
   <div class="sec-t" style="margin-top:0"><div><h2>Reel getiri</h2><p>${R?(R.real?'Gerçek alış/satışların':'Model portföy (1 yıl önce $10.000)')+' aynı tarihlerde ve aynı TL tutarlarıyla alternatiflere yatırılsaydı':'Veri yok'}</p></div>${R?`<div class="bigchip ${cls(R.realVsCpi)}">Enflasyona göre reel <b>${pct(R.realVsCpi,1)}</b></div>`:''}</div>
   ${R?`<div class="grid g-main"><section class="card"><div class="chart" id="cReal" style="height:320px"></div></section>
   <section class="card"><h3>Bugünkü değer (TL) <span class="r muted">yatırılan ₺${nf(R.inTL,0)}</span></h3>
-    ${rt('port',R.real?'Portföyün':'Model portföy',BENCH_COLORS.port)}${rt('dep','TL mevduat (%'+nf(R.rate,0)+' brüt)',BENCH_COLORS.dep)}${rt('gold','Gram altın',BENCH_COLORS.gold)}${rt('spy','S&P 500 (SPY)',BENCH_COLORS.spy)}${rt('usd','Dolar (nakit)',BENCH_COLORS.usd)}${rt('cpi','Enflasyon (TÜFE)',BENCH_COLORS.cpi)}
+    ${rt('port',R.real?'Portföyün':'Model portföy',BENCH_COLORS.port)}${rt('dep',R.depSrc&&/EVDS/.test(R.depSrc)?'TL mevduat (TCMB gerçek oranlar, brüt)':'TL mevduat (%'+nf(R.rate,0)+' brüt)',BENCH_COLORS.dep)}${rt('gold','Gram altın',BENCH_COLORS.gold)}${rt('spy','S&P 500 (SPY)',BENCH_COLORS.spy)}${rt('usd','Dolar (nakit)',BENCH_COLORS.usd)}${rt('cpi','Enflasyon (TÜFE)',BENCH_COLORS.cpi)}
     <p class="muted" style="font-size:12.5px;margin:12px 0 0">Satışlardan çekilen para tüm seçeneklerde aynı tarihte çekilmiş sayılır. TÜFE: TÜİK aylık verisi${R.est?', son ay sonrası son aylık oranla tahmin':''}. Mevduat sabit brüt oran varsayar (stopaj hariç); oranı Pozisyonlar → Ayarlar'dan değiştirebilirsin. Kur ve altın: Twelve Data.</p></section></div>`:'<div class="empty">Kur geçmişi yüklenemedi</div>'}
 
   <div class="sec-t"><div><h2>Risk paneli</h2><p>Son 1 yılın günlük getirileri · ${esc(M.W.src)}</p></div></div>

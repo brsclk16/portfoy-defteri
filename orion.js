@@ -27,6 +27,14 @@ function redFlagsAuto(t){const F=fundOf(t),out=[];const q=(F&&F.q)||[];const add
     const L=q[q.length-1],P=q[q.length-5];if(isNum(L.debt)&&isNum(P.debt)){const op=sum(cur,'op');const lev=op>0?L.debt/op:null;const up=P.debt?(L.debt/P.debt-1)*100:0;
       add('lev','Artan kaldıraç',(lev!=null&&lev>3)||(up>25&&(L.cash||0)<L.debt)?'bad':up>10&&(L.cash||0)<L.debt?'watch':'ok',`borç ${bigN(L.debt)}${lev!=null?' · borç/FVÖK '+nf(lev,1)+'x':''}${P.debt?' · yıllık '+pct(up,0):''}`)}}
   else add('fund','Temel veri','na','bilanço verisi henüz yok (temel veri görevi dolduracak)');
+  if(q.length>=8){const c4=q.slice(-4),p4=q.slice(-8,-4),L=q[q.length-1],P=q[q.length-5];const S4=(a,k)=>a.every(x=>isNum(x[k]))?a.reduce((s,x)=>s+x[k],0):null;
+    const rv1=S4(c4,'rev'),rv0=S4(p4,'rev');const g=rv1&&rv0?(rv1/rv0-1)*100:null;
+    const grow=(k,label)=>{if(!isNum(L[k])||!isNum(P[k])||!P[k]||g==null)return;const kg=(L[k]/P[k]-1)*100,gap=kg-g;add(k,label,gap>25?'bad':gap>12?'watch':'ok',`yıllık ${pct(kg,0)} vs satış ${pct(g,0)}`)};
+    grow('ar','Alacaklar satıştan hızlı artıyor');grow('inv','Stoklar satıştan hızlı artıyor');
+    const gp1=S4(c4,'gp'),gp0=S4(p4,'gp');if(gp1!=null&&gp0!=null&&rv1&&rv0){const m1=gp1/rv1*100,m0=gp0/rv0*100;add('gm','Brüt marj daralması',m1<m0-3?'bad':m1<m0-1.5?'watch':'ok',`%${nf(m0,1)} → %${nf(m1,1)}`)}
+    const sb=S4(c4,'sbc');if(sb!=null&&rv1){const r=sb/rv1*100;add('sbc','Aşırı hisse bazlı ödeme (SBC)',r>15?'bad':r>8?'watch':'ok',`satışın %${nf(r,1)}'i`)}
+    const ni=S4(c4,'ni'),oc=S4(c4,'ocf');if(ni!=null&&oc!=null&&isNum(L.assets)&&L.assets>0){const a=(ni-oc)/L.assets*100;add('acc','Kâr nakde dönmüyor (tahakkuk)',a>8?'bad':a>4?'watch':'ok',`(net kâr − faaliyet nakdi) / varlık %${nf(a,1)}`)}}
+  const sv=typeof svInfo==='function'?svInfo(t):null;if(sv&&isNum(sv.z))add('sv','Açığa satış hacmi sıçraması',sv.z>2.5?'watch':'ok',`5g %${nf(sv.r5,0)} · 60g ort %${nf(sv.r60,0)} (FINRA)`);
   const I=(((S.insider||{}).tickers||{})[t]||{}).insider;if(I){const net=(I.buyValue||0)-(I.sellValue||0);add('ins','İçeriden satış',I.sellCount>=5&&net<-5e6?'watch':'ok',`90g: ${I.buyCount||0} alım / ${I.sellCount||0} satış · net ${bigN(net)}`)}
   const u=uniOf(t);if(isNum(u.pe)){const ps=(typeof peerSet==='function'?peerSet(t):[]).map(x=>uniOf(x).pe).filter(v=>isNum(v)&&v>0).sort((a,b)=>a-b);
     const med=ps.length>=3?ps[Math.floor(ps.length/2)]:null;add('val','Sürdürülemez değerleme',u.pe<0?'watch':med&&u.pe>med*2?'bad':med&&u.pe>med*1.4?'watch':u.pe>60?'watch':'ok',`F/K ${nf(u.pe,1)}${med?' · rakip medyanı '+nf(med,1):''}`)}
@@ -37,9 +45,9 @@ function flagScanCard(){const L=(typeof stockList==='function'?stockList():[]);i
   const rows=L.map(t=>{const f=redFlagsAuto(t);const bad=f.filter(x=>x.st==='bad').length,w=f.filter(x=>x.st==='watch').length;return {t,f,bad,w}}).sort((a,b)=>b.bad-a.bad||b.w-a.w);
   return `<section class="card sec"><h3>🚩 Kırmızı bayrak tarayıcı <span class="r muted" style="font-size:12px">bilanço, içeriden işlem ve değerleme verisinden otomatik</span></h3>
   ${rows.map(r=>`<details class="qa"><summary class="qq"><b>${esc(dispT(r.t))}</b> <span class="muted">${r.bad?`${r.bad} kırmızı`:''}${r.bad&&r.w?' · ':''}${r.w?`${r.w} izle`:''}${!r.bad&&!r.w?'belirgin bayrak yok':''}</span> <span class="r">${r.f.map(x=>FLAG_I[x.st]).join('')}</span></summary>
-    <table class="tbl"><tbody>${r.f.map(x=>`<tr><td>${FLAG_I[x.st]} ${esc(x.label)}</td><td class="muted num">${esc(x.note)}</td></tr>`).join('')}</tbody></table>
+    <table class="tbl wrap"><tbody>${r.f.map(x=>`<tr><td>${FLAG_I[x.st]} ${esc(x.label)}</td><td class="muted num">${esc(x.note)}</td></tr>`).join('')}</tbody></table>
     <button class="btn ghost sm" data-orq="deep" data-ort="${esc(r.t)}">ORION derin analiz iste →</button></details>`).join('')}
-  <p class="muted" style="font-size:11.5px;margin:6px 0 0">Müşteri yoğunlaşması, muhasebe/denetçi sorunları, agresif non-GAAP, stok/alacak şişmesi ve satın almalarla gizlenen organik zayıflık yerel veriden ölçülemez; bunlar ORION raporunda kontrol edilir.</p></section>`}
+  <p class="muted" style="font-size:11.5px;margin:6px 0 0">Alacak/stok şişmesi, brüt marj, SBC ve tahakkuk SEC'e verilen bilançolardan hesaplanır (SEC kaynağı açıkken). Müşteri yoğunlaşması, denetçi sorunları, agresif non-GAAP ve satın almalarla gizlenen organik zayıflık yine ORION raporunda kontrol edilir.</p></section>`}
 
 /* ---------- istek formu ---------- */
 function orionForm(t,mode){const m=mode||S.orionMode||(t?'snapshot':'deep');

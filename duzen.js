@@ -25,8 +25,8 @@ function markNav(r){$$('#tabs a,#bnav a').forEach(a=>a.classList.toggle('on',a.d
 
 /* ---------- Analiz alt sayfaları ---------- */
 function analizPart(part){
-  if(part==='makro')return viewMakro();
-  if(part==='duyarlilik')return viewSent();
+  if(part==='makro')return viewMakro()+`<div class="sec">${regimeCard()}${cotSummary()}${pmCard(8)}</div>`;
+  if(part==='duyarlilik')return viewSent()+`<div class="sec">${vixTermCard()}</div>`;
   if(part==='kaynak')return viewAttrib();
   if(part==='saglik')return viewHealth();
   if(part==='makroev')return viewMacroEv();
@@ -83,7 +83,7 @@ function viewInstTabs(t,tab){
   else if(tab==='temel')body=pick(isMetrics)+pick(isSW)+pick(isHold)+fundSection(t,true)+notesSection(t)+statementsSection(t)+dcfSection(t)+callsSection(t)+analystSection(t)+peersSection(t)+pick(isEarn);
   else if(tab==='haber')body=pick(isNews);
   else if(tab==='iceriden')body=pick(isIns);
-  else body=pick(isMain)+planCard(t)+pick(isSummary)+orionInstCard(t)+askCard(t);
+  else body=pick(isMain)+planCard(t)+pick(isSummary)+optCard(t)+cotCard(t)+orionInstCard(t)+askCard(t);
   return `<div class="fade">${pick(isHead)}<nav class="subnav itabs">${tabs.map(([k,l])=>`<a href="#/t/${encodeURIComponent(t)}/${k}" class="${k===tab?'on':''}">${l}</a>`).join('')}</nav>${body}</div>`;
 }
 function afterInstTabs(t,tab){
