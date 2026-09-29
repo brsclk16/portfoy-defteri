@@ -655,3 +655,10 @@ body.sade #sade{color:var(--accent);box-shadow:inset 0 0 0 1px var(--accent)}
 @media (max-width:760px){.sent-c{grid-template-columns:minmax(0,1fr) 70px 30px}.ms-x{min-width:78px}}
 .gmini svg{width:100%;max-width:110px;height:auto}.gcard .g3s{min-width:0}.gmini{min-width:0}.gcard h3{flex-wrap:wrap;gap:6px}
 .wadd select{min-width:0}
+/* v14: içgörüler */
+.askf{display:flex;gap:8px;align-items:stretch}.askf textarea{flex:1;min-width:0;resize:vertical;font:inherit;padding:10px;border-radius:10px;border:1px solid var(--line2);background:var(--panel2);color:var(--text)}
+.qa{border-top:1px solid var(--line);padding:10px 0}.qa .qq{font-weight:600;cursor:pointer}.qa.pend{opacity:.8}.qa .prose p{margin:8px 0;line-height:1.55}
+.call{padding:4px 0}.call-h{display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+tr.sel td{background:color-mix(in srgb,var(--accent) 10%,transparent)}
+.bar.attr{grid-template-columns:minmax(150px,300px) minmax(0,1fr) 92px}
+@media (max-width:760px){.askf{flex-direction:column}.bar.attr{grid-template-columns:minmax(0,1fr) 80px 70px}}

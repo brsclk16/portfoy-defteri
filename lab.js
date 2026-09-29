@@ -171,12 +171,12 @@ async function ghPutJSON(path,obj,msg){const tok=(S.settings.ghToken||'').trim()
   const g=await fetch(url+'?ref=main',{headers:h});let sha;if(g.ok)sha=(await g.json()).sha;const body={message:msg,content:b64utf8(JSON.stringify(obj,null,1)+'\n'),branch:'main'};if(sha)body.sha=sha;
   const p=await fetch(url,{method:'PUT',headers:{...h,'Content-Type':'application/json'},body:JSON.stringify(body)});return p.ok}
 async function syncRemoteAlarms(){const D=drawAll();const levels=[];Object.entries(D).forEach(([t,arr])=>arr.forEach(g=>{if(g.type==='h'&&g.alarm)levels.push({t,p:g.p})}));
-  const obj={updatedAt:new Date().toISOString(),levels,planAlerts:S.settings.planAlerts!==false,brief:true,rules:(Array.isArray(S.settings.rules)?S.settings.rules:[]).filter(r=>r.on!==false).map(r=>({id:r.id,t:r.t,logic:r.logic,name:r.name,conds:r.conds}))};
+  const obj={updatedAt:new Date().toISOString(),levels,planAlerts:S.settings.planAlerts!==false,brief:true,trails:typeof trailPayload==='function'?trailPayload():[],rules:(Array.isArray(S.settings.rules)?S.settings.rules:[]).filter(r=>r.on!==false).map(r=>({id:r.id,t:r.t,logic:r.logic,name:r.name,conds:r.conds}))};
   try{const ok=await ghPutJSON('data/alarms.json',obj,'Alarm seviyeleri güncellendi (site)');if(ok)toast('Alarmlar telefona bildirim için kaydedildi');return ok}catch(e){return false}}
 
 /* ---------- sabah brifingi kartı (zamanlanmış görev yazar: data/brief.json) ---------- */
 function briefCard(){const B=S.brief;if(!B||!B.publishedAt)return '';const age=(Date.now()-new Date(B.publishedAt))/36e5;if(age>30)return '';
   const open=S.briefOpen!==false;
-  return `<section class="card brief"><div class="th"><h3 style="margin:0">☀️ Sabah brifingi <span class="muted" style="text-transform:none;letter-spacing:0;font-weight:500">${esc(trDate(B.publishedAt,{weekday:'long',day:'numeric',month:'long',hour:'2-digit',minute:'2-digit'}))}</span></h3><button class="lnk2" id="brTg" style="margin:0">${open?'Gizle':'Göster'}</button></div>
+  return `<section class="card brief"><div class="th"><h3 style="margin:0">☀️ Sabah brifingi <span class="muted" style="text-transform:none;letter-spacing:0;font-weight:500">${esc(trDate(B.publishedAt,{weekday:'long',day:'numeric',month:'long',hour:'2-digit',minute:'2-digit'}))}</span></h3><span style="display:inline-flex;gap:12px"><button class="lnk2" data-speak="brief" style="margin:0">🔊 Dinle</button><button class="lnk2" id="brTg" style="margin:0">${open?'Gizle':'Göster'}</button></span></div>
   <div class="brt">${esc(B.title||'')}</div>${open?`<div class="grid g3" style="margin-top:10px">${(B.sections||[]).map(s=>`<div class="brs"><b>${esc(s.h)}</b><ul class="lst">${(s.items||[]).map(x=>`<li><span>${esc(x)}</span></li>`).join('')}</ul></div>`).join('')}</div>`:''}</section>`}
 document.addEventListener('click',e=>{if(e.target&&e.target.id==='brTg'){S.briefOpen=S.briefOpen===false;render(false)}});

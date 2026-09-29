@@ -32,7 +32,9 @@ for(const t of tickers){let P=null;try{P=ctx.tradePlan(t)}catch(e){}if(!P)contin
 for(const L of (alarms.levels||[])){const p=px(L.t);if(!(p>0))continue;const k=L.t+'|'+L.p;const side=p>L.p?'up':'down';const prev=st.levels[k];
   if(prev&&prev!==side)msgs.push({lvl:3,t:L.t,txt:`${d(L.t)} alarm seviyeni ${side==='up'?'yukarı':'aşağı'} kırdı: seviye ${f(L.t,L.p)}, fiyat ${f(L.t,p)}.`});st.levels[k]=side}
 Object.keys(st.levels).forEach(k=>{if(!(alarms.levels||[]).some(L=>L.t+'|'+L.p===k))delete st.levels[k]});
-const ruleStat=[];
+const ruleStat=[];st.trails=st.trails||{};
+for(const T of (alarms.trails||[])){const a=ctx.candles?ctx.candles(T.t):[];if(!a||a.length<20)continue;const atr=ctx.atrS(a)[a.length-1];const seg=a.filter(x=>x.d>=T.since);const hi=Math.max(...(seg.length?seg:a.slice(-1)).map(x=>x.c));const lvl=hi-(T.k||3)*atr;const px=a[a.length-1].c;const below=px<lvl;
+  if(below&&st.trails[T.t]!==true)msgs.push({lvl:3,t:T.t,txt:`📉 ${d(T.t)} iz süren stopunu kırdı: stop ${f(T.t,lvl)} (zirve ${f(T.t,hi)} − ${T.k||3}×ATR), fiyat ${f(T.t,px)}.`});st.trails[T.t]=below}
 for(const R of (alarms.rules||[])){let E=null;try{E=ctx.ruleEval(R)}catch(e){console.error('kural hatası',R.id,e.message)}if(!E)continue;
   if(E.ok&&st.rules[R.id]!==true)msgs.push({lvl:2,t:R.t,txt:'🎯 '+ctx.ruleText(R,E)});st.rules[R.id]=E.ok;ruleStat.push({t:d(R.t),name:R.name,ok:E.ok})}
 Object.keys(st.rules).forEach(k=>{if(!(alarms.rules||[]).some(R=>R.id===k))delete st.rules[k]});

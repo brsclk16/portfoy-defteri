@@ -237,7 +237,7 @@ function afterWatch(){
 /* ---------- haftalık rapor ---------- */
 function weeklyCard(rp,full){
   if(!rp)return '';
-  return `<article class="card wk ${full?'':'sec'}"><div class="wk-h"><div><span class="tag">Haftalık değerlendirme</span><h3 class="wk-t">${esc(rp.title)}</h3><div class="muted" style="font-size:13px">${esc(rp.range||'')} · yayın ${esc(trDate(rp.publishedAt||rp.weekEnd+'T20:00:00Z'))}</div></div>
+  return `<article class="card wk ${full?'':'sec'}"><div class="wk-h"><div><span class="tag">Haftalık değerlendirme</span><h3 class="wk-t">${esc(rp.title)}</h3><div class="muted" style="font-size:13px">${esc(rp.range||'')} · yayın ${esc(trDate(rp.publishedAt||rp.weekEnd+'T20:00:00Z'))} · <button class="lnk2" data-speak="week:${esc(rp.id)}" style="margin:0">🔊 Dinle</button></div></div>
     ${(rp.movers||[]).length?`<div class="wk-m">${rp.movers.slice(0,full?20:6).map(m=>`<a class="chip ${cls(m.pct)}" href="#/t/${m.t}" style="text-decoration:none">${m.t} ${pct(m.pct,1)}</a>`).join('')}</div>`:''}</div>
     <div class="prose">${(rp.summary||[]).slice(0,full?99:2).map(p=>`<p>${esc(p)}</p>`).join('')}</div>
     ${full&&(rp.highlights||[]).length?`<h3 style="margin-top:16px">Öne çıkanlar</h3><ul class="lst">${rp.highlights.map(x=>`<li><span>${esc(x)}</span></li>`).join('')}</ul>`:''}

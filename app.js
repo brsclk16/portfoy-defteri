@@ -605,10 +605,10 @@ function render(scrollTop){
   if(R.r==='t'){v.innerHTML=viewInstTabs(R.t,R.sub);after=()=>afterInstTabs(R.t,R.sub)}
   else if(R.r==='portfoy'){const sn=subnav('portfoy',R.sub);
     if(R.sub==='defter'){v.innerHTML=sn+viewDefter();after=afterDefter}
-    else if(R.sub==='karne'){v.innerHTML=sn+viewKarne()}else if(R.sub==='temettu'){v.innerHTML=sn+viewTemettu();after=afterTemettu}else if(R.sub==='rapor'){v.innerHTML=sn+viewRapor();after=afterRapor}else{v.innerHTML=sn+viewPozisyon();after=afterPozisyon}}
+    else if(R.sub==='karne'){v.innerHTML=sn+viewKarne()}else if(R.sub==='temettu'){v.innerHTML=sn+viewTemettu();after=afterTemettu}else if(R.sub==='rapor'){v.innerHTML=sn+viewRapor();after=afterRapor}else{v.innerHTML=sn+viewPozisyon()+viewTrail();after=()=>{afterPozisyon();afterTrail()}}}
   else if(R.r==='piyasa'){const sn=subnav('piyasa',R.sub);
     if(R.sub==='haber'){v.innerHTML=sn+viewHaber();after=()=>$$('#nf button').forEach(b=>b.onclick=()=>{S.newsFilter=b.dataset.f;render(false)})}
-    else if(R.sub==='takvim'){v.innerHTML=sn+`<div style="margin-bottom:18px">${viewEarnPre(10)}</div><div style="margin-bottom:18px">${viewEcon()}</div>`+viewTakvim()}else if(R.sub==='kurumsal'){v.innerHTML=sn+viewKurumsal()}else if(R.sub==='isi'){v.innerHTML=sn+viewHeat();after=afterHeat}else if(R.sub==='tarayici'){v.innerHTML=sn+viewScreen();after=afterScreen}
+    else if(R.sub==='takvim'){v.innerHTML=sn+`<div style="margin-bottom:18px">${viewEarnPre(10)}</div><div style="margin-bottom:18px">${viewEcon()}</div>`+viewTakvim()}else if(R.sub==='kurumsal'){v.innerHTML=sn+viewKurumsal()}else if(R.sub==='isi'){v.innerHTML=sn+viewHeat();after=afterHeat}else if(R.sub==='icgoru'){v.innerHTML=sn+viewInsight();after=afterInsight}else if(R.sub==='tarayici'){v.innerHTML=sn+viewScreen();after=afterScreen}
     else{v.innerHTML=sn+viewEnstruman();after=afterWatch}}
   else if(R.r==='teknik'){const sn=subnav('teknik',R.sub);
     if(R.sub==='tarama'){v.innerHTML=sn+`<div class="fade">${viewTarama()}</div>`}
@@ -620,7 +620,7 @@ function render(scrollTop){
     else if(R.sub==='test'){v.innerHTML=sn+`<div class="fade">${viewBtAll()}</div>`;after=afterBtAll}
     else{const o=viewTeknikPanel(R.t);v.innerHTML=sn+(o.html||o);after=()=>afterTeknikPanel(o.t)}}
   else if(R.r==='analiz'){const sn=subnav('analiz',R.sub);v.innerHTML=sn+analizPart(R.sub);
-    after=()=>{if(R.sub==='simulator')afterSim();else if(R.sub==='beklenti')afterPortExpect();else if(R.sub==='makro')afterMakro();else if(R.sub==='stres')afterStress();else if(R.sub==='duzenli')afterDca();else if(R.sub==='degerleme'){}else if(R.sub==='senaryo')afterScn2();else if(R.sub==='duyarlilik')afterSent();else if(R.sub!=='haftalik')afterAnaliz()}}
+    after=()=>{if(R.sub==='simulator')afterSim();else if(R.sub==='beklenti')afterPortExpect();else if(R.sub==='makro')afterMakro();else if(R.sub==='stres')afterStress();else if(R.sub==='duzenli')afterDca();else if(R.sub==='degerleme'){}else if(R.sub==='senaryo')afterScn2();else if(R.sub==='duyarlilik')afterSent();else if(R.sub==='asistan')afterAsk();else if(R.sub==='kaynak'||R.sub==='makroev'){}else if(R.sub!=='haftalik')afterAnaliz()}}
   else{v.innerHTML=viewOzet();after=afterOzet}
   try{after()}catch(e){console.error(e)}
   $$('.ranges').forEach(g=>$$('button',g).forEach(b=>b.onclick=()=>{S.range[g.dataset.k]=b.dataset.r;render(false)}));
@@ -637,8 +637,8 @@ async function loadData(){
   const v='?t='+Math.floor(Date.now()/60000);
   const [d,p,h]=await Promise.all(['portfolio','prices','history'].map(n=>fetch('data/'+n+'.json'+v).then(r=>{if(!r.ok)throw new Error(n+'.json '+r.status);return r.json()})));
   const opt=n=>fetch('data/'+n+'.json'+v).then(r=>r.ok?r.json():null).catch(()=>null);
-  const [m,w,wl,er,ins,oh,mo,mk,va,lg,br,dv,i13,eh,un,ec,ms]=await Promise.all([opt('macro'),opt('weekly'),opt('watchlist'),opt('earnings'),opt('insider'),opt('ohlc'),opt('monthly'),opt('markets'),opt('valuation'),opt('long'),opt('brief'),opt('dividends'),opt('inst13f'),opt('earnhist'),opt('universe'),opt('econ'),opt('mstrip')]);
-  S.data=d;S.prices=p;try{Object.values(d.instruments).forEach(i=>{if(i.watchlist||!i.theme||THEMES.some(x=>x.t.includes(i.ticker)))return;let T=THEMES.find(x=>x.name===i.theme);if(!T){T={name:i.theme,t:[],c:['#c792ff','#ff9f5c','#7ee0c3','#f58fd0','#a3b8ff'][THEMES.length%5]};THEMES.push(T)}T.t.push(i.ticker)})}catch(e){}S.hist=h;S.macro=m;S.weekly=w;if(wl)S.watch=wl;S.earn=er;S.insider=ins;S.ohlc=oh;S.monthly=mo;S.markets=mk;S.valuation=va;S.long=lg;S.brief=br;S.divs=dv;S.inst13=i13;S.ehist=eh;S.univ=un;S.econ=ec;S.mstrip=ms;S.labCache={};S.mcCache={};
+  const [m,w,wl,er,ins,oh,mo,mk,va,lg,br,dv,i13,eh,un,ec,ms,aw,cl,an,pr,fh,me]=await Promise.all([opt('macro'),opt('weekly'),opt('watchlist'),opt('earnings'),opt('insider'),opt('ohlc'),opt('monthly'),opt('markets'),opt('valuation'),opt('long'),opt('brief'),opt('dividends'),opt('inst13f'),opt('earnhist'),opt('universe'),opt('econ'),opt('mstrip'),opt('answers'),opt('calls'),opt('analysts'),opt('peers'),opt('fundhold'),opt('macroev')]);
+  S.data=d;S.prices=p;try{Object.values(d.instruments).forEach(i=>{if(i.watchlist||!i.theme||THEMES.some(x=>x.t.includes(i.ticker)))return;let T=THEMES.find(x=>x.name===i.theme);if(!T){T={name:i.theme,t:[],c:['#c792ff','#ff9f5c','#7ee0c3','#f58fd0','#a3b8ff'][THEMES.length%5]};THEMES.push(T)}T.t.push(i.ticker)})}catch(e){}S.hist=h;S.macro=m;S.weekly=w;if(wl)S.watch=wl;S.earn=er;S.insider=ins;S.ohlc=oh;S.monthly=mo;S.markets=mk;S.valuation=va;S.long=lg;S.brief=br;S.divs=dv;S.inst13=i13;S.ehist=eh;S.univ=un;S.econ=ec;S.mstrip=ms;S.answers=aw;S.calls=cl;S.analysts=an;S.peers=pr;S.fundhold=fh;S.macroev=me;S.labCache={};S.mcCache={};
 }
 async function boot(){
   const th=lsGet('pd_theme');if(th)document.documentElement.dataset.theme=th;
