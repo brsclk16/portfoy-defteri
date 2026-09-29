@@ -1,0 +1,32 @@
+name: Telegram alarmları
+on:
+  schedule:
+    - cron: '*/15 13-20 * * 1-5'
+    - cron: '5 21 * * 1-5'
+  workflow_dispatch:
+permissions:
+  contents: write
+concurrency:
+  group: repo-yazma
+  cancel-in-progress: false
+jobs:
+  kontrol:
+    runs-on: ubuntu-latest
+    timeout-minutes: 8
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with: {node-version: '20'}
+      - name: Kontrol ve bildirim
+        env:
+          TG_TOKEN: ${{ secrets.TG_TOKEN }}
+          TG_CHAT: ${{ secrets.TG_CHAT }}
+        run: node tools/check_alerts.mjs --live --telegram
+      - name: Durumu kaydet
+        run: |
+          git config user.name "Portföy alarm botu"
+          git config user.email "portfoy-bot@users.noreply.github.com"
+          git add data/alert_state.json
+          git diff --cached --quiet && exit 0
+          git commit -m "Alarm durumu"
+          for i in 1 2 3 4 5; do git pull --rebase -X theirs origin main && git push origin HEAD:main && exit 0; sleep $((i*7)); done

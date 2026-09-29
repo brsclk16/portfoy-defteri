@@ -1,0 +1,37 @@
+name: Dış veri (SEC, FRED, CFTC, CBOE, Polymarket, FINRA, EVDS)
+on:
+  schedule:
+    - cron: '41 22 * * 1-5'   # ABD kapanışından sonra (TR 01:41)
+    - cron: '17 10 * * 1-5'   # Polymarket ve EVDS gün içi tazeleme
+  push:
+    branches: [main]
+    paths: ['tools/fetch_ext.py', '.github/workflows/veri.yml']
+  workflow_dispatch:
+permissions:
+  contents: write
+concurrency:
+  group: repo-yazma
+  cancel-in-progress: false
+jobs:
+  topla:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with: {python-version: '3.12'}
+      - name: Topla
+        env:
+          EVDS_KEY: ${{ secrets.EVDS_KEY }}
+          SEC_UA: ${{ secrets.SEC_UA }}
+        run: |
+          if [ "${{ github.event.schedule }}" = "17 10 * * 1-5" ]; then python3 tools/fetch_ext.py pm evds; else python3 tools/fetch_ext.py; fi
+      - name: Yayınla
+        run: |
+          git config user.name "Portföy veri botu"
+          git config user.email "portfoy-bot@users.noreply.github.com"
+          git add data
+          git diff --cached --quiet && { echo "değişiklik yok"; exit 0; }
+          git commit -m "Dış veri $(date -u +%F)"
+          for i in 1 2 3 4 5; do git pull --rebase -X theirs origin main && git push origin HEAD:main && exit 0; sleep $((i*7)); done
+          exit 1
