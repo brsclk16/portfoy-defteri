@@ -148,6 +148,33 @@ def series_metrics(rows, cur=None):
     return out
 
 
+def weekly(rows):
+    w = {}
+    for d, c, *_ in rows:
+        if c:
+            y, wk, _ = dt.date.fromisoformat(d).isocalendar()
+            w[(y, wk)] = c
+    return w
+
+
+def calc_beta(rows, bench_w):
+    """Son 2 yılın haftalık getirileriyle SPY'a göre beta (en az 52 ortak hafta)."""
+    if not bench_w:
+        return None
+    w = weekly(rows)
+    ks = sorted(set(w) & set(bench_w))
+    ra, rb = [], []
+    for a, b in zip(ks, ks[1:]):
+        ra.append(w[b] / w[a] - 1)
+        rb.append(bench_w[b] / bench_w[a] - 1)
+    if len(ra) < 52:
+        return None
+    ma, mb = sum(ra) / len(ra), sum(rb) / len(rb)
+    cov = sum((x - ma) * (y - mb) for x, y in zip(ra, rb)) / (len(ra) - 1)
+    var = sum((y - mb) ** 2 for y in rb) / (len(rb) - 1)
+    return cov / var if var else None
+
+
 # ---------------------------------------------------------------- kaynaklar
 def yahoo_hist(t):
     s = urllib.parse.quote(ysym(t))
@@ -372,6 +399,12 @@ def main(only=None):
     flags, filled, stale = [], {}, []
     fxr = {}
 
+    BW = None
+    try:
+        B = yahoo_hist('SPY')
+        BW = weekly(B['rows']) if B else None
+    except Exception as e:
+        print('SPY haftalık seri alınamadı', e)
     budget = float(os.environ.get('UNI_BUDGET_MIN', '30')) * 60
     for i, t in enumerate(syms):
         if time.time() - t0 > budget * 0.75:
@@ -464,13 +497,25 @@ def main(only=None):
             new['pe'] = None  # zarar eden şirkette eski pozitif F/K'yı taşıma
 
         # piyasa değeri (USD) ve beta
-        mcs = [x.get('mc') for x in (N, F, P) if x and x.get('mc')]
+        # Piyasa değeri: Finnhub ADR'lerde raporlama para birimini (TWD, DKK, KRW…), Nasdaq bazen tek hisse sınıfını verebiliyor.
+        # Kaynaklar %15'ten fazla ayrışırsa önceki doğrulanmış değere en yakın olan seçilir; önceki yoksa Nasdaq > FMP > Finnhub.
+        mcs = {n: x.get('mc') for n, x in (('nasdaq', N), ('fmp', P), ('finnhub', F)) if x and x.get('mc')}
         if mcs:
-            new['mc'] = med(mcs)
-            if spread(mcs) > 15:
-                flags.append({'t': t, 'alan': 'piyasa değeri', 'degerler': [round(m / 1e9, 1) for m in mcs]})
+            prev = cur.get('mc')
+            if len(mcs) == 1 or spread(list(mcs.values())) <= 15:
+                new['mc'] = med(list(mcs.values()))
+            else:
+                pick = min(mcs, key=lambda k: abs(math.log(mcs[k] / prev))) if prev else next(iter(mcs))
+                new['mc'] = mcs[pick]
+                flags.append({'t': t, 'alan': 'piyasa değeri (mlr $)', 'degerler': {k: round(v / 1e9, 1) for k, v in mcs.items()}, 'secilen': pick})
+        # beta: kendi hesabımız (haftalık, 2 yıl, SPY'a göre); yoksa Finnhub/FMP medyanı
+        bown = calc_beta(H['rows'], BW) if (M and H and hsrc in ('yahoo', 'stooq', 'twelve')) else None
         bs = [x.get('beta') for x in (F, P) if x and x.get('beta')]
-        if bs:
+        if bown is not None:
+            new['beta'] = bown
+            if bs and abs(med(bs) - bown) > 0.6:
+                flags.append({'t': t, 'alan': 'beta', 'degerler': {'hesap': round(bown, 2), 'kaynak': round(med(bs), 2)}, 'secilen': 'hesap'})
+        elif bs:
             new['beta'] = med(bs)
 
         # ad / sektör: mevcut (Bigdata) sınıflandırması korunur, yoksa kaynaklardan
