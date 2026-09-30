@@ -5,12 +5,11 @@ Zamanlanmış Claude görevi web sitelerine doğrudan erişemediği için (her a
 burada toplayıp data/news_raw.json'a yazıyoruz; "Portföy haber taraması" görevi bu dosyayı repodan okur,
 seçer, Türkçe özetler ve veritabanına yazar.
 
-Anahtarsız kaynaklar: tema RSS akışları (piyasa, Fed/BLS, yarı iletken, biyotek/FDA, metaller), hisse bazlı
-Nasdaq / Yahoo Finance / Seeking Alpha RSS, SEC EDGAR 8-K Atom, Google News RSS araması, TickerTick API,
-GDELT DOC 2.0 (haber tonu).
-İsteğe bağlı anahtarlı ücretsiz kaynaklar (GitHub secret): FINNHUB_KEY (şirket haberi, bilanço takvimi,
-EPS sürprizi, analist tavsiyeleri), FMP_KEY (analist hedef fiyat konsensüsü).
-Kullanım: python3 tools/fetch_news.py [theme ticker google tickertick finnhub fmp gdelt]  (boşsa hepsi)
+Anahtarsız kaynaklar: tema RSS akışları (piyasa, Fed, yarı iletken, biyotek, metaller), hisse bazlı
+Nasdaq / Seeking Alpha RSS, Google News RSS araması, TickerTick API, GDELT DOC 2.0 (haber tonu).
+İsteğe bağlı (GitHub secret): SEC_UA (SEC EDGAR 8-K/6-K; "Ad Soyad eposta@adres"), FINNHUB_KEY (şirket haberi,
+bilanço takvimi, EPS sürprizi, analist tavsiyeleri), FMP_KEY (analist hedef fiyat konsensüsü).
+Kullanım: python3 tools/fetch_news.py [theme ticker sec google tickertick finnhub fmp gdelt]  (boşsa hepsi)
 Her kaynak bağımsızdır; biri çökse diğerleri yazılır. Anahtarlar hiçbir dosyaya yazılmaz."""
 import datetime as dt, email.utils, gzip, hashlib, html, json, os, re, sys, time, traceback
 import urllib.parse, urllib.request, urllib.error
@@ -20,10 +19,10 @@ ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 DATA = os.path.join(ROOT, 'data')
 OUT = 'news_raw.json'
 NOW = dt.datetime.now(dt.timezone.utc)
-WINDOW_H = int(os.environ.get('NEWS_WINDOW_H', '48'))
+WINDOW_H = int(os.environ.get('NEWS_WINDOW_H', '36'))
 MAX_ITEMS = 700
 UA_BROWSER = 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0 Safari/537.36 PortfoyDefteri/1.0'
-UA_SEC = os.environ.get('SEC_UA', '').strip() or 'PortfoyDefteri (github.com/brsclk16/portfoy-defteri)'
+UA_SEC = os.environ.get('SEC_UA', '').strip()  # SEC gerçek iletişim bilgisi ister: "Ad Soyad eposta@adres"
 FINNHUB_KEY = os.environ.get('FINNHUB_KEY', '').strip()
 FMP_KEY = os.environ.get('FMP_KEY', '').strip()
 DIAG = {}
@@ -41,7 +40,6 @@ THEME_FEEDS = [
     ('cnbc-economy', 'https://search.cnbc.com/rs/search/combinedcms/view.xml?partnerId=wrss01&id=20910258', ['makro'], MACRO_KW),
     ('fed', 'https://www.federalreserve.gov/feeds/press_all.xml', ['makro', 'fed'], None),
     ('fed-speeches', 'https://www.federalreserve.gov/feeds/speeches.xml', ['makro', 'fed'], None),
-    ('bls', 'https://www.bls.gov/feed/bls_latest.rss', ['makro'], None),
     ('eetimes', 'https://www.eetimes.com/feed/', ['yari-iletken'], SEMI_KW),
     ('semi-digest', 'https://www.semiconductor-digest.com/feed/', ['yari-iletken'], SEMI_KW),
     ('semi-today', 'https://www.semiconductor-today.com/rss/news.xml', ['yari-iletken'], SEMI_KW),
@@ -52,11 +50,8 @@ THEME_FEEDS = [
     ('fiercebiotech', 'https://www.fiercebiotech.com/rss/xml', ['biyotek'], BIO_KW),
     ('fiercepharma', 'https://www.fiercepharma.com/rss/xml', ['biyotek'], BIO_KW),
     ('biopharmadive', 'https://www.biopharmadive.com/feeds/news/', ['biyotek'], BIO_KW),
-    ('biospace', 'https://www.biospace.com/rss/news', ['biyotek'], BIO_KW),
     ('statnews', 'https://www.statnews.com/feed/', ['biyotek'], r'fda|drug|trial|biotech|pharma|lilly|novo|merck|abbvie|amgen|moderna|medicare|glp-1|obesity|approval|cms'),
-    ('fda-press', 'https://www.fda.gov/about-fda/contact-fda/stay-informed/rss-feeds/press-releases/rss.xml', ['biyotek', 'fda'], None),
     ('mining', 'https://www.mining.com/feed/', ['metaller'], METAL_KW),
-    ('kitco', 'https://www.kitco.com/news/category/mining/rss', ['metaller'], METAL_KW),
 ]
 # Google News RSS tema aramaları (son 1 gün)
 GOOGLE_THEMES = [
@@ -185,7 +180,7 @@ def parse_feed(text):
 
 ITEMS = []
 T0 = time.time()
-BUDGET = {'theme': 120, 'ticker': 240, 'finnhub': 150, 'fmp': 60, 'google': 120, 'tickertick': 160, 'gdelt': 130}
+BUDGET = {'theme': 120, 'ticker': 150, 'sec': 60, 'finnhub': 150, 'fmp': 60, 'google': 120, 'tickertick': 160, 'gdelt': 130}
 DEADLINE = [0]
 
 
@@ -292,25 +287,68 @@ def src_ticker(U):
         if over():
             bad.append('süre doldu'); break
         s = us_sym(t)
-        ftype = '6-K' if t in FOREIGN_6K else '8-K'
         tags = fund_tags(U, t)
         feeds = [
             ('nasdaq', f'https://www.nasdaq.com/feed/rssoutbound?symbol={s}', {}),
-            ('yahoo', f'https://feeds.finance.yahoo.com/rss/2.0/headline?s={s}&region=US&lang=en-US', {}),
             ('seekingalpha', f'https://seekingalpha.com/api/sa/combined/{s}.xml', {}),
-            ('sec-8k', f'https://www.sec.gov/cgi-bin/browse-edgar?action=getcompany&CIK={s}&type={ftype}&dateb=&owner=include&count=10&output=atom', {'User-Agent': UA_SEC}),
         ]
         for name, url, hd in feeds:
             try:
                 for d in parse_feed(get(url, hd)):
-                    src = 'SEC EDGAR' if name == 'sec-8k' else (d['source'] or name)
+                    src = d['source'] or name
                     add(src, name, d['title'], d['url'], d['date'], d['summary'], tickers=[t] + tags,
                         extra={'holding': t})
                 ok += 1
             except Exception as e:
                 bad.append(f'{name}/{s}: {type(e).__name__} {str(e)[:60]}')
-            time.sleep(0.4 if name != 'sec-8k' else 0.25)
+            time.sleep(0.6)
     return {'feedsOk': ok, 'feedsFail': bad[:40]}
+
+
+SEC_ITEMS = {'1.01': 'önemli anlaşma', '1.02': 'anlaşma feshi', '2.01': 'satın alma/elden çıkarma', '2.02': 'finansal sonuçlar',
+             '2.05': 'yeniden yapılandırma', '2.06': 'değer düşüklüğü', '3.01': 'kotasyon', '5.02': 'yönetici değişikliği',
+             '7.01': 'Reg FD açıklaması', '8.01': 'diğer önemli olay', '9.01': 'finansal tablolar/ekler'}
+
+
+def src_sec(U):
+    if not UA_SEC:
+        return {'skipped': 'SEC_UA secret tanımlı değil ("Ad Soyad eposta@adres")'}
+    h = {'User-Agent': UA_SEC}
+    m = jget('https://www.sec.gov/files/company_tickers.json', h)
+    cik = {v['ticker'].upper(): int(v['cik_str']) for v in m.values()}
+    bad, since = [], (NOW - dt.timedelta(days=4)).date().isoformat()
+    for t in U:
+        if over():
+            bad.append('süre doldu'); break
+        s = us_sym(t).upper()
+        c = cik.get(s)
+        if not c:
+            continue
+        try:
+            js = jget(f'https://data.sec.gov/submissions/CIK{c:010d}.json', h)
+            r = js.get('filings', {}).get('recent', {})
+            for i, form in enumerate(r.get('form', [])):
+                fd = r['filingDate'][i]
+                if fd < since:
+                    break
+                if form not in ('8-K', '6-K', '8-K/A', 'SC 13D', 'SC 13G'):
+                    continue
+                acc = r['accessionNumber'][i].replace('-', '')
+                doc = r.get('primaryDocument', [''] * (i + 1))[i]
+                items = r.get('items', [''] * (i + 1))[i] or ''
+                desc = ', '.join(f'{x} {SEC_ITEMS.get(x, "")}'.strip() for x in items.split(',') if x)
+                acc_t = r.get('acceptanceDateTime', [''] * (i + 1))[i]
+                add('SEC EDGAR', 'sec', f'{e_name(U, t)} {form}' + (f' — Item {desc}' if desc else ''),
+                    f'https://www.sec.gov/Archives/edgar/data/{c}/{acc}/{doc}', pdate(acc_t) or pdate(fd),
+                    items, tickers=[t] + fund_tags(U, t), extra={'holding': t, 'form': form, 'items': items})
+        except Exception as e:
+            bad.append(f'{s}: {type(e).__name__} {str(e)[:60]}')
+        time.sleep(0.3)
+    return {'fail': bad}
+
+
+def e_name(U, t):
+    return U.get(t, {}).get('name') or t
 
 
 def gnews(q, when='1d'):
@@ -331,7 +369,7 @@ def src_google(U, I):
         if over():
             bad.append('süre doldu'); break
         try:
-            for d in gnews(q)[:25]:
+            for d in gnews(q)[:(12 if tk else 10)]:
                 title = d['title']
                 src = d['source']
                 if src and title.endswith(' - ' + src):
@@ -474,7 +512,7 @@ def src_gdelt(U):
                              'src': 'GDELT'}
         except Exception as e:
             bad.append(f'{t}: {type(e).__name__} {str(e)[:60]}')
-        time.sleep(5.5)  # GDELT: 5 sn'de bir istek
+        time.sleep(6.5)  # GDELT: 5 sn'de bir istek (429'a karşı pay)
     return {'fail': bad}
 
 
@@ -486,7 +524,7 @@ def norm_title(s):
 
 def finalize():
     by = {}
-    prio = {'finnhub': 1, 'tickertick': 2, 'nasdaq': 3, 'sec-8k': 0, 'rss': 1, 'seekingalpha': 4, 'yahoo': 4, 'google': 5}
+    prio = {'finnhub': 1, 'tickertick': 2, 'nasdaq': 3, 'sec': 0, 'rss': 1, 'seekingalpha': 4, 'yahoo': 4, 'google': 5}
     for it in ITEMS:
         k = norm_title(it['title'])
         if not k:
@@ -510,17 +548,24 @@ def finalize():
     for i, it in enumerate(items):
         it['id'] = hashlib.sha1(it['url'].encode()).hexdigest()[:12]
     items.sort(key=lambda x: x.get('publishedAt') or '', reverse=True)
-    return items[:MAX_ITEMS]
+    # önce google dışı ve ticker'lı maddeler korunur; kesinti gerekirse google'ın ticker'sız maddeleri gider
+    keep = [i for i in items if i['feed'] != 'google' or i['tickers']]
+    rest = [i for i in items if not (i['feed'] != 'google' or i['tickers'])]
+    out = (keep + rest)[:MAX_ITEMS]
+    out.sort(key=lambda x: x.get('publishedAt') or '', reverse=True)
+    return out
 
 
 def main(argv):
-    want = set(argv) or {'theme', 'ticker', 'google', 'tickertick', 'finnhub', 'fmp', 'gdelt'}
+    want = set(argv) or {'theme', 'ticker', 'sec', 'google', 'tickertick', 'finnhub', 'fmp', 'gdelt'}
     U, I = universe()
     print('evren:', ', '.join(U))
     if 'theme' in want:
         run('theme', src_theme)
     if 'ticker' in want:
         run('ticker', lambda: src_ticker(U))
+    if 'sec' in want:
+        run('sec', lambda: src_sec(U))
     if 'finnhub' in want:
         run('finnhub', lambda: src_finnhub(U))
     if 'fmp' in want:
