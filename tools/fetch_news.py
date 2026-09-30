@@ -481,6 +481,9 @@ def src_fmp(U):
     return {'fail': bad}
 
 
+DBG = {}
+
+
 def src_gdelt(U):
     """Şirket adına göre son 3 gün / önceki 4 gün ortalama haber tonu (−10…+10 ölçeği)."""
     bad = []
@@ -501,6 +504,7 @@ def src_gdelt(U):
                     d = pdate(p.get('date'))
                     if d and p.get('value') is not None:
                         pts.append((d, float(p['value'])))
+            DBG[t] = {'pts': len(pts), 'keys': list(js.keys())[:3], 'first': str(js.get('timeline', [{}])[0].get('data', [None])[:1])[:80] if js.get('timeline') else None}
             rec = [v for d, v in pts if (NOW - d).days < 3]
             old = [v for d, v in pts if (NOW - d).days >= 3]
             if rec:
@@ -512,7 +516,9 @@ def src_gdelt(U):
                              'src': 'GDELT'}
         except Exception as e:
             bad.append(f'{t}: {type(e).__name__} {str(e)[:60]}')
-        time.sleep(6.5)  # GDELT: 5 sn'de bir istek (429'a karşı pay)
+        time.sleep(6.5)
+    if DBG:
+        return {'fail': bad, 'debug': DBG}  # GDELT: 5 sn'de bir istek (429'a karşı pay)
     return {'fail': bad}
 
 
