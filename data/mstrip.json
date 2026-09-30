@@ -1,5 +1,5 @@
 {
- "updatedAt": "2026-09-29T21:41:52Z",
+ "updatedAt": "2026-09-30T07:35:54Z",
  "quotes": {
   "SPY": {
    "px": 764.20001,
@@ -42,6 +42,27 @@
    "chg": 0.01365,
    "pct": 0.027861879,
    "d": "2026-09-30"
+  },
+  "WTI": {
+   "px": 89.248,
+   "chg": -0.13,
+   "pct": -0.15,
+   "d": "2026-09-30",
+   "src": "Trading Economics (CFD)"
+  },
+  "XCU": {
+   "px": 6.59,
+   "chg": 0.044,
+   "pct": 0.67,
+   "d": "2026-09-30",
+   "src": "Trading Economics (USD/lb)"
+  },
+  "BIST": {
+   "px": 12290.58,
+   "chg": -302.18,
+   "pct": -2.4,
+   "d": "2026-09-29",
+   "src": "Trading Economics"
   }
  },
  "sectors": {
@@ -106,9 +127,5 @@
    "d": "2026-09-29"
   }
  },
- "failed": [
-  "WTI",
-  "XCU",
-  "BIST"
- ]
+ "failed": []
 }
