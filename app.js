@@ -76,7 +76,7 @@ function tickers(){const all=Object.keys(S.data.instruments).filter(t=>!S.data.i
 function quote(t){
   const i=inst(t)||{}, p=(S.prices&&S.prices.quotes[t])||{}, l=S.live[t];
   const base={price:p.price??i.price, chg:p.chg??i.dayChange, pct:p.pct??i.dayChangePct, day:p.day||(i.priceAsOf||'').slice(0,10), hi52:p.hi52??i.high52, lo52:p.lo52??i.low52, src:S.prices?S.prices.source:''};
-  if(l&&l.price>0&&(!base.day||l.day>=base.day)) return {...base,...l,src:'Twelve Data (canlı)'};
+  if(l&&l.price>0&&(!base.day||l.day>=base.day)) return {...base,...l,src:l.src||'Twelve Data (canlı)'};
   return base;
 }
 function series(t){
@@ -308,6 +308,7 @@ async function fetchLive(manual){
 }
 function autoLive(){
   if(document.visibilityState!=='visible'||!S.settings.tdKey)return;
+  if(typeof LV!=='undefined'&&['fh','al'].some(k=>LV.st[k]&&LV.st[k].s==='bağlı'))return;
   const ms=marketState();const age=Date.now()-S.liveAt;
   if(ms.open?age>10*60000:!S.liveAt&&(Date.now()-new Date(S.prices?S.prices.updatedAt:0))>6*3600000)fetchLive(false);
 }
@@ -316,8 +317,8 @@ function autoLive(){
 function renderTop(){
   const ms=marketState();const m=$('#mkt');m.classList.toggle('open',ms.open);m.lastElementChild.textContent=ms.msg;m.title=ms.msg;
   $$('#ccy span').forEach(s=>s.classList.toggle('on',s.dataset.c===S.ccy));
-  const items=tickers().map(t=>{const q=quote(t);return `<a class="tk" href="#/t/${t}"><b>${t}</b><span class="num">${pxf(t,q.price)}</span><span class="num ${cls(q.pct)}">${pct(q.pct)}</span></a>`}).join('');
-  const fxItem=S.fx?`<span class="tk"><b>USD/TRY</b><span class="num">${nf(S.fx,4)}</span></span>`:'';
+  const items=tickers().map(t=>{const q=quote(t);return `<a class="tk" href="#/t/${t}"><b>${t}</b><span class="num" data-lp="${t}">${pxf(t,q.price)}</span><span class="num ${cls(q.pct)}">${pct(q.pct)}</span></a>`}).join('');
+  const fxItem=(S.fx?`<span class="tk"><b>USD/TRY</b><span class="num">${nf(S.fx,4)}</span></span>`:'')+(typeof LV!=='undefined'&&LV.x.USDTTRY?`<span class="tk"><b>USDT/TRY</b><span class="num" data-lp="xUSDTTRY">${nf(LV.x.USDTTRY.p,4)}</span></span>`:'')+(typeof LV!=='undefined'&&LV.x.PAXG?`<span class="tk"><b>Altın ons</b><span class="num" data-lp="xPAXG">$${nf(LV.x.PAXG.p,1)}</span></span>`:'');
   $('#tapeIn').innerHTML=(items+fxItem).repeat(2);
   const p=S.prices||{};const live=S.liveAt?` · canlı ${ago(S.liveAt)}`:'';
   $('#fresh').innerHTML=`Fiyatlar: ${esc(p.asOf?trDate(p.asOf+'T12:00:00Z'):'—')} · ${esc(p.source||'')} · site verisi ${esc(ago(p.updatedAt))}${live}${S.fx?` · USD/TRY ${nf(S.fx,4)} (${esc(S.fxSrc||'')})`:''} · analiz ${esc(trDT(S.data.generatedAt))}`;
@@ -608,7 +609,7 @@ function render(scrollTop){
     else if(R.sub==='karne'){v.innerHTML=sn+viewKarne()}else if(R.sub==='temettu'){v.innerHTML=sn+viewTemettu();after=afterTemettu}else if(R.sub==='rapor'){v.innerHTML=sn+viewRapor();after=afterRapor}else{v.innerHTML=sn+viewPozisyon()+viewTrail()+viewShareCard()+`<div class="sec">${sourcesCard()}</div>`;after=()=>{afterPozisyon();afterTrail();afterShareCard()}}}
   else if(R.r==='piyasa'){const sn=subnav('piyasa',R.sub);
     if(R.sub==='haber'){v.innerHTML=sn+viewHaber();after=()=>$$('#nf button').forEach(b=>b.onclick=()=>{S.newsFilter=b.dataset.f;render(false)})}
-    else if(R.sub==='takvim'){v.innerHTML=sn+`<div style="margin-bottom:18px">${viewEarnPre(10)}</div><div style="margin-bottom:18px">${viewEcon()}</div><div style="margin-bottom:18px">${pmCard(5)}</div>`+viewTakvim()}else if(R.sub==='kurumsal'){v.innerHTML=sn+viewKurumsal()}else if(R.sub==='isi'){v.innerHTML=sn+viewHeat();after=afterHeat}else if(R.sub==='icgoru'){v.innerHTML=sn+viewInsight();after=afterInsight}else if(R.sub==='notlar'){v.innerHTML=sn+viewNotlar()}else if(R.sub==='arastirma'){v.innerHTML=sn+viewOrion();after=afterOrion}else if(R.sub==='tarayici'){v.innerHTML=sn+viewScreen();after=afterScreen}
+    else if(R.sub==='takvim'){v.innerHTML=sn+`<div style="margin-bottom:18px">${viewEarnPre(10)}</div><div style="margin-bottom:18px">${viewEcon()}</div><div style="margin-bottom:18px">${pmCard(5)}</div>`+viewTakvim()}else if(R.sub==='kurumsal'){v.innerHTML=sn+viewKurumsal()}else if(R.sub==='isi'){v.innerHTML=sn+viewHeat();after=afterHeat}else if(R.sub==='icgoru'){v.innerHTML=sn+viewInsight();after=afterInsight}else if(R.sub==='notlar'){v.innerHTML=sn+viewNotlar()}else if(R.sub==='arastirma'){v.innerHTML=sn+viewOrion();after=afterOrion}else if(R.sub==='canli'){v.innerHTML=sn+viewCanli();after=afterCanli}else if(R.sub==='tarayici'){v.innerHTML=sn+viewScreen();after=afterScreen}
     else{v.innerHTML=sn+viewEnstruman();after=afterWatch}}
   else if(R.r==='teknik'){const sn=subnav('teknik',R.sub);
     if(R.sub==='tarama'){v.innerHTML=sn+`<div class="fade">${viewTarama()}</div>`}
@@ -650,7 +651,7 @@ async function boot(){
   $('#user').onclick=()=>{if(S.session){if(confirm('Çıkış yapılsın mı?')){logout();render(false)}}else openLogin()};
   $('[data-close]').onclick=()=>$('#login').hidden=true;
   $('#login').onclick=e=>{if(e.target.id==='login')$('#login').hidden=true};
-  const go=async()=>{const err=$('#lErr');err.hidden=true;try{await login($('#lEmail').value.trim(),$('#lPass').value);$('#login').hidden=true;await cloudLoad();toast('Hoş geldin');render(false);fetchLive(false)}catch(e){err.textContent=e.message;err.hidden=false}};
+  const go=async()=>{const err=$('#lErr');err.hidden=true;try{await login($('#lEmail').value.trim(),$('#lPass').value);$('#login').hidden=true;await cloudLoad();try{if(typeof lvStart==='function')lvStart()}catch(e){}toast('Hoş geldin');render(false);fetchLive(false)}catch(e){err.textContent=e.message;err.hidden=false}};
   $('#lGo').onclick=go;$('#lPass').onkeydown=e=>{if(e.key==='Enter')go()};
   setupChrome();
   try{await loadData()}catch(e){$('#view').innerHTML=`<div class="empty"><b>Veri yüklenemedi</b>${esc(e.message)}</div>`;return}
@@ -662,5 +663,6 @@ async function boot(){
   document.addEventListener('visibilitychange',autoLive);
   setInterval(async()=>{try{const old=S.prices&&S.prices.updatedAt;await loadData();if(S.prices.updatedAt!==old)render(false)}catch(e){}},15*60000);
   autoLive();
+  try{if(typeof lvStart==='function')lvStart()}catch(e){}
 }
 boot();

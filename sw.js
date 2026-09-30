@@ -1,6 +1,6 @@
 /* Portföy Defteri service worker: kabuk önbellekte, veri önce ağdan */
-const V='pd-v18';
-const SHELL=['./','index.html','style.css?v=18','analiz.js?v=18','ekler.js?v=18','teknik.js?v=18','strateji.js?v=18','duzen.js?v=18','arac.js?v=18','lab.js?v=18','ileri.js?v=18','kural.js?v=18','kontrol.js?v=18','pro.js?v=18','icgoru.js?v=18','deger.js?v=18','komut.js?v=18','orion.js?v=18','dogrula.js?v=18','dis.js?v=18','app.js?v=18','manifest.webmanifest','icon-192.png','icon-512.png'];
+const V='pd-v19';
+const SHELL=['./','index.html','style.css?v=19','analiz.js?v=19','ekler.js?v=19','teknik.js?v=19','strateji.js?v=19','duzen.js?v=19','arac.js?v=19','lab.js?v=19','ileri.js?v=19','kural.js?v=19','kontrol.js?v=19','pro.js?v=19','icgoru.js?v=19','deger.js?v=19','komut.js?v=19','orion.js?v=19','dogrula.js?v=19','dis.js?v=19','stream.js?v=19','app.js?v=19','manifest.webmanifest','icon-192.png','icon-512.png'];
 self.addEventListener('install',e=>{e.waitUntil(caches.open(V).then(c=>c.addAll(SHELL)).then(()=>self.skipWaiting()))});
 self.addEventListener('activate',e=>{e.waitUntil(caches.keys().then(ks=>Promise.all(ks.filter(k=>k!==V).map(k=>caches.delete(k)))).then(()=>self.clients.claim()))});
 self.addEventListener('fetch',e=>{
