@@ -22,7 +22,13 @@ NOW = dt.datetime.now(dt.timezone.utc)
 WINDOW_H = int(os.environ.get('NEWS_WINDOW_H', '36'))
 MAX_ITEMS = 700
 UA_BROWSER = 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0 Safari/537.36 PortfoyDefteri/1.0'
-UA_SEC = os.environ.get('SEC_UA', '').strip()  # SEC gerçek iletişim bilgisi ister: "Ad Soyad eposta@adres"
+def ascii_ua(v):
+    import unicodedata
+    v = v.translate(str.maketrans('ıİşŞçÇğĞöÖüÜ', 'iIsScCgGoOuU'))
+    return unicodedata.normalize('NFKD', v).encode('ascii', 'ignore').decode().strip()
+
+
+UA_SEC = ascii_ua(os.environ.get('SEC_UA', ''))  # SEC gerçek iletişim bilgisi ister: "Ad Soyad eposta@adres"
 FINNHUB_KEY = os.environ.get('FINNHUB_KEY', '').strip()
 FMP_KEY = os.environ.get('FMP_KEY', '').strip()
 DIAG = {}
@@ -180,7 +186,7 @@ def parse_feed(text):
 
 ITEMS = []
 T0 = time.time()
-BUDGET = {'theme': 120, 'ticker': 150, 'sec': 60, 'finnhub': 150, 'fmp': 60, 'google': 120, 'tickertick': 160, 'gdelt': 130}
+BUDGET = {'theme': 120, 'ticker': 150, 'sec': 60, 'finnhub': 220, 'fmp': 60, 'google': 120, 'tickertick': 160, 'gdelt': 130}
 DEADLINE = [0]
 
 
@@ -423,7 +429,7 @@ def src_finnhub(U):
             bad.append('süre doldu'); break
         g = SIG.setdefault(t, {})
         try:
-            for n in jget(f'{base}/company-news?symbol={s}&from={f}&to={to}&token={k}')[:30]:
+            for n in jget(f'{base}/company-news?symbol={s}&from={f}&to={to}&token={k}')[:12]:
                 d = dt.datetime.fromtimestamp(n.get('datetime', 0), dt.timezone.utc) if n.get('datetime') else None
                 add(n.get('source') or 'Finnhub', 'finnhub', n.get('headline'), n.get('url'), d, n.get('summary') or '',
                     tickers=[t] + fund_tags(U, t), extra={'holding': t})
@@ -448,16 +454,18 @@ def src_finnhub(U):
         except Exception as e:
             bad.append(f'eps/{s}: {e}'[:90])
         time.sleep(1.1)
-    try:
-        f2, t2 = NOW.date().isoformat(), (NOW + dt.timedelta(days=21)).date().isoformat()
-        cal = jget(f'{base}/calendar/earnings?from={f2}&to={t2}&token={k}').get('earningsCalendar', [])
-        for c in cal:
-            if c.get('symbol') in syms:
-                EARN.append({'t': syms[c['symbol']], 'date': c.get('date'), 'hour': c.get('hour'),
+    f2, t2 = (NOW - dt.timedelta(days=2)).date().isoformat(), (NOW + dt.timedelta(days=45)).date().isoformat()
+    for s, t in syms.items():
+        try:
+            cal = jget(f'{base}/calendar/earnings?symbol={s}&from={f2}&to={t2}&token={k}').get('earningsCalendar', [])
+            for c in cal:
+                EARN.append({'t': t, 'date': c.get('date'), 'hour': c.get('hour'),
                              'quarter': c.get('quarter'), 'year': c.get('year'), 'epsEst': c.get('epsEstimate'),
-                             'revEst': c.get('revenueEstimate'), 'src': 'Finnhub'})
-    except Exception as e:
-        bad.append(f'calendar: {e}'[:90])
+                             'revEst': c.get('revenueEstimate'), 'epsAct': c.get('epsActual'),
+                             'revAct': c.get('revenueActual'), 'src': 'Finnhub'})
+        except Exception as e:
+            bad.append(f'calendar/{s}: {e}'[:90])
+        time.sleep(1.1)
     return {'fail': bad[:30], 'earnings': len(EARN)}
 
 

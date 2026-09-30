@@ -9,7 +9,13 @@ import csv, datetime as dt, io, json, math, os, re, sys, time, traceback, urllib
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 DATA = os.path.join(ROOT, 'data')
 TODAY = dt.date.today()
-UA = os.environ.get('SEC_UA', '').strip() or 'PortfoyDefteri (github.com/brsclk16/portfoy-defteri)'
+def _ascii(v):
+    import unicodedata
+    v = v.translate(str.maketrans('ıİşŞçÇğĞöÖüÜ', 'iIsScCgGoOuU'))
+    return unicodedata.normalize('NFKD', v).encode('ascii', 'ignore').decode().strip()
+
+
+UA = _ascii(os.environ.get('SEC_UA', '')) or 'PortfoyDefteri (github.com/brsclk16/portfoy-defteri)'
 
 
 def _ascii(s):
