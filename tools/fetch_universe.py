@@ -154,7 +154,7 @@ def yahoo_hist(t):
     for host in ('query1', 'query2'):
         try:
             j = json.loads(fx.get(f'https://{host}.finance.yahoo.com/v8/finance/chart/{s}?range=2y&interval=1d&includePrePost=false&events=div%2Csplit',
-                                  headers=BROWSER, tries=2))
+                                  headers=BROWSER, tries=2, timeout=15))
             break
         except Exception:
             if host == 'query2':
@@ -184,7 +184,7 @@ def stooq_hist(t):
     s = ssym(t)
     if not s:
         return None
-    txt = fx.get(f'https://stooq.com/q/d/l/?s={s}&i=d', headers=BROWSER, tries=2)
+    txt = fx.get(f'https://stooq.com/q/d/l/?s={s}&i=d', headers=BROWSER, tries=1, timeout=15)
     if not txt.startswith('Date'):
         raise ValueError('CSV değil: ' + txt[:60].replace('\n', ' '))
     rows = []
@@ -199,7 +199,7 @@ def stooq_last(t):
     s = ssym(t)
     if not s:
         return None
-    txt = fx.get(f'https://stooq.com/q/l/?s={s}&f=sd2t2ohlcv&h&e=csv', headers=BROWSER, tries=2)
+    txt = fx.get(f'https://stooq.com/q/l/?s={s}&f=sd2t2ohlcv&h&e=csv', headers=BROWSER, tries=1, timeout=15)
     rr = list(csv.DictReader(io.StringIO(txt)))
     if not rr:
         return None
@@ -210,7 +210,7 @@ def stooq_last(t):
 def twelve_hist(t):
     if not TWELVE or t in FOREIGN:
         return None
-    j = json.loads(fx.get(f'https://api.twelvedata.com/time_series?symbol={urllib.parse.quote(t)}&interval=1day&outputsize=520&format=JSON&apikey={TWELVE}', tries=2))
+    j = json.loads(fx.get(f'https://api.twelvedata.com/time_series?symbol={urllib.parse.quote(t)}&interval=1day&outputsize=520&format=JSON&apikey={TWELVE}', tries=2, timeout=20))
     if j.get('status') == 'error':
         raise ValueError(j.get('message', '')[:100])
     vals = j.get('values') or []
@@ -225,14 +225,14 @@ def nasdaq(t):
     s = urllib.parse.quote(t.replace('.', '/'))
     out = {}
     try:
-        j = json.loads(fx.get(f'https://api.nasdaq.com/api/quote/{s}/info?assetclass=stocks', headers=BROWSER, tries=2))
+        j = json.loads(fx.get(f'https://api.nasdaq.com/api/quote/{s}/info?assetclass=stocks', headers=BROWSER, tries=1, timeout=15))
         d = j.get('data') or {}
         p = (d.get('primaryData') or {})
         out['px'] = num(p.get('lastSalePrice'))
         out['name'] = d.get('companyName')
     except Exception:
         pass
-    j = json.loads(fx.get(f'https://api.nasdaq.com/api/quote/{s}/summary?assetclass=stocks', headers=BROWSER, tries=2))
+    j = json.loads(fx.get(f'https://api.nasdaq.com/api/quote/{s}/summary?assetclass=stocks', headers=BROWSER, tries=1, timeout=15))
     sd = ((j.get('data') or {}).get('summaryData') or {})
     val = lambda k: (sd.get(k) or {}).get('value')
     out['pe'] = num(val('PERatio'))
@@ -251,9 +251,9 @@ def finnhub(t):
     if not FINNHUB:
         return None
     s = urllib.parse.quote(fsym(t))
-    q = json.loads(fx.get(f'https://finnhub.io/api/v1/quote?symbol={s}&token={FINNHUB}', tries=2))
+    q = json.loads(fx.get(f'https://finnhub.io/api/v1/quote?symbol={s}&token={FINNHUB}', tries=2, timeout=15))
     time.sleep(1.05)
-    m = json.loads(fx.get(f'https://finnhub.io/api/v1/stock/metric?symbol={s}&metric=all&token={FINNHUB}', tries=2))
+    m = json.loads(fx.get(f'https://finnhub.io/api/v1/stock/metric?symbol={s}&metric=all&token={FINNHUB}', tries=2, timeout=15))
     time.sleep(1.05)
     mm = m.get('metric') or {}
     out = {'px': num(q.get('c')) or None, 'd1': num(q.get('dp')), 'pe': num(mm.get('peTTM') or mm.get('peExclExtraTTM') or mm.get('peBasicExclExtraTTM')),
@@ -268,7 +268,7 @@ def finnhub(t):
 def finnhub_profile(t):
     if not FINNHUB:
         return None
-    j = json.loads(fx.get(f'https://finnhub.io/api/v1/stock/profile2?symbol={urllib.parse.quote(fsym(t))}&token={FINNHUB}', tries=2))
+    j = json.loads(fx.get(f'https://finnhub.io/api/v1/stock/profile2?symbol={urllib.parse.quote(fsym(t))}&token={FINNHUB}', tries=2, timeout=15))
     time.sleep(1.05)
     if not j:
         return None
@@ -278,7 +278,7 @@ def finnhub_profile(t):
 def fmp(t):
     if not FMP or t in FOREIGN:
         return None
-    j = json.loads(fx.get(f'https://financialmodelingprep.com/stable/profile?symbol={urllib.parse.quote(t.replace(".", "-"))}&apikey={FMP}', tries=1))
+    j = json.loads(fx.get(f'https://financialmodelingprep.com/stable/profile?symbol={urllib.parse.quote(t.replace(".", "-"))}&apikey={FMP}', tries=1, timeout=15))
     if not j:
         return None
     j = j[0]
@@ -366,12 +366,23 @@ def main(only=None):
     D = U.setdefault('data', {})
     S = {n: Src(n) for n in ('yahoo', 'stooq', 'nasdaq', 'finnhub', 'fmp', 'twelve', 'sec')}
     S['nasdaq'].pause = 0.35
+    S['nasdaq'].limit = S['stooq'].limit = 4
     S['yahoo'].pause = 0.25
     S['stooq'].pause = 0.3
     flags, filled, stale = [], {}, []
     fxr = {}
 
+    budget = float(os.environ.get('UNI_BUDGET_MIN', '30')) * 60
     for i, t in enumerate(syms):
+        if time.time() - t0 > budget * 0.6:
+            for n in ('nasdaq', 'stooq', 'fmp', 'sec', 'twelve'):
+                if not S[n].dead:
+                    S[n].dead = True
+                    S[n].errs.append('süre bütçesi: bu çalışmada bırakıldı')
+        if time.time() - t0 > budget:
+            stale.extend(syms[i:])
+            print('süre bütçesi doldu, kalan semboller eski değerleriyle kaldı', flush=True)
+            break
         cur = D.get(t, {})
         before = set(k for k, v in cur.items() if v not in (None, ''))
         H = S['yahoo'].call(yahoo_hist, t)
