@@ -1,0 +1,42 @@
+name: Fikir tarayıcı evreni (Yahoo, Stooq, Nasdaq, Finnhub, FMP, Twelve Data, SEC)
+on:
+  schedule:
+    - cron: '23 22 * * 1-5'   # ABD kapanışından sonra (TR 01:23)
+    - cron: '47 14 * * 1-5'   # ABD açılışından sonra gün içi tazeleme (TR 17:47)
+  push:
+    branches: [main]
+    paths: ['tools/fetch_universe.py', '.github/workflows/evren.yml']
+  workflow_dispatch:
+    inputs:
+      semboller:
+        description: 'Yalnız bu semboller (boşluklu liste; boşsa tüm evren)'
+        required: false
+permissions:
+  contents: write
+concurrency:
+  group: repo-yazma
+  cancel-in-progress: false
+jobs:
+  topla:
+    runs-on: ubuntu-latest
+    timeout-minutes: 40
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with: {python-version: '3.12'}
+      - name: Topla
+        env:
+          FINNHUB_KEY: ${{ secrets.FINNHUB_KEY || secrets.FINNHUB }}
+          FMP_KEY: ${{ secrets.FMP_KEY || secrets.FINANCIALMODELINGPREP }}
+          TWELVEDATA_KEY: ${{ secrets.TWELVEDATA_KEY }}
+          SEC_UA: ${{ secrets.SEC_UA }}
+        run: python3 -u tools/fetch_universe.py ${{ github.event.inputs.semboller }}
+      - name: Yayınla
+        run: |
+          git config user.name "Portföy veri botu"
+          git config user.email "portfoy-bot@users.noreply.github.com"
+          git add data/universe.json data/universe_list.json data/_diag/universe.json
+          git diff --cached --quiet && { echo "değişiklik yok"; exit 0; }
+          git commit -m "Fikir tarayıcı evreni $(date -u +'%F %H:%M') UTC (çok kaynaklı)"
+          for i in 1 2 3 4 5; do git pull --rebase -X theirs origin main && git push origin HEAD:main && exit 0; sleep $((i*7)); done
+          exit 1

@@ -32,7 +32,8 @@ for f in args:
         U['data'][t] = cur; n += 1
 if meta:
     for t, v in U['data'].items():
-        v['idx'] = [k for k, lab in (('ndx', 'NDX'), ('sp', 'SPX'), ('hold', 'FON')) if t in meta.get(k, [])]
-U['updatedAt'] = dt.datetime.now(dt.timezone.utc).strftime('%Y-%m-%dT%H:%M:%SZ'); U['source'] = 'Bigdata.com (şirket özeti, fiyat performansı)'
+        v['idx'] = [lab for k, lab in (('ndx', 'NDX'), ('sp', 'SPX'), ('hold', 'FON')) if t in meta.get(k, [])]
+U['updatedAt'] = dt.datetime.now(dt.timezone.utc).strftime('%Y-%m-%dT%H:%M:%SZ')
+if not str(U.get('source', '')).startswith('Çok kaynaklı'): U['source'] = 'Bigdata.com (şirket özeti, fiyat performansı)'
 json.dump(U, open(P, 'w'), ensure_ascii=False, separators=(',', ':'))
 print(f'{n} satır işlendi, {bad} bozuk satır; toplam {len(U["data"])} sembol')
