@@ -719,3 +719,10 @@ th.c,td.c{text-align:center}
 .lvtape{max-height:420px;overflow:auto}
 .lvset{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:10px;margin-bottom:10px}.lvset label{display:flex;flex-direction:column;gap:4px;font-size:13px}.lvset input{background:var(--bg);color:var(--text);border:1px solid var(--line);border-radius:8px;padding:7px 9px;font:inherit}
 .lvon{display:flex;gap:8px;align-items:center;margin-bottom:10px;font-size:13px}.lvon input{width:auto;flex:none}
+/* faktör ayrıştırma */
+.qbig{display:grid;grid-template-columns:auto auto auto 1fr;gap:14px;align-items:center}.qbig div{display:flex;flex-direction:column;align-items:center}.qbig>div>b{font-size:34px;line-height:1}.qbig span{font-size:12px;color:var(--muted)}.qarr{font-size:26px;color:var(--muted)}.qbig p{margin:0;font-size:13.5px}
+@media(max-width:640px){.qbig{grid-template-columns:auto auto auto}.qbig p{grid-column:1/-1}}
+.qev{display:flex;gap:8px;align-items:flex-end;height:130px}.qev div{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:flex-end;height:100%;gap:2px;font-size:11.5px}.qev i{display:block;width:70%;background:var(--accent2);border-radius:5px 5px 0 0}.qev span{color:var(--muted)}.qev em{font-style:normal;font-size:10.5px}
+.qdec{display:flex;flex-wrap:wrap;gap:8px 22px}.qdec div{display:flex;flex-direction:column}.qdec span{font-size:12px;color:var(--muted)}.qdec b{font-size:18px}
+.vgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:14px}.vgt td,.vgt th{padding:5px 8px}
+svg.vhist{width:100%;height:140px;display:block}

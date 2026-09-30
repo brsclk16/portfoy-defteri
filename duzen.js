@@ -5,7 +5,7 @@ const SECTIONS={
   portfoy:{label:'Portföyüm',icon:'M4 7h16v12H4zM8 7V5h8v2',subs:[['pozisyon','Pozisyonlar'],['karne','İşlem karnesi'],['temettu','Temettü'],['rapor','Aylık rapor'],['defter','Günlük · plan · vergi']]},
   piyasa:{label:'Piyasa',icon:'M4 19V9M10 19V5M16 19v-7M22 19H2',subs:[['enstruman','Enstrümanlar'],['canli','Canlı akış'],['arastirma','ORION araştırma'],['haber','Haberler'],['takvim','Takvim'],['kurumsal','Kurumsal (13F)'],['isi','Isı haritası'],['icgoru','İçgörüler'],['notlar','Hisse notları'],['tarayici','Fikir tarayıcı']]},
   teknik:{label:'Teknik',icon:'M7 4v16M7 8h-2v6h2M17 4v16M17 7h-2v8h2M12 9v11M12 12h-2v4h2',subs:[['grafik','Grafik paneli'],['karsilastir','Karşılaştır · oran'],['test','Sinyal testi'],['lab','Strateji lab'],['dogrula','Strateji doğrulama'],['oynat','Geçmişi oynat'],['coklu','Çoklu grafik'],['guc','Göreli güç'],['kural','Alarm kuralları'],['tarama','Teknik tarama']]},
-  analiz:{label:'Analiz',icon:'M4 20l5-6 4 3 7-9',subs:[['getiri','Reel getiri'],['kaynak','Getiri kaynağı'],['saglik','Sağlık kontrolü'],['asistan','Asistan'],['risk','Risk'],['makro','Makro'],['duyarlilik','Duyarlılık'],['makroev','Makro olaylar'],['beklenti','Vade beklentisi'],['senaryo','Senaryo'],['stres','Stres testi'],['degerleme','Değerleme'],['duzenli','Düzenli alım'],['dengeleme','Dengeleme'],['simulator','Eklesem ne olur?'],['haftalik','Haftalık rapor']]}
+  analiz:{label:'Analiz',icon:'M4 20l5-6 4 3 7-9',subs:[['getiri','Reel getiri'],['kaynak','Getiri kaynağı'],['saglik','Sağlık kontrolü'],['faktor','Faktör ayrıştırma'],['asistan','Asistan'],['risk','Risk'],['makro','Makro'],['duyarlilik','Duyarlılık'],['makroev','Makro olaylar'],['beklenti','Vade beklentisi'],['senaryo','Senaryo'],['stres','Stres testi'],['degerleme','Değerleme'],['duzenli','Düzenli alım'],['dengeleme','Dengeleme'],['simulator','Eklesem ne olur?'],['haftalik','Haftalık rapor']]}
 };
 const LEGACY={pozisyon:['portfoy','pozisyon'],defter:['portfoy','defter'],enstruman:['piyasa','enstruman'],haber:['piyasa','haber'],takvim:['piyasa','takvim'],haftalik:['analiz','haftalik']};
 const ITABS=[['genel','Genel bakış'],['plan','Plan ve beklenti'],['teknik','Teknik'],['temel','Temel'],['haber','Haberler'],['iceriden','İçeriden işlemler']];
@@ -29,6 +29,7 @@ function analizPart(part){
   if(part==='duyarlilik')return viewSent()+`<div class="sec">${vixTermCard()}</div>`;
   if(part==='kaynak')return viewAttrib();
   if(part==='saglik')return viewHealth();
+  if(part==='faktor')return viewFaktor();
   if(part==='makroev')return viewMacroEv();
   if(part==='asistan')return viewAsk();
   if(part==='senaryo')return viewScn2();
@@ -83,7 +84,7 @@ function viewInstTabs(t,tab){
   else if(tab==='temel')body=pick(isMetrics)+pick(isSW)+pick(isHold)+fundSection(t,true)+notesSection(t)+statementsSection(t)+dcfSection(t)+callsSection(t)+analystSection(t)+peersSection(t)+pick(isEarn);
   else if(tab==='haber')body=pick(isNews);
   else if(tab==='iceriden')body=pick(isIns);
-  else body=pick(isMain)+planCard(t)+pick(isSummary)+optCard(t)+cotCard(t)+orionInstCard(t)+askCard(t);
+  else body=pick(isMain)+planCard(t)+pick(isSummary)+(typeof residLine==='function'?residLine(t):'')+optCard(t)+cotCard(t)+orionInstCard(t)+askCard(t);
   return `<div class="fade">${pick(isHead)}<nav class="subnav itabs">${tabs.map(([k,l])=>`<a href="#/t/${encodeURIComponent(t)}/${k}" class="${k===tab?'on':''}">${l}</a>`).join('')}</nav>${body}</div>`;
 }
 function afterInstTabs(t,tab){

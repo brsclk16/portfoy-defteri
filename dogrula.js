@@ -51,7 +51,7 @@ function vBacktest(cfg,from,to,opt={}){const D=vData();if(!D)return null;const {
     curve.push([dates[i],eq*100]);spyCurve.push([dates[i],spyEq*100]);
     if(i<to&&isReb(i)){const sc={};const R={};fk.forEach(k=>{const v={};U.forEach(t=>v[t]=vFactor(k,px[t],i,t,dates[i]));R[k]=vRanks(v)});
       U.forEach(t=>{if(fk.some(k=>R[k][t]==null))return;sc[t]=fk.reduce((s,k)=>s+R[k][t]*cfg.w[k],0)/wsum});
-      let order=Object.entries(sc).sort((x,y)=>y[1]-x[1]).map(x=>x[0]);
+      let order=opt.rand?vShuffle(Object.keys(sc),opt.rand):Object.entries(sc).sort((x,y)=>y[1]-x[1]).map(x=>x[0]);
       if(cfg.regF&&typeof regimeAt==='function'&&S.fred&&regimeAt(dates[i]).score<=-2)order=[];
       if(cfg.trendF)order=order.filter(t=>{const v=vFactor('trend',px[t],i);return v!=null&&v>0});
       let pick=order.slice(0,N);const band=cfg.band||0;
@@ -59,6 +59,25 @@ function vBacktest(cfg,from,to,opt={}){const D=vData();if(!D)return null;const {
       const tw={};pick.forEach(t=>tw[t]=1/N);pending=tw}}
   return {curve,spyCurve,rets,spyR,contrib,turn,costTot,rebs,cashDays,from:dates[from],to:dates[to],days:rets.length}}
 
+function vShuffle(a,rnd){const b=a.slice();for(let i=b.length-1;i>0;i--){const j=Math.floor(rnd()*(i+1));[b[i],b[j]]=[b[j],b[i]]}return b}
+function vTot(B){return B&&B.curve.length?(B.curve[B.curve.length-1][1]/100-1)*100:null}
+function vExcess(B){return B&&B.curve.length?vTot(B)-(B.spyCurve[B.spyCurve.length-1][1]/100-1)*100:null}
+/* en iyi ay çıkarılınca: getirinin tek bir iyi aydan gelip gelmediği */
+function vDropBestMonth(B){const M={};B.rets.forEach((r,k)=>{const m=B.curve[k+1][0].slice(0,7);(M[m]=M[m]||{s:1,b:1,ks:[]});M[m].s*=1+r;M[m].b*=1+B.spyR[k];M[m].ks.push(k)});
+  const best=Object.entries(M).sort((a,b)=>(b[1].s-b[1].b)-(a[1].s-a[1].b))[0];if(!best)return null;const drop=new Set(best[1].ks);let s=1,b=1;B.rets.forEach((r,k)=>{if(!drop.has(k)){s*=1+r;b*=1+B.spyR[k]}});
+  return {m:best[0],mEx:(best[1].s-best[1].b)*100,tot:(s-1)*100,spy:(b-1)*100}}
+/* parametre kararlılığı: komşu ayarlar da çalışıyor mu? */
+function vGrid(cfg,from,to){const U=cfg.uni.length;const tops=[cfg.topN-1,cfg.topN,cfg.topN+1].filter(x=>x>=1&&x<=U);const bands=[0,1,2];const out={tops,bands,cells:{}};
+  ['m','w'].forEach(rb=>tops.forEach(tn=>bands.forEach(bd=>{const c={...cfg,topN:tn,band:bd,reb:rb};out.cells[rb+'|'+tn+'|'+bd]=vExcess(vBacktest(c,from,to))})));
+  const wp=[];VF.forEach(f=>{const w=cfg.w[f[0]]||0;if(!w)return;[0.5,1.5].forEach(m=>{const c={...cfg,w:{...cfg.w,[f[0]]:Math.round(w*m)}};wp.push({n:f[1],m,ex:vExcess(vBacktest(c,from,to))})})});
+  out.wp=wp;const all=Object.values(out.cells).concat(wp.map(x=>x.ex)).filter(isNum);out.share=all.filter(x=>x>0).length/all.length*100;out.med=all.slice().sort((a,b)=>a-b)[Math.floor(all.length/2)];return out}
+/* aynı evren, aynı kurallar, rastgele seçim: şans dağılımı */
+function vRandom(cfg,from,to,N=300){const seed=hashStr(JSON.stringify(cfg.uni)+cfg.topN+cfg.reb);const rnd=rng(seed);const xs=[];for(let i=0;i<N;i++){const e=vExcess(vBacktest(cfg,from,to,{rand:rnd}));if(isNum(e))xs.push(e)}return xs.sort((a,b)=>a-b)}
+function vHist(xs,mark){if(xs.length<20)return '';const lo=Math.min(xs[0],mark),hi=Math.max(xs[xs.length-1],mark);const nb=24,w=(hi-lo)/nb||1;const bins=new Array(nb).fill(0);xs.forEach(x=>bins[Math.min(nb-1,Math.floor((x-lo)/w))]++);
+  const mx=Math.max(...bins);const W=600,H=120;const bx=W/nb;const X=v=>(v-lo)/(hi-lo||1)*W;const z0=X(0);
+  return `<svg class="vhist" viewBox="0 0 ${W} ${H+18}" preserveAspectRatio="none">${bins.map((c,i)=>`<rect x="${i*bx+1}" y="${H-c/mx*H}" width="${bx-2}" height="${c/mx*H}" fill="var(--line2,#3a4252)"/>`).join('')}
+   ${lo<0&&hi>0?`<line x1="${z0}" x2="${z0}" y1="0" y2="${H}" stroke="var(--muted)" stroke-dasharray="3 3"/>`:''}<line x1="${X(mark)}" x2="${X(mark)}" y1="0" y2="${H}" stroke="var(--accent)" stroke-width="3"/>
+   <text x="2" y="${H+14}" fill="var(--muted)" font-size="11">${nf(lo,0)} puan</text><text x="${W-2}" y="${H+14}" fill="var(--muted)" font-size="11" text-anchor="end">${nf(hi,0)} puan</text></svg>`}
 /* ---------- istatistik ---------- */
 function vMean(a){return a.reduce((s,x)=>s+x,0)/(a.length||1)}
 function vStd(a){const m=vMean(a);return Math.sqrt(a.reduce((s,x)=>s+(x-m)**2,0)/Math.max(1,a.length-1))}
@@ -98,7 +117,8 @@ function vEvaluate(cfg){if((cfg.w.qual||0)>0&&!cfg.uni.some(t=>{const F=typeof f
   const mid=Math.floor((P.devFrom+P.devTo)/2);const h1=vStats(vBacktest(cfg,P.devFrom,mid)),h2=vStats(vBacktest(cfg,mid,P.devTo));
   const eps=(typeof stressEpisodes==='function'?stressEpisodes(6):[]).filter(e=>e.peak>=P.dates[P.devFrom]&&e.trough<=P.dates[P.devTo]);
   const epR=eps.map(e=>{const i0=P.dates.indexOf(e.peak),i1=P.dates.indexOf(e.trough);if(i0<0||i1<=i0)return null;const c=B.curve;const f=c.find(p=>p[0]===e.peak),g=c.find(p=>p[0]===e.trough);return f&&g?{name:e.name,spy:e.spy,s:(g[1]/f[1]-1)*100}:null}).filter(Boolean);
-  return {P,B,st,st2,stx,h1,h2,epR}}
+  const bm=vDropBestMonth(B);const G=vGrid(cfg,P.devFrom,P.devTo);const RX=vRandom(cfg,P.devFrom,P.devTo);const rp=RX.length?RX.filter(x=>x<st.excess).length/RX.length*100:null;
+  return {P,B,st,st2,stx,h1,h2,epR,bm,G,RX,rp}}
 function vChecks(E,crit,dsr){const s=E.st;const c=[];const add=(k,val,ok)=>c.push({k,val,ok});
   add('excess',s.excess,s.excess>crit.excess);add('excess2x',E.st2?E.st2.excess:null,E.st2&&E.st2.excess>crit.excess2x);add('maxdd',-s.maxdd,-s.maxdd<=crit.maxdd);
   add('sharpe',s.sharpe,s.sharpe>=crit.sharpe);add('top',s.top,s.top!=null&&s.top<=crit.top);add('alpha',s.alpha,s.alpha!=null&&s.alpha>=crit.alpha);add('dsr',dsr,dsr!=null&&dsr>=crit.dsr);return c}
@@ -140,10 +160,17 @@ function viewDogrula(){const U=vUniverse();if(!U.length)return `<div class="empt
    ${[['Maliyet 2 katı',E.st2&&E.st2.tot,E.st.spy,E.st2&&E.st2.excess>0],
       ['En çok katkı veren çıkarılınca ('+esc(dispT(E.st.topT||''))+')',E.stx&&E.stx.tot,E.st.spy,E.stx&&E.stx.excess>0],
       ['Dönemin ilk yarısı',E.h1&&E.h1.tot,E.h1&&E.h1.spy,E.h1&&E.h1.excess>0],['Dönemin ikinci yarısı',E.h2&&E.h2.tot,E.h2&&E.h2.spy,E.h2&&E.h2.excess>0]]
-     .concat(E.epR.map(x=>['Stres: '+esc(x.name),x.s,x.spy,x.s>x.spy])).map(r=>`<tr><td>${r[0]}</td><td class="r num ${cls(r[1])}">${pct(r[1],1)}</td><td class="r num">${pct(r[2],1)}</td><td>${r[3]?'✅ dayandı':'❌ kırıldı'}</td></tr>`).join('')}</tbody></table></div>
+     .concat(E.bm?[['En iyi ay çıkarılınca ('+esc(E.bm.m)+', o ay '+pct(E.bm.mEx,1)+' fark)',E.bm.tot,E.bm.spy,E.bm.tot>E.bm.spy]]:[]).concat(E.epR.map(x=>['Stres: '+esc(x.name),x.s,x.spy,x.s>x.spy])).map(r=>`<tr><td>${r[0]}</td><td class="r num ${cls(r[1])}">${pct(r[1],1)}</td><td class="r num">${pct(r[2],1)}</td><td>${r[3]?'✅ dayandı':'❌ kırıldı'}</td></tr>`).join('')}</tbody></table></div>
    <div class="vcon">${Object.entries(E.B.contrib).sort((a,b)=>b[1]-a[1]).map(([t,v])=>`<div><span>${esc(dispT(t))}</span><i class="${v>=0?'up':'down'}" style="width:${Math.min(100,Math.abs(v)/Math.max(...Object.values(E.B.contrib).map(Math.abs))*100)}%"></i><b class="num ${cls(v)}">${pct(v*100,1)}</b></div>`).join('')}</div>
    <p class="muted" style="font-size:12px">Çubuklar: her enstrümanın strateji getirisine katkısı (puan).</p></section>`:''}
 
+  ${E&&E.G?`<section class="card sec"><h3>4b · Parametre kararlılığı <span class="r muted" style="font-size:12px">komşu ayarlarda SPY'a göre fark (puan)</span></h3>
+   <div class="vgrid">${['m','w'].map(rb=>`<div><div class="muted" style="font-size:12px;margin-bottom:4px">${rb==='m'?'Aylık':'Haftalık'} dengeleme</div><table class="tbl vgt"><thead><tr><th>Tutulan · bant →</th>${E.G.bands.map(b=>`<th class="r">${b}</th>`).join('')}</tr></thead><tbody>${E.G.tops.map(tn=>`<tr><td>ilk ${tn}</td>${E.G.bands.map(bd=>{const v=E.G.cells[rb+'|'+tn+'|'+bd];const me=rb===vCfg().reb&&tn===vCfg().topN&&bd===vCfg().band;return `<td class="r num ${cls(v)}" style="background:${isNum(v)?(v>0?'rgba(47,227,154,'+Math.min(.35,Math.abs(v)/60)+')':'rgba(255,93,122,'+Math.min(.35,Math.abs(v)/60)+')'):'none'};${me?'outline:2px solid var(--accent)':''}">${isNum(v)?(v>0?'+':'')+nf(v,1):'—'}</td>`}).join('')}</tr>`).join('')}</tbody></table></div>`).join('')}
+   ${E.G.wp.length?`<div><div class="muted" style="font-size:12px;margin-bottom:4px">Faktör ağırlığı yarıya / 1,5 katına</div><table class="tbl vgt"><tbody>${E.G.wp.map(x=>`<tr><td>${esc(x.n)} ×${nf(x.m,1)}</td><td class="r num ${cls(x.ex)}">${isNum(x.ex)?(x.ex>0?'+':'')+nf(x.ex,1):'—'}</td></tr>`).join('')}</tbody></table></div>`:''}</div>
+   <p style="margin:8px 0 0">Komşu ayarların <b class="${E.G.share>=70?'up':E.G.share>=40?'':'down'}">%${nf(E.G.share,0)}</b>'i SPY'ı geçiyor, medyan fark <b class="${cls(E.G.med)}">${pct(E.G.med,1)}</b>. ${E.G.share>=70?'Sonuç ayara hassas değil; iyi işaret.':E.G.share>=40?'Sonuç kısmen ayara bağlı.':'Sonuç yalnızca belirli ayarlarda iyi: aşırı uyum (overfitting) şüphesi.'} <span class="muted" style="font-size:12px">Çerçeveli hücre mevcut ayar. Bu tablo deneme sayılmaz; en iyi hücreyi seçip test edersen o yeni bir deneme olur.</span></p></section>
+  <section class="card sec"><h3>4c · Şansla karşılaştır <span class="r muted" style="font-size:12px">aynı evren ve kurallar, rastgele seçimle ${E.RX.length} strateji</span></h3>
+   ${vHist(E.RX,E.st.excess)}
+   <p style="margin:6px 0 0">Senin stratejin (yeşil çizgi) rastgele stratejilerin <b class="${E.rp>=95?'up':E.rp>=80?'':'down'}">%${nf(E.rp,0)}</b>'inden iyi. ${E.rp>=95?'Şansla açıklanması zor.':E.rp>=80?'Şansla ayırt etmek güç; daha uzun örnek gerekir.':'Rastgele seçimden belirgin şekilde iyi değil: bulunan "avantaj" büyük ihtimalle evrenin kendisinden geliyor.'} <span class="muted" style="font-size:12px">Rastgele stratejiler aynı sayıda enstrümanı, aynı dengeleme sıklığında, aynı maliyetle rastgele seçer.</span></p></section>`:''}
   <section class="card sec"><h3>5 · Saklı dönem ${st.opened?'<span class="chip warnc">açıldı</span>':''}</h3>
    ${st.opened?vOpenedHTML(st.opened):`<p class="muted" style="font-size:13px;margin:0 0 8px">Geliştirme dönemindeki tüm kriterleri geçen bir strateji, geliştirme sırasında hiç görülmemiş son dönemde <b>bir kez</b> test edilir. Açıldıktan sonra yapılan her değişiklik "saklı dönem görüldü" olarak işaretlenir; artık gerçek bir örneklem dışı test yoktur.</p>
    <button class="btn" id="vOpen" ${allOk&&cur?'':'disabled'}>Saklı dönemi aç (tek sefer)</button> ${allOk&&cur?'':'<span class="muted" style="font-size:12px">Önce tüm kriterleri geçen bir deneme gerekli.</span>'}`}
