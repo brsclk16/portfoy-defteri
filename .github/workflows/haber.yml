@@ -22,8 +22,8 @@ jobs:
         with: {python-version: '3.12'}
       - name: Topla
         env:
-          FINNHUB_KEY: ${{ secrets.FINNHUB_KEY }}
-          FMP_KEY: ${{ secrets.FMP_KEY }}
+          FINNHUB_KEY: ${{ secrets.FINNHUB_KEY || secrets.FINNHUB }}
+          FMP_KEY: ${{ secrets.FMP_KEY || secrets.FINANCIALMODELINGPREP }}
           SEC_UA: ${{ secrets.SEC_UA }}
         run: python3 -u tools/fetch_news.py
       - name: Yayınla
