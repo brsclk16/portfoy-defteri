@@ -10,6 +10,16 @@ ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 DATA = os.path.join(ROOT, 'data')
 TODAY = dt.date.today()
 UA = os.environ.get('SEC_UA', '').strip() or 'PortfoyDefteri (github.com/brsclk16/portfoy-defteri)'
+
+
+def _ascii(s):
+    # HTTP başlıkları latin-1 olmalı; 'Barış Çelik' → 'Baris Celik'
+    import unicodedata
+    s = s.translate(str.maketrans('ıİşŞğĞçÇöÖüÜ', 'iIsSgGcCoOuU'))
+    return unicodedata.normalize('NFKD', s).encode('ascii', 'ignore').decode('ascii').strip()
+
+
+UA = _ascii(UA)
 DIAG = {}
 
 
