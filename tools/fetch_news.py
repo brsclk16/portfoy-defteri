@@ -88,7 +88,7 @@ def wr(name, obj):
         f.write('\n')
 
 
-def get(url, headers=None, tries=2, timeout=30, raw=False):
+def get(url, headers=None, tries=2, timeout=15, raw=False):
     h = {'User-Agent': UA_BROWSER, 'Accept-Encoding': 'gzip', 'Accept': '*/*'}
     h.update(headers or {})
     last = None
@@ -184,6 +184,13 @@ def parse_feed(text):
 
 
 ITEMS = []
+T0 = time.time()
+BUDGET = {'theme': 120, 'ticker': 240, 'finnhub': 150, 'fmp': 60, 'google': 120, 'tickertick': 160, 'gdelt': 130}
+DEADLINE = [0]
+
+
+def over():
+    return time.time() > DEADLINE[0]
 
 
 def add(src, feed, title, url, date, summary='', tickers=(), themes=(), extra=None):
@@ -201,6 +208,7 @@ def add(src, feed, title, url, date, summary='', tickers=(), themes=(), extra=No
 
 def run(name, fn):
     t0 = time.time()
+    DEADLINE[0] = t0 + BUDGET.get(name, 120)
     n0 = len(ITEMS)
     try:
         info = fn() or {}
@@ -257,6 +265,8 @@ def fund_tags(U, t):
 def src_theme():
     ok, bad = 0, []
     for name, url, themes, kw in THEME_FEEDS:
+        if over():
+            bad.append('süre doldu'); break
         try:
             for d in parse_feed(get(url)):
                 txt = d['title'] + ' ' + d['summary']
@@ -279,6 +289,8 @@ def src_ticker(U):
     for t in U:
         if t in NO_US_FEED:
             continue
+        if over():
+            bad.append('süre doldu'); break
         s = us_sym(t)
         ftype = '6-K' if t in FOREIGN_6K else '8-K'
         tags = fund_tags(U, t)
@@ -316,6 +328,8 @@ def src_google(U, I):
     for th, q in GOOGLE_THEMES:
         qs.append((q, [], [th]))
     for q, tk, th in qs:
+        if over():
+            bad.append('süre doldu'); break
         try:
             for d in gnews(q)[:25]:
                 title = d['title']
@@ -336,6 +350,8 @@ def src_tickertick(U):
     for i, t in enumerate(U):
         if t in NO_US_FEED:
             continue
+        if over():
+            bad.append('süre doldu'); break
         s = us_sym(t).lower()
         q = f'(and z:{s} (or T:curated T:market T:earning T:sec T:analysis))'
         url = 'https://api.tickertick.com/feed?' + urllib.parse.urlencode({'q': q, 'n': 30})
@@ -365,6 +381,8 @@ def src_finnhub(U):
     bad = []
     syms = {us_sym(t): t for t in U if t not in NO_US_FEED}
     for s, t in syms.items():
+        if over():
+            bad.append('süre doldu'); break
         g = SIG.setdefault(t, {})
         try:
             for n in jget(f'{base}/company-news?symbol={s}&from={f}&to={to}&token={k}')[:30]:
@@ -432,6 +450,8 @@ def src_gdelt(U):
         nm = short_name(e['name'])
         if not nm or len(nm) < 3:
             continue
+        if over():
+            bad.append('süre doldu'); break
         q = f'"{nm}" sourcelang:english'
         url = 'https://api.gdeltproject.org/api/v2/doc/doc?' + urllib.parse.urlencode(
             {'query': q, 'mode': 'timelinetone', 'timespan': '7d', 'format': 'json'})

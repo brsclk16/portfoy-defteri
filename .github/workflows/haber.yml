@@ -15,7 +15,7 @@ concurrency:
 jobs:
   topla:
     runs-on: ubuntu-latest
-    timeout-minutes: 25
+    timeout-minutes: 30
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
@@ -25,7 +25,7 @@ jobs:
           FINNHUB_KEY: ${{ secrets.FINNHUB_KEY }}
           FMP_KEY: ${{ secrets.FMP_KEY }}
           SEC_UA: ${{ secrets.SEC_UA }}
-        run: python3 tools/fetch_news.py
+        run: python3 -u tools/fetch_news.py
       - name: Yayınla
         run: |
           git config user.name "Portföy veri botu"
