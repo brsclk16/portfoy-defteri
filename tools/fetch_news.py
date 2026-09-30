@@ -563,7 +563,8 @@ def finalize():
 
 
 def main(argv):
-    want = set(argv) or {'theme', 'ticker', 'sec', 'google', 'tickertick', 'finnhub', 'fmp', 'gdelt'}
+    # GDELT GitHub Actions IP'lerinden sürekli 429 veriyor; varsayılan dışı (elle: fetch_news.py gdelt)
+    want = set(argv) or {'theme', 'ticker', 'sec', 'google', 'tickertick', 'finnhub', 'fmp'}
     U, I = universe()
     print('evren:', ', '.join(U))
     if 'theme' in want:
@@ -584,7 +585,7 @@ def main(argv):
         run('gdelt', lambda: src_gdelt(U))
     items = finalize()
     prev = rd(OUT, {}) or {}
-    sig = prev.get('signals', {}) if not ({'finnhub', 'fmp', 'gdelt'} & want) else {}
+    sig = prev.get('signals', {}) if not ({'finnhub', 'fmp', 'gdelt'} & want) else {t: {k: v for k, v in g.items() if k == 'tone'} for t, g in prev.get('signals', {}).items() if 'gdelt' not in want and g.get('tone')}
     for t, g in SIG.items():
         sig.setdefault(t, {}).update(g)
     out = {
