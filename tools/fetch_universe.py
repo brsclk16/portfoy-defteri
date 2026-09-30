@@ -374,7 +374,7 @@ def main(only=None):
 
     budget = float(os.environ.get('UNI_BUDGET_MIN', '30')) * 60
     for i, t in enumerate(syms):
-        if time.time() - t0 > budget * 0.6:
+        if time.time() - t0 > budget * 0.75:
             for n in ('nasdaq', 'stooq', 'fmp', 'sec', 'twelve'):
                 if not S[n].dead:
                     S[n].dead = True
@@ -442,18 +442,23 @@ def main(only=None):
             pes['finnhub'] = F['pe']
         if N and N.get('pe', 0) > 0:
             pes['nasdaq'] = N['pe']
-        need_sec = len(pes) < 2 and t not in FOREIGN
-        if need_sec:
+        # SEC'ten türetilen F/K yalnızca yedek: hisse bölünmesi sonrası eski EPS'ler yanıltabildiği için
+        # Finnhub/Nasdaq değeri varsa yalnızca uyuşmazlık kontrolünde kullanılır.
+        pv = {k: v for k, v in pes.items() if v}
+        if t not in FOREIGN and (not pv or len(pv) == 1):
             E = S['sec'].call(sec_eps_ttm, t)
             if E and E['eps'] > 0 and new.get('px'):
-                pes['sec'] = new['px'] / E['eps']
+                sp_ = new['px'] / E['eps']
                 used.append('sec')
-            elif E and E['eps'] <= 0:
+                if not pv and 0 < sp_ < 3000:
+                    pv['sec'] = sp_
+                elif pv and spread([sp_] + list(pv.values())) > 25:
+                    flags.append({'t': t, 'alan': 'F/K (SEC kontrolü)', 'degerler': {**{k: round(v, 2) for k, v in pv.items()}, 'sec': round(sp_, 2)}})
+            elif E and E['eps'] <= 0 and not pv:
                 pes['sec_negatif'] = None
-        pv = {k: v for k, v in pes.items() if v}
         if pv:
             new['pe'] = med(list(pv.values()))
-            if spread(list(pv.values())) > 25:
+            if len(pv) >= 2 and spread(list(pv.values())) > 25:
                 flags.append({'t': t, 'alan': 'F/K', 'degerler': {k: round(v, 2) for k, v in pv.items()}})
         elif 'sec_negatif' in pes or (F and F.get('pe', 1) < 0):
             new['pe'] = None  # zarar eden şirkette eski pozitif F/K'yı taşıma

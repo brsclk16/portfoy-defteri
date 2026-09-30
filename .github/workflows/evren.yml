@@ -30,7 +30,7 @@ jobs:
           FMP_KEY: ${{ secrets.FMP_KEY || secrets.FINANCIALMODELINGPREP }}
           TWELVEDATA_KEY: ${{ secrets.TWELVEDATA_KEY }}
           SEC_UA: ${{ secrets.SEC_UA }}
-          UNI_BUDGET_MIN: '33'
+          UNI_BUDGET_MIN: '38'
         run: python3 -u tools/fetch_universe.py ${{ github.event.inputs.semboller }}
       - name: Yayınla
         run: |
