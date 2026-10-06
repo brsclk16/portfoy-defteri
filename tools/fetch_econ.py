@@ -25,13 +25,13 @@ BACK, FWD = 10, 35
 DEF_HOUR = {'US': '12:30', 'TR': '07:00'}
 
 # (ülke, regex [küçük harf ad], Türkçe ad, önem, kategori, birim, dönem gecikmesi, iyi yön)
-# gecikme: ay sayısı | 'w' haftalık başvuru haftası | 'q' önceki çeyrek | None dönem yok. iyi yön: +1 yüksek iyi, -1 düşük iyi.
+# gecikme: ay sayısı | 'eom' ay sonu/başı | 'w' haftalık başvuru haftası | 'q' önceki çeyrek | None dönem yok. iyi yön: +1 yüksek iyi, -1 düşük iyi.
 RULES = [
     ('US', r'initial jobless claims', 'Haftalık işsizlik başvuruları', 3, 'labor-market', 'K', 'w', -1),
     ('US', r'^(?!.*adp)(?!.*private)non.?farm payrolls?(?!.*private)', 'Tarım dışı istihdam', 3, 'labor-market', 'K', 1, 1),
     ('US', r'^unemployment rate', 'İşsizlik oranı', 3, 'labor-market', '%', 1, -1),
     ('US', r'average hourly earnings.*(mom|m/m)', 'Ortalama saatlik kazanç (aylık)', 3, 'labor-market', '%', 1, None),
-    ('US', r'^(?!.*weekly)adp (non.?farm )?employment(?!.*weekly)', 'ADP özel sektör istihdamı', 3, 'labor-market', 'K', 1, 1),
+    ('US', r'^(?!.*weekly)adp (non.?farm )?employment(?!.*weekly)', 'ADP özel sektör istihdamı', 3, 'labor-market', 'K', 'eom', 1),
     ('US', r'jolts', 'JOLTS iş ilanları', 3, 'labor-market', 'M', 1, 1),
     ('US', r'core pce.*(mom|m/m)', 'Çekirdek PCE (aylık)', 3, 'inflation', '%', 1, -1),
     ('US', r'^pce price index.*(yoy|y/y)', 'PCE enflasyonu (yıllık)', 3, 'inflation', '%', 1, -1),
@@ -44,7 +44,7 @@ RULES = [
     ('US', r'gdp.*(qoq|q/q|growth rate|annuali)', 'GSYH (çeyreklik)', 3, 'economic-activity', '%', 'q', 1),
     ('US', r'^retail sales.*(mom|m/m)(?!.*ex)', 'Perakende satışlar', 3, 'consumption', '%', 1, 1),
     ('US', r'^retail sales$', 'Perakende satışlar', 3, 'consumption', '%', 1, 1),
-    ('US', r'(trade balance|balance of trade)', 'Dış ticaret dengesi', 3, 'economic-activity', 'B USD', 2, 1),
+    ('US', r'^(?!.*goods)(trade balance|balance of trade)', 'Dış ticaret dengesi', 3, 'economic-activity', 'B USD', 2, 1),
     ('US', r'^durable goods orders(?!.*ex)', 'Dayanıklı mal siparişleri (aylık)', 3, 'economic-activity', '%', 1, 1),
     ('US', r'michigan.*(sentiment|confidence)', 'Michigan tüketici güveni', 3, 'consumption', None, 0, 1),
     ('US', r'(cb|conference board) consumer confidence', 'CB tüketici güveni', 3, 'consumption', None, 0, 1),
@@ -111,6 +111,8 @@ def period(d, lag):
         return None
     if lag == 'w':
         return (d - dt.timedelta(days=(d.weekday() - 5) % 7 or 7)).isoformat()
+    if lag == 'eom':  # ay sonunda açıklanırsa aynı ay, ay başında açıklanırsa önceki ay
+        lag = 0 if d.day >= 25 else 1
     if lag == 'q':
         q = (d.month - 1) // 3  # önceki çeyrek
         y = d.year if q else d.year - 1
