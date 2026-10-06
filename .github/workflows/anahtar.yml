@@ -1,0 +1,36 @@
+name: Anahtar kontrolü
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths: ['tools/check_keys.py', '.github/workflows/anahtar.yml']
+permissions:
+  contents: write
+concurrency:
+  group: repo-yazma
+  cancel-in-progress: false
+jobs:
+  kontrol:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with: {python-version: '3.12'}
+      - name: Kontrol
+        env:
+          ALPHAVANTAGE_KEY: ${{ secrets.ALPHAVANTAGE_KEY }}
+          ALPHA_VANTAGE_KEY: ${{ secrets.ALPHA_VANTAGE_KEY }}
+          AV_KEY: ${{ secrets.AV_KEY }}
+          FRED_KEY: ${{ secrets.FRED_KEY }}
+          FRED_API_KEY: ${{ secrets.FRED_API_KEY }}
+          EVDS_KEY: ${{ secrets.EVDS_KEY }}
+        run: python3 tools/check_keys.py
+      - name: Yayınla
+        run: |
+          git config user.name "Portföy veri botu"
+          git config user.email "portfoy-bot@users.noreply.github.com"
+          git add data/_diag/keys.json
+          git diff --cached --quiet && exit 0
+          git commit -m "Anahtar kontrolü $(date -u +%F)"
+          for i in 1 2 3; do git pull --rebase -X theirs origin main && git push origin HEAD:main && exit 0; sleep $((i*7)); done
