@@ -1,16 +1,18 @@
-{"publishedAt":"2026-09-30T06:17:26Z","asOf":"2026-09-29","title":"Çipler ve altın S&P'yi geride bıraktı; bugün PCE, akşam Micron bilançosu var","sections":[
+{"publishedAt":"2026-10-06T06:15:39Z","asOf":"2026-09-30","title":"Fiyat verisi 30 Eylül'de kaldı; gündemde yarın akşamki FOMC tutanakları var","sections":[
 {"h":"Dün","items":[
-"Salı toparlanma günüydü: izlenen 12 enstrümandan 8'i artıda kapandı, S&P 500 (SPY) ise %0,18 geriledi.",
-"Günün yıldızı ASML (%+3,56); yarı iletkenlerde VRT %+1,79, SOXX %+1,19, SMH %+1,15. Değerli metaller de tepki verdi: IAU %+1,32, SLV %+0,96.",
-"Ekside kalanlar sınırlı: DELL %-0,71, AGNG %-0,64, CRDO %-0,17, AMD %-0,05.",
-"VIX 16,04 ile sakin; 10 yıllık ABD faizi %5,26 ile zirve bölgesinde. Fed'den Williams'ın temkinli mesajı sonrası Ekim artırımı olasılığı ~%50'ye geriledi."]},
+"Son kapanış günü 30 Eylül (fiyat akışı o günden beri güncellenmedi): izlenen 12 enstrümandan 7'si artıda kapandı; S&P 500 karşılaştırması veride yok.",
+"Önde gidenler: XBI %+1,21, CRDO %+0,95, AMD %+0,91, SMH %+0,72, SOXX %+0,51.",
+"Geride kalanlar: VRT %-2,28, SLV %-1,87, ASML %-1,13, COPX %-0,73, IAU %-0,52.",
+"Arka plan: VIX 16,02 ile sakin; 10 yıllık ABD faizi %5,26 ile 2007'den bu yana en yüksek bölgede, bu da metaller ve biyotek için baskı unsuru olmaya devam ediyor."
+]},
 {"h":"Bugün","items":[
-"15:30 TRT: ABD çekirdek PCE. Faiz beklentisini doğrudan etkileyeceği için en çok faize duyarlı IAU, SLV, XBI ve AGNG'yi ilgilendiriyor.",
-"23:30 TRT: Micron bilançosu (kapanış sonrası). Bellek talebine dair yorumlar SMH ve SOXX'in yarınki açılışına yön verebilir.",
-"Yarın 17:00 TRT: ABD ISM imalat PMI; metaller, COPX ve faize duyarlı fonlar için önemli. Novo'nun kalp yetmezliği çalışmasında da (AGNG) tahmini bitiş tarihi yarın.",
-"Gece Çin imalat PMI'ı 50,1 ile büyüme bölgesine döndü; bakır madencilerinden oluşan COPX için destekleyici bir veri."]},
+"Bugün takvimde portföyü doğrudan ilgilendiren planlı bir veri ya da bilanço görünmüyor.",
+"Yarın (7 Ekim) 21:00 TRT'de FOMC tutanakları açıklanacak; faiz artırımı ihtimaline dair ton, faize duyarlı IAU, SLV, XBI ve AGNG ile yüksek çarpanlı SMH/SOXX için belirleyici olabilir.",
+"Fiyat ve haber akışı 30 Eylül'den beri yenilenmediği için aradaki günlerin hareketleri bu brifinge yansımadı; pozisyonlara bakmadan önce güncel fiyatları kontrol etmekte fayda var."
+]},
 {"h":"Teknik durum","items":[
-"Alım bölgesinde: AGNG 36,68 (bölge 36,49–36,75) ve COPX 85,48 (bölge 84,32–84,93'ün hemen üstünde).",
-"Stop'a yakın: AGNG fiyatı stop seviyesi 35,83'e yalnızca ~%2,3 uzaklıkta; hedef/risk oranı da 0,84 ile zayıf.",
-"Aşırı ısınmış: AMD 607,57 (RSI 66, alım bölgesinin ~%12 üstünde, ilk hedef 639) ve DELL 539,59 (ilk hedef 595,51).",
-"Hedefe yakın: SLV 55,48 ilk hedef 56,98'e ~%2,7; ASML 1.834,39 ilk hedef 1.896,35'e ~%3,4 mesafede."]}]}
+"Stop'a yakın: AGNG 36,69 ile alım bölgesinde (36,50–36,75) ama stop 35,84'e yalnızca %2,3 uzaklıkta; RSI 40.",
+"Alım bölgesinde: XBI 158,70 (bölge 155,88–159,31, stop 152,10, ~%4,2 mesafe) ve COPX 84,86 (bölge 82,76–84,93, stop 80,39, ~%5,3 mesafe).",
+"Aşırı ısınmış: AMD 613,12 ile planlanan alım bölgesinin (488–511) çok üzerinde, RSI 66, ilk hedef 639; DELL 539,82, ilk hedef 563,41.",
+"SMH 611,25 ile ilk hedef 624,80'e ~%2,2 mesafede (RSI 63); IAU ve SLV bölgelerinin üzerinde ama RSI 39 ile ivme zayıf."
+]}]}
