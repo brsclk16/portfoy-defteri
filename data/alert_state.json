@@ -7,16 +7,16 @@
   "DELL": "Aşırı ısınmış",
   "IAU": "Bölgenin üzerinde",
   "SLV": "Bölgenin üzerinde",
-  "SMH": "Bölgenin üzerinde",
+  "SMH": "Aşırı ısınmış",
   "SOXX": "Bölgenin üzerinde",
   "VRT": "Fiyat alım bölgesinde",
-  "XBI": "Bölgenin üzerinde",
+  "XBI": "Fiyat alım bölgesinde",
   "ASML": "Bölgenin üzerinde"
  },
  "levels": {},
  "tp": {},
  "day": "",
- "updatedAt": "2026-10-06T14:21:06.149Z",
+ "updatedAt": "2026-10-06T15:12:49.501Z",
  "rules": {},
  "trails": {}
 }
