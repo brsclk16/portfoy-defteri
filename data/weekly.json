@@ -1,6 +1,89 @@
 {
  "reports": [
   {
+   "id": "2026-W40",
+   "weekEnd": "2026-10-02",
+   "range": "28 Eylül–2 Ekim 2026",
+   "publishedAt": "2026-10-06T07:11:08Z",
+   "title": "ASML ve çip fonları öne çıktı, gümüş ve altın sert geriledi",
+   "movers": [
+    {
+     "t": "ASML",
+     "pct": 7.07
+    },
+    {
+     "t": "SMH",
+     "pct": 3.96
+    },
+    {
+     "t": "CRDO",
+     "pct": 3.64
+    },
+    {
+     "t": "SOXX",
+     "pct": 2.83
+    },
+    {
+     "t": "AMD",
+     "pct": 0.52
+    },
+    {
+     "t": "DELL",
+     "pct": -0.07
+    },
+    {
+     "t": "XBI",
+     "pct": -0.39
+    },
+    {
+     "t": "VRT",
+     "pct": -0.43
+    },
+    {
+     "t": "COPX",
+     "pct": -0.95
+    },
+    {
+     "t": "AGNG",
+     "pct": -2.56
+    },
+    {
+     "t": "IAU",
+     "pct": -3.36
+    },
+    {
+     "t": "SLV",
+     "pct": -5.85
+    }
+   ],
+   "summary": [
+    "Hafta zor başladı ama çip tarafı güçlü bitirdi. Pazartesi petrolün İran gerginliğiyle 100 doları aşması ve tahvil faizlerinin 19 yılın zirvesine çıkması tüm riskli varlıkları baskıladı; perşembe ve cuma gelen zayıf veriler tabloyu tersine çevirdi. Portföyün en iyisi %7,1 ile ASML, en kötüsü %5,9 düşüşle gümüş (SLV) oldu. S&P 500 (SPY) haftayı %0,2 ekside kapatırken 12 enstrümandan 5'i artıda kaldı; eşit ağırlıkla bakıldığında portföy ortalaması yaklaşık %0,4 artı, yani endeksin biraz önünde.",
+    "Yarı iletkenlerde SMH %4,0, SOXX %2,8 yükseldi. Micron'un beklentiyi rahat aşan sonuçları ve 61,5 milyar dolarlık yeni çeyrek rehberi bellek tarafındaki talebin sürdüğünü gösterdi; ASML 14 Ekim bilançosu öncesi ilgiyle haftanın yıldızı oldu. Credo pazartesi yönetici satışlarıyla %9 düştükten sonra hızla toparlanıp haftayı %3,6 artıda bitirdi. AI altyapısında karışık bir hafta vardı: AMD (+%0,5) ve Dell (−%0,1) pazartesi kaybını ancak telafi edebildi, Vertiv %0,4 geride kaldı. Biyotekte XBI %0,4, AGNG %2,6 geriledi; yüksek faiz ve sağlık hisselerindeki zayıflık sürdü. Değerli metaller en zor haftayı yaşadı: ons altın %3,4 düşüşle 4.142 dolara indi, IAU %3,4 kaybetti; faiz artırımı beklentisinin perşembeden itibaren azalması bile metalleri toparlamaya yetmedi. Bakır madencileri (COPX) Çin'de imalat PMI'ının yeniden 50'nin üzerine çıkmasına rağmen %1,0 geriledi, ancak cuma günü %3'lük tepkiyle haftayı kayıplarının bir kısmını geri alarak kapattı.",
+    "Dolar/TL haftada %0,3 yükselerek 49,11'e çıktı; TL bazında tüm pozisyonlara bu kadar ek getiri yansıdı, bu da SPY'ın küçük kaybını TL'de sıfırın biraz üzerine taşıdı. Çeşitlendirme bu hafta beklenen şekilde çalışmadı: faiz şoku hem çipleri hem metalleri aynı anda vurdu, savunma rolündeki altın ve gümüş ise tam tersine kaybın en büyük kaynağı oldu. Haftanın getirisini neredeyse tamamen çip ağırlıklı pozisyonlar taşıdı."
+   ],
+   "highlights": [
+    "Micron (SMH/SOXX'in büyük holdingi): mali 4. çeyrek geliri 54,2 milyar $ ile beklentiyi (%5,6) aştı, yeni çeyrek için 61,5 milyar $ gelir rehberi verdi; hisse ilk tepkide yatay kaldı.",
+    "ASML (+%7,1): 1.744 $'dan 1.867 $'a çıktı; 14 Ekim'deki 3. çeyrek bilançosu öncesi çip ekipmanı hisselerine talep arttı.",
+    "AMD (+%0,5): Fei-Fei Li'nin kurduğu World Labs'i yaklaşık 8,2 milyar $'lık hisse takasıyla alacağını açıkladı; pazartesi %3,6 düşen hisse cuma 633,9 $ ile haftayı artıda kapattı.",
+    "Nvidia hisse geri alım yetkisini 150 milyar $ artırarak 235 milyar $'a çıkardı (SMH ve SOXX'in en büyük pozisyonlarından).",
+    "Vertiv: Wells Fargo 340 $ hedef fiyat ve 'Overweight' notuyla kapsama başladı; hisse 252 $ ile bu hedefin yaklaşık %26 altında.",
+    "Sağlıkta anlaşma trafiği sürdü: Novo, Hengrui'nin ağızdan alınan GLP-1/GIP ilacını 2,6 milyar $'a kadar lisansladı; AstraZeneca Summit Therapeutics'in ~%12'sini 2 milyar $'a aldı (AGNG, XBI)."
+   ],
+   "nextWeek": [
+    "7 Ekim Çarşamba 21:00 TSİ: FOMC tutanakları — faiz artırımı tartışmasının tonu IAU, SLV, XBI ve AGNG için belirleyici.",
+    "9 Ekim Cuma: ABD Michigan tüketici güveni (öncü) — zayıf istihdamın ardından talep tarafına dair ilk sinyal.",
+    "14 Ekim Çarşamba: ASML 3. çeyrek bilançosu (rehber 11–12 milyar €) — doğrudan pozisyon; SMH ve SOXX için de 2027 sipariş görünürlüğü kritik.",
+    "14 Ekim Çarşamba: ABD TÜFE (önceki yıllık %3,4) — 28 Ekim Fed kararı öncesindeki en önemli veri; faize duyarlı tüm pozisyonları etkiler.",
+    "15 Ekim Perşembe: TSMC 3. çeyrek bilançosu — SMH'nin en büyük holdinglerinden; AI çip talebinin teyidi açısından önemli."
+   ],
+   "watch": [
+    "Faiz riski sürüyor: 10 yıllık ABD faizi %5,2–5,3 bandında, 2007'den beri en yüksek bölgede. Zayıf istihdam Ekim artırımı olasılığını düşürdü ama 14 Ekim'deki TÜFE sıcak gelirse metaller ve biyotek yeniden baskı görebilir.",
+    "Çip yoğunlaşması: ASML, SMH, SOXX, AMD ve CRDO birlikte hareket ediyor; ASML'nin bilanço öncesi %7'lik yükselişi beklenti çıtasını yükseltti, rehberde hayal kırıklığı tüm bu pozisyonlara aynı anda yansır.",
+    "Gümüş oynaklığı yüksek: SLV haftada %5,9 düştü ve 52 haftalık zirvesinin (109,8 $) yaklaşık yarısında işlem görüyor; petrol ve faiz haberlerine çok duyarlı.",
+    "Credo'da sert salınımlar: pazartesi %9 düşüş, perşembe-cuma toplam ~%12 yükseliş; yöneticilerin planlı satışları sürüyor."
+   ]
+  },
+  {
    "id": "2026-W39",
    "weekEnd": "2026-09-25",
    "range": "21–25 Eylül 2026",
