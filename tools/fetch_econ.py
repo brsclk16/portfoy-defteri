@@ -17,6 +17,7 @@ BROWSER = {'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/
            'Accept': 'application/json, text/plain, */*', 'Accept-Language': 'en-US,en;q=0.9',
            'Origin': 'https://www.nasdaq.com', 'Referer': 'https://www.nasdaq.com/'}
 TODAY = dt.datetime.now(dt.timezone.utc).date()
+PROBE = '--dry' in sys.argv
 BACK, FWD = 10, 35
 DEF_HOUR = {'US': '12:30', 'TR': '07:00'}
 
@@ -27,7 +28,7 @@ RULES = [
     ('US', r'^(?!.*adp)(?!.*private)non.?farm payrolls?(?!.*private)', 'Tarım dışı istihdam', 3, 'labor-market', 'K', 1, 1),
     ('US', r'^unemployment rate', 'İşsizlik oranı', 3, 'labor-market', '%', 1, -1),
     ('US', r'average hourly earnings.*(mom|m/m)', 'Ortalama saatlik kazanç (aylık)', 3, 'labor-market', '%', 1, None),
-    ('US', r'adp (non.?farm )?employment', 'ADP özel sektör istihdamı', 3, 'labor-market', 'K', 1, 1),
+    ('US', r'^(?!.*weekly)adp (non.?farm )?employment(?!.*weekly)', 'ADP özel sektör istihdamı', 3, 'labor-market', 'K', 1, 1),
     ('US', r'jolts', 'JOLTS iş ilanları', 3, 'labor-market', 'M', 1, 1),
     ('US', r'core pce.*(mom|m/m)', 'Çekirdek PCE (aylık)', 3, 'inflation', '%', 1, -1),
     ('US', r'^pce price index.*(yoy|y/y)', 'PCE enflasyonu (yıllık)', 3, 'inflation', '%', 1, -1),
@@ -145,6 +146,10 @@ def nasdaq(diag):
                 break
             continue
         rows = ((j.get('data') or {}).get('rows')) or []
+        if PROBE and abs(i) <= 4:
+            for r in rows:
+                if COUNTRY.get(str(r.get('country') or '').strip().lower()):
+                    print('PROBE', d, r.get('gmt'), r.get('country'), '|', r.get('eventName'), '|', r.get('actual'), r.get('consensus'), r.get('previous'))
         for r in rows:
             c = COUNTRY.get(str(r.get('country') or '').strip().lower())
             if not c:
