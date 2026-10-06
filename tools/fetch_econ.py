@@ -2,13 +2,15 @@
 """Ekonomik takvim — ücretsiz kaynaklardan data/econ.json (GitHub Actions'ta çalışır).
 
 Kaynaklar (bağımsız; biri düşerse diğeriyle devam edilir):
-  nasdaq  Nasdaq.com ekonomik takvim API'si (anahtarsız) — ABD ve Türkiye; gerçekleşen, beklenti, önceki
+  nasdaq  Nasdaq.com ekonomik takvim API'si (anahtarsız) — ABD; gerçekleşen, beklenti, önceki (Türkiye'yi kapsamıyor)
   ff      ForexFactory haftalık JSON'u (anahtarsız) — yalnızca bu hafta, ABD; önem derecesi, beklenti, önceki
 Seçim: yalnızca aşağıdaki KURALLAR listesindeki göstergeler alınır (önem derecesi ve Türkçe ad buradan gelir).
 Birleştirme: önceki econ.json'daki olaylar korunur, yeni gelen dolu alanlar üzerine yazılır; [bugün−10, bugün+35] dışı atılır.
-Kullanım: python3 tools/fetch_econ.py [--dry]
+Kullanım: python3 tools/fetch_econ.py [--dry] [--probe]   (--probe: Nasdaq ham satırlarını basar)
+TR olayları: önceki econ.json'dan korunur (TÜİK/TCMB takvimi); Nasdaq ve ForexFactory Türkiye vermez.
 Çıktı: data/econ.json, tanı: data/_diag/econ.json"""
 import datetime as dt, html, json, os, re, sys, time, traceback
+from zoneinfo import ZoneInfo
 
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 import fetch_ext as fx
@@ -17,7 +19,8 @@ BROWSER = {'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/
            'Accept': 'application/json, text/plain, */*', 'Accept-Language': 'en-US,en;q=0.9',
            'Origin': 'https://www.nasdaq.com', 'Referer': 'https://www.nasdaq.com/'}
 TODAY = dt.datetime.now(dt.timezone.utc).date()
-PROBE = '--dry' in sys.argv
+PROBE = '--probe' in sys.argv
+ET = ZoneInfo('America/New_York')
 BACK, FWD = 10, 35
 DEF_HOUR = {'US': '12:30', 'TR': '07:00'}
 
@@ -82,6 +85,12 @@ def match(c, name):
     return None
 
 
+def michigan_tag(e):
+    if e and e['tr'] == 'Michigan tüketici güveni':
+        e['tr'] += ' (öncü)' if int(e['date'][8:10]) <= 15 else ' (nihai)'
+    return e
+
+
 def num(s):
     if s is None:
         return None, None
@@ -126,15 +135,15 @@ def build(c, name, when, act, fc, prev, src):
         unit = unit if unit in ('%', 'K', 'M', 'B') else None
     sur = round(a - f, 4) if a is not None and f is not None else None
     better = (sur * good > 0) if (sur not in (None, 0) and good) else None
-    return {'date': when, 'c': c, 'name': name.strip(), 'tr': tr, 'imp': imp, 'cat': cat, 'act': a, 'fc': f, 'prev': p,
-            'unit': unit, 'sur': sur, 'better': better, 'period': period(dt.date.fromisoformat(when[:10]), lag), '_src': src}
+    return michigan_tag({'date': when, 'c': c, 'name': name.strip(), 'tr': tr, 'imp': imp, 'cat': cat, 'act': a, 'fc': f, 'prev': p,
+            'unit': unit, 'sur': sur, 'better': better, 'period': period(dt.date.fromisoformat(when[:10]), lag), '_src': src})
 
 
 def nasdaq(diag):
     out, sample, fails = [], None, 0
-    for i in range(-BACK, FWD + 1):
+    for i in range(-BACK + 1, FWD + 2):
         d = TODAY + dt.timedelta(days=i)
-        if d.weekday() == 6:
+        if d.weekday() == 0:  # pazartesi sorgusu pazar olaylarını getirir
             continue
         try:
             j = json.loads(fx.get(f'https://api.nasdaq.com/api/calendar/economicevents?date={d.isoformat()}', headers=BROWSER, tries=2, timeout=20))
@@ -156,9 +165,14 @@ def nasdaq(diag):
                 continue
             if sample is None:
                 sample = r
+            # Nasdaq: sorgu günü D'nin satırları D−1 gününe ait; 'gmt' alanı aslında New York saati (CI incelemesiyle doğrulandı).
+            ev_day = d - dt.timedelta(days=1)
             t = str(r.get('gmt') or r.get('time') or '').strip()
-            hm = t if re.fullmatch(r'\d{1,2}:\d{2}', t) else DEF_HOUR[c]
-            when = f'{d.isoformat()}T{int(hm.split(":")[0]):02d}:{hm.split(":")[1]}:00Z'
+            if re.fullmatch(r'\d{1,2}:\d{2}', t):
+                hh, mm = map(int, t.split(':'))
+                when = dt.datetime(ev_day.year, ev_day.month, ev_day.day, hh, mm, tzinfo=ET).astimezone(dt.timezone.utc).strftime('%Y-%m-%dT%H:%M:00Z')
+            else:
+                when = f'{ev_day.isoformat()}T{DEF_HOUR[c]}:00Z'
             e = build(c, str(r.get('eventName') or r.get('event') or ''), when, r.get('actual'), r.get('consensus'), r.get('previous'), 'nasdaq')
             if e:
                 out.append(e)
