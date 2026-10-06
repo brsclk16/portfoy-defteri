@@ -1,0 +1,19 @@
+{
+ "at": "2026-10-06T08:02:54Z",
+ "alphavantage": {
+  "ok": true,
+  "secret": "ALPHAVANTAGE_KEY",
+  "http": 200,
+  "why": null
+ },
+ "fred": {
+  "ok": false,
+  "secret": "FRED_KEY",
+  "http": 400,
+  "why": "{\"error_code\":400,\"error_message\":\"Bad Request.  The value for variable api_key is not registered.  Read https:\\/\\/fred.stlouisfed.org\\/docs\\/api\\/api_key.html for more information.\"}"
+ },
+ "evds": {
+  "ok": false,
+  "why": "secret yok veya workflow env içinde değil"
+ }
+}
