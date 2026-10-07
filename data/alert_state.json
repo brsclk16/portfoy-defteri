@@ -10,13 +10,13 @@
   "SMH": "Bölgenin üzerinde",
   "SOXX": "Bölgenin üzerinde",
   "VRT": "Bölgenin üzerinde",
-  "XBI": "Bölgenin üzerinde",
-  "ASML": "Fiyat alım bölgesinde"
+  "XBI": "Fiyat alım bölgesinde",
+  "ASML": "Bölgenin üzerinde"
  },
  "levels": {},
  "tp": {},
  "day": "",
- "updatedAt": "2026-10-07T19:11:45.487Z",
+ "updatedAt": "2026-10-07T20:12:25.211Z",
  "rules": {},
  "trails": {}
 }
