@@ -2,7 +2,7 @@
  "plans": {
   "AGNG": "Fiyat alım bölgesinde",
   "AMD": "Aşırı ısınmış",
-  "COPX": "Bölgenin üzerinde",
+  "COPX": "Fiyat alım bölgesinde",
   "CRDO": "Bölgenin üzerinde",
   "DELL": "Aşırı ısınmış",
   "IAU": "Bölgenin üzerinde",
@@ -10,13 +10,13 @@
   "SMH": "Bölgenin üzerinde",
   "SOXX": "Bölgenin üzerinde",
   "VRT": "Bölgenin üzerinde",
-  "XBI": "Fiyat alım bölgesinde",
+  "XBI": "Bölgenin üzerinde",
   "ASML": "Bölgenin üzerinde"
  },
  "levels": {},
  "tp": {},
  "day": "",
- "updatedAt": "2026-10-07T16:12:25.431Z",
+ "updatedAt": "2026-10-07T17:11:59.638Z",
  "rules": {},
  "trails": {}
 }
