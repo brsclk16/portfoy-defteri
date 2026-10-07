@@ -29,7 +29,7 @@
  },
  "deposit": {
   "annualGross": 42,
-  "note": "Brüt, sabit oran varsayımı. TCMB 1-3 ay vadeli TL mevduat ortalaması 4 Eylül 2026 haftasında %37,3; bir yıl önce ~%47,7. Ayarlardan değiştirilebilir."
+  "note": "Brüt, sabit oran varsayımı. TCMB 1-3 ay vadeli TL mevduat ortalaması 25 Eylül 2026 haftasında %36,9 (2023'ten beri ilk kez %37'nin altında). Ayarlardan değiştirilebilir."
  },
  "gramPerOz": 31.1035,
  "yiufe": {
