@@ -2,7 +2,7 @@
 """Ücretsiz içgörü verisi (GitHub Actions'ta çalışır) — Bigdata.com kredisi bittiğinde boş kalan dosyalar için.
 
 Parçalar (her biri bağımsız; biri düşerse diğerleri yazılır; hiçbir kaynak değer veremezse eski kayıt korunur):
-  analysts   data/analysts.json   Nasdaq.com hedef fiyat + al/tut/sat (yedek: Yahoo financialData/recommendationTrend);
+  analysts   data/analysts.json   Yahoo Finance ortalama hedef fiyat + al/tut/sat (yedek: Nasdaq.com/Zacks konsensüsü);
                                   not/hedef değişiklikleri: Yahoo upgradeDowngradeHistory (son 14 gün)
   valuation  data/valuation.json  pe: Yahoo trailingPE; fpe: fiyat ÷ Nasdaq önümüzdeki 4 çeyrek EPS konsensüsü;
                                   eg: (o toplam ÷ son 4 çeyrek gerçekleşen EPS − 1)×100; peg = pe ÷ eg (0 < eg ≤ 100)
@@ -181,28 +181,27 @@ def part_analysts(diag):
     ok = 0
     for t in syms:
         cur = D.setdefault(t, {'hist': [], 'changes': []})
-        row = None
-        try:
-            c = (nasdaq(f'analyst/{urllib.parse.quote(us(t))}/targetprice') or {}).get('consensusOverview') or {}
-            pt = num(c.get('priceTarget'))
-            if pt:
-                row = [TODAY.isoformat(), pt, int(num(c.get('buy')) or 0), int(num(c.get('hold')) or 0), int(num(c.get('sell')) or 0)]
-                cur['src'] = 'Nasdaq.com (Zacks konsensüsü)'
-        except Exception as e:
-            diag.setdefault('errs', []).append(f'{t} nasdaq: {type(e).__name__} {str(e)[:60]}')
-        y = None
+        row, y = None, None
         try:
             y = yahoo_stock(t)
-        except Exception as e:
-            diag.setdefault('errs', []).append(f'{t} yahoo: {type(e).__name__} {str(e)[:60]}')
-        if row is None and y:
             fd = y.get('financialData') or {}
             tr = ((y.get('recommendationTrend') or {}).get('trend') or [{}])[0]
             pt = num(fd.get('targetMeanPrice'))
-            if pt and tr:
+            if pt and tr and tr.get('period') == '0m':
                 row = [TODAY.isoformat(), pt, int((tr.get('strongBuy') or 0) + (tr.get('buy') or 0)), int(tr.get('hold') or 0),
                        int((tr.get('sell') or 0) + (tr.get('strongSell') or 0))]
                 cur['src'] = 'Yahoo Finance'
+        except Exception as e:
+            diag.setdefault('errs', []).append(f'{t} yahoo: {type(e).__name__} {str(e)[:60]}')
+        if row is None:
+            try:
+                c = (nasdaq(f'analyst/{urllib.parse.quote(us(t))}/targetprice') or {}).get('consensusOverview') or {}
+                pt = num(c.get('priceTarget'))
+                if pt:
+                    row = [TODAY.isoformat(), pt, int(num(c.get('buy')) or 0), int(num(c.get('hold')) or 0), int(num(c.get('sell')) or 0)]
+                    cur['src'] = 'Nasdaq.com (Zacks konsensüsü)'
+            except Exception as e:
+                diag.setdefault('errs', []).append(f'{t} nasdaq: {type(e).__name__} {str(e)[:60]}')
         if row:
             h = [r for r in cur.get('hist', []) if r[0] != row[0]]
             h.append(row)
@@ -231,7 +230,8 @@ def part_analysts(diag):
                 new.append({'d': d.isoformat(), 'firm': g.get('firm'), 'action': a, 'from': g.get('fromGrade') or None, 'to': g.get('toGrade') or None,
                             'ptFrom': ptA or None, 'ptTo': ptB or None, 'url': f'https://finance.yahoo.com/quote/{us(t)}/analysis/'})
             have = {(c['d'], c.get('firm'), c.get('action')) for c in cur.get('changes', [])}
-            add = [c for c in new if (c['d'], c['firm'], c['action']) not in have]
+            have |= {(c['d'], c.get('action'), c.get('ptTo')) for c in cur.get('changes', []) if c.get('ptTo')}
+            add = [c for c in new if (c['d'], c['firm'], c['action']) not in have and (c['d'], c['action'], c['ptTo']) not in have]
             if add:
                 cur['changes'] = sorted(add + cur.get('changes', []), key=lambda c: c['d'], reverse=True)[:30]
                 diag.setdefault('changes', {})[t] = len(add)
