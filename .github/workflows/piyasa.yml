@@ -1,0 +1,43 @@
+name: Piyasa şeridi ve ekonomik takvim (ücretsiz yedek kaynaklar)
+# Yedek hat: zamanlanmış "Portföy piyasa verisi" görevi Twelve Data / Bigdata.com'dan veri alamadığında bu iş akışını
+# workflow_dispatch ile tetikler. Kendi zamanlaması yoktur.
+on:
+  pull_request:
+    paths: ['tools/fetch_mstrip.py', 'tools/fetch_econ.py', '.github/workflows/piyasa.yml']
+  workflow_dispatch:
+    inputs:
+      parca:
+        description: 'Hangi parça: hepsi | serit | takvim'
+        required: false
+        default: 'hepsi'
+permissions:
+  contents: write
+concurrency:
+  group: ${{ github.event_name == 'pull_request' && format('piyasa-pr-{0}', github.ref) || 'repo-yazma' }}
+  cancel-in-progress: false
+jobs:
+  topla:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with: {python-version: '3.12'}
+      - name: Piyasa şeridi
+        if: github.event_name == 'pull_request' || inputs.parca != 'takvim'
+        env:
+          TWELVEDATA_KEY: ${{ secrets.TWELVEDATA_KEY }}
+        run: python3 -u tools/fetch_mstrip.py ${{ github.event_name == 'pull_request' && '--dry' || '' }}
+      - name: Ekonomik takvim
+        if: always() && (github.event_name == 'pull_request' || inputs.parca != 'serit')
+        run: python3 -u tools/fetch_econ.py ${{ github.event_name == 'pull_request' && '--dry' || '' }}
+      - name: Yayınla
+        if: github.event_name != 'pull_request'
+        run: |
+          git config user.name "Portföy veri botu"
+          git config user.email "portfoy-bot@users.noreply.github.com"
+          git add data/mstrip.json data/econ.json data/_diag
+          git diff --cached --quiet && { echo "değişiklik yok"; exit 0; }
+          git commit -m "Piyasa şeridi ve takvim $(TZ=Europe/Istanbul date '+%F %H:%M') TRT"
+          for i in 1 2 3 4 5; do git pull --rebase -X theirs origin main && git push origin HEAD:main && exit 0; sleep $((i*7)); done
+          exit 1
