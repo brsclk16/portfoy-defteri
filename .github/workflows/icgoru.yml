@@ -1,0 +1,19 @@
+name: İçgörü verisi (ücretsiz kaynaklar)
+on:
+  pull_request:
+    paths: ['tools/fetch_free.py', '.github/workflows/icgoru.yml']
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  topla:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with: {python-version: '3.12'}
+      - name: İnceleme
+        env:
+          FINNHUB_KEY: ${{ secrets.FINNHUB_KEY || secrets.FINNHUB }}
+        run: python3 -u tools/fetch_free.py --probe
