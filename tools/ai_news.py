@@ -46,13 +46,23 @@ def ts(s):
         return None
 
 
+class _KeepPost(urllib.request.HTTPRedirectHandler):
+    """Yönlendirmede POST gövdesini ve başlıkları koru (urllib varsayılanı GET'e çevirir)."""
+    def redirect_request(self, req, fp, code, msg, headers, newurl):
+        print(f'yönlendirme {code} → {newurl}')
+        return urllib.request.Request(newurl, data=req.data, headers=dict(req.header_items()), method='POST')
+
+
+OPENER = urllib.request.build_opener(_KeepPost)
+
+
 def ask(model, user):
     body = json.dumps({'model': model, 'temperature': 0.2, 'max_tokens': 3500,
                        'messages': [{'role': 'system', 'content': SYSTEM}, {'role': 'user', 'content': user}]}).encode()
     req = urllib.request.Request(URL, data=body, headers={'Authorization': f'Bearer {TOKEN}', 'Content-Type': 'application/json',
                                                           'Accept': 'application/vnd.github+json', 'X-GitHub-Api-Version': '2022-11-28'})
     try:
-        with urllib.request.urlopen(req, timeout=120) as r:
+        with OPENER.open(req, timeout=120) as r:
             raw = r.read().decode('utf-8', 'replace')
             st = r.status
     except urllib.error.HTTPError as e:
