@@ -1,0 +1,37 @@
+name: Aylık rapor (PDF → Telegram; Claude görevinin yerine)
+on:
+  schedule:
+    - cron: '53 6 1 * *'   # her ayın 1'i, TR 09:53
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  rapor:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with: {python-version: '3.12'}
+      - name: Rapor
+        id: r
+        run: |
+          sudo apt-get install -y -qq fonts-dejavu-core >/dev/null || true
+          pip install -q reportlab matplotlib
+          python3 tools/monthly_report.py > /tmp/out.json
+          cat /tmp/out.json
+      - name: Telegram
+        env:
+          TG_TOKEN: ${{ secrets.TG_TOKEN }}
+          TG_CHAT: ${{ secrets.TG_CHAT }}
+        run: |
+          python3 - <<'PY'
+          import json, subprocess
+          o = json.loads(open('/tmp/out.json').read().strip().splitlines()[-1])
+          f = lambda v: '—' if v is None else f'{v:+.2f}%'
+          b, w = o.get('best') or ['—', None], o.get('worst') or ['—', None]
+          txt = (f"📊 {o['month']} raporu\nEşit ağırlıklı portföy: {f(o.get('eqw'))} (dolar), {f(o.get('eqwTL'))} (TL)\n"
+                 f"S&P 500: {f(o.get('spy'))} · Dolar/TL: {f(o.get('usdtry'))}\nEn iyi: {b[0]} {f(b[1])} · En zayıf: {w[0]} {f(w[1])}\n"
+                 "https://brsclk16.github.io/portfoy-defteri/#/portfoy/rapor")
+          subprocess.run(['python3', 'tools/tg.py', '--doc', o['pdf'], txt], check=False)
+          PY
