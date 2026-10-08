@@ -6,7 +6,7 @@ Girdi : data/news_raw.json (Haber toplayıcı), data/portfolio.json (enstrümanl
 Kural : Model yalnızca verilen başlık/özetlerden seçer ve Türkçe yazar; url, kaynak ve tarih ham maddeden alınır (model uyduramaz);
         ticker'lar portföy listesiyle süzülür. Model hata verirse hiçbir dosya değişmez.
 Kullanım: python3 tools/ai_news.py [--dry] [--hours 26]"""
-import datetime as dt, json, os, re, sys, time, unicodedata, urllib.request
+import datetime as dt, json, os, re, sys, time, unicodedata, urllib.error, urllib.request
 
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 import fetch_ext as fx
@@ -51,8 +51,16 @@ def ask(model, user):
                        'messages': [{'role': 'system', 'content': SYSTEM}, {'role': 'user', 'content': user}]}).encode()
     req = urllib.request.Request(URL, data=body, headers={'Authorization': f'Bearer {TOKEN}', 'Content-Type': 'application/json',
                                                           'Accept': 'application/vnd.github+json', 'X-GitHub-Api-Version': '2022-11-28'})
-    with urllib.request.urlopen(req, timeout=120) as r:
-        j = json.loads(r.read().decode())
+    try:
+        with urllib.request.urlopen(req, timeout=120) as r:
+            raw = r.read().decode('utf-8', 'replace')
+            st = r.status
+    except urllib.error.HTTPError as e:
+        raise RuntimeError(f'HTTP {e.code}: {e.read().decode("utf-8", "replace")[:300]}')
+    try:
+        j = json.loads(raw)
+    except Exception:
+        raise RuntimeError(f'HTTP {st}, JSON değil: {raw[:300]!r}')
     txt = j['choices'][0]['message']['content']
     m = re.search(r'\{.*\}', txt, re.S)
     return json.loads(m.group(0))
