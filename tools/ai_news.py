@@ -56,21 +56,45 @@ class _KeepPost(urllib.request.HTTPRedirectHandler):
 OPENER = urllib.request.build_opener(_KeepPost)
 
 
-def ask(model, user):
-    body = json.dumps({'model': model, 'temperature': 0.2, 'max_tokens': 3500,
-                       'messages': [{'role': 'system', 'content': SYSTEM}, {'role': 'user', 'content': user}]}).encode()
-    req = urllib.request.Request(URL, data=body, headers={'Authorization': f'Bearer {TOKEN}', 'Content-Type': 'application/json',
-                                                          'Accept': 'application/vnd.github+json', 'X-GitHub-Api-Version': '2022-11-28'})
+ENDPOINTS = [
+    ('https://models.github.ai/inference/chat/completions', {'Accept': 'application/json'}),
+    ('https://models.github.ai/inference/chat/completions', {'Accept': 'application/vnd.github+json', 'X-GitHub-Api-Version': '2022-11-28'}),
+    ('https://models.inference.ai.azure.com/chat/completions', {'Accept': 'application/json'}),
+]
+_GOOD = []
+
+
+def _post(url, extra, body):
+    h = {'Authorization': f'Bearer {TOKEN}', 'Content-Type': 'application/json', 'User-Agent': 'portfoy-defteri-ai-news'}
+    h.update(extra)
+    req = urllib.request.Request(url, data=body, headers=h, method='POST')
     try:
         with OPENER.open(req, timeout=120) as r:
-            raw = r.read().decode('utf-8', 'replace')
-            st = r.status
+            raw, st, ct = r.read().decode('utf-8', 'replace'), r.status, r.headers.get('Content-Type')
     except urllib.error.HTTPError as e:
-        raise RuntimeError(f'HTTP {e.code}: {e.read().decode("utf-8", "replace")[:300]}')
+        raise RuntimeError(f'{url} HTTP {e.code}: {e.read().decode("utf-8", "replace")[:300]}')
     try:
-        j = json.loads(raw)
+        return json.loads(raw)
     except Exception:
-        raise RuntimeError(f'HTTP {st}, JSON değil: {raw[:300]!r}')
+        raise RuntimeError(f'{url} HTTP {st} ({ct}), JSON değil: {raw[:200]!r}')
+
+
+def ask(model, user):
+    errs = []
+    for url, extra in (_GOOD or ENDPOINTS):
+        mdl = model.split('/')[-1] if 'azure' in url else model
+        body = json.dumps({'model': mdl, 'temperature': 0.2, 'max_tokens': 3500,
+                           'messages': [{'role': 'system', 'content': SYSTEM}, {'role': 'user', 'content': user}]}).encode()
+        try:
+            j = _post(url, extra, body)
+            if not _GOOD:
+                _GOOD.append((url, extra))
+            print(f'uç nokta: {url}')
+            break
+        except Exception as e:
+            errs.append(str(e)[:250])
+    else:
+        raise RuntimeError(' | '.join(errs))
     txt = j['choices'][0]['message']['content']
     m = re.search(r'\{.*\}', txt, re.S)
     return json.loads(m.group(0))
