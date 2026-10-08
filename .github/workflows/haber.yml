@@ -30,11 +30,12 @@ jobs:
           FMP_KEY: ${{ secrets.FMP_KEY || secrets.FINANCIALMODELINGPREP }}
           SEC_UA: ${{ secrets.SEC_UA }}
         run: python3 -u tools/fetch_news.py
-      - name: Haber özeti (GitHub Models, ücretsiz)
+      - name: Haber özeti (ücretsiz model — Gemini / GitHub Models)
         if: github.event_name != 'push'
         continue-on-error: true
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
         run: python3 -u tools/ai_news.py ${{ github.event_name == 'pull_request' && '--dry' || '' }}
       - name: Yayınla
         if: github.event_name != 'pull_request'

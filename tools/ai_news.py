@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Günlük haber özeti — GitHub Models (ücretsiz; GitHub Actions'ın GITHUB_TOKEN'ı ile) — Claude görevinin haber adımının yerine.
+"""Günlük haber özeti — ücretsiz model: Google Gemini (GEMINI_API_KEY secret'ı varsa) ya da GitHub Models (GITHUB_TOKEN) — Claude görevinin haber adımının yerine.
 
 Girdi : data/news_raw.json (Haber toplayıcı), data/portfolio.json (enstrümanlar ve holdingler, mevcut haberler)
 Çıktı : data/news_ai.json {"updatedAt","model","items":[haber dokümanı, ...]} ve data/portfolio.json → news (url'ye göre tekilleştirilerek)
@@ -56,7 +56,8 @@ class _KeepPost(urllib.request.HTTPRedirectHandler):
 OPENER = urllib.request.build_opener(_KeepPost)
 
 
-ENDPOINTS = [
+GEMINI = os.environ.get('GEMINI_API_KEY', '').strip()
+ENDPOINTS = ([('https://generativelanguage.googleapis.com/v1beta/openai/chat/completions', {'Accept': 'application/json', '_key': GEMINI})] if GEMINI else []) + [
     ('https://models.github.ai/inference/chat/completions', {'Accept': 'application/json'}),
     ('https://models.github.ai/inference/chat/completions', {'Accept': 'application/vnd.github+json', 'X-GitHub-Api-Version': '2022-11-28'}),
     ('https://models.inference.ai.azure.com/chat/completions', {'Accept': 'application/json'}),
@@ -65,7 +66,9 @@ _GOOD = []
 
 
 def _post(url, extra, body):
-    h = {'Authorization': f'Bearer {TOKEN}', 'Content-Type': 'application/json', 'User-Agent': 'portfoy-defteri-ai-news'}
+    extra = dict(extra)
+    key = extra.pop('_key', None) or TOKEN
+    h = {'Authorization': f'Bearer {key}', 'Content-Type': 'application/json', 'User-Agent': 'portfoy-defteri-ai-news'}
     h.update(extra)
     req = urllib.request.Request(url, data=body, headers=h, method='POST')
     try:
@@ -82,7 +85,8 @@ def _post(url, extra, body):
 def ask(model, user):
     errs = []
     for url, extra in (_GOOD or ENDPOINTS):
-        mdl = model.split('/')[-1] if 'azure' in url else model
+        mdl = (os.environ.get('GEMINI_MODEL', 'gemini-2.5-flash') if 'googleapis' in url
+               else model.split('/')[-1] if 'azure' in url else model)
         body = json.dumps({'model': mdl, 'temperature': 0.2, 'max_tokens': 3500,
                            'messages': [{'role': 'system', 'content': SYSTEM}, {'role': 'user', 'content': user}]}).encode()
         try:
@@ -92,7 +96,7 @@ def ask(model, user):
             print(f'uç nokta: {url}')
             break
         except Exception as e:
-            errs.append(str(e)[:250])
+            errs.append(str(e)[:400])
     else:
         raise RuntimeError(' | '.join(errs))
     txt = j['choices'][0]['message']['content']
@@ -101,8 +105,8 @@ def ask(model, user):
 
 
 def main():
-    if not TOKEN:
-        sys.exit('GITHUB_TOKEN yok')
+    if not (TOKEN or GEMINI):
+        sys.exit('GITHUB_TOKEN/GEMINI_API_KEY yok')
     P = fx.rd('portfolio.json', {}) or {}
     I = P.get('instruments') or {}
     port = sorted(I)
@@ -144,7 +148,7 @@ def main():
             used = m
             break
         except Exception as e:
-            err.append(f'{m}: {type(e).__name__} {str(e)[:200]}')
+            err.append(f'{m}: {type(e).__name__} {str(e)[:1500]}')
             time.sleep(3)
     if out is None:
         print(json.dumps({'errs': err}, ensure_ascii=False))
@@ -172,7 +176,7 @@ def main():
                'whyItMatters': str(x.get('whyItMatters') or '')[:400], 'tickers': tick,
                'holdings': [h for h in (x.get('holdings') or []) if h in allowed_h][:8], 'impact': imp, 'importance': importance,
                'source': it.get('source') or '', 'url': it['url'], 'publishedAt': p.strftime('%Y-%m-%dT%H:%M:%SZ'), 'fetchedAt': STAMP,
-               'ai': f'GitHub Models · {used}'}
+               'ai': ('Gemini' if _GOOD and 'googleapis' in _GOOD[0][0] else 'GitHub Models') + f' · {used}'}
         new.append(doc)
         seen_t.add(slug(title)[:30])
     print(json.dumps({'model': used, 'adaylar': len(cand), 'secilen': len(new), 'errs': err,
