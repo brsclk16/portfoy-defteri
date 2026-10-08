@@ -1,16 +1,33 @@
-{"publishedAt":"2026-10-07T06:16:46Z","asOf":"2026-10-06","title":"Çipler ve altın güçlü, XBI geride; bu akşamın odağı FOMC tutanakları","sections":[
-{"h":"Dün","items":[
-"6 Ekim kapanışında 12 enstrümandan 5'i artıda; S&P 500 rekor tazeledi (yüzde değişim veride yok).",
-"Önde: CRDO %+3,91, DELL %+3,90, AMD %+2,82; altın tarafında IAU %+0,71, SLV %+0,58 — faiz ve dolardaki gerileme metallere yaradı.",
-"Geride: XBI %-3,38 (en büyük holdingi Moderna'daki sert geri çekilme etkili), ASML %-1,39, AGNG %-0,56.",
-"Arka plan: VIX 15,05 ile sakin; 10 yıllık ABD faizi %5,31 (5 Ekim) ile hâlâ yüksek bölgede."]},
-{"h":"Bugün","items":[
-"21:00 TRT: FOMC tutanakları. Fed'in sıkı duruşuna dair ipuçları faizleri, dolayısıyla IAU/SLV ile faize duyarlı XBI ve AGNG'yi doğrudan ilgilendiriyor.",
-"Çip cephesi gündemde: Marvell'in hedef yükseltmesi CRDO için olumlu emsal; SpaceX'in Nvidia çipleri için borç arayışı SMH/SOXX'a talep sinyali.",
-"Samsung'un öncü 3. çeyrek rakamları bellek fiyatları için ilk test olacak; zayıf gelirse Micron ağırlığı nedeniyle SOXX/SMH etkilenebilir.",
-"Önümüzdeki 48 saatte takvimde başka önemli olay yok; TSMC bilançosu 15 Ekim'de."]},
-{"h":"Teknik durum","items":[
-"Alım bölgesinde: AGNG 35,90 (bölge 35,69–35,94), VRT 253,21 (248,55–254,05), COPX 86,26 (82,94–85,98, üst sınırın hemen üzerinde).",
-"Aşırı ısınmış: AMD 649,55 (RSI 72, hedef-1 682,61) ve DELL 573,83 (alım bölgesi 489–522'nin çok üzerinde).",
-"Stop'a en yakın: AGNG — fiyat 34,80 stop'a yaklaşık %3,1 mesafede, RSI 31 ile zayıf; %3 eşiğinin hemen dışında.",
-"SMH (RSI 68) ve SOXX (RSI 66) bölgelerinin epey üzerinde; SOXX hedef-1'e (603,07) %2,3 uzaklıkta."]}]}
+{
+ "publishedAt": "2026-10-08T06:19:04Z",
+ "asOf": "2026-10-07",
+ "title": "Şahin Fed tutanakları sonrası geniş satış; metaller en çok etkilenen",
+ "sections": [
+  {
+   "h": "Dün",
+   "items": [
+    "7 Ekim kapanışında 12 enstrümandan yalnızca DELL artıda (%+0,86); S&P 500 (SPY) %-0,24 ile sınırlı geriledi, portföyün çoğu endeksin altında kaldı.",
+    "En sert düşüşler: COPX %-3,13 (vadeli bakır %+0,71 yükselmesine rağmen), SLV %-2,92, VRT %-2,63, IAU %-1,67.",
+    "Çip tarafı da geride: ASML %-1,59, SMH %-1,16, SOXX %-1,12, AMD %-0,55.",
+    "Arka plan: Fed tutanaklarında üyelerin çoğunun yıl sonuna kadar bir artış daha görmesi doları (UUP %+0,48) destekledi; 10 yıllık faiz %5,28, VIX 15,08 ile sakin."
+   ]
+  },
+  {
+   "h": "Bugün",
+   "items": [
+    "Önümüzdeki 48 saatte takvimde portföyü ilgilendiren planlı bir veri ya da bilanço yok; gündem tutanakların faiz ve dolar üzerindeki etkisinin sindirilmesi.",
+    "Yüksek faiz beklentisi, faiz getirisi olmayan IAU/SLV ile faize duyarlı XBI ve AGNG için baskı kaynağı olmayı sürdürüyor.",
+    "Sıradaki büyük gün 14 Ekim: 08:00 TRT ASML bilançosu (ASML, SMH, SOXX) ve 15:30 TRT ABD TÜFE; 15 Ekim'de TSMC bilançosu."
+   ]
+  },
+  {
+   "h": "Teknik durum",
+   "items": [
+    "Alım bölgesinde: AGNG 36,06 $ (bölge 35,74–35,96, stop 34,79, RSI 35) ve XBI 150,24 $ (bölge 147,48–149,15, stop 140,86, RSI 38) — ikisi de bölgenin üst sınırında.",
+    "Aşırı ısınmış: AMD 645,83 $ (RSI 71, ilk hedef 687,85) ve DELL 578,96 $ (RSI 61, alım bölgesinin ~%11 üzerinde).",
+    "Stop'a %3'ten yakın enstrüman yok; en yakını AGNG (stop'a ~%3,5).",
+    "IAU (RSI 37) ve SLV (RSI 38) son düşüşlerle zayıfladı ama hâlâ alım bölgelerinin (74,69–75,15 ve 49,64–49,96) belirgin üzerinde."
+   ]
+  }
+ ]
+}
