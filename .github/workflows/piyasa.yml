@@ -1,7 +1,9 @@
-name: Piyasa şeridi ve ekonomik takvim (ücretsiz yedek kaynaklar)
-# Yedek hat: zamanlanmış "Portföy piyasa verisi" görevi Twelve Data / Bigdata.com'dan veri alamadığında bu iş akışını
-# workflow_dispatch ile tetikler. Kendi zamanlaması yoktur.
+name: Piyasa şeridi ve ekonomik takvim (ücretsiz kaynaklar)
+# Piyasa şeridi ve ekonomik takvim tamamen ücretsiz kaynaklardan (Claude görevinin yerine).
 on:
+  schedule:
+    - cron: '53 22 * * 1-5'   # ABD kapanışından sonra (TR 01:53)
+    - cron: '23 5 * * 1-5'    # TR 08:23 — sabah (kripto, kur, takvim)
   pull_request:
     paths: ['tools/fetch_mstrip.py', 'tools/fetch_econ.py', '.github/workflows/piyasa.yml']
   workflow_dispatch:
@@ -24,12 +26,12 @@ jobs:
       - uses: actions/setup-python@v5
         with: {python-version: '3.12'}
       - name: Piyasa şeridi
-        if: github.event_name == 'pull_request' || inputs.parca != 'takvim'
+        if: github.event_name != 'workflow_dispatch' || inputs.parca != 'takvim'
         env:
           TWELVEDATA_KEY: ${{ secrets.TWELVEDATA_KEY }}
         run: python3 -u tools/fetch_mstrip.py ${{ github.event_name == 'pull_request' && '--dry' || '' }}
       - name: Ekonomik takvim
-        if: always() && (github.event_name == 'pull_request' || inputs.parca != 'serit')
+        if: always() && (github.event_name != 'workflow_dispatch' || inputs.parca != 'serit')
         run: python3 -u tools/fetch_econ.py ${{ github.event_name == 'pull_request' && '--dry' || '' }}
       - name: Yayınla
         if: github.event_name != 'pull_request'

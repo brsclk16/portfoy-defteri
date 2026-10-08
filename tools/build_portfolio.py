@@ -18,7 +18,14 @@ for d in coll('instruments'):
     if base: d['ytdBase'] = base[-1]
     inst[t] = d
 if len(inst) < 5: sys.exit('instruments eksik görünüyor, portfolio.json yazılmadı')
-news = sorted(coll('news'), key=lambda x: x.get('publishedAt', ''), reverse=True)[:80]
+news = coll('news')
+# GitHub Models'ın Actions'ta yazdığı haberler (data/news_ai.json) veritabanında yoksa da korunur
+try:
+    _u = {n.get('url') for n in news}
+    news += [n for n in json.load(open(os.path.join(D, 'news_ai.json'))).get('items', []) if n.get('url') not in _u]
+except FileNotFoundError:
+    pass
+news = sorted(news, key=lambda x: x.get('publishedAt', ''), reverse=True)[:80]
 events = sorted(coll('events'), key=lambda x: x.get('date', ''))
 signals = {s['ticker']: s for s in coll('signals') if s.get('ticker')}
 out = {'generatedAt': datetime.datetime.now(datetime.timezone.utc).strftime('%Y-%m-%dT%H:%M:%SZ'),

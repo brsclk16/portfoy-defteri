@@ -13,6 +13,7 @@ def num(v):
 args = sys.argv[1:]
 qs = json.load(open(args[0]))
 usdtry = float(args[args.index('--usdtry') + 1]) if '--usdtry' in args else None
+src = args[args.index('--source') + 1] if '--source' in args else 'Twelve Data'
 P = json.load(open(os.path.join(D, 'prices.json')))
 OP = os.path.join(D, 'ohlc.json')
 O = json.load(open(OP)) if os.path.exists(OP) else {}
@@ -52,7 +53,7 @@ for t, q in qs.items():
     H[t] = h[-400:]
 if not n: sys.exit('hiç geçerli fiyat yok, dosyalar değişmedi')
 if days: P['asOf'] = max(days)
-P['source'] = 'Twelve Data'
+P['source'] = src
 P['updatedAt'] = datetime.datetime.now(datetime.timezone.utc).strftime('%Y-%m-%dT%H:%M:%SZ')
 if usdtry: P['usdtry'] = usdtry
 json.dump(P, open(os.path.join(D, 'prices.json'), 'w'), separators=(',', ':'))
