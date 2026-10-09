@@ -1,0 +1,66 @@
+name: Gemini brifing + haftalık
+# Hafta içi 08:41 TR sabah brifingi (data/brief.json), cumartesi 09:33 TR haftalık değerlendirme (data/weekly.json).
+# Rakamlar Python ile hesaplanır; Gemini (yoksa Groq) yalnızca metni yazar. PR'larda kuru çalışır (dosya yazmaz, Telegram göndermez).
+on:
+  schedule:
+    - cron: '41 5 * * 1-5'
+    - cron: '33 6 * * 6'
+  workflow_dispatch:
+    inputs:
+      is:
+        description: 'brief / weekly / qa'
+        default: brief
+  pull_request:
+    paths: ['tools/ai_tasks.py', 'tools/gemini.py', 'tools/ai_news.py', '.github/workflows/ai_gunluk.yml']
+permissions:
+  contents: write
+concurrency:
+  group: ${{ github.event_name == 'pull_request' && format('pr-{0}', github.ref) || 'repo-yazma' }}
+  cancel-in-progress: false
+jobs:
+  ai:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    env:
+      GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+      GROQ_API_KEY: ${{ secrets.GROQ_API_KEY || secrets.GROQ_KEY || secrets.GROQ || vars.GROQ_API_KEY }}
+      TG_TOKEN: ${{ secrets.TG_TOKEN }}
+      TG_CHAT: ${{ secrets.TG_CHAT }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with: {python-version: '3.12'}
+      - name: Kuru deneme (PR)
+        if: github.event_name == 'pull_request'
+        run: |
+          python3 -u tools/ai_tasks.py brief --dry
+          python3 -u tools/ai_tasks.py weekly --dry
+          mkdir -p data/q
+          echo '{"id":"deneme","t":"ASML","q":"ASML bilançosundan önce nelere dikkat etmeliyim?","createdAt":"2026-10-09T06:00:00Z"}' > data/q/deneme.json
+          python3 -u tools/ai_tasks.py qa --dry
+      - name: Groq yedeği deneme (PR, Gemini kapalı)
+        if: github.event_name == 'pull_request'
+        env:
+          GEMINI_API_KEY: ''
+        run: |
+          if [ -z "$GROQ_API_KEY" ]; then echo "::warning::GROQ_API_KEY görünmüyor (Settings → Secrets and variables → Actions → Repository secrets); Groq denemesi atlandı"; exit 0; fi
+          python3 -u tools/ai_tasks.py brief --dry
+          python3 -u tools/ai_tasks.py qa --dry
+      - name: Çalıştır
+        if: github.event_name != 'pull_request'
+        run: |
+          IS="${{ github.event.inputs.is }}"
+          if [ -z "$IS" ]; then
+            if [ "${{ github.event.schedule }}" = "33 6 * * 6" ]; then IS=weekly; else IS=brief; fi
+          fi
+          python3 -u tools/ai_tasks.py $IS
+      - name: Yayınla
+        if: github.event_name != 'pull_request'
+        run: |
+          git config user.name "Portföy veri botu"
+          git config user.email "portfoy-bot@users.noreply.github.com"
+          git add -A data
+          git diff --cached --quiet && { echo "değişiklik yok"; exit 0; }
+          git commit -m "Gemini: ${{ github.event.inputs.is || 'zamanlanmış' }} $(TZ=Europe/Istanbul date '+%F %H:%M') TRT"
+          for i in 1 2 3 4 5; do git pull --rebase -X theirs origin main && git push origin HEAD:main && exit 0; sleep $((i*7)); done
+          exit 1
