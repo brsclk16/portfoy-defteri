@@ -43,7 +43,7 @@ jobs:
         env:
           GEMINI_API_KEY: ''
         run: |
-          if [ -z "$GROQ_API_KEY" ]; then echo "GROQ anahtarı görünmüyor"; exit 1; fi
+          if [ -z "$GROQ_API_KEY" ]; then echo "::warning::GROQ_API_KEY görünmüyor (Settings → Secrets and variables → Actions → Repository secrets); Groq denemesi atlandı"; exit 0; fi
           python3 -u tools/ai_tasks.py brief --dry
           python3 -u tools/ai_tasks.py qa --dry
       - name: Çalıştır
