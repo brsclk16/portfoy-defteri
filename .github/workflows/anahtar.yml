@@ -24,7 +24,7 @@ jobs:
           AV_KEY: ${{ secrets.AV_KEY }}
           FRED_KEY: ${{ secrets.FRED_KEY }}
           FRED_API_KEY: ${{ secrets.FRED_API_KEY }}
-          EVDS_KEY: ${{ secrets.EVDS_KEY }}
+          EVDS_KEY: ${{ secrets.EVDS_KEY || vars.EVDS_KEY || secrets.EVD3TCMB || vars.EVD3TCMB || secrets.EVDSTCMB || vars.EVDSTCMB }}
         run: python3 tools/check_keys.py
       - name: Yayınla
         run: |

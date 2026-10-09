@@ -22,7 +22,11 @@ jobs:
         with: {python-version: '3.12'}
       - name: Topla
         env:
+<<<<<<< Updated upstream
           EVDS_KEY: ${{ secrets.EVD3TCMB || vars.EVD3TCMB || secrets.EVDS_KEY || vars.EVDS_KEY }}
+=======
+          EVDS_KEY: ${{ secrets.EVDS_KEY || vars.EVDS_KEY || secrets.EVD3TCMB || vars.EVD3TCMB || secrets.EVDSTCMB || vars.EVDSTCMB || secrets.EVDS || secrets.EVDS_API_KEY }}
+>>>>>>> Stashed changes
           SEC_UA: ${{ secrets.SEC_UA }}
         run: |
           if [ "${{ github.event.schedule }}" = "17 10 * * 1-5" ]; then python3 tools/fetch_ext.py pm evds; else python3 tools/fetch_ext.py; fi
