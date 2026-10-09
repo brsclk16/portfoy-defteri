@@ -136,7 +136,7 @@ def qa():
         if 'yatırım tavsiyesi değildir' not in ans:
             ans += '\n\nBu bir değerlendirmedir, yatırım tavsiyesi değildir.'
         item = {'id': q.get('id') or os.path.basename(f)[:-5], 't': t, 'q': q.get('q'), 'a': ans, 'createdAt': q.get('createdAt'),
-                'answeredAt': STAMP, 'sources': src[:6], 'ai': f'Gemini · {gemini.USED[0] if gemini.USED else ""}'}
+                'answeredAt': STAMP, 'sources': src[:6], 'ai': gemini.label()}
         A['items'] = [item] + [x for x in A['items'] if x.get('id') != item['id']][:99]
         first = ans.split('\n')[0][:220]
         msgs.append(f'💬 {(q.get("q") or "")[:80]}\n{first}\n{SITE}#/' + (f't/{t}' if t else 'analiz/asistan'))
@@ -165,7 +165,7 @@ def brief():
     if not out.get('title') or not secs:
         raise RuntimeError(f'eksik yanıt: {out}')
     B = {'publishedAt': STAMP, 'asOf': S.get('asOf'), 'title': str(out['title'])[:120], 'sections': secs,
-         'ai': f'Gemini · {gemini.USED[0] if gemini.USED else ""}'}
+         'ai': gemini.label()}
     print(json.dumps(B, ensure_ascii=False, indent=1))
     if not DRY:
         fx.wr('brief.json', B)
@@ -223,7 +223,7 @@ def weekly():
     rep = {'id': rid, 'weekEnd': fri.isoformat(), 'range': rng, 'publishedAt': STAMP, 'title': str(out.get('title') or '')[:120], 'movers': movers,
            'summary': [str(x) for x in out.get('summary') or []][:3], 'highlights': [str(x) for x in out.get('highlights') or []][:6],
            'nextWeek': [str(x) for x in out.get('nextWeek') or []][:6], 'watch': [str(x) for x in out.get('watch') or []][:4],
-           'ai': f'Gemini · {gemini.USED[0] if gemini.USED else ""}'}
+           'ai': gemini.label()}
     if src:
         rep['sources'] = src[:8]
     if not rep['title'] or len(rep['summary']) < 2:
@@ -241,5 +241,5 @@ def weekly():
 if __name__ == '__main__':
     job = next((a for a in sys.argv[1:] if not a.startswith('--')), '')
     if not gemini.available():
-        sys.exit('GEMINI_API_KEY yok')
+        sys.exit('GEMINI_API_KEY / GROQ_API_KEY yok')
     {'qa': qa, 'brief': brief, 'weekly': weekly}[job]()

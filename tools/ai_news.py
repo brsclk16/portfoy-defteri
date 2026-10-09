@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """Günlük haber özeti — Claude görevinin haber adımının yerine, ücretsiz.
-Sıra: (1) AI_API_URL/AI_API_KEY ile herhangi bir OpenAI uyumlu sağlayıcı, (2) GEMINI_API_KEY, (3) GitHub Models (GITHUB_TOKEN);
+Sıra: (1) AI_API_URL/AI_API_KEY ile herhangi bir OpenAI uyumlu sağlayıcı, (2) GEMINI_API_KEY, (2b) GROQ_API_KEY, (3) GitHub Models (GITHUB_TOKEN);
 hiçbiri çalışmazsa (4) anahtarsız kural tabanlı seçim + ücretsiz Google Çeviri (başlık/özet Türkçeye çevrilir, "neden önemli" fon ağırlıklarından yazılır).
 
 Girdi : data/news_raw.json (Haber toplayıcı), data/portfolio.json (enstrümanlar ve holdingler, mevcut haberler)
@@ -59,9 +59,11 @@ OPENER = urllib.request.build_opener(_KeepPost)
 
 
 GEMINI = os.environ.get('GEMINI_API_KEY', '').strip()
+GROQ = (os.environ.get('GROQ_API_KEY') or os.environ.get('GROQ_KEY') or '').strip()
 EXT_URL, EXT_KEY = os.environ.get('AI_API_URL', '').strip(), os.environ.get('AI_API_KEY', '').strip()  # herhangi bir OpenAI uyumlu sağlayıcı (isteğe bağlı)
 ENDPOINTS = ([(EXT_URL, {'Accept': 'application/json', '_key': EXT_KEY})] if EXT_URL and EXT_KEY else []) + \
-    ([('https://generativelanguage.googleapis.com/v1beta/openai/chat/completions', {'Accept': 'application/json', '_key': GEMINI})] if GEMINI else []) + [
+    ([('https://generativelanguage.googleapis.com/v1beta/openai/chat/completions', {'Accept': 'application/json', '_key': GEMINI})] if GEMINI else []) + \
+    ([('https://api.groq.com/openai/v1/chat/completions', {'Accept': 'application/json', '_key': GROQ})] if GROQ else []) + [
     ('https://models.github.ai/inference/chat/completions', {'Accept': 'application/json'}),
     ('https://models.github.ai/inference/chat/completions', {'Accept': 'application/vnd.github+json', 'X-GitHub-Api-Version': '2022-11-28'}),
     ('https://models.inference.ai.azure.com/chat/completions', {'Accept': 'application/json'}),
@@ -87,22 +89,28 @@ def _post(url, extra, body):
 
 
 _USED = []
+GROQ_MODELS = [m for m in os.environ.get('GROQ_MODEL', 'openai/gpt-oss-120b,qwen/qwen3.8-27b,openai/gpt-oss-20b').split(',') if m]
 GEMINI_MODELS = [m for m in os.environ.get('GEMINI_MODEL', 'gemini-3.8-flash,gemini-flash-latest,gemini-flash-lite-latest').split(',') if m]
 
 
 def ask(model, user):
     errs = []
-    for url, extra in (_GOOD or ENDPOINTS):
+    for url, extra in _GOOD + [e for e in ENDPOINTS if e not in _GOOD]:
         if url == EXT_URL:
             names = [os.environ.get('AI_MODEL') or model]
         elif 'googleapis' in url:
             names = GEMINI_MODELS
+        elif 'groq' in url:
+            names = GROQ_MODELS
         else:
             names = [model.split('/')[-1] if 'azure' in url else model]
         j = None
         for mdl in names:
-            body = json.dumps({'model': mdl, 'temperature': 0.2, 'max_tokens': 3500,
-                               'messages': [{'role': 'system', 'content': SYSTEM}, {'role': 'user', 'content': user}]}).encode()
+            b = {'model': mdl, 'temperature': 0.2, 'max_tokens': 3500,
+                 'messages': [{'role': 'system', 'content': SYSTEM}, {'role': 'user', 'content': user if 'groq' not in url else user[:14000]}]}
+            if 'groq' in url and mdl.startswith('openai/gpt-oss'):
+                b['reasoning_effort'] = 'low'
+            body = json.dumps(b).encode()
             for attempt in range(3):
                 try:
                     j = _post(url, extra, body)
@@ -261,7 +269,7 @@ def main():
                'whyItMatters': str(x.get('whyItMatters') or '')[:400], 'tickers': tick,
                'holdings': [h for h in (x.get('holdings') or []) if h in allowed_h][:8], 'impact': imp, 'importance': importance,
                'source': it.get('source') or '', 'url': it['url'], 'publishedAt': p.strftime('%Y-%m-%dT%H:%M:%SZ'), 'fetchedAt': STAMP,
-               'ai': used if used.startswith('kural') else (('Gemini' if _GOOD and 'googleapis' in _GOOD[0][0] else 'GitHub Models') + f' · {used}')}
+               'ai': used if used.startswith('kural') else (('Gemini' if used.startswith('gemini') else 'Groq' if used in GROQ_MODELS else 'Yapay zekâ') + f' · {used}')}
         new.append(doc)
         seen_t.add(slug(title)[:30])
     print(json.dumps({'model': used, 'adaylar': len(cand), 'secilen': len(new), 'errs': err,
