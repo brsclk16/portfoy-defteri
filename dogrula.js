@@ -12,11 +12,21 @@ const VF=[
   ['high','52 hafta zirveye yakınlık','Fiyat / son 1 yılın en yükseği',252],
   ['qual','Nakit akışı kalitesi','Son 4 çeyrek faaliyet nakit akışı / toplam varlık. Yalnızca o tarihte SEC\'e dosyalanmış bilançolar kullanılır; ETF\'ler ve dosyalama tarihi olmayan veriler dışarıda kalır',0]];
 const VCRIT_DEF={excess:0,excess2x:0,maxdd:30,sharpe:1,top:40,alpha:0,dsr:90};
-const VCRIT_TXT={excess:['SPY\'ı maliyet sonrası geçmeli','puan'],excess2x:['2x maliyette de SPY\'ı geçmeli','puan'],maxdd:['En büyük düşüş en fazla','%'],sharpe:['Sharpe (yıllık, %4 risksiz faiz) en az',''],top:['Tek enstrümanın getiriye katkısı en fazla','%'],alpha:['Beta düzeltmeli alfa (yıllık) en az','%'],dsr:['Deneme sayısına göre düzeltilmiş Sharpe güveni en az','%']};
+const VCRIT_TXT={excess:['SPY\'ı maliyet sonrası geçmeli','puan'],excess2x:['2x maliyette de SPY\'ı geçmeli','puan'],maxdd:['En büyük düşüş en fazla','%'],sharpe:['Sharpe (yıllık, Fed faizine göre) en az',''],top:['Tek enstrümanın getiriye katkısı en fazla','%'],alpha:['Beta düzeltmeli alfa (yıllık) en az','%'],dsr:['Deneme sayısına göre düzeltilmiş Sharpe güveni en az','%']};
 const RF=0.04;
+/* risksiz faiz: o günkü Fed politika faizi (FRED FEDFUNDS); veri yoksa %4 */
+function vRf(d){const s=S.fred&&S.fred.series&&S.fred.series.FEDFUNDS;if(!s||!s.length||!d)return RF;if(d<s[0][0])return RF;let v=null;for(const p of s){if(p[0]>d)break;v=p[1]}return v==null?RF:v/100}
 
 /* ---------- veri ---------- */
-function vData(){const O=S.ohlc||{};const spy=O.SPY||[];if(spy.length<300)return null;const dates=spy.map(r=>r[0]);const idx=Object.fromEntries(dates.map((d,i)=>[d,i]));
+function vData(){const key=(S.longpx&&S.longpx.updatedAt)+'|'+(S.ohlc&&S.ohlc.SPY&&S.ohlc.SPY.length);if(S._vd&&S._vd.k===key)return S._vd.v;const v=vDataBuild();S._vd={k:key,v};return v}
+/* uzun geçmiş (Yahoo, 2010'dan) varsa onu kullan; son günleri günlük ohlc'den tamamla */
+function vDataBuild(){const Lp=S.longpx;if(Lp&&Lp.dates&&Lp.px&&Lp.px.SPY){const dates=Lp.dates.slice();const O=S.ohlc||{};const last=dates[dates.length-1];
+    (O.SPY||[]).forEach(r=>{if(r[0]>last)dates.push(r[0])});const idx=Object.fromEntries(dates.map((d,i)=>[d,i]));const px={};
+    Object.keys(Lp.px).forEach(t=>{const a=Lp.px[t].concat(new Array(dates.length-Lp.dates.length).fill(null));(O[t]||[]).forEach(r=>{const i=idx[r[0]];if(i!=null&&r[0]>last&&r[4]>0)a[i]=r[4]});px[t]=a});
+    Object.keys(O).forEach(t=>{if(px[t]||!Array.isArray(O[t]))return;const a=new Array(dates.length).fill(null);O[t].forEach(r=>{const i=idx[r[0]];if(i!=null&&r[4]>0)a[i]=r[4]});px[t]=a});
+    Object.values(px).forEach(a=>{let seen=false;for(let i=0;i<a.length;i++){if(a[i]!=null)seen=true;else if(seen&&i>0)a[i]=a[i-1]}});return {dates,px}}
+  return vDataOhlc()}
+function vDataOhlc(){const O=S.ohlc||{};const spy=O.SPY||[];if(spy.length<300)return null;const dates=spy.map(r=>r[0]);const idx=Object.fromEntries(dates.map((d,i)=>[d,i]));
   const px={};Object.keys(O).forEach(t=>{if(t==='updatedAt'||!Array.isArray(O[t]))return;const a=new Array(dates.length).fill(null);O[t].forEach(r=>{const i=idx[r[0]];if(i!=null&&r[4]>0)a[i]=r[4]});
     for(let i=1;i<a.length;i++)if(a[i]==null&&a[i-1]!=null&&O[t][0][0]<=dates[i])a[i]=a[i-1];px[t]=a});return {dates,px}}
 function vUniverse(){const D=vData();if(!D)return [];return Object.keys(D.px).filter(t=>t!=='SPY'&&D.px[t].filter(v=>v!=null).length>=300)}
@@ -38,16 +48,16 @@ function vWarm(cfg){return Math.max(60,...VF.filter(f=>(cfg.w[f[0]]||0)>0).map(f
 function vBacktest(cfg,from,to,opt={}){const D=vData();if(!D)return null;const {dates,px}=D;const costM=(opt.costMult||1);const bps=(cfg.cost||15)*costM/1e4;
   const U=(cfg.uni||[]).filter(t=>px[t]&&!(opt.exclude||[]).includes(t));const fk=VF.map(f=>f[0]).filter(k=>(cfg.w[k]||0)>0);if(!U.length||!fk.length)return null;
   const wsum=fk.reduce((s,k)=>s+cfg.w[k],0);const N=Math.max(1,Math.min(cfg.topN||3,U.length));
-  let hold={};let eq=1,spyEq=1;const curve=[],spyCurve=[],rets=[],spyR=[],contrib={};let turn=0,costTot=0,rebs=0,cashDays=0;let lastM=null;
+  let hold={};let eq=1,spyEq=1;const curve=[],spyCurve=[],rets=[],spyR=[],rfs=[],contrib={};let turn=0,costTot=0,rebs=0,cashDays=0;let lastM=null;
   const isReb=i=>{if(cfg.reb==='w')return (i-from)%5===0;const m=dates[i].slice(0,7);if(m!==lastM){lastM=m;return true}return false};
   let pending=null;
   for(let i=from;i<=to;i++){
     if(i>from){let r=0;const nh={};let tot=0;Object.entries(hold).forEach(([t,w])=>{const a=px[t];const ri=a[i]&&a[i-1]?a[i]/a[i-1]-1:0;r+=w*ri;contrib[t]=(contrib[t]||0)+w*ri;nh[t]=w*(1+ri);tot+=w*(1+ri)});
-      const cashW=1-Object.values(hold).reduce((s,w)=>s+w,0);r+=cashW*RF/252;tot+=cashW*(1+RF/252);
+      const rfd=vRf(dates[i])/252;const cashW=1-Object.values(hold).reduce((s,w)=>s+w,0);r+=cashW*rfd;tot+=cashW*(1+rfd);
       if(tot>0)Object.keys(nh).forEach(t=>nh[t]/=tot);hold=nh;if(cashW>0.99)cashDays++;
       const sr=px.SPY[i]/px.SPY[i-1]-1;
       if(pending){const all=new Set(Object.keys(hold).concat(Object.keys(pending)));let tv=0;all.forEach(t=>tv+=Math.abs((pending[t]||0)-(hold[t]||0)));const cst=tv*bps;r-=cst;costTot+=cst;turn+=tv;hold=pending;pending=null;rebs++}
-      eq*=1+r;spyEq*=1+sr;rets.push(r);spyR.push(sr)}
+      eq*=1+r;spyEq*=1+sr;rets.push(r);spyR.push(sr);rfs.push(rfd)}
     curve.push([dates[i],eq*100]);spyCurve.push([dates[i],spyEq*100]);
     if(i<to&&isReb(i)){const sc={};const R={};fk.forEach(k=>{const v={};U.forEach(t=>v[t]=vFactor(k,px[t],i,t,dates[i]));R[k]=vRanks(v)});
       U.forEach(t=>{if(fk.some(k=>R[k][t]==null))return;sc[t]=fk.reduce((s,k)=>s+R[k][t]*cfg.w[k],0)/wsum});
@@ -57,7 +67,7 @@ function vBacktest(cfg,from,to,opt={}){const D=vData();if(!D)return null;const {
       let pick=order.slice(0,N);const band=cfg.band||0;
       if(band>0){const keep=Object.keys(hold).filter(t=>order.indexOf(t)>-1&&order.indexOf(t)<N+band);pick=keep.slice(0,N);for(const t of order){if(pick.length>=N)break;if(!pick.includes(t))pick.push(t)}}
       const tw={};pick.forEach(t=>tw[t]=1/N);pending=tw}}
-  return {curve,spyCurve,rets,spyR,contrib,turn,costTot,rebs,cashDays,from:dates[from],to:dates[to],days:rets.length}}
+  return {curve,spyCurve,rets,spyR,rfs,contrib,turn,costTot,rebs,cashDays,from:dates[from],to:dates[to],days:rets.length}}
 
 function vShuffle(a,rnd){const b=a.slice();for(let i=b.length-1;i>0;i--){const j=Math.floor(rnd()*(i+1));[b[i],b[j]]=[b[j],b[i]]}return b}
 function vTot(B){return B&&B.curve.length?(B.curve[B.curve.length-1][1]/100-1)*100:null}
@@ -78,6 +88,11 @@ function vHist(xs,mark){if(xs.length<20)return '';const lo=Math.min(xs[0],mark),
   return `<svg class="vhist" viewBox="0 0 ${W} ${H+18}" preserveAspectRatio="none">${bins.map((c,i)=>`<rect x="${i*bx+1}" y="${H-c/mx*H}" width="${bx-2}" height="${c/mx*H}" fill="var(--line2,#3a4252)"/>`).join('')}
    ${lo<0&&hi>0?`<line x1="${z0}" x2="${z0}" y1="0" y2="${H}" stroke="var(--muted)" stroke-dasharray="3 3"/>`:''}<line x1="${X(mark)}" x2="${X(mark)}" y1="0" y2="${H}" stroke="var(--accent)" stroke-width="3"/>
    <text x="2" y="${H+14}" fill="var(--muted)" font-size="11">${nf(lo,0)} puan</text><text x="${W-2}" y="${H+14}" fill="var(--muted)" font-size="11" text-anchor="end">${nf(hi,0)} puan</text></svg>`}
+/* bugün yeniden dengelense hangi enstrümanlar seçilirdi */
+function vCurrentPick(cfg){const D=vData();if(!D)return [];const {dates,px}=D;const i=dates.length-1;const U=(cfg.uni||[]).filter(t=>px[t]);const fk=VF.map(f=>f[0]).filter(k=>(cfg.w[k]||0)>0);if(!U.length||!fk.length)return [];
+  const wsum=fk.reduce((s,k)=>s+cfg.w[k],0);const R={};fk.forEach(k=>{const v={};U.forEach(t=>v[t]=vFactor(k,px[t],i,t,dates[i]));R[k]=vRanks(v)});const sc={};U.forEach(t=>{if(fk.some(k=>R[k][t]==null))return;sc[t]=fk.reduce((s,k)=>s+R[k][t]*cfg.w[k],0)/wsum});
+  let order=Object.entries(sc).sort((x,y)=>y[1]-x[1]).map(x=>x[0]);if(cfg.regF&&typeof regimeAt==='function'&&S.fred&&regimeAt(dates[i]).score<=-2)order=[];if(cfg.trendF)order=order.filter(t=>{const v=vFactor('trend',px[t],i);return v!=null&&v>0});
+  return order.slice(0,Math.max(1,Math.min(cfg.topN||3,U.length)))}
 /* ---------- istatistik ---------- */
 function vMean(a){return a.reduce((s,x)=>s+x,0)/(a.length||1)}
 function vStd(a){const m=vMean(a);return Math.sqrt(a.reduce((s,x)=>s+(x-m)**2,0)/Math.max(1,a.length-1))}
@@ -87,12 +102,12 @@ function normInv(p){if(p<=0)return -Infinity;if(p>=1)return Infinity;const a=[-3
   if(q!=null&&p<0.5)return (((((c[0]*q+c[1])*q+c[2])*q+c[3])*q+c[4])*q+c[5])/((((d[0]*q+d[1])*q+d[2])*q+d[3])*q+1);
   if(q!=null)return -(((((c[0]*q+c[1])*q+c[2])*q+c[3])*q+c[4])*q+c[5])/((((d[0]*q+d[1])*q+d[2])*q+d[3])*q+1);
   const r=p-0.5,s=r*r;return (((((a[0]*s+a[1])*s+a[2])*s+a[3])*s+a[4])*s+a[5])*r/(((((b[0]*s+b[1])*s+b[2])*s+b[3])*s+b[4])*s+1)}
-function vStats(B){if(!B||B.rets.length<20)return null;const r=B.rets,s=B.spyR,n=r.length;const ex=r.map(x=>x-RF/252);
+function vStats(B){if(!B||B.rets.length<20)return null;const r=B.rets,s=B.spyR,n=r.length;const rf=B.rfs&&B.rfs.length===n?B.rfs:r.map(()=>RF/252);const ex=r.map((x,i)=>x-rf[i]);const mrf=vMean(rf);
   const tot=(B.curve[B.curve.length-1][1]/100-1)*100,spy=(B.spyCurve[B.spyCurve.length-1][1]/100-1)*100;const yrs=n/252;
   const sd=vStd(r);const m=vMean(ex),sdx=vStd(ex)||1e-9;const srD=m/sdx;
   const sk=ex.reduce((a,x)=>a+((x-m)/sdx)**3,0)/n,ku=ex.reduce((a,x)=>a+((x-m)/sdx)**4,0)/n;
   const ms=vMean(s),mr=vMean(r);let cov=0,vs=0;for(let i=0;i<n;i++){cov+=(r[i]-mr)*(s[i]-ms);vs+=(s[i]-ms)**2}const beta=vs?cov/vs:null;
-  const alpha=beta!=null?((vMean(r)-RF/252)-beta*(ms-RF/252))*252*100:null;
+  const alpha=beta!=null?((vMean(r)-mrf)-beta*(ms-mrf))*252*100:null;
   let pk=-Infinity,dd=0;B.curve.forEach(p=>{pk=Math.max(pk,p[1]);dd=Math.min(dd,p[1]/pk-1)});
   const C=Object.entries(B.contrib);const pos=C.reduce((a,x)=>a+Math.max(0,x[1]),0);const topE=C.sort((x,y)=>y[1]-x[1])[0];
   return {tot,spy,excess:tot-spy,cagr:(Math.pow(1+tot/100,1/yrs)-1)*100,vol:sd*Math.sqrt(252)*100,sharpe:srD*Math.sqrt(252),srD,sk,ku,n,beta,alpha,maxdd:dd*100,
@@ -182,7 +197,7 @@ function viewDogrula(){const U=vUniverse();if(!U.length)return `<div class="empt
 
   <section class="card sec"><h3>Nasıl okunur</h3><div class="prose" style="font-size:13px">
    <p><b>Neden bu kadar kural?</b> 20 rastgele strateji denersen biri tesadüfen endeksi geçer. Bu sayfa her denemeyi sayar, Sharpe'ı deneme sayısına göre düşürür (Bailey ve López de Prado'nun deflated Sharpe yöntemi) ve son dönemi sona saklar.</p>
-   <p><b>Sınırlar:</b> Evren küçük (sadece fiyat geçmişi olan enstrümanlar) ve sadece fiyat faktörleri var; bilanço kalitesi gibi faktörleri o tarihte bilinen haliyle bulamadığımız için eklemedik, çünkü o test geleceği bilen bir backtest olurdu. Sinyal kapanışta hesaplanır, işlem ertesi günün kapanışında yapılır. Nakit %4 faiz kazanır. Vergi yok. Geçmiş sonuç gelecek garantisi değildir; bu bir araştırma aracıdır, yatırım tavsiyesi değildir.</p></div></section></div>`}
+   <p><b>Sınırlar:</b> Evren küçük (sadece fiyat geçmişi olan enstrümanlar) ve sadece fiyat faktörleri var; bilanço kalitesi gibi faktörleri o tarihte bilinen haliyle bulamadığımız için eklemedik, çünkü o test geleceği bilen bir backtest olurdu. Sinyal kapanışta hesaplanır, işlem ertesi günün kapanışında yapılır. Nakit o günkü Fed politika faizini kazanır (FRED). Vergi yok. Geçmiş sonuç gelecek garantisi değildir; bu bir araştırma aracıdır, yatırım tavsiyesi değildir.</p></div></section></div>`}
 function vOpenedHTML(o){return `<div class="btk">${[['Strateji',pct(o.tot,1)],['SPY',pct(o.spy,1)],['Fark',pct(o.excess,1)],['Sharpe',nf(o.sharpe,2)],['En büyük düşüş','%'+nf(-o.maxdd,1)],['Beta',nf(o.beta,2)]].map(x=>`<div><span>${x[0]}</span><b>${x[1]}</b></div>`).join('')}</div>
   <p style="margin:8px 0 0">${o.excess>0&&o.maxdd>-30?'✅ Strateji görmediği dönemde de SPY\'ı geçti.':'❌ Strateji görmediği dönemde tutmadı; geliştirme sonucu büyük ihtimalle veriye uydurulmuştu.'} <span class="muted" style="font-size:12px">${esc(o.txt)} · ${esc(trDT(o.at))}</span></p>`}
 function afterDogrula(){const st=vStudy(),cfg=vCfg();const E=S.vEval;

@@ -1,0 +1,261 @@
+{
+ "id": "arastirma-2026-10-09",
+ "plan": "data/strateji/plan-2026-10-09.json",
+ "completedAt": "2026-10-09",
+ "measurementFix": "Ön kayıttan sonra motorda bir ölçüm hatası düzeltildi: risksiz faiz sabit %4 yerine o günkü Fed politika faizi (FRED FEDFUNDS). Strateji kuralları değişmedi; düzeltme tüm denemelere aynı uygulandı.",
+ "development": {
+  "from": "2011-01-03",
+  "to": "2024-10-09",
+  "spy": {
+   "cagr": 13.7,
+   "sharpe": 0.76,
+   "maxdd": -33.7
+  },
+  "trials": [
+   {
+    "id": "T1",
+    "cagr": 6.9,
+    "excess": -334.0,
+    "sharpe": 0.37,
+    "maxdd": -39.9,
+    "beta": 0.82,
+    "alpha": -3.2,
+    "excess2x": -370.0,
+    "dsr": 84.0,
+    "passed": 1,
+    "checks": [
+     false,
+     false,
+     false,
+     false,
+     true,
+     false,
+     false
+    ],
+    "verdict": "RED"
+   },
+   {
+    "id": "T2",
+    "cagr": 9.6,
+    "excess": -233.0,
+    "sharpe": 0.49,
+    "maxdd": -30.7,
+    "beta": 0.84,
+    "alpha": -1.1,
+    "excess2x": -274.0,
+    "dsr": 92.0,
+    "passed": 2,
+    "checks": [
+     false,
+     false,
+     false,
+     false,
+     true,
+     false,
+     true
+    ],
+    "verdict": "RED"
+   },
+   {
+    "id": "T3",
+    "cagr": 7.7,
+    "excess": -308.0,
+    "sharpe": 0.43,
+    "maxdd": -30.7,
+    "beta": 0.74,
+    "alpha": -1.8,
+    "excess2x": -352.0,
+    "dsr": 89.0,
+    "passed": 1,
+    "checks": [
+     false,
+     false,
+     false,
+     false,
+     true,
+     false,
+     false
+    ],
+    "verdict": "RED"
+   },
+   {
+    "id": "T4",
+    "cagr": 9.1,
+    "excess": -254.0,
+    "sharpe": 0.6,
+    "maxdd": -20.9,
+    "beta": 0.56,
+    "alpha": 1.1,
+    "excess2x": -292.0,
+    "dsr": 97.0,
+    "passed": 4,
+    "checks": [
+     false,
+     false,
+     true,
+     false,
+     true,
+     true,
+     true
+    ],
+    "verdict": "RED"
+   },
+   {
+    "id": "T5",
+    "cagr": 8.3,
+    "excess": -286.0,
+    "sharpe": 0.45,
+    "maxdd": -30.7,
+    "beta": 0.81,
+    "alpha": -2.1,
+    "excess2x": -331.0,
+    "dsr": 90.0,
+    "passed": 1,
+    "checks": [
+     false,
+     false,
+     false,
+     false,
+     true,
+     false,
+     false
+    ],
+    "verdict": "RED"
+   },
+   {
+    "id": "T6",
+    "cagr": 8.2,
+    "excess": -291.0,
+    "sharpe": 0.45,
+    "maxdd": -34.6,
+    "beta": 0.83,
+    "alpha": -2.4,
+    "excess2x": -324.0,
+    "dsr": 90.0,
+    "passed": 1,
+    "checks": [
+     false,
+     false,
+     false,
+     false,
+     true,
+     false,
+     false
+    ],
+    "verdict": "RED"
+   }
+  ]
+ },
+ "selected": "T4",
+ "robustness": {
+  "bestMonthRemoved": {
+   "month": "2020-03",
+   "tot": 240.0,
+   "spy": 569.0
+  },
+  "neighbourSettingsBeatingSPY": 0,
+  "neighbourMedianExcess": -330.0,
+  "randomPercentile": 91,
+  "randomMedianExcess": -341.0,
+  "stress": [
+   {
+    "name": "SPY düşüşü 2011-04",
+    "spy": -18.6,
+    "s": -18
+   },
+   {
+    "name": "SPY düşüşü 2018-09",
+    "spy": -19.3,
+    "s": -16.3
+   },
+   {
+    "name": "SPY düşüşü 2020-02",
+    "spy": -33.7,
+    "s": -20.5
+   },
+   {
+    "name": "SPY düşüşü 2022-01",
+    "spy": -24.5,
+    "s": -5.5
+   }
+  ],
+  "years": {
+   "2011": [
+    -11.3,
+    0.9
+   ],
+   "2012": [
+    6.2,
+    16.0
+   ],
+   "2013": [
+    32.4,
+    32.3
+   ],
+   "2014": [
+    15.6,
+    13.5
+   ],
+   "2015": [
+    -3.6,
+    1.2
+   ],
+   "2016": [
+    5.7,
+    12.0
+   ],
+   "2017": [
+    34.2,
+    21.7
+   ],
+   "2018": [
+    -4.2,
+    -4.6
+   ],
+   "2019": [
+    13.0,
+    31.2
+   ],
+   "2020": [
+    13.4,
+    18.3
+   ],
+   "2021": [
+    10.0,
+    28.7
+   ],
+   "2022": [
+    1.3,
+    -18.2
+   ],
+   "2023": [
+    10.8,
+    26.2
+   ],
+   "2024": [
+    10.9,
+    22.6
+   ]
+  }
+ },
+ "holdout": {
+  "from": "2024-10-09",
+  "to": "2026-10-08",
+  "tot": 44.8,
+  "spy": 37.2,
+  "excess": 7.6,
+  "sharpe": 0.74,
+  "spySharpe": 0.8,
+  "maxdd": -21.3,
+  "spyMaxdd": -18.8,
+  "beta": 0.76
+ },
+ "verdict": "Kabul edilmedi. Önceden konan kriterlere göre hiçbir deneme SPY'ı geliştirme döneminde geçemedi. T4 savunmacı bir çeşitlendirici: ayı piyasalarında belirgin şekilde daha az kaybetti (2022: +%1 / SPY −%18; 2020 çöküşü −%20 / SPY −%34), boğa yıllarında geride kaldı. Saklı dönemde SPY'ı 7,6 puan geçti ama daha yüksek düşüş ve biraz daha düşük Sharpe ile; bu tek başına kabul için yeterli kanıt değil.",
+ "decision": "T4, 'gözlem' etiketiyle kâğıt üzerinde canlı takibe alındı (gerçek para önerisi değil). Durdurma kuralı: 63 işlem gününde SPY'ın 10 puandan fazla gerisinde kalırsa durdurulur.",
+ "currentBasket": [
+  "XLE",
+  "IWM",
+  "SMH",
+  "XBI"
+ ]
+}

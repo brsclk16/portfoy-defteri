@@ -340,7 +340,7 @@ function viewOzet(){
   const heroVal=real?money(T.value):money(hs.length?hs[hs.length-1][1]:null);
   const wk=S.weekly&&S.weekly.reports&&S.weekly.reports[0];
   return `<div class="fade">
-  ${viewStrip()}${briefCard()}${alertsCard()}${viewEarnPre(7,true)}${realLine()}
+  ${viewStrip()}${typeof todayCard==='function'?todayCard():alertsCard()}${briefCard()}${viewEarnPre(7,true)}${realLine()}
   <div class="grid g-hero">
     <section class="card hero">
       <div class="lbl">${real?'Portföy değeri':'Model portföy · 1 yıl önce $10.000 ('+esc(W.src)+')'}</div>
@@ -658,8 +658,8 @@ async function loadData(){
   const v='?t='+Math.floor(Date.now()/60000);
   const [d,p,h]=await Promise.all(['portfolio','prices','history'].map(n=>fetch('data/'+n+'.json'+v).then(r=>{if(!r.ok)throw new Error(n+'.json '+r.status);return r.json()})));
   const opt=n=>fetch('data/'+n+'.json'+v).then(r=>r.ok?r.json():null).catch(()=>null);
-  const [m,w,wl,er,ins,oh,mo,mk,va,lg,br,dv,i13,eh,un,ec,ms,aw,cl,an,pr,fh,me,fu,rs,frd,ct,opn,pmk,shv,evd,dg,ppr]=await Promise.all([opt('macro'),opt('weekly'),opt('watchlist'),opt('earnings'),opt('insider'),opt('ohlc'),opt('monthly'),opt('markets'),opt('valuation'),opt('long'),opt('brief'),opt('dividends'),opt('inst13f'),opt('earnhist'),opt('universe'),opt('econ'),opt('mstrip'),opt('answers'),opt('calls'),opt('analysts'),opt('peers'),opt('fundhold'),opt('macroev'),opt('fund'),opt('research/index'),opt('fred'),opt('cot'),opt('options'),opt('pm'),opt('shortvol'),opt('evds'),opt('_diag/ext'),opt('paper')]);
-  S.data=d;S.prices=p;try{Object.values(d.instruments).forEach(i=>{if(i.watchlist||!i.theme||THEMES.some(x=>x.t.includes(i.ticker)))return;let T=THEMES.find(x=>x.name===i.theme);if(!T){T={name:i.theme,t:[],c:['#c792ff','#ff9f5c','#7ee0c3','#f58fd0','#a3b8ff'][THEMES.length%5]};THEMES.push(T)}T.t.push(i.ticker)})}catch(e){}S.hist=h;S.macro=m;S.weekly=w;if(wl)S.watch=wl;S.earn=er;S.insider=ins;S.ohlc=oh;S.monthly=mo;S.markets=mk;S.valuation=va;S.long=lg;S.brief=br;S.divs=dv;S.inst13=i13;S.ehist=eh;S.univ=un;S.econ=ec;S.mstrip=ms;S.answers=aw;S.calls=cl;S.analysts=an;S.peers=pr;S.fundhold=fh;S.macroev=me;S.fund=fu;S.research=rs;S.fred=frd;S.cot=ct;S.options=opn;S.pm=pmk;S.shortvol=shv;S.evds=evd;S.diag=dg;S.paper=ppr;S._rh=null;S.labCache={};S.mcCache={};
+  const [m,w,wl,er,ins,oh,mo,mk,va,lg,br,dv,i13,eh,un,ec,ms,aw,cl,an,pr,fh,me,fu,rs,frd,ct,opn,pmk,shv,evd,dg,ppr,lpx]=await Promise.all([opt('macro'),opt('weekly'),opt('watchlist'),opt('earnings'),opt('insider'),opt('ohlc'),opt('monthly'),opt('markets'),opt('valuation'),opt('long'),opt('brief'),opt('dividends'),opt('inst13f'),opt('earnhist'),opt('universe'),opt('econ'),opt('mstrip'),opt('answers'),opt('calls'),opt('analysts'),opt('peers'),opt('fundhold'),opt('macroev'),opt('fund'),opt('research/index'),opt('fred'),opt('cot'),opt('options'),opt('pm'),opt('shortvol'),opt('evds'),opt('_diag/ext'),opt('paper'),opt('long_px')]);
+  S.data=d;S.prices=p;try{Object.values(d.instruments).forEach(i=>{if(i.watchlist||!i.theme||THEMES.some(x=>x.t.includes(i.ticker)))return;let T=THEMES.find(x=>x.name===i.theme);if(!T){T={name:i.theme,t:[],c:['#c792ff','#ff9f5c','#7ee0c3','#f58fd0','#a3b8ff'][THEMES.length%5]};THEMES.push(T)}T.t.push(i.ticker)})}catch(e){}S.hist=h;S.macro=m;S.weekly=w;if(wl)S.watch=wl;S.earn=er;S.insider=ins;S.ohlc=oh;S.monthly=mo;S.markets=mk;S.valuation=va;S.long=lg;S.brief=br;S.divs=dv;S.inst13=i13;S.ehist=eh;S.univ=un;S.econ=ec;S.mstrip=ms;S.answers=aw;S.calls=cl;S.analysts=an;S.peers=pr;S.fundhold=fh;S.macroev=me;S.fund=fu;S.research=rs;S.fred=frd;S.cot=ct;S.options=opn;S.pm=pmk;S.shortvol=shv;S.evds=evd;S.diag=dg;S.paper=ppr;S.longpx=lpx;S._rh=null;S.labCache={};S.mcCache={};
 }
 async function boot(){
   const th=lsGet('pd_theme');if(th)document.documentElement.dataset.theme=th;

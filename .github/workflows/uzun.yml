@@ -1,7 +1,7 @@
 name: Uzun fiyat geçmişi (Yahoo, strateji doğrulama)
 on:
   schedule:
-    - cron: '23 23 * * 5'   # Cuma kapanıştan sonra, haftada bir
+    - cron: '52 22 * * 1-5'   # her iş günü ABD kapanışından sonra
   workflow_dispatch:
 permissions:
   contents: write

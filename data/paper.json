@@ -1,0 +1,50 @@
+{
+ "updatedAt": "2026-10-09T08:00:00Z",
+ "items": [
+  {
+   "id": "t4-2026-10-09",
+   "name": "T4 · savunmacı trend rotasyonu",
+   "status": "gözlem",
+   "txt": "Momentum 12-1 60 + Düşük oynaklık 40 · ilk 4 · aylık · bant 1 · 15 bp · 200G trend filtresi · 18 ETF",
+   "note": "Kabul kriterlerini geçmedi (2011–2024'te SPY'ın gerisinde, ayı piyasalarında çok daha az kayıp). Çeşitlendirici olarak ileriye dönük izleniyor. Araştırma: data/strateji/sonuc-2026-10-09.json",
+   "cfg": {
+    "uni": [
+     "SMH",
+     "XBI",
+     "COPX",
+     "IAU",
+     "SLV",
+     "XLE",
+     "XLV",
+     "XLU",
+     "XLP",
+     "XLK",
+     "XLF",
+     "XLI",
+     "QQQ",
+     "IWM",
+     "EFA",
+     "EEM",
+     "TLT",
+     "IEF"
+    ],
+    "w": {
+     "mom121": 60,
+     "lowvol": 40
+    },
+    "topN": 4,
+    "reb": "m",
+    "band": 1,
+    "cost": 15,
+    "trendF": true,
+    "regF": false
+   },
+   "start": "2026-10-08",
+   "createdAt": "2026-10-09T08:00:00Z",
+   "kill": {
+    "days": 63,
+    "under": -10
+   }
+  }
+ ]
+}
