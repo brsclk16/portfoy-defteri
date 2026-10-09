@@ -1,11 +1,11 @@
-name: Haber toplayıcı (RSS, Google News, TickerTick, SEC, GDELT, Finnhub, FMP)
+name: Haber toplayıcı (Kıssadan Hisse, RSS, Google News, TickerTick, SEC, GDELT, Finnhub, FMP)
 on:
   schedule:
     - cron: '7 5 * * 1-5'    # TR 08:07 — sabah haber taramasından (08:52) önce
     - cron: '7 20 * * 1-5'   # TR 23:07 — akşam haber taramasından (23:52) önce
   push:
     branches: [main]
-    paths: ['tools/fetch_news.py', '.github/workflows/haber.yml']
+    paths: ['tools/fetch_news.py', 'tools/fetch_kissadan.py', '.github/workflows/haber.yml']
   pull_request:
     paths: ['tools/ai_news.py', '.github/workflows/haber.yml']
   workflow_dispatch:
@@ -45,7 +45,7 @@ jobs:
         run: |
           git config user.name "Portföy veri botu"
           git config user.email "portfoy-bot@users.noreply.github.com"
-          git add data/news_raw.json data/_diag/news.json data/news_ai.json data/portfolio.json 2>/dev/null || git add data/news_raw.json data/_diag/news.json data/portfolio.json
+          git add data/news_raw.json data/_diag/news.json data/news_ai.json data/portfolio.json data/kissadan.json 2>/dev/null || git add data/news_raw.json data/_diag/news.json data/portfolio.json
           git diff --cached --quiet && { echo "değişiklik yok"; exit 0; }
           git commit -m "Ham haber $(date -u +'%F %H:%M') UTC"
           for i in 1 2 3 4 5; do git pull --rebase -X theirs origin main && git push origin HEAD:main && exit 0; sleep $((i*7)); done

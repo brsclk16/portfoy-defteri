@@ -5,11 +5,11 @@ Zamanlanmış Claude görevi web sitelerine doğrudan erişemediği için (her a
 burada toplayıp data/news_raw.json'a yazıyoruz; "Portföy haber taraması" görevi bu dosyayı repodan okur,
 seçer, Türkçe özetler ve veritabanına yazar.
 
-Anahtarsız kaynaklar: tema RSS akışları (piyasa, Fed, yarı iletken, biyotek, metaller), hisse bazlı
+Anahtarsız kaynaklar: WinningCircle "Kıssadan Hisse" Türkçe sabah bülteni (tools/fetch_kissadan.py), tema RSS akışları (piyasa, Fed, yarı iletken, biyotek, metaller), hisse bazlı
 Nasdaq / Seeking Alpha RSS, Google News RSS araması, TickerTick API, GDELT DOC 2.0 (haber tonu).
 İsteğe bağlı (GitHub secret): SEC_UA (SEC EDGAR 8-K/6-K; "Ad Soyad eposta@adres"), FINNHUB_KEY (şirket haberi,
 bilanço takvimi, EPS sürprizi, analist tavsiyeleri), FMP_KEY (analist hedef fiyat konsensüsü).
-Kullanım: python3 tools/fetch_news.py [theme ticker sec google tickertick finnhub fmp gdelt]  (boşsa hepsi)
+Kullanım: python3 tools/fetch_news.py [theme ticker sec google tickertick finnhub fmp gdelt winningcircle]  (boşsa hepsi)
 Her kaynak bağımsızdır; biri çökse diğerleri yazılır. Anahtarlar hiçbir dosyaya yazılmaz."""
 import datetime as dt, email.utils, gzip, hashlib, html, json, os, re, sys, time, traceback
 import urllib.parse, urllib.request, urllib.error
@@ -186,7 +186,7 @@ def parse_feed(text):
 
 ITEMS = []
 T0 = time.time()
-BUDGET = {'theme': 120, 'ticker': 150, 'sec': 60, 'finnhub': 220, 'fmp': 60, 'google': 120, 'tickertick': 160, 'gdelt': 130}
+BUDGET = {'theme': 120, 'ticker': 150, 'sec': 60, 'finnhub': 220, 'fmp': 60, 'google': 120, 'tickertick': 160, 'gdelt': 130, 'winningcircle': 40}
 DEADLINE = [0]
 
 
@@ -531,6 +531,45 @@ def src_gdelt(U):
 
 
 # ------------------------------------------------------------------ birleştirme
+# ------------------------------------------------------------------ WinningCircle "Kıssadan Hisse" (Türkçe)
+WC_THEMES = [
+    ('yari-iletken', r'yarı ?iletken|çip|gpu|nvidia|tsmc|asml|micron|amd\b|intel|broadcom|hbm|bellek|veri merkez'),
+    ('biyotek', r'biyotek|ilaç|fda|klinik|onay\w* (aldı|verdi)|obezite|glp-1|pfizer|lilly|novo'),
+    ('metaller', r'altın|gümüş|bakır|maden|emtia|ons'),
+    ('makro', r'\bfed\b|faiz|enflasyon|tüfe|istihdam|tarım dışı|hazine|tahvil|dolar|resesyon|gsyih|petrol|brent|opec|gümrük|tarife'),
+    ('kripto', r'bitcoin|kripto|ethereum|xrp|stablecoin|sabit kripto|token'),
+]
+
+
+def src_winningcircle(U):
+    """Önce canlı API (arşivi de günceller), olmazsa repodaki data/kissadan.json arşivi. Metin zaten Türkçe."""
+    sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+    import fetch_kissadan as fk
+    live, msg = fk.update()
+    arc = fk.load()
+    pats = []
+    for t, e in U.items():
+        names = {short_name(e.get('name') or '')} | ({us_sym(t)} if len(us_sym(t)) >= 3 else set())
+        for n in names:
+            if n and len(n) >= 3:
+                pats.append((t, re.compile(r'(?<![\w])' + re.escape(n) + r'(?![a-zçğıöşü])', re.I if n != us_sym(t) else 0)))
+    n_items = 0
+    for b in arc.get('briefs') or []:
+        for a in b.get('items') or []:
+            txt = a['title'] + ' ' + a.get('summary', '')
+            hit = sorted({t for t, p in pats if p.search(txt)})
+            tickers = set(hit)
+            for t in hit:
+                tickers.update(fund_tags(U, t))
+            themes = [th for th, kw in WC_THEMES if re.search(kw, txt, re.I)]
+            d = pdate(a.get('publishedAt')) if a.get('publishedAt') else None
+            add(a.get('source') or 'WinningCircle', 'winningcircle', a['title'], a['url'], d, a.get('summary', ''),
+                tickers=tickers, themes=themes,
+                extra={'via': 'WinningCircle · Kıssadan Hisse', 'lang': 'tr', **({'holding': hit[0]} if hit else {})})
+            n_items += 1
+    return {'live': live, 'msg': msg, 'briefDays': len(arc.get('briefs') or []), 'scanned': n_items}
+
+
 def norm_title(s):
     s = re.sub(r'\s+[-|\u2013]\s+[^-|\u2013]{2,40}$', '', s or '')
     return re.sub(r'[^a-z0-9]+', ' ', s.lower()).strip()[:90]
@@ -538,7 +577,7 @@ def norm_title(s):
 
 def finalize():
     by = {}
-    prio = {'finnhub': 1, 'tickertick': 2, 'nasdaq': 3, 'sec': 0, 'rss': 1, 'seekingalpha': 4, 'yahoo': 4, 'google': 5}
+    prio = {'winningcircle': 2, 'finnhub': 1, 'tickertick': 2, 'nasdaq': 3, 'sec': 0, 'rss': 1, 'seekingalpha': 4, 'yahoo': 4, 'google': 5}
     for it in ITEMS:
         k = norm_title(it['title'])
         if not k:
@@ -572,7 +611,7 @@ def finalize():
 
 def main(argv):
     # GDELT GitHub Actions IP'lerinden sürekli 429 veriyor; varsayılan dışı (elle: fetch_news.py gdelt)
-    want = set(argv) or {'theme', 'ticker', 'sec', 'google', 'tickertick', 'finnhub', 'fmp'}
+    want = set(argv) or {'theme', 'ticker', 'sec', 'google', 'tickertick', 'finnhub', 'fmp', 'winningcircle'}
     U, I = universe()
     print('evren:', ', '.join(U))
     if 'theme' in want:
@@ -591,6 +630,8 @@ def main(argv):
         run('tickertick', lambda: src_tickertick(U))
     if 'gdelt' in want:
         run('gdelt', lambda: src_gdelt(U))
+    if 'winningcircle' in want:
+        run('winningcircle', lambda: src_winningcircle(U))
     items = finalize()
     prev = rd(OUT, {}) or {}
     sig = prev.get('signals', {}) if not ({'finnhub', 'fmp', 'gdelt'} & want) else {t: {k: v for k, v in g.items() if k == 'tone'} for t, g in prev.get('signals', {}).items() if 'gdelt' not in want and g.get('tone')}

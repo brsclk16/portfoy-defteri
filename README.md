@@ -14,3 +14,7 @@ Kişisel portföy takip sitesi (GitHub Pages, statik). Pozisyonlar Supabase'de k
 
 Pozisyonlar (alış/satış) ve hedef ağırlıklar **repoda tutulmaz**; Supabase `user_settings` tablosunda
 `portfoy_lots` ve `portfoy_settings` anahtarlarıyla kullanıcıya bağlı saklanır. API anahtarları repoya yazılmaz.
+- `data/kissadan.json` — WinningCircle "Kıssadan Hisse" Türkçe sabah bülteni arşivi (son 30 gün, günde ~15 haber).
+  `tools/fetch_kissadan.py` anahtarsız uç noktadan (`api.winningcircle.io/landing/morningBrief/recent`) her sabah TR 08:47'de
+  çeker (`kissadan.yml`); API düşerse arşiv korunur. Haber toplayıcı (`fetch_news.py`) bu bülteni `winningcircle` kaynağı olarak
+  ham habere ekler, portföy hisselerini Türkçe metinden eşler; Türkçe olduğu için çeviriye gönderilmez. Haberler sayfasında ayrı bölüm.

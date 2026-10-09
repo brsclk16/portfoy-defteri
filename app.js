@@ -585,7 +585,25 @@ function viewHaber(){
   const f=S.newsFilter;const list=f==='ALL'?all:all.filter(n=>(n.tickers||[]).includes(f));
   return `<div class="fade"><div class="sec-t" style="margin-top:0"><div><h2>Haberler</h2><p>Fonlar ve içindeki şirketlerle ilgili seçilmiş haberler · günde iki kez güncellenir</p></div></div>
   <div class="filters" id="nf"><button data-f="ALL" class="${f==='ALL'?'on':''}">Tümü (${all.length})</button>${tk.map(t=>`<button data-f="${t}" class="${f===t?'on':''}">${t}</button>`).join('')}</div>
-  <section class="card"><div class="news">${list.map(nwRow).join('')||'<div class="empty">Bu filtrede haber yok</div>'}</div></section></div>`;
+  <section class="card"><div class="news">${list.map(nwRow).join('')||'<div class="empty">Bu filtrede haber yok</div>'}</div></section>
+  <div class="sec-t"><div><h2>Kıssadan Hisse</h2><p>WinningCircle sabah bülteni · piyasa gündemi, Türkçe özet · her sabah ~08:30</p></div></div>
+  <section class="card" id="kh"><div class="muted">Yükleniyor…</div></section></div>`;
+}
+async function kissadanMount(){
+  const el=$('#kh');if(!el)return;
+  if(!S.kissadan){S.kissadan=await fetch('data/kissadan.json?t='+Math.floor(Date.now()/600000)).then(r=>r.ok?r.json():null).catch(()=>null)}
+  const B=(S.kissadan&&S.kissadan.briefs)||[];
+  if(!B.length){el.innerHTML='<div class="empty">Bülten arşivi henüz oluşmadı</div>';return}
+  if(!B.some(b=>b.date===S.khDay))S.khDay=B[0].date;
+  const b=B.find(x=>x.date===S.khDay);
+  const day=d=>trDate(d+'T12:00:00Z',{day:'numeric',month:'short',weekday:'short'});
+  el.innerHTML=`<div class="filters" id="khd">${B.slice(0,7).map(x=>`<button data-d="${x.date}" class="${x.date===b.date?'on':''}">${esc(day(x.date))}</button>`).join('')}</div>
+  <div class="news">${b.items.map(n=>`<article class="nw"><div class="im"></div><div>
+  <a class="t" href="${esc(n.url)}" target="_blank" rel="noopener">${esc(n.title)}</a>
+  <div class="m"><span>${esc(n.source||'')}</span>${n.publishedAt?`<span>·</span><span>${esc(new Date(n.publishedAt).toLocaleTimeString('tr-TR',{hour:'2-digit',minute:'2-digit'}))}</span>`:''}</div>
+  ${n.summary?`<p>${esc(n.summary)}</p>`:''}</div></article>`).join('')}</div>
+  <div class="muted" style="font-size:12px;margin-top:10px">Kaynak: WinningCircle · Kıssadan Hisse${S.kissadan.updatedAt?' · arşiv '+esc(trDate(S.kissadan.updatedAt,{day:'numeric',month:'short',hour:'2-digit',minute:'2-digit'})):''}</div>`;
+  $$('#khd button').forEach(x=>x.onclick=()=>{S.khDay=x.dataset.d;kissadanMount()});
 }
 function viewTakvim(){
   const ev=(S.data.events||[]).filter(e=>new Date(e.date)>=new Date(Date.now()-864e5));
@@ -608,7 +626,7 @@ function render(scrollTop){
     if(R.sub==='defter'){v.innerHTML=sn+viewDefter();after=afterDefter}
     else if(R.sub==='karne'){v.innerHTML=sn+viewKarne()}else if(R.sub==='temettu'){v.innerHTML=sn+viewTemettu();after=afterTemettu}else if(R.sub==='rapor'){v.innerHTML=sn+viewRapor();after=afterRapor}else{v.innerHTML=sn+viewPozisyon()+viewTrail()+viewShareCard()+`<div class="sec">${sourcesCard()}</div>`;after=()=>{afterPozisyon();afterTrail();afterShareCard()}}}
   else if(R.r==='piyasa'){const sn=subnav('piyasa',R.sub);
-    if(R.sub==='haber'){v.innerHTML=sn+viewHaber();after=()=>$$('#nf button').forEach(b=>b.onclick=()=>{S.newsFilter=b.dataset.f;render(false)})}
+    if(R.sub==='haber'){v.innerHTML=sn+viewHaber();after=()=>{$$('#nf button').forEach(b=>b.onclick=()=>{S.newsFilter=b.dataset.f;render(false)});kissadanMount()}}
     else if(R.sub==='takvim'){v.innerHTML=sn+`<div style="margin-bottom:18px">${viewEarnPre(10)}</div><div style="margin-bottom:18px">${viewEcon()}</div><div style="margin-bottom:18px">${pmCard(5)}</div>`+viewTakvim()}else if(R.sub==='kurumsal'){v.innerHTML=sn+viewKurumsal()}else if(R.sub==='isi'){v.innerHTML=sn+viewHeat();after=afterHeat}else if(R.sub==='icgoru'){v.innerHTML=sn+viewInsight();after=afterInsight}else if(R.sub==='notlar'){v.innerHTML=sn+viewNotlar()}else if(R.sub==='arastirma'){v.innerHTML=sn+viewOrion();after=afterOrion}else if(R.sub==='canli'){v.innerHTML=sn+viewCanli();after=afterCanli}else if(R.sub==='tarayici'){v.innerHTML=sn+viewScreen();after=afterScreen}
     else{v.innerHTML=sn+viewEnstruman();after=afterWatch}}
   else if(R.r==='teknik'){const sn=subnav('teknik',R.sub);
