@@ -1,6 +1,89 @@
 {
  "reports": [
   {
+   "id": "2026-W41",
+   "weekEnd": "2026-10-09",
+   "range": "5–9 Ekim 2026",
+   "publishedAt": "2026-10-09T22:41:03Z",
+   "title": "Çip fonları %4-5 geriledi; Dell ve altın haftayı artıda bitirdi",
+   "movers": [
+    {
+     "t": "DELL",
+     "pct": 4.24
+    },
+    {
+     "t": "IAU",
+     "pct": 1.18
+    },
+    {
+     "t": "SLV",
+     "pct": 0.07
+    },
+    {
+     "t": "AGNG",
+     "pct": 0.04
+    },
+    {
+     "t": "COPX",
+     "pct": -0.19
+    },
+    {
+     "t": "XBI",
+     "pct": -0.43
+    },
+    {
+     "t": "CRDO",
+     "pct": -0.96
+    },
+    {
+     "t": "VRT",
+     "pct": -3.76
+    },
+    {
+     "t": "AMD",
+     "pct": -4.21
+    },
+    {
+     "t": "SMH",
+     "pct": -4.3
+    },
+    {
+     "t": "ASML",
+     "pct": -4.66
+    },
+    {
+     "t": "SOXX",
+     "pct": -5.01
+    }
+   ],
+   "summary": [
+    "Geçen haftanın tersine bu kez çipler geride kaldı. S&P 500 pazartesi rekor kırdıktan sonra hafta ortasında Fed tutanakları ve yükselen uzun vadeli faizlerle, perşembe de OpenAI'ın gelirinin beklentilerin altında kaldığı haberiyle yapay zekâ hisseleri satış gördü. Portföyün en iyisi %4,2 ile Dell, en kötüsü %5,0 düşüşle SOXX oldu. S&P 500 (SPY) haftayı %1,2 artıda kapatırken 12 enstrümandan yalnızca 4'ü artıda kaldı; eşit ağırlıkla bakıldığında portföy ortalaması yaklaşık %1,5 eksi, yani endeksin yaklaşık 2,7 puan gerisinde.",
+    "Yarı iletkenlerde SMH %4,3, SOXX %5,0 geriledi; ASML (−%4,7) ve AMD (−%4,2) da aynı yolu izledi. Hafta başında Nvidia'nın rekor seviyesi ve Lisa Su'nun 2027'de arzı ciddi artırma planı AMD'yi salı 649,6 dolara taşımıştı; OpenAI'ın yıllıklandırılmış gelirinin 50 milyar dolar civarında olduğu haberi ise yapay zekâ yatırımlarının geri dönüşüne dair soru işaretlerini canlandırdı ve TSMC'nin rekor çeyrek geliri bile düşüşü durdurmadı. Credo, Marvell'in yatırımcı gününde hedeflerini yükseltmesinin desteğiyle kaybını %1,0'de sınırladı. AI altyapısında ayrışma vardı: Mizuho'nun hedef artırımıyla Dell %4,2 yükselirken Vertiv, GLJ Research'ün 'sat' notuyla %3,8 geriledi. Biyotekte XBI %0,4 düştü (Twist'teki %16'lık sert satış ağırlık yaptı, cuma %3'lük toparlanma oldu), AGNG yatay kaldı. Değerli metaller toparlandı: ons altın %1,4 artışla yaklaşık 4.195 dolara çıktı, IAU %1,2 kazandı; gümüş (SLV) ise yatay kaldı. Bakır madencileri (COPX) Şili'deki Centinela grevinin arz kaygılarını artırmasına rağmen hafta ortasındaki risk iştahı kaybıyla %0,2 geriledi, cumadaki %4'lük toparlanmayla kaybın çoğunu sildi.",
+    "Dolar/TL haftada %0,5 yükselerek 49,34'e çıktı; bu, TL bazında tüm pozisyonlara aynı oranda ek getiri olarak yansıdı. TL bazında SPY yaklaşık %1,6, IAU %1,7, Dell %4,7 kazandırırken çip fonlarının kaybı %4 civarına geriledi; eşit ağırlıklı portföy ortalaması TL'de yaklaşık %1,0 eksi. Çeşitlendirme bu hafta beklenen rolü oynadı: altın, gümüş, bakır ve biyotek yatay ya da artıda kalarak çiplerdeki düşüşü kısmen dengeledi. Yine de 12 enstrümanın 7'sinin yapay zekâ temasına bağlı olması, tek bir haberin portföyün büyük bölümünü aynı anda etkileyebildiğini bir kez daha gösterdi."
+   ],
+   "highlights": [
+    "OpenAI: CNBC'nin teyit ettiği habere göre şirket Eylül sonunda yıllıklandırılmış yaklaşık 50 milyar $ gelire ulaştı; piyasa bunu beklentinin altında okudu ve 8 Ekim'de Nasdaq 100 %1,4 düştü. Aynı hafta Broadcom'un OpenAI çipleri için 50 milyar $'ı aşan, SpaceX'in de Nvidia çipi alımı için 40 milyar $'lık borç finansmanı aradığı haberleri geldi (SMH, SOXX, AMD).",
+    "TSMC (SMH/SOXX'in büyük holdingi): 3. çeyrek geliri yıllık %50 artışla rekor 1,49 trilyon NT$'a çıkarak beklentiyi aştı; ancak çip hisseleri aynı gün geriledi.",
+    "Bellek tarafı güçlü: Micron'un DRAM geliri son çeyrekte %343 artışla 39,8 milyar $'a ulaştı; Bernstein bellek fiyatlarının 3. çeyrekte ~%20 arttığını belirtti, D.A. Davidson Micron hedefini 3.000 $'a çıkardı. Öte yandan Micron'un Tayvan'daki sendikası prim anlaşmazlığı nedeniyle grev yetkisi aldı.",
+    "Dell (+%4,2): Mizuho hedef fiyatı 600 $'dan 650 $'a yükseltti; hisse 586 $ ile haftayı kapattı. Buna karşın 3. çeyrekte küresel PC sevkiyatları yıllık %20,1, Dell'in sevkiyatları %25 geriledi; hisseyi taşıyan PC değil sunucu/AI tarafı.",
+    "Vertiv (−%3,8): GLJ Research 188 $ hedef ve 'sat' notuyla kapsama başlarken BMO 'Outperform' ile takibe aldı; şirketin sıvı soğutma ünitesi NVIDIA'nın 'DSX Ready' onayını aldı.",
+    "Sağlık: AbbVie'nin Temab-A ilacı kolorektal ve akciğer kanserinde iki FDA 'çığır açan tedavi' statüsü aldı; şirket 216 milyon $'lık Ar-Ge gideriyle 2026 düzeltilmiş HBK rehberini 13,76–13,96 $'a çekti. Halozyme, Merck'in deri altı Keytruda'sını 8 Avrupa ülkesinde durduran tedbir kararı aldı (AGNG, XBI)."
+   ],
+   "nextWeek": [
+    "14 Ekim Çarşamba 08:00 TSİ: ASML 3. çeyrek bilançosu (rehber 11–12 milyar €, brüt marj %55–57) — doğrudan pozisyon; 2027 sipariş görünürlüğü SMH ve SOXX için de yön belirleyici.",
+    "14 Ekim Çarşamba 15:30 TSİ: ABD Eylül TÜFE (önceki yıllık %3,4, çekirdek aylık %0,3) — Fed'in yıl sonu faiz artırımı beklentisini doğrudan etkiler; IAU, SLV, XBI ve AGNG için kritik.",
+    "15 Ekim Perşembe 09:00 TSİ: TSMC 3. çeyrek bilançosu — gelir zaten açıklandı, odak 4. çeyrek rehberi ve yatırım bütçesinde; SMH, SOXX, AMD ve ASML'yi ilgilendiriyor.",
+    "15 Ekim Perşembe 15:30 TSİ: ABD perakende satışlar (önceki aylık %1,2), ÜFE (önceki yıllık %5,4) ve haftalık işsizlik başvuruları — enflasyon ve talep resmini tamamlayacak.",
+    "İleri bakış: 21 Ekim Vertiv bilançosu, 22 Ekim TCMB faiz kararı (politika faizi %37) ve 28 Ekim Fed kararı."
+   ],
+   "watch": [
+    "Yapay zekâ finansmanı: OpenAI gelir haberi ve büyük çip alımlarının giderek borçla finanse edilmesi, AI harcamalarının sürdürülebilirliği sorusunu gündemde tutuyor. Portföydeki 7 enstrüman bu temaya bağlı; benzer haberler hepsini birlikte etkileyebilir.",
+    "Faiz ve enflasyon: Fed tutanaklarına göre üyelerin çoğu yıl sonuna kadar bir artış daha görüyor; NY Fed anketinde 1 yıllık enflasyon beklentisi %3,9'a çıktı, uzun vadeli faizler 24 yılın zirvesini gördü. Yüksek bir TÜFE hem metalleri hem biyoteği baskılayabilir.",
+    "Bilanço oynaklığı: ASML 52 haftalık zirvesinin (~2.000 $) yaklaşık %11 altında bilançoya giriyor; rehberde hayal kırıklığı çip fonlarına da yansır.",
+    "Petrol ve jeopolitik: İran'ın tanker saldırılarını artırması ve Körfez'deki kasırga riski petrolü yukarı itiyor; bu, enflasyon ve faiz kanalıyla tüm risk varlıklarını etkileyebilir."
+   ]
+  },
+  {
    "id": "2026-W40",
    "weekEnd": "2026-10-02",
    "range": "28 Eylül–2 Ekim 2026",
