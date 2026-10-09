@@ -6,7 +6,7 @@ on:
 permissions:
   contents: write
 concurrency:
-  group: repo-yazma
+  group: kissadan  # ayrı kuyruk: ortak "repo-yazma" kuyruğunda bekleyen iş iptal ediliyordu; push döngüsü çakışmayı çözer
   cancel-in-progress: false
 jobs:
   arsivle:
