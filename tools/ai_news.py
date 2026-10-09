@@ -86,6 +86,7 @@ def _post(url, extra, body):
         raise RuntimeError(f'{url} HTTP {st} ({ct}), JSON değil: {raw[:200]!r}')
 
 
+_USED = []
 GEMINI_MODELS = [m for m in os.environ.get('GEMINI_MODEL', 'gemini-3.8-flash,gemini-flash-latest,gemini-flash-lite-latest').split(',') if m]
 
 
@@ -115,6 +116,7 @@ def ask(model, user):
                     break
             if j is not None:
                 print(f'uç nokta: {url} · model: {mdl}')
+                _USED[:] = [mdl]
                 break
         if j is not None:
             if not _GOOD:
@@ -228,7 +230,7 @@ def main():
     for m in MODELS:
         try:
             out = ask(m, user)
-            used = m
+            used = (_USED or [m])[0]
             break
         except Exception as e:
             err.append(f'{m}: {type(e).__name__} {str(e)[:1500]}')
