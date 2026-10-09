@@ -1,0 +1,22 @@
+{
+ "id": "arastirma-2026-10-09",
+ "registeredAt": "2026-10-09T07:20:00Z",
+ "status": "önceden kayıt (sonuçlar görülmeden)",
+ "hypothesis": "Sektör/tema ETF'leri ve emtialar orta vadede trend sürekliliği gösterir (bilginin fiyata yavaş yansıması, fon akımlarının sürmesi). Son 6-12 ayın görece güçlüleri sonraki aylarda da görece güçlü kalma eğilimindedir. Bu tür sepetlerin en büyük riski sert çöküşlerdir; 200 günlük ortalamanın altına düşen varlığı nakde (kısa vadeli faiz) çeviren mutlak trend filtresi bu riski sınırlar.",
+ "universe": ["SMH","XBI","COPX","IAU","SLV","XLE","XLV","XLU","XLP","XLK","XLF","XLI","QQQ","IWM","EFA","EEM","TLT","IEF"],
+ "universeNote": "Yalnızca 2010'dan beri işlem gören ETF'ler. Tek tek hisseler (VRT, CRDO, AMD...) bilerek dışarıda: bugün portföyde oldukları için seçilmeleri geriye dönük kazanan seçme yanlılığı yaratır. SOXX (SMH ile aynı) ve GLD (IAU ile aynı) tekrar olmasın diye dışarıda.",
+ "benchmark": "SPY",
+ "costBps": 15,
+ "periods": {"warmup": "ilk 252 işlem günü", "development": "2011-01 → 2024-10-08", "holdout": "2024-10-09 → bugün (yalnızca seçilen tek strateji için, bir kez)"},
+ "criteria": {"excessVsSPY": "> 0", "excessAt2xCost": "> 0", "maxDrawdown": "<= %30", "sharpe": ">= 1.0", "topContributor": "<= %40", "alpha": ">= 0", "deflatedSharpeConfidence": ">= %90"},
+ "trials": [
+  {"id": "T1", "factors": {"mom61": 100}, "topN": 3, "reb": "aylık", "trendFilter": true},
+  {"id": "T2", "factors": {"mom121": 100}, "topN": 3, "reb": "aylık", "trendFilter": true},
+  {"id": "T3", "factors": {"mom61": 50, "mom3": 25, "lowvol": 25}, "topN": 3, "reb": "aylık", "trendFilter": true},
+  {"id": "T4", "factors": {"mom121": 60, "lowvol": 40}, "topN": 4, "reb": "aylık", "trendFilter": true},
+  {"id": "T5", "factors": {"mom61": 60, "lowvol": 25, "trend": 15}, "topN": 3, "reb": "aylık", "trendFilter": false, "note": "Minara yazısındaki formül, karşılaştırma için"},
+  {"id": "T6", "factors": {"mom121": 50, "mom61": 50}, "topN": 4, "reb": "aylık", "trendFilter": true}
+ ],
+ "selectionRule": "Geliştirme döneminde en çok kriteri geçen; eşitlikte düzeltilmiş Sharpe güveni yüksek olan. Seçilen tek strateji sağlamlık testlerinden (komşu ayarlar, rastgele seçim dağılımı, en iyi ay çıkarma, 2x maliyet) geçirilir, sonra saklı dönem bir kez açılır.",
+ "killRule": "Canlı takipte 63 işlem gününde SPY'ın 10 puandan fazla gerisinde kalırsa durdurulur."
+}
