@@ -1,5 +1,5 @@
 {
- "at": "2026-10-06T08:02:54Z",
+ "at": "2026-10-09T07:19:55Z",
  "alphavantage": {
   "ok": true,
   "secret": "ALPHAVANTAGE_KEY",
@@ -13,7 +13,19 @@
   "why": "{\"error_code\":400,\"error_message\":\"Bad Request.  The value for variable api_key is not registered.  Read https:\\/\\/fred.stlouisfed.org\\/docs\\/api\\/api_key.html for more information.\"}"
  },
  "evds": {
-  "ok": false,
-  "why": "secret yok veya workflow env içinde değil"
+  "ok": true,
+  "secret": "EVDS_KEY",
+  "bases": {
+   "evds3.tcmb.gov.tr": {
+    "http": 200,
+    "ok": true,
+    "snip": null
+   },
+   "evds2.tcmb.gov.tr": {
+    "http": 200,
+    "ok": false,
+    "snip": "<!DOCTYPE html>\n<html lang=\"en\">\n  <head>\n    <meta charset=\"UTF-8\" />\n    <link rel=\"icon\" href=\"/assets/images/favicon-BIeG2SoQ.ico\" />\n    <meta na"
+   }
+  }
  }
 }
