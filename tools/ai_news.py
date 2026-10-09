@@ -1,12 +1,14 @@
 #!/usr/bin/env python3
-"""Günlük haber özeti — ücretsiz model: Google Gemini (GEMINI_API_KEY secret'ı varsa) ya da GitHub Models (GITHUB_TOKEN) — Claude görevinin haber adımının yerine.
+"""Günlük haber özeti — Claude görevinin haber adımının yerine, ücretsiz.
+Sıra: (1) AI_API_URL/AI_API_KEY ile herhangi bir OpenAI uyumlu sağlayıcı, (2) GEMINI_API_KEY, (3) GitHub Models (GITHUB_TOKEN);
+hiçbiri çalışmazsa (4) anahtarsız kural tabanlı seçim + ücretsiz Google Çeviri (başlık/özet Türkçeye çevrilir, "neden önemli" fon ağırlıklarından yazılır).
 
 Girdi : data/news_raw.json (Haber toplayıcı), data/portfolio.json (enstrümanlar ve holdingler, mevcut haberler)
 Çıktı : data/news_ai.json {"updatedAt","model","items":[haber dokümanı, ...]} ve data/portfolio.json → news (url'ye göre tekilleştirilerek)
 Kural : Model yalnızca verilen başlık/özetlerden seçer ve Türkçe yazar; url, kaynak ve tarih ham maddeden alınır (model uyduramaz);
         ticker'lar portföy listesiyle süzülür. Model hata verirse hiçbir dosya değişmez.
 Kullanım: python3 tools/ai_news.py [--dry] [--hours 26]"""
-import datetime as dt, json, os, re, sys, time, unicodedata, urllib.error, urllib.request
+import datetime as dt, json, os, re, sys, time, unicodedata, urllib.error, urllib.parse, urllib.request
 
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 import fetch_ext as fx
@@ -57,7 +59,9 @@ OPENER = urllib.request.build_opener(_KeepPost)
 
 
 GEMINI = os.environ.get('GEMINI_API_KEY', '').strip()
-ENDPOINTS = ([('https://generativelanguage.googleapis.com/v1beta/openai/chat/completions', {'Accept': 'application/json', '_key': GEMINI})] if GEMINI else []) + [
+EXT_URL, EXT_KEY = os.environ.get('AI_API_URL', '').strip(), os.environ.get('AI_API_KEY', '').strip()  # herhangi bir OpenAI uyumlu sağlayıcı (isteğe bağlı)
+ENDPOINTS = ([(EXT_URL, {'Accept': 'application/json', '_key': EXT_KEY})] if EXT_URL and EXT_KEY else []) + \
+    ([('https://generativelanguage.googleapis.com/v1beta/openai/chat/completions', {'Accept': 'application/json', '_key': GEMINI})] if GEMINI else []) + [
     ('https://models.github.ai/inference/chat/completions', {'Accept': 'application/json'}),
     ('https://models.github.ai/inference/chat/completions', {'Accept': 'application/vnd.github+json', 'X-GitHub-Api-Version': '2022-11-28'}),
     ('https://models.inference.ai.azure.com/chat/completions', {'Accept': 'application/json'}),
@@ -85,7 +89,7 @@ def _post(url, extra, body):
 def ask(model, user):
     errs = []
     for url, extra in (_GOOD or ENDPOINTS):
-        mdl = (os.environ.get('GEMINI_MODEL', 'gemini-2.5-flash') if 'googleapis' in url
+        mdl = (os.environ.get('AI_MODEL', model) if url == EXT_URL else os.environ.get('GEMINI_MODEL', 'gemini-2.5-flash') if 'googleapis' in url
                else model.split('/')[-1] if 'azure' in url else model)
         body = json.dumps({'model': mdl, 'temperature': 0.2, 'max_tokens': 3500,
                            'messages': [{'role': 'system', 'content': SYSTEM}, {'role': 'user', 'content': user}]}).encode()
@@ -104,9 +108,69 @@ def ask(model, user):
     return json.loads(m.group(0))
 
 
+JUNK = re.compile(r'(price prediction|forecast 20\d\d|top \d+ stocks|best stocks?|should you buy|buy now|is it too late|motley fool|'
+                  r'stocks? to (buy|watch)|millionaire|dividend stocks?|crypto|bitcoin|\bdeal(s)?\b.*%|discount|coupon|review:|'
+                  r'buying opportunity|massive news|skyrocket|soar(s|ing)?\b|\?\s*$)', re.I)
+HIGH = re.compile(r'(8-K|6-K|earnings|results|guidance|outlook|FDA|approval|approves|phase 3|acquir|merger|buyback|downgrade|upgrade|'
+                  r'export|tariff|ban|lawsuit|recall|CEO|resign|beats|misses|raises|cuts|record)', re.I)
+
+
+def tr(text):
+    """Ücretsiz Google Çeviri uç noktası (anahtarsız). Hata olursa metni olduğu gibi döndürür."""
+    text = (text or '').strip()
+    if not text:
+        return text
+    try:
+        u = ('https://translate.googleapis.com/translate_a/single?client=gtx&sl=auto&tl=tr&dt=t&q='
+             + urllib.parse.quote(text[:1500]))
+        j = json.loads(urllib.request.urlopen(urllib.request.Request(u, headers={'User-Agent': 'Mozilla/5.0'}), timeout=20).read().decode())
+        out = ''.join(seg[0] for seg in j[0] if seg and seg[0])
+        time.sleep(0.4)
+        return out or text
+    except Exception:
+        return text
+
+
+def _words(t):
+    return {w for w in re.findall(r'[a-z0-9]{4,}', (t or '').lower())}
+
+
+def rule_select(cand, I, hold, k=8):
+    """Model yokken: portföy ilişkisi, kaynak türü ve önem kelimelerine göre puanla; benzer başlıkları ele; Türkçeye çevir."""
+    picked, bags = [], []
+    scored = []
+    for i, (sc, p, it, rel) in enumerate(cand):
+        title = it.get('title') or ''
+        if JUNK.search(title) or not rel:
+            continue
+        direct = [t for t in rel if t in I]
+        s2 = sc + (3 if direct else 0) + (2 if HIGH.search(title + ' ' + (it.get('summary') or '')) else 0) \
+            + (2 if it.get('feed') == 'sec' or (it.get('source') or '').upper().startswith('SEC') else 0)
+        scored.append((s2, p, i, it, rel, direct))
+    scored.sort(key=lambda x: (x[0], x[1]), reverse=True)
+    for s2, p, i, it, rel, direct in scored:
+        wb = _words(it.get('title'))
+        if any(len(wb & b) >= max(3, int(0.5 * min(len(wb), len(b)))) for b in bags):
+            continue
+        bags.append(wb)
+        why = []
+        for h in rel[:3]:
+            if h in I:
+                why.append(f'{h} portföyde doğrudan pozisyon.')
+            for v in hold.get(h, [])[:2]:
+                f, w = v.split(' ')[0], v.split(' ')[1] if ' ' in v else ''
+                why.append(f'{h}, {f} fonunda {w} ağırlıkta.')
+        summ = (it.get('summary') or '').strip()
+        picked.append({'i': i, 'title': tr(it['title'])[:140], 'summary': tr(summ[:600]) if summ else '',
+                       'whyItMatters': ' '.join(dict.fromkeys(why))[:400],
+                       'tickers': direct or sorted({v.split(' ')[0] for h in rel for v in hold.get(h, [])}),
+                       'holdings': rel[:8], 'impact': 'nötr', 'importance': 2 if (direct or s2 >= 7) else 1})
+        if len(picked) >= k:
+            break
+    return {'items': picked}
+
+
 def main():
-    if not (TOKEN or GEMINI):
-        sys.exit('GITHUB_TOKEN/GEMINI_API_KEY yok')
     P = fx.rd('portfolio.json', {}) or {}
     I = P.get('instruments') or {}
     port = sorted(I)
@@ -151,8 +215,8 @@ def main():
             err.append(f'{m}: {type(e).__name__} {str(e)[:1500]}')
             time.sleep(3)
     if out is None:
-        print(json.dumps({'errs': err}, ensure_ascii=False))
-        sys.exit(1)
+        print(json.dumps({'model_hatalari': [e[:300] for e in err]}, ensure_ascii=False))
+        out, used = rule_select(cand, I, hold), 'kural tabanlı seçim + Google Çeviri'
     new = []
     for x in out.get('items') or []:
         try:
@@ -176,7 +240,7 @@ def main():
                'whyItMatters': str(x.get('whyItMatters') or '')[:400], 'tickers': tick,
                'holdings': [h for h in (x.get('holdings') or []) if h in allowed_h][:8], 'impact': imp, 'importance': importance,
                'source': it.get('source') or '', 'url': it['url'], 'publishedAt': p.strftime('%Y-%m-%dT%H:%M:%SZ'), 'fetchedAt': STAMP,
-               'ai': ('Gemini' if _GOOD and 'googleapis' in _GOOD[0][0] else 'GitHub Models') + f' · {used}'}
+               'ai': used if used.startswith('kural') else (('Gemini' if _GOOD and 'googleapis' in _GOOD[0][0] else 'GitHub Models') + f' · {used}')}
         new.append(doc)
         seen_t.add(slug(title)[:30])
     print(json.dumps({'model': used, 'adaylar': len(cand), 'secilen': len(new), 'errs': err,
