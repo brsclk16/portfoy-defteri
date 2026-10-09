@@ -89,7 +89,7 @@ def _post(url, extra, body):
 def ask(model, user):
     errs = []
     for url, extra in (_GOOD or ENDPOINTS):
-        mdl = (os.environ.get('AI_MODEL', model) if url == EXT_URL else os.environ.get('GEMINI_MODEL', 'gemini-2.5-flash') if 'googleapis' in url
+        mdl = (os.environ.get('AI_MODEL', model) if url == EXT_URL else os.environ.get('GEMINI_MODEL', 'gemini-3.8-flash') if 'googleapis' in url
                else model.split('/')[-1] if 'azure' in url else model)
         body = json.dumps({'model': mdl, 'temperature': 0.2, 'max_tokens': 3500,
                            'messages': [{'role': 'system', 'content': SYSTEM}, {'role': 'user', 'content': user}]}).encode()
