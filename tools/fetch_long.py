@@ -64,9 +64,8 @@ def main():
     px = {s: [got[s].get(d) for d in dates] for s in got}
     json.dump({'updatedAt': dt.datetime.utcnow().isoformat() + 'Z', 'src': 'Yahoo Finance (düzeltilmiş kapanış)', 'dates': dates, 'px': px},
               open(os.path.join(DATA, 'long_px.json'), 'w'), separators=(',', ':'))
-    diag = rd('_diag/ext.json', {}) or {}
-    diag['long'] = {'ok': True, 'at': dt.datetime.utcnow().isoformat() + 'Z', 'info': {'symbols': len(got), 'days': len(dates), 'from': dates[0], 'errs': errs}}
-    json.dump(diag, open(os.path.join(DATA, '_diag/ext.json'), 'w'), ensure_ascii=False, separators=(',', ':'))
+    json.dump({'ok': True, 'at': dt.datetime.utcnow().isoformat() + 'Z', 'info': {'symbols': len(got), 'days': len(dates), 'from': dates[0], 'errs': errs}},
+              open(os.path.join(DATA, '_diag/long.json'), 'w'), ensure_ascii=False)
     print('OK', len(got), 'sembol', len(dates), 'gün', dates[0], errs)
 
 

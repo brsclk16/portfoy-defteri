@@ -486,7 +486,7 @@ EVDS_BASES = ['https://evds3.tcmb.gov.tr/igmevdsms-dis/', 'https://evds2.tcmb.go
 def evds():
     key = os.environ.get('EVDS_KEY', '').strip()
     if not key:
-        return {'skipped': 'EVDS_KEY secret tanımlı değil'}
+        return {'skipped': 'EVDS_KEY secret tanımlı değil (Settings → Secrets and variables → Actions → Secrets sekmesi, ad tam olarak EVDS_KEY)'}
     H = {'key': key}
     base, cat = None, None
     for b in EVDS_BASES:
