@@ -70,7 +70,7 @@ def _post(model, body):
         with urllib.request.urlopen(req, timeout=180) as r:
             return json.loads(r.read().decode())
     except urllib.error.HTTPError as e:
-        raise RuntimeError(f'HTTP {e.code}: {e.read().decode("utf-8", "replace")[:300]}')
+        raise RuntimeError(f'HTTP {e.code}: {e.read().decode("utf-8", "replace")[:800]}')
 
 
 def _json(txt):
@@ -91,9 +91,11 @@ def ask(system, user, search=False, as_json=True, max_tokens=6000, temperature=0
         body['generationConfig']['responseMimeType'] = 'application/json'
     errs = []
     for model in (MODELS if KEY else []):
-        for attempt in range(3):
+        b = json.loads(json.dumps(body))
+        attempt = 0
+        while attempt < 3:
             try:
-                j = _post(model, body)
+                j = _post(model, b)
                 cand = (j.get('candidates') or [{}])[0]
                 txt = ''.join(p.get('text', '') for p in ((cand.get('content') or {}).get('parts') or []))
                 if not txt:
@@ -107,9 +109,18 @@ def ask(system, user, search=False, as_json=True, max_tokens=6000, temperature=0
                 return (_json(txt) if as_json else txt), src
             except Exception as e:
                 msg = str(e)
-                errs.append(f'{model}: {msg[:200]}')
-                if ('HTTP 503' in msg or 'HTTP 429' in msg or 'HTTP 500' in msg) and attempt < 2:
-                    time.sleep(20 * (attempt + 1))
+                errs.append(f'{model}: {msg[:160]}')
+                if 'HTTP 429' in msg and 'tools' in b:
+                    # Google Arama kotası dolmuş olabilir: aynı modeli aramasız dene (bekleme yok)
+                    b.pop('tools')
+                    if as_json:
+                        b['generationConfig']['responseMimeType'] = 'application/json'
+                    continue
+                if 'HTTP 429' in msg and 'quota' in msg.lower() and 'PerDay' in msg:
+                    break  # günlük kota: bu modelde beklemek boşuna
+                attempt += 1
+                if ('HTTP 503' in msg or 'HTTP 429' in msg or 'HTTP 500' in msg) and attempt < 3:
+                    time.sleep(20 * attempt)
                     continue
                 break
     if GROQ:
