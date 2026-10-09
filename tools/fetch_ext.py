@@ -262,7 +262,7 @@ def fred():
     out, errs = {}, {}
     for sid in FRED_IDS:
         try:
-            txt = get(f'https://fred.stlouisfed.org/graph/fredgraph.csv?id={sid}&cosd=2016-01-01')
+            txt = get(f'https://fred.stlouisfed.org/graph/fredgraph.csv?id={sid}&cosd=2009-01-01')
             rows = list(csv.reader(io.StringIO(txt)))[1:]
             wk = {}
             for d, v in rows:
