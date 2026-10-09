@@ -14,7 +14,7 @@ sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 import fetch_ext as fx
 
 TOKEN = os.environ.get('GITHUB_TOKEN', '').strip()
-MODELS = [m for m in os.environ.get('AI_MODELS', 'openai/gpt-4.1-mini,openai/gpt-4o-mini').split(',') if m]
+MODELS = [m for m in os.environ.get('AI_MODELS', 'openai/gpt-4.1-mini').split(',') if m]
 URL = 'https://models.github.ai/inference/chat/completions'
 DRY = '--dry' in sys.argv
 HOURS = int(sys.argv[sys.argv.index('--hours') + 1]) if '--hours' in sys.argv else 26
@@ -86,21 +86,40 @@ def _post(url, extra, body):
         raise RuntimeError(f'{url} HTTP {st} ({ct}), JSON değil: {raw[:200]!r}')
 
 
+GEMINI_MODELS = [m for m in os.environ.get('GEMINI_MODEL', 'gemini-3.8-flash,gemini-flash-latest,gemini-flash-lite-latest').split(',') if m]
+
+
 def ask(model, user):
     errs = []
     for url, extra in (_GOOD or ENDPOINTS):
-        mdl = (os.environ.get('AI_MODEL', model) if url == EXT_URL else os.environ.get('GEMINI_MODEL', 'gemini-3.8-flash') if 'googleapis' in url
-               else model.split('/')[-1] if 'azure' in url else model)
-        body = json.dumps({'model': mdl, 'temperature': 0.2, 'max_tokens': 3500,
-                           'messages': [{'role': 'system', 'content': SYSTEM}, {'role': 'user', 'content': user}]}).encode()
-        try:
-            j = _post(url, extra, body)
+        if url == EXT_URL:
+            names = [os.environ.get('AI_MODEL') or model]
+        elif 'googleapis' in url:
+            names = GEMINI_MODELS
+        else:
+            names = [model.split('/')[-1] if 'azure' in url else model]
+        j = None
+        for mdl in names:
+            body = json.dumps({'model': mdl, 'temperature': 0.2, 'max_tokens': 3500,
+                               'messages': [{'role': 'system', 'content': SYSTEM}, {'role': 'user', 'content': user}]}).encode()
+            for attempt in range(3):
+                try:
+                    j = _post(url, extra, body)
+                    break
+                except Exception as e:
+                    msg = str(e)
+                    errs.append(f'{mdl}: {msg[:300]}')
+                    if ('HTTP 503' in msg or 'HTTP 429' in msg) and attempt < 2:
+                        time.sleep(20 * (attempt + 1))
+                        continue
+                    break
+            if j is not None:
+                print(f'uç nokta: {url} · model: {mdl}')
+                break
+        if j is not None:
             if not _GOOD:
                 _GOOD.append((url, extra))
-            print(f'uç nokta: {url}')
             break
-        except Exception as e:
-            errs.append(str(e)[:400])
     else:
         raise RuntimeError(' | '.join(errs))
     txt = j['choices'][0]['message']['content']
