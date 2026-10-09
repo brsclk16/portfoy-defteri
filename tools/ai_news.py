@@ -190,7 +190,8 @@ def rule_select(cand, I, hold, k=8):
                 f, w = v.split(' ')[0], v.split(' ')[1] if ' ' in v else ''
                 why.append(f'{h}, {f} fonunda {w} ağırlıkta.')
         summ = (it.get('summary') or '').strip()
-        picked.append({'i': i, 'title': tr(it['title'])[:140], 'summary': tr(summ[:600]) if summ else '',
+        T = (lambda x: x) if it.get('lang') == 'tr' else tr  # Kıssadan Hisse maddeleri zaten Türkçe
+        picked.append({'i': i, 'title': T(it['title'])[:140], 'summary': T(summ[:600]) if summ else '',
                        'whyItMatters': ' '.join(dict.fromkeys(why))[:400],
                        'tickers': direct or sorted({v.split(' ')[0] for h in rel for v in hold.get(h, [])}),
                        'holdings': rel[:8], 'impact': 'nötr', 'importance': 2 if (direct or s2 >= 7) else 1})
