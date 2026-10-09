@@ -1,7 +1,8 @@
 name: Site talepleri (bildirim + anında veri)
 # Siteden ORION isteği (data/r/), soru (data/q/) ya da yeni sembol (data/watchlist.json) geldiğinde:
 # Telegram'a "alındı" bildirimi gönderir; yeni sembolde ücretsiz verileri (fiyat, analist, değerleme, temettü, 13F, evren) hemen toplar.
-# Metin işleri (rapor, cevap, enstrüman özeti) günde bir kez çalışan Claude görevlerinde yapılır.
+# Sorular Gemini (Google Arama destekli) ile hemen cevaplanır → data/answers.json. Gemini başaramazsa akşamki Claude görevi cevaplar.
+# ORION raporları ve enstrüman özetleri günde bir kez çalışan Claude görevlerinde yapılır.
 on:
   push:
     branches: [main]
@@ -26,6 +27,8 @@ jobs:
           git diff --name-only --diff-filter=A HEAD~1 HEAD -- data/r data/q > /tmp/yeni.txt || true
           W=0; git diff --quiet HEAD~1 HEAD -- data/watchlist.json || W=1
           echo "w=$W" >> $GITHUB_OUTPUT
+          Q=0; ls data/q/*.json >/dev/null 2>&1 && Q=1
+          echo "q=$Q" >> $GITHUB_OUTPUT
           python3 - <<'PY' > /tmp/msg.txt
           import json, os
           L = [l.strip() for l in open('/tmp/yeni.txt') if l.strip().endswith('.json')]
@@ -37,8 +40,10 @@ jobs:
                   out.append(f"🔭 ORION isteği alındı: {d.get('mode','')} {' '.join(d.get('tickers') or [])} {d.get('topic') or ''}".strip())
               else:
                   out.append(f"💬 Soru alındı{(' (' + d['t'] + ')') if d.get('t') else ''}: {(d.get('q') or '')[:120]}")
-          if out:
-              out.append('Bu akşam ~20:10–20:30 (TR) arasında cevaplanacak.')
+          if any(f.startswith('data/r/') for f in L):
+              out.append('ORION raporu bu akşam ~20:10 (TR) hazırlanacak.')
+          if any(f.startswith('data/q/') for f in L):
+              out.append('Soru birkaç dakika içinde cevaplanacak.')
           print('\n'.join(out))
           PY
           cat /tmp/msg.txt
@@ -50,6 +55,13 @@ jobs:
         run: |
           if [ -s /tmp/msg.txt ]; then python3 tools/tg.py "$(cat /tmp/msg.txt)"; fi
           if [ "${{ steps.ne.outputs.w }}" = "1" ]; then python3 tools/tg.py "➕ İzleme listesi değişti; ücretsiz veriler şimdi toplanıyor, enstrüman özeti bu akşam ~20:30 (TR) eklenecek."; fi
+      - name: Soruları cevapla (Gemini)
+        if: steps.ne.outputs.q == '1'
+        env:
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+          TG_TOKEN: ${{ secrets.TG_TOKEN }}
+          TG_CHAT: ${{ secrets.TG_CHAT }}
+        run: python3 -u tools/ai_tasks.py qa || true
       - name: Yeni sembollerin verisi
         if: steps.ne.outputs.w == '1'
         env:
@@ -67,12 +79,12 @@ jobs:
           if [ -n "$NEW" ]; then python3 -u tools/fetch_universe.py $NEW || true; fi
           python3 -u tools/fetch_free.py analysts valuation earnhist dividends inst13f insider peers fundhold || true
       - name: Yayınla
-        if: steps.ne.outputs.w == '1'
+        if: steps.ne.outputs.w == '1' || steps.ne.outputs.q == '1'
         run: |
           git config user.name "Portföy veri botu"
           git config user.email "portfoy-bot@users.noreply.github.com"
-          git add data
+          git add -A data
           git diff --cached --quiet && { echo "değişiklik yok"; exit 0; }
-          git commit -m "Yeni sembol verisi (ücretsiz) $(TZ=Europe/Istanbul date '+%F %H:%M') TRT"
+          git commit -m "Site talepleri: cevap/veri $(TZ=Europe/Istanbul date '+%F %H:%M') TRT"
           for i in 1 2 3 4 5; do git pull --rebase -X theirs origin main && git push origin HEAD:main && exit 0; sleep $((i*7)); done
           exit 1
