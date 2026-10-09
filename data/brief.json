@@ -1,32 +1,31 @@
 {
- "publishedAt": "2026-10-08T06:19:04Z",
+ "publishedAt": "2026-10-09T05:57:06Z",
  "asOf": "2026-10-07",
- "title": "Şahin Fed tutanakları sonrası geniş satış; metaller en çok etkilenen",
+ "title": "OpenAI gelir şoku çipleri vurdu; petrol ve faiz baskısı sürüyor",
  "sections": [
   {
    "h": "Dün",
    "items": [
-    "7 Ekim kapanışında 12 enstrümandan yalnızca DELL artıda (%+0,86); S&P 500 (SPY) %-0,24 ile sınırlı geriledi, portföyün çoğu endeksin altında kaldı.",
-    "En sert düşüşler: COPX %-3,13 (vadeli bakır %+0,71 yükselmesine rağmen), SLV %-2,92, VRT %-2,63, IAU %-1,67.",
-    "Çip tarafı da geride: ASML %-1,59, SMH %-1,16, SOXX %-1,12, AMD %-0,55.",
-    "Arka plan: Fed tutanaklarında üyelerin çoğunun yıl sonuna kadar bir artış daha görmesi doları (UUP %+0,48) destekledi; 10 yıllık faiz %5,28, VIX 15,08 ile sakin."
+    "Son işlenen kapanış (7 Ekim): en iyi DELL %+0,86, ardından AGNG %-0,08 ve CRDO %-0,37.",
+    "En zayıflar COPX %-3,13, SLV %-2,94, VRT %-2,63; IAU %-1,67, ASML %-1,59, SMH %-1,18 ve SOXX %-1,12 düştü.",
+    "8 Ekim fiyatları henüz işlenmedi: o gün S&P 500 %0,47, Nasdaq 100 %1,39 geriledi; OpenAI'nin ~50 mlr $ yıllık gelir haberi AI/çip hisselerini sattırdı, petrol İran gerginliğiyle yükseldi."
    ]
   },
   {
    "h": "Bugün",
    "items": [
-    "Önümüzdeki 48 saatte takvimde portföyü ilgilendiren planlı bir veri ya da bilanço yok; gündem tutanakların faiz ve dolar üzerindeki etkisinin sindirilmesi.",
-    "Yüksek faiz beklentisi, faiz getirisi olmayan IAU/SLV ile faize duyarlı XBI ve AGNG için baskı kaynağı olmayı sürdürüyor.",
-    "Sıradaki büyük gün 14 Ekim: 08:00 TRT ASML bilançosu (ASML, SMH, SOXX) ve 15:30 TRT ABD TÜFE; 15 Ekim'de TSMC bilançosu."
+    "Bugün 17:00 TRT: ABD Michigan tüketici güveni (öncü, beklenti 47,5) — faiz beklentileri üzerinden XBI ve çip fonlarını etkileyebilir.",
+    "14 Ekim: ASML bilançosu (piyasa öncesi) ve 15:30 TRT'de ABD TÜFE — ASML, SMH, SOXX ve faize duyarlı tüm pozisyonlar için haftanın ana olayları.",
+    "15 Ekim: TSMC bilançosu — SMH/SOXX'in en büyük holdingi; rekor Q3 gelirine rağmen hisselerin düşmesi beklentilerin yüksek olduğunu gösteriyor.",
+    "Takvime eklendi: TCMB faiz kararı (22 Ekim 14:00 TRT) ve AbbVie bilançosu (30 Ekim, AGNG)."
    ]
   },
   {
    "h": "Teknik durum",
    "items": [
-    "Alım bölgesinde: AGNG 36,06 $ (bölge 35,74–35,96, stop 34,79, RSI 35) ve XBI 150,24 $ (bölge 147,48–149,15, stop 140,86, RSI 38) — ikisi de bölgenin üst sınırında.",
-    "Aşırı ısınmış: AMD 645,83 $ (RSI 71, ilk hedef 687,85) ve DELL 578,96 $ (RSI 61, alım bölgesinin ~%11 üzerinde).",
-    "Stop'a %3'ten yakın enstrüman yok; en yakını AGNG (stop'a ~%3,5).",
-    "IAU (RSI 37) ve SLV (RSI 38) son düşüşlerle zayıfladı ama hâlâ alım bölgelerinin (74,69–75,15 ve 49,64–49,96) belirgin üzerinde."
+    "Alım bölgesinde: ASML 1.769,79 $ (bölge 1.714,30–1.775,01, stop 1.591,42), CRDO 211,86 $ (206,75–212,09, stop 186,63), XBI 149,29 $ (147,48–149,15, stop 140,86).",
+    "AGNG 35,86 $ alım bölgesinde (35,74–35,96) ve stop'a (34,78) yaklaşık %3 mesafede, RSI 32; COPX 82,22 $ ile bölgenin (80,94–81,43) hemen üzerinde, stop 78,84.",
+    "Aşırı ısınmış: AMD 620,68 $ (TP1 658,52, RSI 62) ve DELL 574,55 $ (TP1 709,34, RSI 60)."
    ]
   }
  ]
