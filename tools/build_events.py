@@ -5,8 +5,8 @@ Soru: "Bu hissede şu olay olduğunda sonraki 1 hafta / 1 ay / 3 ayda ne oldu �
 
 Olaylar
   bilanço   : SEC EDGAR 8-K "Item 2.02 (Results of Operations)" bildirimleri, 2010'dan beri. Tepki = tepki günü kapanışı / önceki kapanış,
-              SPY'a göre fark. Tepki günü SEC kabul saatinden: 16:00 (ABD doğu) sonrası ertesi gün, öncesi aynı gün; saat yoksa iki günden
-              tepkisi büyük olan (zamanlama bir gerçek, yön değil). Tahmin/sürpriz verisinin ücretsiz
+              SPY'a göre fark. Tepki günü şirket bazında: sitenin bilanço verisindeki açıklama zamanı (açılış öncesi / kapanış sonrası),
+              yoksa şirketin tüm geçmişinde aynı gün ile ertesi günden hangisinin tepkisi büyükse (çoğunluk oyu; zamanlama bir gerçek, yön değil). Tahmin/sürpriz verisinin ücretsiz
               derin geçmişi yok; piyasanın tepkisi sürprizin dürüst bir ölçüsü.
               Kovalar (hisseye göre): büyük olumlu / olumlu / olumsuz / büyük olumsuz — "büyük" = o hissenin geçmiş tepkilerinin mutlak medyanından büyük.
   içeriden  : SEC Form 4, açık piyasa alımı (kod P) — yönetici/yönetim kurulu üyesi. Alım tarihi değil, kamuya açıklandığı gün esas alınır.
@@ -234,9 +234,13 @@ def stats(evs, base_of):
 
 
 # ------------------------------------------------------------------ bilanço
-def earnings_events(t, subs, P, B):
+def earnings_events(t, subs, P, B, when_hint=None):
+    """Tepki günü şirket bazında bir kez belirlenir (şirketler bilanço saatini neredeyse hiç değiştirmez):
+    1) sitenin bilanço verisindeki açıklama zamanı (Finnhub 'bmo'/'amc') varsa o,
+    2) yoksa şirketin tüm geçmişinde aynı gün (D) ile ertesi gün (D+1) tepkilerinden hangisinin büyük olduğuna çoğunluk oyu.
+    SEC kabul saati güvenilir değil: şirketler 8-K'yı sonuçlardan önce ya da sonra dosyalayabiliyor."""
     raw = sorted([s for s in subs if s['form'] in ('8-K', '8-K/A') and '2.02' in (s.get('items') or '')], key=lambda s: s['filingDate'])
-    evs, last, agree, tot = [], None, 0, 0
+    picked, last = [], None
     for s in raw:
         d = s['filingDate']
         if last and (dt.date.fromisoformat(d) - dt.date.fromisoformat(last)).days < 45:
@@ -244,7 +248,6 @@ def earnings_events(t, subs, P, B):
         k = P.idx_ge(d)
         if k is None or k < 1:
             continue
-        # aday tepki günleri: k (sabah / seans içi) ve k+1 (kapanış sonrası)
         cands = []
         for kk in (k, k + 1):
             if kk < len(P.d):
@@ -252,29 +255,26 @@ def earnings_events(t, subs, P, B):
                 r, rb = ret(P, kk - 1, kk), (ret(B, b0, b1) if b0 is not None and b1 is not None else None)
                 if r is not None and rb is not None:
                     cands.append((kk, (r - rb) * 100, r * 100))
-        if not cands:
-            continue
-        hr = eastern_hour(s.get('acceptanceDateTime'))
-        by_abs = max(cands, key=lambda c: abs(c[1]))
-        by_hr = None
-        # Şirketler 8-K'yı çoğu zaman sonuçları açıklamadan dakikalar önce (16:00'dan hemen önce) dosyalar; bu yüzden yalnızca
-        # açılış öncesi (<9:30 → aynı gün) ve kapanış sonrası (≥16:00 → ertesi gün) kesin sayılır, arası tepkisi büyük olan günle çözülür.
-        if hr is not None and P.d[k] == d:
-            if hr < 9.5:
-                by_hr = cands[0]
-            elif hr >= 16 and len(cands) > 1:
-                by_hr = cands[1]
-        if by_hr:
-            tot += 1
-            agree += by_hr[0] == by_abs[0]
-        kk, ex, raw_r = by_hr or by_abs  # önce SEC kabul saati; yoksa iki günden tepkisi büyük olan
-        evs.append({'d': P.d[kk], 'filed': d, 'ex': round(ex, 2), 'r': round(raw_r, 2), 'f': fwd(P, B, kk), 'how': 'saat' if by_hr else 'tepki'})
-        last = d
+        if cands:
+            picked.append((d, k, cands))
+            last = d
+    votes = [abs(c[1][1]) > abs(c[0][1]) for _, k, c in picked if len(c) == 2 and P.d[k] == _]
+    if when_hint in ('amc', 'bmo'):
+        after, how = when_hint == 'amc', 'site:' + when_hint
+    else:
+        after = sum(votes) * 2 > len(votes) if votes else False
+        how = f'oy {sum(votes)}/{len(votes)}'
+    evs = []
+    for d, k, cands in picked:
+        # açıklama günü işlem günü değilse (hafta sonu/tatil) ilk işlem günü zaten tepki günüdür
+        c = cands[1] if (after and P.d[k] == d and len(cands) > 1) else cands[0]
+        kk, ex, raw_r = c
+        evs.append({'d': P.d[kk], 'filed': d, 'ex': round(ex, 2), 'r': round(raw_r, 2), 'f': fwd(P, B, kk)})
     if evs:
         med_abs = sorted(abs(e['ex']) for e in evs)[len(evs) // 2]
         for e in evs:
             e['b'] = ('bp' if e['ex'] >= med_abs else 'p') if e['ex'] > 0 else ('bn' if -e['ex'] >= med_abs else 'n')
-    return evs, (agree, tot)
+    return evs, {'after': after, 'how': how, 'votes': f'{sum(votes)}/{len(votes)}'}
 
 
 # ------------------------------------------------------------------ içeriden alım (Form 4)
@@ -377,23 +377,25 @@ def insider_scan(t, cik, subs, cache, limit):
 
 
 def insider_events(t, C, P, B):
-    """Açıklandığı gün sonrası ilk kapanıştan giriş. Küme: 30 gün içinde ≥2 farklı kişi ya da tek alım ≥ 250 bin $."""
+    """Giriş: açıklandığı günden sonraki ilk kapanış. Küme: 30 gün içinde kişi başı ≥25 bin $ alan ≥2 farklı kişi ya da tek kişiden ≥250 bin $."""
     buys = sorted(C.get('buys', []), key=lambda b: b['filed'])
     evs, last = [], None
     for i, b in enumerate(buys):
         win = [x for x in buys if 0 <= (dt.date.fromisoformat(b['filed']) - dt.date.fromisoformat(x['filed'])).days <= 30]
-        people = {x['who'] for x in win}
-        tot = sum(x['usd'] for x in win)
-        if not (len(people) >= 2 or b['usd'] >= 250000):
+        per = {}
+        for x in win:
+            per[x['who']] = per.get(x['who'], 0) + x['usd']
+        people = {w for w, v in per.items() if v >= 25000}  # küçük, düzenli alım programları (ESPP benzeri) sinyal sayılmaz
+        tot = sum(per[w] for w in people)
+        if not (len(people) >= 2 or per.get(b['who'], 0) >= 250000):
             continue
         if last and (dt.date.fromisoformat(b['filed']) - dt.date.fromisoformat(last)).days < 30:
             continue
-        hr = eastern_hour(b.get('acc'))
         k = P.idx_ge(b['filed'])
         if k is None:
             continue
-        if hr is not None and hr >= 16 and P.d[k] == b['filed']:
-            k += 1
+        if P.d[k] == b['filed']:
+            k += 1  # açıklandığı gün kapanıştan sonra gelmiş olabilir: giriş her zaman bir sonraki kapanış (ileriye bakma yok)
         if k >= len(P.d):
             continue
         evs.append({'d': P.d[k], 'filed': b['filed'], 'people': len(people), 'usd': tot, 'f': fwd(P, B, k)})
@@ -466,7 +468,8 @@ def main():
            'source': 'SEC EDGAR (8-K Item 2.02, Form 4) · Yahoo Finance (düzeltilmiş kapanış)', 'tickers': {}, 'pool': {}}
     BASE, PX, SUBS = {}, {}, {}
     all_earn, all_ins = [], []
-    timing = [0, 0]
+    timing = {}
+    EHD = ((rd('earnhist.json', {}) or {}).get('data') or {})
     # 1) fiyat + SEC listesi + bilanço olayları (hızlı)
     for t in U:
         try:
@@ -480,10 +483,11 @@ def main():
             PX[t], SUBS[t] = P, (cik, subs)
             k0 = P.idx_ge('2010-06-01') or 0
             BASE[t] = base_rates(P, B, k0)
-            ev, (ag, tot) = earnings_events(t, subs, P, B)
-            timing[0] += ag
-            timing[1] += tot
-            T = {'name': name, 'cik': cik, 'base': BASE[t], 'from': P.d[k0], 'direct': t in direct, 'in': hold.get(t, [])}
+            whens = [h.get('when') for h in (EHD.get({'NVO': 'NOVO.B'}.get(t, t)) or {}).get('hist', []) if h.get('when') in ('amc', 'bmo')]
+            hint = max(set(whens), key=whens.count) if whens and whens.count(max(set(whens), key=whens.count)) >= 0.8 * len(whens) else None
+            ev, tm = earnings_events(t, subs, P, B, hint)
+            timing[t] = tm
+            T = {'name': name, 'cik': cik, 'base': BASE[t], 'from': P.d[k0], 'direct': t in direct, 'in': hold.get(t, []), 'timing': tm}
             if ev:
                 T['earn'] = {'events': ev, 'medAbs': round(sorted(abs(e['ex']) for e in ev)[len(ev) // 2], 2),
                              'upShare': round(100 * sum(1 for e in ev if e['ex'] > 0) / len(ev)),
@@ -537,7 +541,7 @@ def main():
             elif len(bad) < 12:
                 bad.append(f"{t} {h['d']}: ben {m[0]}, site {h['rd']}")
     DIAG['validation'] = {'tepki günü sitenin bilanço verisiyle uyuşuyor': f'{ok}/{tot2}', 'uyuşmayan örnekler': bad}
-    DIAG['timing'] = {'kabul saati kuralı ile en büyük tepki gününün uyuşması': f'{timing[0]}/{timing[1]}'}
+    DIAG['timing'] = {t: f"{'kapanış sonrası' if v['after'] else 'açılış öncesi/seans içi'} ({v['how']})" for t, v in timing.items()}
     DIAG['insiderPending'] = {t: c.get('pending', 0) for t, c in cache.items() if c.get('pending')}
     DIAG['budgetSec'] = BUDGET
     if NOTIFY:
