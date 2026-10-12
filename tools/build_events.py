@@ -382,12 +382,17 @@ def insider_events(t, C, P, B):
     evs, last = [], None
     for i, b in enumerate(buys):
         win = [x for x in buys if 0 <= (dt.date.fromisoformat(b['filed']) - dt.date.fromisoformat(x['filed'])).days <= 30]
+        bd = dt.date.fromisoformat(b['filed'])
+        def planned(w):  # son 4 ayın en az 3'ünde alım yapan kişi: düzenli alım programı, takdire bağlı karar değil
+            ms = {x['filed'][:7] for x in buys if x['who'] == w and 0 <= (bd - dt.date.fromisoformat(x['filed'])).days <= 120}
+            return len(ms) >= 3
         per = {}
         for x in win:
-            per[x['who']] = per.get(x['who'], 0) + x['usd']
+            if not planned(x['who']):
+                per[x['who']] = per.get(x['who'], 0) + x['usd']
         people = {w for w, v in per.items() if v >= 25000}  # küçük, düzenli alım programları (ESPP benzeri) sinyal sayılmaz
         tot = sum(per[w] for w in people)
-        if not (len(people) >= 2 or per.get(b['who'], 0) >= 250000):
+        if not people or not (len(people) >= 2 or per.get(b['who'], 0) >= 250000):
             continue
         if last and (dt.date.fromisoformat(b['filed']) - dt.date.fromisoformat(last)).days < 30:
             continue
@@ -430,7 +435,7 @@ def notify(out, direct, last_day, prev_state):
             ctx = ''
             if st.get('n', 0) >= 4:
                 tt, pos = st.get('t') or 0, e['b'] in ('bp', 'p')
-                if abs(tt) < 2:
+                if abs(tt) < 3:  # tek hissede çok sayıda test yapıldığı için eşik yüksek
                     verdict = 'geçmiş, rastgele bir günden ayırt edilemiyor; tepkiye göre işlem yapmanın tarihsel bir avantajı yok'
                 elif (tt > 0) == pos:
                     verdict = 'geçmişte bu tür tepkinin ardından hareket aynı yönde sürme eğiliminde'

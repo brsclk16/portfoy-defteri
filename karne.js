@@ -45,6 +45,7 @@ function viewSinyalKarne(L){
   ${skTable(live,'Canlı karne','o gün kaydedilen sinyaller · sonradan değiştirilemez')}
   ${skEvents(L)}
   ${skTable(back,'Geriye dönük karne','aynı kod geçmiş günlere uygulandı · karşılaştırma için')}
+  <div id="evpool"></div>
   <section class="card sec"><h3>Nasıl okunur?</h3><div class="note" style="line-height:1.65">
     <p><b>Katkı</b> asıl sayı: sinyalden sonraki getirinin SPY'dan farkı, <b>aynı hissede rastgele bir günün</b> aynı farkından ne kadar iyi? Bu hisseler son yıllarda SPY'ı zaten geçtiği için "sinyalden sonra SPY'ı geçti" demek tek başına bir şey kanıtlamaz; rastgele bir günde alsan da geçecektin.</p>
     <p><b>Sinyal</b>: sinyal yönünde SPY üstü getiri (alım sinyalinde hisse − SPY, ısınma ve stop kırılımında SPY − hisse). <b>Rastgele</b>: aynı hisselerde sıradan bir günün aynı yöndeki ortalaması. <b>İsabet</b>: sinyalin yönünde sonuçlanan olay oranı.</p>
@@ -52,10 +53,19 @@ function viewSinyalKarne(L){
     <p><b>Stop kırılımı</b>: kapanışın bir önceki günün plan stopunun altına inmesi. <b>Canlı</b> kayıtlar herkese açık depoya o gün yazılır; <b>geriye dönük</b> karne bugünkü kodla üretildiği için iyimser olabilir. Giriş fiyatı sinyal günü kapanışıdır.</p>
   </div></section>`;
 }
+function evPoolCard(){
+  const E=S.events;if(!E||!E.pool)return '';const P=E.pool;
+  const row=(l,x,pos)=>{const [c,txt]=evVerdictAll(x,pos,2.5);return `<tr><td><b>${l}</b></td>${SK_H.map(h=>evCellH(x&&x[h])).join('')}<td><span class="chip ${c}">${esc(txt)}</span></td></tr>`};
+  return `<section class="card sec"><h3>Bilanço tepkisi ve içeriden alım sonrası (havuz)<span class="r muted" style="font-size:12px">${P.tickers} şirket · ${P.nEarn} bilanço · ${P.nIns} içeriden alım kümesi · 2010'dan beri</span></h3><div class="tscroll"><table class="tbl"><thead><tr><th>Olay</th>${SK_H.map(h=>`<th class="r">${SK_HL[h]} katkı</th>`).join('')}<th>Sonuç</th></tr></thead><tbody>
+    ${EV_B.map(([b,l])=>row(l,P.earn[b],b==='bp'||b==='p')).join('')}${row('İçeriden alım kümesi',P.ins,true)}</tbody></table></div>
+    <p class="muted" style="font-size:12px;margin:8px 0 0;line-height:1.5">Portföydeki hisseler ve fonların büyük holdingleri bir arada. Aynı günlerde birden çok şirket bilanço açıkladığı için olaylar bağımsız değildir; bu yüzden havuzda eşik |t| ≥ 2,5. Hisse bazında ayrıntı: hisse sayfası → Plan ve beklenti. Kaynak: SEC EDGAR, Yahoo Finance.</p></section>`;
+}
 async function karneMount(){
   const el=$('#skr');if(!el)return;
+  if(S.events===undefined)evLoad(()=>{const p=$('#evpool');if(p)p.innerHTML=evPoolCard()});
   if(!S.sigCard)S.sigCard=await fetch('data/signals.json?t='+Math.floor(Date.now()/600000)).then(r=>r.ok?r.json():null).catch(()=>null);
   el.innerHTML=S.sigCard?viewSinyalKarne(S.sigCard):`<div class="empty"><b>Karne henüz oluşmadı</b>İlk kayıt her iş günü kapanıştan sonra (TR ~01:00) yapılır.</div>`;
+  const p=$('#evpool');if(p&&S.events)p.innerHTML=evPoolCard();
 }
 
 /* ================= olay sonrası tarihsel oranlar (data/events.json, tools/build_events.py) ================= */
@@ -67,13 +77,21 @@ function evLoad(rerender){
 }
 function evOf(t){const E=S.events&&S.events.tickers;return E?(E[t==='NOVO.B'?'NVO':t]||null):null}
 // yön kovaya göre okunur: olumlu tepkide t>0 devam, olumsuz tepkide t<0 devam
-function evVerdict(x,pos){
+// tek hissede 4 kova × çok sayıda hisse test edildiği için eşik |t| ≥ 3 (şans eseri 'anlamlı' görünmeyi azaltır); havuzda 2
+function evVerdict(x,pos,thr=3){
   if(!x||!x.n)return ['n','Veri yok'];
   if(x.n<8)return ['n',`Az veri (${x.n})`];
-  if(x.t==null||Math.abs(x.t)<2)return ['warnc','Rastgeleden ayırt edilemez'];
+  if(x.t==null||Math.abs(x.t)<thr)return ['warnc','Rastgeleden ayırt edilemez'];
   return (x.t>0)===pos?['up','Hareket sürüyor']:['down','Hareket geri dönüyor'];
 }
 function skPct(v,d=1){return isNum(v)?`${v>0?'+':v<0?'−':''}%${nf(Math.abs(v),d)}`:'—'}
+// tüm vadelere bakar: eşiği geçen vade(ler) varsa onu söyler
+function evVerdictAll(X,pos,thr=3){
+  const hits=SK_H.map(h=>[h,X&&X[h]]).filter(([h,x])=>x&&x.n>=8&&x.t!=null&&Math.abs(x.t)>=thr);
+  if(!hits.length)return evVerdict(X&&X['21'],pos,thr);
+  const [h,x]=hits.sort((a,b)=>Math.abs(b[1].t)-Math.abs(a[1].t))[0];const same=(x.t>0)===pos;
+  return [same?'up':'down',`${SK_HL[h]}: hareket ${same?'sürüyor':'geri dönüyor'}`];
+}
 function evCellH(x){
   if(!x||!x.n)return '<td class="r muted">—</td>';
   return `<td class="r"><div class="num ${cls(x.vsBase)}" style="font-weight:600">${skSigned(x.vsBase)}</div>
@@ -81,7 +99,7 @@ function evCellH(x){
 }
 function evStockCard(t,T){
   const E=T.earn||{},ev=E.events||[];const I=T.ins||{};
-  const rows=EV_B.map(([b,l])=>{const B=(E.buckets||{})[b]||{};const [c,txt]=evVerdict(B['21'],b==='bp'||b==='p');
+  const rows=EV_B.map(([b,l])=>{const B=(E.buckets||{})[b]||{};const [c,txt]=evVerdictAll(B,b==='bp'||b==='p');
     return `<tr><td><b>${l}</b></td>${SK_H.map(h=>evCellH(B[h])).join('')}<td><span class="chip ${c}">${esc(txt)}</span></td></tr>`}).join('');
   const last=ev.slice(-8).reverse();
   const insStats=(()=>{const L=I.events||[];if(!L.length)return `<p class="muted" style="margin:6px 0 0">${I.pending?`Form 4 taraması sürüyor (${I.pending} dosya kaldı, birkaç gecede tamamlanır). `:''}${I.since?`${esc(trDate(I.since+'T12:00:00Z',{month:'short',year:'numeric'}))} sonrasında `:''}yönetici ya da YK üyesinden kümelenmiş açık piyasa alımı bulunmadı${I.buys?` (${I.buys} tekil alım var, eşiğin altında)`:''}. Büyük şirketlerde içeriden alım nadirdir; çoğu işlem hisse ödülü ve satıştır.</p>`;
@@ -91,12 +109,12 @@ function evStockCard(t,T){
     ${ev.length?`<div class="grid g3"><div class="kpi mini"><div class="l">Tipik bilanço tepkisi</div><div class="v">±%${nf(E.medAbs,1)}</div><div class="s">SPY'a göre, mutlak medyan</div></div>
       <div class="kpi mini"><div class="l">Yukarı tepki</div><div class="v">%${nf(E.upShare,0)}</div><div class="s">bilançoların</div></div>
       <div class="kpi mini"><div class="l">Son tepki</div><div class="v ${cls(ev[ev.length-1].ex)}">${skPct(ev[ev.length-1].ex)}</div><div class="s">${esc(trDate(ev[ev.length-1].d+'T12:00:00Z'))}</div></div></div>
-    <div class="tscroll" style="margin-top:12px"><table class="tbl"><thead><tr><th>Bilanço tepkisinden sonra</th>${SK_H.map(h=>`<th class="r">${SK_HL[h]} katkı</th>`).join('')}<th>1 ay sonucu</th></tr></thead><tbody>${rows}</tbody></table></div>
+    <div class="tscroll" style="margin-top:12px"><table class="tbl"><thead><tr><th>Bilanço tepkisinden sonra</th>${SK_H.map(h=>`<th class="r">${SK_HL[h]} katkı</th>`).join('')}<th>Sonuç</th></tr></thead><tbody>${rows}</tbody></table></div>
     <details style="margin-top:10px"><summary class="muted" style="cursor:pointer">Son 8 bilanço</summary><div class="tscroll"><table class="tbl"><thead><tr><th>Tepki günü</th><th class="r">Tepki</th>${SK_H.map(h=>`<th class="r">sonraki ${SK_HL[h]}</th>`).join('')}</tr></thead><tbody>
       ${last.map(e=>`<tr><td class="num">${esc(trDate(e.d+'T12:00:00Z'))}</td><td class="r num ${cls(e.ex)}">${skPct(e.ex)}</td>${SK_H.map(h=>`<td class="r num ${cls(e.f[h])}">${e.f[h]==null?'bekliyor':skSigned(e.f[h])}</td>`).join('')}</tr>`).join('')}</tbody></table></div></details>`
     :`<p class="muted">${esc(E.note||'Bilanço verisi yok.')}</p>`}
     <h4 style="margin:16px 0 6px">İçeriden alım kümeleri</h4>${insStats}
-    <p class="muted" style="font-size:12px;margin:10px 0 0;line-height:1.5"><b>Katkı</b>: olaydan sonraki getirinin SPY'dan farkı eksi aynı hissede rastgele bir günün aynı farkı (puan). "Büyük" tepki: bu hissenin geçmiş tepkilerinin mutlak medyanından büyük. Karar için en az 8 vaka ve istatistiksel ayrışma (t ≥ 2) gerekir. Kaynak: SEC EDGAR (8-K Item 2.02, Form 4), Yahoo Finance.</p></section>`;
+    <p class="muted" style="font-size:12px;margin:10px 0 0;line-height:1.5"><b>Katkı</b>: olaydan sonraki getirinin SPY'dan farkı eksi aynı hissede rastgele bir günün aynı farkı (puan). "Büyük" tepki: bu hissenin geçmiş tepkilerinin mutlak medyanından büyük. Karar için en az 8 vaka ve güçlü istatistiksel ayrışma (|t| ≥ 3) gerekir: aynı test onlarca hissede ve dört kovada tekrarlandığı için şans eseri birkaç tanesinin "anlamlı" görünmesi beklenir. Kaynak: SEC EDGAR (8-K Item 2.02, Form 4), Yahoo Finance.</p></section>`;
 }
 function evFundCard(t){
   const H=((S.data.instruments[t]||{}).holdings||[]).slice().sort((a,b)=>(b.w||0)-(a.w||0)).slice(0,8).map(h=>({...h,T:evOf(h.t)})).filter(h=>h.T&&h.T.earn&&(h.T.earn.events||[]).length);
