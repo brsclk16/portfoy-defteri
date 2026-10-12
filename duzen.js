@@ -79,7 +79,7 @@ function viewInstTabs(t,tab){
   const hasIns=kids.some(isIns);
   const tabs=ITABS.filter(([k])=>k!=='iceriden'||hasIns);
   let body='';
-  if(tab==='plan')body=planCard(t)+`<div class="sec">${psCard(t)}</div>`+expectSection(t)+btSection(t);
+  if(tab==='plan')body=planCard(t)+`<div class="sec">${psCard(t)}</div>`+expectSection(t)+btSection(t)+'<div id="evc"></div>';
   else if(tab==='teknik')body=pick(isTech)+levelsSection(t);
   else if(tab==='temel')body=pick(isMetrics)+pick(isSW)+pick(isHold)+fundSection(t,true)+notesSection(t)+statementsSection(t)+dcfSection(t)+callsSection(t)+analystSection(t)+peersSection(t)+pick(isEarn);
   else if(tab==='haber')body=pick(isNews);
@@ -92,7 +92,7 @@ function afterInstTabs(t,tab){
   if(tab==='teknik'){afterTech(t);afterLevels(t)}
   if(tab==='temel'){try{afterAnalyst(t)}catch(e){}afterDcf2()}
   if(tab==='genel'){afterAsk();afterOrionInst()}
-  if(tab==='plan'){afterExpect(t);afterPs(t);afterBt()}
+  if(tab==='plan'){afterExpect(t);afterPs(t);afterBt();if(typeof evMount==='function')evMount(t)}
 }
 
 /* ---------- uyarılar ---------- */

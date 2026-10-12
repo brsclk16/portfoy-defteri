@@ -108,6 +108,17 @@ for(const n of (S.data.news||[])){const dir=n.impact==='olumlu'?1:n.impact==='ol
   for(const t of (n.tickers||[]).filter(x=>S.data.instruments[x])){const px=pxOn(t,d);if(!px)continue;
     const g=late(d);addEvent({id:`${g?'b':'c'}|haber|${t}|${n.id||n.url}`,src:g?'geri':'canli',k:'haber',dir,t,d,lbl:'Haber: '+(n.impact),px,...bench(d),title:(n.title||'').slice(0,120)})}}
 
+/* 6) canlı: analist değişiklikleri (data/analysts.json günlük birikir) — not ve hedef fiyat ayrı sinyal */
+const BULL=/buy|outperform|overweight|positive|accumulate|add\b|strong/i,BEAR=/sell|underperform|underweight|negative|reduce/i;
+for(const [t0,A] of Object.entries((rd('analysts.json',{})||{}).data||{})){const t=t0;
+  for(const c of (A.changes||[])){let k=null,dir=null;
+    if(c.action==='not yükseltme'){k='analist_not';dir=1}else if(c.action==='not düşürme'){k='analist_not';dir=-1}
+    else if(c.action==='kapsama başlatma'){k='analist_not';dir=BULL.test(c.to||'')?1:BEAR.test(c.to||'')?-1:null}
+    else if(c.action==='hedef artırma'){k='analist_hedef';dir=1}else if(c.action==='hedef düşürme'){k='analist_hedef';dir=-1}
+    if(!k||!dir)continue;const d=entryDay(c.d);if(!d)continue;
+    const s0=sym(t);const px=pxOn(t,d)||pxOn(s0,d)||(d===TODAY&&uPx(t)?uPx(t).px:null);if(!px)continue;
+    const g=late(d);addEvent({id:`${g?'b':'c'}|${k}|${t}|${d}|${dir}`,src:g?'geri':'canli',k,dir,t,d,lbl:(dir>0?'Analist: ':'Analist: ')+c.action+(c.firm?' ('+c.firm+')':''),px,...bench(d)})}}
+
 /* ---------- puanlama ---------- */
 for(const e of L.events){const i0=calIdx.get(e.d);if(i0==null)continue;e.r=e.r||{};
   for(const h of H){if(e.r[h])continue;const i1=i0+h;if(i1>iToday)continue;const d1=CAL[i1];
@@ -125,7 +136,7 @@ function uncond(t,h){const k=t+'|'+h;if(k in base)return base[k];const s=series[
 
 /* ---------- özet ---------- */
 const med=a=>{if(!a.length)return null;const s=a.slice().sort((x,y)=>x-y);const m=s.length>>1;return s.length%2?s[m]:(s[m-1]+s[m])/2};
-const NAMES={plan_alim:'Alım bölgesine giriş',plan_isinma:'Aşırı ısınma',plan_kirildi:'Stop kırılımı',orion:'ORION duruşu',haber:'Haber etkisi',...(L.state.scrNames||{})};
+const NAMES={plan_alim:'Alım bölgesine giriş',plan_isinma:'Aşırı ısınma',plan_kirildi:'Stop kırılımı',orion:'ORION duruşu',haber:'Haber etkisi',analist_not:'Analist not değişikliği',analist_hedef:'Analist hedef fiyat değişikliği',...(L.state.scrNames||{})};
 const groups={};
 for(const e of L.events){const g=groups[e.src+'|'+e.k]||(groups[e.src+'|'+e.k]={src:e.src,k:e.k,name:NAMES[e.k]||e.k,n:0,h:{}});g.n++;if(!e.dir)continue;  // nötr duruş yön vermez, puanlanmaz
   for(const h of H){const r=e.r&&e.r[h];if(!r)continue;const x=g.h[h]||(g.h[h]={exs:[],hits:0,rets:[],bases:[]});x.exs.push(e.dir*r.ex);x.rets.push(r.ret);if(e.dir&&e.dir*r.ex>0)x.hits++;const u=uncond(e.t,h);if(u!=null&&e.dir)x.bases.push(e.dir*u)}}
