@@ -192,7 +192,7 @@ function lineChart(el,list,opts={}){
   niceTicks(mn,mx,4).forEach(v=>{if(v<mn||v>mx)return;g+=`<line class="gridl" x1="${pl}" x2="${W-pr}" y1="${Y(v)}" y2="${Y(v)}"/><text x="${W-pr+8}" y="${Y(v)+4}">${esc(fmt(v,true))}</text>`});
   if(opts.pct)g+=`<line x1="${pl}" x2="${W-pr}" y1="${Y(0)}" y2="${Y(0)}" stroke="var(--line2)"/>`;
   const nx=Math.min(6,Math.max(2,Math.floor((W-pl-pr)/110)));
-  for(let k=0;k<nx;k++){const i=Math.round(k/(nx-1)*(dates.length-1));const d=new Date(dates[i]+'T12:00:00Z');g+=`<text x="${X(i)}" y="${H-6}" text-anchor="${k===0?'start':k===nx-1?'end':'middle'}">${d.toLocaleDateString('tr-TR',{day:'numeric',month:'short'})}</text>`}
+  for(let k=0;k<nx;k++){const i=Math.round(k/(nx-1)*(dates.length-1));const d=new Date(dates[i]+'T12:00:00Z');g+=`<text x="${X(i)}" y="${H-6}" text-anchor="${k===0?'start':k===nx-1?'end':'middle'}">${opts.xfmt?opts.xfmt(dates[i]):d.toLocaleDateString('tr-TR',{day:'numeric',month:'short'})}</text>`}
   let paths='',defs='';
   list.forEach((s,si)=>{
     const d=s.pts.map((p,i)=>`${i?'L':'M'}${X(xi.get(p[0])).toFixed(1)},${Y(p[1]).toFixed(1)}`).join('');
@@ -642,7 +642,7 @@ function render(scrollTop){
     else if(R.sub==='test'){v.innerHTML=sn+`<div class="fade">${viewBtAll()}</div>`;after=afterBtAll}
     else{const o=viewTeknikPanel(R.t);v.innerHTML=sn+(o.html||o);after=()=>afterTeknikPanel(o.t)}}
   else if(R.r==='analiz'){const sn=subnav('analiz',R.sub);v.innerHTML=sn+analizPart(R.sub);
-    after=()=>{if(R.sub==='simulator')afterSim();else if(R.sub==='beklenti')afterPortExpect();else if(R.sub==='makro')afterMakro();else if(R.sub==='stres')afterStress();else if(R.sub==='duzenli')afterDca();else if(R.sub==='degerleme'){}else if(R.sub==='senaryo')afterScn2();else if(R.sub==='duyarlilik')afterSent();else if(R.sub==='asistan')afterAsk();else if(R.sub==='kaynak'||R.sub==='makroev'){}else if(R.sub!=='haftalik')afterAnaliz()}}
+    after=()=>{if(R.sub==='simulator')afterSim();else if(R.sub==='beklenti')afterPortExpect();else if(R.sub==='makro')afterMakro();else if(R.sub==='stres')afterStress();else if(R.sub==='duzenli')afterDca();else if(R.sub==='degerleme'){}else if(R.sub==='senaryo')afterScn2();else if(R.sub==='duyarlilik')afterSent();else if(R.sub==='asistan')afterAsk();else if(R.sub==='agirlik')afterAgirlik();else if(R.sub==='kaynak'||R.sub==='makroev'){}else if(R.sub!=='haftalik')afterAnaliz()}}
   else{v.innerHTML=viewOzet();after=afterOzet}
   try{after()}catch(e){console.error(e)}
   $$('.ranges').forEach(g=>$$('button',g).forEach(b=>b.onclick=()=>{S.range[g.dataset.k]=b.dataset.r;render(false)}));
