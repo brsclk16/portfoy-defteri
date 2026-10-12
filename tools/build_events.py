@@ -257,13 +257,18 @@ def earnings_events(t, subs, P, B):
         hr = eastern_hour(s.get('acceptanceDateTime'))
         by_abs = max(cands, key=lambda c: abs(c[1]))
         by_hr = None
+        # Şirketler 8-K'yı çoğu zaman sonuçları açıklamadan dakikalar önce (16:00'dan hemen önce) dosyalar; bu yüzden yalnızca
+        # açılış öncesi (<9:30 → aynı gün) ve kapanış sonrası (≥16:00 → ertesi gün) kesin sayılır, arası tepkisi büyük olan günle çözülür.
         if hr is not None and P.d[k] == d:
-            by_hr = cands[0] if hr < 16 else (cands[1] if len(cands) > 1 else None)
+            if hr < 9.5:
+                by_hr = cands[0]
+            elif hr >= 16 and len(cands) > 1:
+                by_hr = cands[1]
         if by_hr:
             tot += 1
             agree += by_hr[0] == by_abs[0]
         kk, ex, raw_r = by_hr or by_abs  # önce SEC kabul saati; yoksa iki günden tepkisi büyük olan
-        evs.append({'d': P.d[kk], 'filed': d, 'ex': round(ex, 2), 'r': round(raw_r, 2), 'f': fwd(P, B, kk)})
+        evs.append({'d': P.d[kk], 'filed': d, 'ex': round(ex, 2), 'r': round(raw_r, 2), 'f': fwd(P, B, kk), 'how': 'saat' if by_hr else 'tepki'})
         last = d
     if evs:
         med_abs = sorted(abs(e['ex']) for e in evs)[len(evs) // 2]
@@ -280,6 +285,7 @@ def parse_form4(xml_bytes):
     who = g(root, './/reportingOwner/reportingOwnerId/rptOwnerName')
     role = 'yönetici' if g(rel, 'isOfficer') in ('1', 'true') else 'YK üyesi' if g(rel, 'isDirector') in ('1', 'true') else '%10 ortak' if g(rel, 'isTenPercentOwner') in ('1', 'true') else 'diğer'
     title = g(rel, 'officerTitle')
+    issuer = g(root, './/issuer/issuerCik').lstrip('0')
     buys = []
     for tr in root.findall('.//nonDerivativeTable/nonDerivativeTransaction'):
         if g(tr, 'transactionCoding/transactionCode') != 'P' or g(tr, 'transactionAmounts/transactionAcquiredDisposedCode/value') != 'A':
@@ -290,7 +296,7 @@ def parse_form4(xml_bytes):
         except ValueError:
             continue
         buys.append({'td': g(tr, 'transactionDate/value')[:10], 'sh': sh, 'usd': round(sh * pr)})
-    return who, role, title, buys
+    return who, role, title, buys, issuer
 
 
 INS_START = '2013-01-01'
@@ -305,8 +311,26 @@ def insider_scan(t, cik, subs, cache, limit):
     old = [s for s in f4 if lo is not None and s['filingDate'] < lo]
     if hi is None:  # ilk kez: en yeniden geriye doğru, hepsi "eski" gibi işlenir
         old, new = sorted(f4, key=lambda s: s['filingDate'], reverse=True), []
-    have = {b.get('accN') for b in C['buys']}
     n = 0
+    # geçiş: issuer kontrolünden önce kaydedilmiş alımlar bir kez doğrulanır (şirketin başka şirketlerdeki alımları ayıklanır)
+    keep = []
+    for b in C['buys']:
+        if b.get('iss') is not None or over():
+            keep.append(b)
+            continue
+        s0 = next((x for x in f4 if x['accessionNumber'] == b.get('accN')), None)
+        doc = re.sub(r'^xslF345X\d+/', '', (s0 or {}).get('primaryDocument') or '')
+        try:
+            iss = parse_form4(get(f'https://www.sec.gov/Archives/edgar/data/{cik}/{b["accN"].replace("-", "")}/{doc}', sec=True))[4] if doc.endswith('.xml') else ''
+        except Exception:
+            keep.append(b)
+            continue
+        n += 1
+        if iss == str(cik):
+            b['iss'] = iss
+            keep.append(b)
+    C['buys'] = keep
+    have = {b.get('accN') for b in C['buys']}
 
     def one(s):
         acc = s['accessionNumber']
@@ -314,15 +338,15 @@ def insider_scan(t, cik, subs, cache, limit):
         if not doc.endswith('.xml') or acc in have:
             return
         try:
-            who, role, title, buys = parse_form4(get(f'https://www.sec.gov/Archives/edgar/data/{cik}/{acc.replace("-", "")}/{doc}', sec=True))
+            who, role, title, buys, issuer = parse_form4(get(f'https://www.sec.gov/Archives/edgar/data/{cik}/{acc.replace("-", "")}/{doc}', sec=True))
         except urllib.error.HTTPError as e:
             if e.code != 404:
                 raise
             return
         except ET.ParseError:
             return
-        if buys and role in ('yönetici', 'YK üyesi'):
-            C['buys'].append({'accN': acc, 'filed': s['filingDate'], 'acc': s.get('acceptanceDateTime', ''), 'who': who[:60], 'role': role,
+        if buys and role in ('yönetici', 'YK üyesi') and issuer == str(cik):  # şirketin başka şirketlerdeki alımları değil
+            C['buys'].append({'accN': acc, 'iss': issuer, 'filed': s['filingDate'], 'acc': s.get('acceptanceDateTime', ''), 'who': who[:60], 'role': role,
                               'title': title[:60], 'usd': sum(b['usd'] for b in buys), 'td': min(b['td'] for b in buys)})
 
     try:
@@ -499,6 +523,20 @@ def main():
     out['pool'] = {'earn': {b: stats([(t, e['f']) for t, e in all_earn if e['b'] == b], bo) for b in BUCKET},
                    'ins': stats([(t, e['f']) for t, e in all_ins], bo),
                    'nEarn': len(all_earn), 'nIns': len(all_ins), 'tickers': len(out['tickers'])}
+    EH = ((rd('earnhist.json', {}) or {}).get('data') or {})
+    ok, tot2, bad = 0, 0, []
+    for t, T in out['tickers'].items():
+        mine = {e['filed']: e['d'] for e in (T.get('earn') or {}).get('events', [])}
+        for h in (EH.get({'NVO': 'NOVO.B'}.get(t, t)) or {}).get('hist', []):
+            m = [v for f, v in mine.items() if abs((dt.date.fromisoformat(f) - dt.date.fromisoformat(h['d'])).days) <= 3]
+            if not m or not h.get('rd'):
+                continue
+            tot2 += 1
+            if m[0] == h['rd']:
+                ok += 1
+            elif len(bad) < 12:
+                bad.append(f"{t} {h['d']}: ben {m[0]}, site {h['rd']}")
+    DIAG['validation'] = {'tepki günü sitenin bilanço verisiyle uyuşuyor': f'{ok}/{tot2}', 'uyuşmayan örnekler': bad}
     DIAG['timing'] = {'kabul saati kuralı ile en büyük tepki gününün uyuşması': f'{timing[0]}/{timing[1]}'}
     DIAG['insiderPending'] = {t: c.get('pending', 0) for t, c in cache.items() if c.get('pending')}
     DIAG['budgetSec'] = BUDGET
