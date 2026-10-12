@@ -35,6 +35,13 @@ for(const t of tickers){let P=null;try{P=ctx.tradePlan(t)}catch(e){}if(!P)contin
     if(P.state==='Fiyat alım bölgesinde')msgs.push({lvl:2,t,txt:`${d(t)} teknik alım bölgesine geldi (${f(t,P.zone.lo)}–${f(t,P.zone.hi)}). Stop ${f(t,P.stop)}, TP1 ${f(t,P.tp1.p)}.`});
     if(P.state==='Destek kırıldı')msgs.push({lvl:3,t,txt:`${d(t)} plan stop seviyesinin (${f(t,P.stop)}) altına indi. Fiyat ${f(t,P.px)}.`});}
   st.plans[t]=P.state;
+  // Stop kırılımı: plan stopu her gün güncel fiyatın altında yeniden hesaplandığı için 'Destek kırıldı' durumu pratikte oluşmaz;
+  // bu yüzden bir önceki işlem gününün stopuna bakılır. Aynı gün içinde tekrar tekrar çalışınca dünkü stop korunur, alarm günde bir kez.
+  {st.stops=st.stops||{};st.stopHit=st.stopHit||{};const day=((S.ohlc[t]||[]).slice(-1)[0]||[])[0];const sv=st.stops[t];
+   const pStop=sv?(sv.d===day?sv.prev:sv.stop):null;
+   if(alarms.planAlerts!==false&&day&&pStop&&P.px<pStop&&st.stopHit[t]!==day){st.stopHit[t]=day;
+     msgs.push({lvl:3,t,txt:`${d(t)} dünkü plan stopunun (${f(t,pStop)}) altına indi. Fiyat ${f(t,P.px)}.`})}
+   if(day)st.stops[t]={d:day,stop:+P.stop.toFixed(4),prev:pStop}}
   const hi=Math.max(...(S.ohlc[t]||[]).slice(-1).map(r=>r[2]));const key=t+'|'+P.tp1.p.toFixed(2);
   if(alarms.planAlerts!==false&&prev&&hi>=P.tp1.p&&!st.tp[key]&&P.state!=='Fiyat alım bölgesinde'){st.tp[key]=1;}
 }
