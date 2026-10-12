@@ -638,6 +638,7 @@ function render(scrollTop){
     else if(R.sub==='oynat'){v.innerHTML=sn+viewReplay();after=afterReplay}
     else if(R.sub==='dogrula'){v.innerHTML=sn+viewDogrula();after=afterDogrula}
     else if(R.sub==='lab'){v.innerHTML=sn+`<div class="fade">${viewLab()}</div>`;after=afterLab}
+    else if(R.sub==='sinyalkarne'){v.innerHTML=sn+'<div class="fade" id="skr"><div class="muted">Yükleniyor…</div></div>';after=karneMount}
     else if(R.sub==='test'){v.innerHTML=sn+`<div class="fade">${viewBtAll()}</div>`;after=afterBtAll}
     else{const o=viewTeknikPanel(R.t);v.innerHTML=sn+(o.html||o);after=()=>afterTeknikPanel(o.t)}}
   else if(R.r==='analiz'){const sn=subnav('analiz',R.sub);v.innerHTML=sn+analizPart(R.sub);
