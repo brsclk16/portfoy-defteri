@@ -1,0 +1,1 @@
+{"at":"2026-10-13T12:34:40Z","sec":209,"errors":{"ANTO":"HTTPError: HTTP Error 404: Not Found","BOL":"HTTPError: HTTP Error 404: Not Found","GLEN":"HTTPError: HTTP Error 404: Not Found","KGH":"KeyError: 'timestamp'"},"fiyat":{"sembol":270,"gün":4219,"ilk":"2010-01-04","son":"2026-10-12"},"canliEklenen":10}
