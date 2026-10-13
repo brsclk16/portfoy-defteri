@@ -27,27 +27,153 @@ H = [5, 21, 63]
 COST = 0.001
 TOPN = {'stock': 10, 'etf': 5}
 W_MOM, W_VOL = 0.6, 0.4
-ETFS = {
-    # sektör
-    'XLK': 'Teknoloji', 'XLV': 'Sağlık', 'XLF': 'Finans', 'XLE': 'Enerji', 'XLI': 'Sanayi', 'XLY': 'Tüketici (döngüsel)', 'XLP': 'Temel tüketim',
-    'XLU': 'Kamu hizmetleri', 'XLB': 'Malzeme', 'XLRE': 'Gayrimenkul', 'XLC': 'İletişim',
+# t: (ad, ihraççı, neye dayalı)
+ETF_INFO = {
+    # sektör (State Street SPDR)
+    'XLK': ('Teknoloji', 'State Street', 'S&P 500 teknoloji sektörü'), 'XLV': ('Sağlık', 'State Street', 'S&P 500 sağlık sektörü'),
+    'XLF': ('Finans', 'State Street', 'S&P 500 finans sektörü'), 'XLE': ('Enerji', 'State Street', 'S&P 500 enerji sektörü'),
+    'XLI': ('Sanayi', 'State Street', 'S&P 500 sanayi sektörü'), 'XLY': ('Tüketici (döngüsel)', 'State Street', 'S&P 500 isteğe bağlı tüketim'),
+    'XLP': ('Temel tüketim', 'State Street', 'S&P 500 temel tüketim'), 'XLU': ('Kamu hizmetleri', 'State Street', 'S&P 500 kamu hizmetleri'),
+    'XLB': ('Malzeme', 'State Street', 'S&P 500 malzeme sektörü'), 'XLRE': ('Gayrimenkul', 'State Street', 'S&P 500 gayrimenkul'),
+    'XLC': ('İletişim', 'State Street', 'S&P 500 iletişim hizmetleri'),
     # tema / alt sektör
-    'SMH': 'Yarı iletken', 'SOXX': 'Yarı iletken', 'IGV': 'Yazılım', 'CIBR': 'Siber güvenlik', 'XBI': 'Biyoteknoloji', 'IHI': 'Tıbbi cihaz',
-    'ITA': 'Savunma ve havacılık', 'PAVE': 'ABD altyapı', 'TAN': 'Güneş enerjisi', 'ICLN': 'Temiz enerji', 'URA': 'Uranyum', 'LIT': 'Lityum ve batarya',
-    'COPX': 'Bakır madencileri', 'GDX': 'Altın madencileri', 'SIL': 'Gümüş madencileri', 'KRE': 'Bölgesel bankalar', 'XHB': 'Konut inşaatı',
-    'JETS': 'Havayolları', 'XRT': 'Perakende', 'IYT': 'Taşımacılık', 'AGNG': 'Yaşlanan nüfus',
-    # faktör / genel
-    'SPY': 'S&P 500', 'QQQ': 'Nasdaq-100', 'IWM': 'Küçük şirketler', 'MDY': 'Orta büyüklük', 'MTUM': 'Momentum faktörü', 'QUAL': 'Kalite faktörü',
-    'USMV': 'Düşük oynaklık', 'VLUE': 'Değer faktörü',
+    'SMH': ('Yarı iletken', 'VanEck', 'En büyük 25 yarı iletken şirketi'), 'SOXX': ('Yarı iletken', 'BlackRock', 'NYSE yarı iletken endeksi (30 şirket)'),
+    'IGV': ('Yazılım', 'BlackRock', 'ABD yazılım şirketleri'), 'CIBR': ('Siber güvenlik', 'First Trust', 'Siber güvenlik şirketleri'),
+    'XBI': ('Biyoteknoloji', 'State Street', 'Eşit ağırlıklı ABD biyoteknoloji'), 'IHI': ('Tıbbi cihaz', 'BlackRock', 'ABD tıbbi cihaz'),
+    'ITA': ('Savunma ve havacılık', 'BlackRock', 'ABD savunma ve havacılık'), 'PAVE': ('ABD altyapı', 'Global X', 'ABD altyapı inşaatı ve malzemeleri'),
+    'GRID': ('Elektrik şebekesi', 'First Trust', 'Akıllı şebeke ve elektrik altyapısı'), 'IGF': ('Küresel altyapı', 'BlackRock', 'Küresel altyapı şirketleri'),
+    'TAN': ('Güneş enerjisi', 'Invesco', 'Güneş enerjisi şirketleri'), 'ICLN': ('Temiz enerji', 'BlackRock', 'Küresel temiz enerji'),
+    'URA': ('Uranyum', 'Global X', 'Uranyum madencileri ve nükleer'), 'LIT': ('Lityum ve batarya', 'Global X', 'Lityum madenciliği ve batarya'),
+    'COPX': ('Bakır madencileri', 'Global X', 'Bakır madencileri'), 'GDX': ('Altın madencileri', 'VanEck', 'Altın madencileri'),
+    'SIL': ('Gümüş madencileri', 'Global X', 'Gümüş madencileri'), 'KRE': ('Bölgesel bankalar', 'State Street', 'ABD bölgesel bankaları'),
+    'XHB': ('Konut inşaatı', 'State Street', 'ABD konut inşaatı'), 'JETS': ('Havayolları', 'US Global', 'Havayolları'),
+    'XRT': ('Perakende', 'State Street', 'Eşit ağırlıklı ABD perakende'), 'IYT': ('Taşımacılık', 'BlackRock', 'ABD taşımacılık'),
+    'AGNG': ('Yaşlanan nüfus', 'Global X', 'Yaşlanan nüfustan faydalanan şirketler'), 'VNQ': ('Gayrimenkul (REIT)', 'Vanguard', 'ABD gayrimenkul yatırım ortaklıkları'),
+    # geniş piyasa ve büyük ihraççıların ana fonları
+    'SPY': ('S&P 500', 'State Street', 'S&P 500'), 'IVV': ('S&P 500', 'BlackRock', 'S&P 500'), 'VOO': ('S&P 500', 'Vanguard', 'S&P 500'),
+    'VTI': ('ABD tüm piyasa', 'Vanguard', 'CRSP ABD tüm piyasa'), 'QQQ': ('Nasdaq-100', 'Invesco', 'Nasdaq-100'),
+    'IWM': ('Küçük şirketler', 'BlackRock', 'Russell 2000'), 'MDY': ('Orta büyüklük', 'State Street', 'S&P MidCap 400'),
+    'ACWI': ('Dünya hisseleri', 'BlackRock', 'MSCI ACWI (gelişmiş + gelişmekte olan)'),
+    'VGT': ('Teknoloji', 'Vanguard', 'MSCI ABD bilgi teknolojisi'), 'VIG': ('Temettü büyüten şirketler', 'Vanguard', 'S&P ABD temettü büyütenler'),
+    'VYM': ('Yüksek temettü', 'Vanguard', 'FTSE yüksek temettü verimi'), 'FTEC': ('Teknoloji', 'Fidelity', 'MSCI ABD bilgi teknolojisi'),
+    'FHLC': ('Sağlık', 'Fidelity', 'MSCI ABD sağlık'), 'FENY': ('Enerji', 'Fidelity', 'MSCI ABD enerji'), 'FDVV': ('Yüksek temettü', 'Fidelity', 'Fidelity yüksek temettü endeksi'),
+    'JEPI': ('Opsiyonlu gelir', 'JPMorgan', 'Aktif: düşük oynaklıklı ABD hisseleri + S&P 500 alım opsiyonu satışı'),
+    'JEPQ': ('Opsiyonlu gelir (Nasdaq)', 'JPMorgan', 'Aktif: Nasdaq-100 hisseleri + alım opsiyonu satışı'),
+    'BBJP': ('Japonya', 'JPMorgan', 'Japonya büyük ve orta şirketler (düşük maliyetli endeks)'),
+    'GSLC': ('ABD çok etkenli', 'Goldman Sachs', 'ActiveBeta: değer, momentum, kalite, düşük oynaklık eğilimli büyük şirketler'),
+    'CGDV': ('Temettü ve değer', 'Capital Group', 'Aktif: temettü ödeyen değer hisseleri'), 'CGGR': ('Büyüme', 'Capital Group', 'Aktif: büyüme hisseleri'),
+    'CGXU': ('ABD dışı odaklı', 'Capital Group', 'Aktif: ABD dışı hisseler'), 'BKLC': ('ABD büyük şirketler', 'BNY', 'ABD büyük şirketler endeksi'),
+    'MTUM': ('Momentum faktörü', 'BlackRock', 'MSCI ABD momentum'), 'QUAL': ('Kalite faktörü', 'BlackRock', 'MSCI ABD kalite'),
+    'USMV': ('Düşük oynaklık', 'BlackRock', 'MSCI ABD minimum oynaklık'), 'VLUE': ('Değer faktörü', 'BlackRock', 'MSCI ABD değer'),
     # ülke / bölge
-    'EFA': 'Gelişmiş ülkeler', 'EEM': 'Gelişmekte olan ülkeler', 'EWJ': 'Japonya', 'EWG': 'Almanya', 'EWU': 'İngiltere', 'EWZ': 'Brezilya',
-    'INDA': 'Hindistan', 'FXI': 'Çin büyük şirketler', 'EWT': 'Tayvan', 'EWY': 'Güney Kore', 'EWW': 'Meksika', 'TUR': 'Türkiye',
+    'EFA': ('Gelişmiş ülkeler', 'BlackRock', 'MSCI EAFE'), 'IEFA': ('Gelişmiş ülkeler', 'BlackRock', 'MSCI EAFE IMI'),
+    'VEA': ('Gelişmiş ülkeler', 'Vanguard', 'FTSE gelişmiş ülkeler (ABD hariç)'), 'VGK': ('Avrupa', 'Vanguard', 'FTSE Avrupa'),
+    'EEM': ('Gelişmekte olan ülkeler', 'BlackRock', 'MSCI gelişmekte olan'), 'IEMG': ('Gelişmekte olan ülkeler', 'BlackRock', 'MSCI gelişmekte olan IMI'),
+    'VWO': ('Gelişmekte olan ülkeler', 'Vanguard', 'FTSE gelişmekte olan'), 'EMXC': ('Gelişmekte olanlar (Çin hariç)', 'BlackRock', 'MSCI gelişmekte olan (Çin hariç)'),
+    'EWJ': ('Japonya', 'BlackRock', 'MSCI Japonya'), 'EWG': ('Almanya', 'BlackRock', 'MSCI Almanya'), 'EWU': ('İngiltere', 'BlackRock', 'MSCI İngiltere'),
+    'EWZ': ('Brezilya', 'BlackRock', 'MSCI Brezilya'), 'INDA': ('Hindistan', 'BlackRock', 'MSCI Hindistan'), 'FXI': ('Çin büyük şirketler', 'BlackRock', 'FTSE Çin 50'),
+    'EWT': ('Tayvan', 'BlackRock', 'MSCI Tayvan'), 'EWY': ('Güney Kore', 'BlackRock', 'MSCI Kore'), 'EWW': ('Meksika', 'BlackRock', 'MSCI Meksika'),
+    'TUR': ('Türkiye', 'BlackRock', 'MSCI Türkiye'),
     # tahvil
-    'TLT': 'ABD uzun vade tahvil', 'IEF': 'ABD orta vade tahvil', 'SHY': 'ABD kısa vade tahvil', 'TIP': 'Enflasyona endeksli tahvil',
-    'LQD': 'Yatırım yapılabilir şirket tahvili', 'HYG': 'Yüksek getirili şirket tahvili',
+    'AGG': ('ABD toplam tahvil', 'BlackRock', 'Bloomberg ABD toplam tahvil'), 'BND': ('ABD toplam tahvil', 'Vanguard', 'Bloomberg ABD toplam tahvil'),
+    'TLT': ('ABD uzun vade tahvil', 'BlackRock', '20+ yıl ABD devlet tahvili'), 'IEF': ('ABD orta vade tahvil', 'BlackRock', '7-10 yıl ABD devlet tahvili'),
+    'SHY': ('ABD kısa vade tahvil', 'BlackRock', '1-3 yıl ABD devlet tahvili'), 'TIP': ('Enflasyona endeksli tahvil', 'BlackRock', 'ABD TIPS'),
+    'LQD': ('Kaliteli şirket tahvili', 'BlackRock', 'Yatırım yapılabilir ABD şirket tahvili'), 'HYG': ('Yüksek getirili şirket tahvili', 'BlackRock', 'Yüksek getirili ABD şirket tahvili'),
+    'EMB': ('Gelişmekte olan ülke tahvili', 'BlackRock', 'Dolar cinsi gelişmekte olan devlet tahvili'),
+    'JPST': ('Ultra kısa gelir', 'JPMorgan', 'Aktif: ultra kısa vadeli yatırım yapılabilir tahvil'), 'MINT': ('Ultra kısa vade', 'PIMCO', 'Aktif: kısa vadeli gelişmiş tahvil'),
+    'BOND': ('Aktif tahvil', 'PIMCO', 'Aktif: çekirdek tahvil'), 'FBND': ('Toplam tahvil', 'Fidelity', 'Aktif: toplam tahvil'),
     # emtia
-    'GLD': 'Altın', 'IAU': 'Altın', 'SLV': 'Gümüş', 'DBC': 'Emtia sepeti', 'USO': 'Ham petrol', 'DBA': 'Tarım',
+    'GLD': ('Altın', 'State Street', 'Fiziki altın'), 'IAU': ('Altın', 'BlackRock', 'Fiziki altın'), 'SLV': ('Gümüş', 'BlackRock', 'Fiziki gümüş'),
+    'DBC': ('Emtia sepeti', 'Invesco', 'Enerji, metal ve tarım vadelileri'), 'USO': ('Ham petrol', 'US Commodity Funds', 'WTI petrol vadelileri'),
+    'DBA': ('Tarım', 'Invesco', 'Tarım emtia vadelileri'),
 }
+ETFS = {t: v[0] for t, v in ETF_INFO.items()}
+# yinelenen maruziyetler (aynı endeks farklı ihraççı): öneride biri yeter, karşılaştırmada hepsi görünür
+DUP = [{'SPY', 'IVV', 'VOO'}, {'EFA', 'IEFA', 'VEA'}, {'EEM', 'IEMG', 'VWO'}, {'AGG', 'BND'}, {'GLD', 'IAU'}, {'XLK', 'VGT', 'FTEC'}, {'XLV', 'FHLC'}, {'XLE', 'FENY'}, {'SMH', 'SOXX'}]
+# hisse sektörü / ETF → büyük yönetici görüşlerindeki tema
+ETF_THEME = {'SPY': 'us_eq', 'IVV': 'us_eq', 'VOO': 'us_eq', 'VTI': 'us_eq', 'BKLC': 'us_eq', 'GSLC': 'us_eq', 'QQQ': 'us_eq', 'IWM': 'us_small',
+             'VLUE': 'us_value', 'CGDV': 'us_value', 'VYM': 'us_value', 'FDVV': 'us_value', 'SMH': 'ai_semis', 'SOXX': 'ai_semis', 'GRID': 'ai_infra', 'PAVE': 'ai_infra',
+             'VGK': 'europe_eq', 'EWG': 'europe_eq', 'EWU': 'europe_eq', 'EWJ': 'japan_eq', 'BBJP': 'japan_eq', 'EEM': 'em_eq', 'IEMG': 'em_eq', 'VWO': 'em_eq',
+             'EMXC': 'em_xchina', 'FXI': 'china_eq', 'INDA': 'india_eq', 'EWY': 'korea_taiwan', 'EWT': 'korea_taiwan', 'ITA': 'industrials_def', 'XLI': 'industrials_def',
+             'XLF': 'financials', 'KRE': 'financials', 'XLE': 'energy', 'FENY': 'energy', 'XLV': 'healthcare', 'FHLC': 'healthcare', 'IHI': 'healthcare', 'IGF': 'infrastructure',
+             'TLT': 'ust_long', 'IEF': 'ust_mid', 'SHY': 'short_bonds', 'JPST': 'short_bonds', 'MINT': 'short_bonds', 'LQD': 'ig_credit', 'HYG': 'high_yield', 'EMB': 'em_debt',
+             'TIP': 'tips', 'GLD': 'gold', 'IAU': 'gold', 'DBC': 'commodities'}
+SEC_THEME = {'Industrials': 'industrials_def', 'Financial Services': 'financials', 'Energy': 'energy', 'Healthcare': 'healthcare', 'Utilities': 'infrastructure', 'Basic Materials': 'commodities'}
+
+
+def stock_themes(u):
+    th = ['us_eq']
+    if 'emiconductor' in (u.get('ind') or ''):
+        th.append('ai_semis')
+    if SEC_THEME.get(u.get('sec')):
+        th.append(SEC_THEME[u['sec']])
+    return th
+
+
+# ------------------------------------------------------------------ büyük yöneticiler
+def house_layer(HV, dates, px, i):
+    """Tema başına görüş özeti + her görüşün yayın tarihinden bu yana karnesi (tema ETF'si − karşılaştırma)."""
+    if not HV:
+        return {}, {}
+    T = HV.get('themes', {})
+    today = dt.date.fromisoformat(dates[i])
+    idx = {d: k for k, d in enumerate(dates)}
+    def k_on(d):
+        for k in range(len(dates)):
+            if dates[k] >= d:
+                return k
+        return None
+    cons, card = {}, {}
+    for h in HV.get('houses', []):
+        age = (today - dt.date.fromisoformat(h['date'])).days
+        stale = dates[i] > h.get('validUntil', '9999')  # ufku geçmiş görüş uzlaşıya katılmaz
+        k0 = k_on(h['date'])
+        hits, n = 0, 0
+        rows = []
+        for th, (st, why) in (h.get('views') or {}).items():
+            meta = T.get(th) or {}
+            c = cons.setdefault(th, {'n': meta.get('n', th), 'pos': [], 'neg': [], 'neu': []})
+            (c['pos'] if st > 0 else c['neg'] if st < 0 else c['neu']).append({'h': h['n'], 'id': h['id'], 'date': h['date'], 'stale': stale, 'why': why})
+            e, b = meta.get('etf'), meta.get('bench')
+            res = None
+            if k0 is not None and e in px and b in px and px[e][k0] and px[e][i] and px[b][k0] and px[b][i] and i - k0 >= 21:
+                ex = (px[e][i] / px[e][k0] - (px[b][i] / px[b][k0])) * 100
+                res = round(ex, 1)
+                if st != 0:
+                    n += 1
+                    hits += (ex > 0) == (st > 0)
+            rows.append({'th': th, 'st': st, 'ex': res, 'etf': e, 'bench': b})
+        card[h['id']] = {'n': h['n'], 'date': h['date'], 'age': age, 'stale': stale, 'validUntil': h.get('validUntil'), 'horizon': h.get('horizon'), 'hits': hits, 'calls': n, 'rows': rows}
+    for th, c in cons.items():
+        c['score'] = sum(1 for x in c['pos'] if not x['stale']) - sum(1 for x in c['neg'] if not x['stale'])
+    return cons, card
+
+
+def news_for(t, name, NR, KH, by_name=True):
+    """Adayla ilgili son başlıklar: ham haber (ticker etiketi ya da ad) + Kıssadan Hisse (ad geçiyorsa)."""
+    import re
+    junk = re.compile(r'zacks|motley fool|stock price, news, quote|top \d+ |best .{0,30}stocks|should you buy|is it time to|price prediction', re.I)
+    short = re.sub(r'\b(Inc|Corp|Corporation|Holdings?|Group|Co|Company|Ltd|plc|N\.V\.|S\.A\.|The)\b\.?', '', name or '', flags=re.I).strip(' ,.') if name else ''
+    pat = re.compile(r'(?<![\w])' + re.escape(short) + r'(?![a-zçğıöşü])', re.I) if by_name and len(short) >= 4 else None
+    out = []
+    for it in (NR.get('items') or []):
+        if junk.search(it.get('title') or ''):
+            continue
+        if t in (it.get('tickers') or []) or (pat and pat.search(it.get('title') or '')):
+            out.append({'title': it['title'][:160], 'url': it.get('url'), 'src': it.get('source'), 'd': (it.get('publishedAt') or '')[:10]})
+    for b in (KH.get('briefs') or [])[:5]:
+        for it in b.get('items') or []:
+            if pat and pat.search(it.get('title', '') + ' ' + it.get('summary', '')):
+                out.append({'title': it['title'][:160], 'url': it.get('url'), 'src': (it.get('source') or '') + ' · Kıssadan Hisse', 'd': b['date'], 'tr': 1})
+    seen, res = set(), []
+    for x in sorted(out, key=lambda x: x['d'], reverse=True):
+        k = x['title'][:60].lower()
+        if k not in seen:
+            seen.add(k)
+            res.append(x)
+    return res[:3]
+
+
 DIAG = {'errors': {}}
 
 
@@ -279,6 +405,9 @@ def main():
     for t, v in P.items():
         for h in (v.get('holdings') or []):
             held_funds_holdings.setdefault(h.get('t'), []).append({'t': t, 'w': h.get('w')})
+    HV = rd('house_views.json', {}) or {}
+    NR = rd('news_raw.json', {}) or {}
+    KH = rd('kissadan.json', {}) or {}
     syms = list(dict.fromkeys(['SPY'] + port + etfs + stocks))
     dates, px = load_prices(syms)
     i = len(dates) - 1
@@ -291,6 +420,8 @@ def main():
                       'etf': '12-1 ay momentum sırası; fiyat 200 günlük ortalamanın üstünde',
                       'fit': "Portföyle 1 yıllık günlük getiri korelasyonu (portföydeki enstrümanların eşit ağırlıklı yaklaşığı); çeşitlendirici < 0,5"},
            'lists': {}, 'backtest': {}, 'universe': {'stock': len([t for t in stocks if t in px]), 'etf': len([t for t in etfs if t in px])}}
+    cons, hcard = house_layer(HV, dates, px, i)
+    out['houses'] = {'consensus': cons, 'card': hcard, 'updatedAt': HV.get('updatedAt')}
     prev = rd('ideas.json', {}) or {}
     prev_top = {k: {x['t'] for x in v.get('guclu', []) + v.get('cesit', [])} for k, v in (prev.get('lists') or {}).items()}
     today_for_log = {}
@@ -304,12 +435,24 @@ def main():
         for t, s in sorted(elig.items(), key=lambda x: -x[1])[:40]:
             c = corr(daily_rets(px[t], i), port_r) if port_r else None
             u = UD.get(t, {})
+            ths = [ETF_THEME[t]] if kind == 'etf' and t in ETF_THEME else (stock_themes(u) if kind == 'stock' else [])
+            hv = [{'th': th, 'n': cons[th]['n'], 'score': cons[th]['score'], 'pos': [x['h'] for x in cons[th]['pos'] if not x['stale']],
+                   'neg': [x['h'] for x in cons[th]['neg'] if not x['stale']]} for th in ths if th in cons]
+            info = ETF_INFO.get(t) if kind == 'etf' else None
             rows.append({'t': t, 'n': u.get('n') or ETFS.get(t) or t, 'sec': u.get('sec') or ('ETF' if kind == 'etf' else None), 'ind': u.get('ind'),
+                         'issuer': info[1] if info else None, 'basis': info[2] if info else None, 'hv': hv,
+                         'news': news_for(t, u.get('n') or ETFS.get(t), NR, KH, by_name=(kind == 'stock')) if len(rows) < 12 else [],
                          'score': round(s * 100, 1), 'rank': rk[t], 'of': nrank, 'mom': round(M[t] * 100, 1), 'vol': round(V[t] * 100, 1) if V.get(t) else None,
                          'trend': round(T[t] * 100, 1), 'corr': None if c is None else round(c, 2), 'px': round(px[t][i], 4),
                          'pe': u.get('pe'), 'beta': u.get('beta'), 'mc': u.get('mc'),
                          'held': t in port, 'inFunds': held_funds_holdings.get(t, []), 'new': t not in prev_top.get(kind, set())})
-        notheld = [r for r in rows if not r['held']]
+        def dup_ok(r, chosen):
+            g = next((g for g in DUP if r['t'] in g), None)
+            return not g or not any(c['t'] in g for c in chosen)
+        notheld = []
+        for r in rows:
+            if not r['held'] and dup_ok(r, notheld) and not any(r['t'] in g and set(port) & g for g in DUP):
+                notheld.append(r)
         guclu = [dict(r, list='guclu') for r in notheld[:5]]
         cesit = [dict(r, list='cesit') for r in notheld if r['corr'] is not None and r['corr'] < 0.5 and r['t'] not in {g['t'] for g in guclu}][:3]
         out['lists'][kind] = {'guclu': guclu, 'cesit': cesit, 'all': rows[:30]}
@@ -338,7 +481,7 @@ def main():
     print(json.dumps({'asOf': out['asOf'], 'evren': out['universe'],
                       'hisse': [x['t'] for x in out['lists']['stock']['guclu']], 'hisseCesit': [x['t'] for x in out['lists']['stock']['cesit']],
                       'etf': [x['t'] for x in out['lists']['etf']['guclu']], 'etfCesit': [x['t'] for x in out['lists']['etf']['cesit']],
-                      'test': {k: {kk: v[kk] for kk in ('from', 'cagr', 'cagrEW', 'cagrSPY', 'mdd', 'mddEW', 't', 'hitMonths')} for k, v in bt.items() if v},
+                      'test': {k: {kk: v.get(kk) for kk in ('from', 'cagr', 'cagrEW', 'cagrSPY', 'mdd', 'mddEW', 't', 'hitMonths')} for k, v in bt.items() if v and k in ('stock', 'etf')}, 'parcalar': bt.get('stockParts'),
                       **DIAG}, ensure_ascii=False)[:3000])
 
 

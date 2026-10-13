@@ -1,0 +1,600 @@
+{
+ "updatedAt": "2026-10-13",
+ "note": "Büyük varlık yöneticilerinin yayımlanmış görünümlerinden derlendi. Duruş: 1 olumlu/ağırlık artır, 0 nötr, -1 olumsuz/ağırlık azalt. Her görüş kendi yayın tarihindedir; her görüşün geçerlilik tarihi (validUntil) yayının ufkuna göre konur; geçenler 'eski' sayılır ve uzlaşıya katılmaz. Kaynak bağlantıları birincil yayın ya da yayını aktaran haber/uygulayıcı sayfasıdır (tür alanında belirtilir). Bu kurumların kısa vadeli görünümleri sık yanılır; sitede her görüş, yayın tarihinden bu yana temanın gerçekte ne yaptığıyla karnelenir.",
+ "themes": {
+  "us_eq": {
+   "n": "ABD hisseleri",
+   "etf": "SPY",
+   "bench": "ACWI"
+  },
+  "us_value": {
+   "n": "ABD değer hisseleri",
+   "etf": "VLUE",
+   "bench": "SPY"
+  },
+  "us_small": {
+   "n": "ABD küçük şirketler",
+   "etf": "IWM",
+   "bench": "SPY"
+  },
+  "ai_semis": {
+   "n": "Yarı iletken / AI",
+   "etf": "SMH",
+   "bench": "SPY"
+  },
+  "ai_infra": {
+   "n": "AI altyapısı, elektrik ve şebeke",
+   "etf": "GRID",
+   "bench": "SPY"
+  },
+  "europe_eq": {
+   "n": "Avrupa hisseleri",
+   "etf": "VGK",
+   "bench": "ACWI"
+  },
+  "japan_eq": {
+   "n": "Japonya hisseleri",
+   "etf": "EWJ",
+   "bench": "ACWI"
+  },
+  "em_eq": {
+   "n": "Gelişmekte olan ülke hisseleri",
+   "etf": "EEM",
+   "bench": "ACWI"
+  },
+  "em_xchina": {
+   "n": "Gelişmekte olanlar (Çin hariç)",
+   "etf": "EMXC",
+   "bench": "ACWI"
+  },
+  "china_eq": {
+   "n": "Çin hisseleri",
+   "etf": "FXI",
+   "bench": "ACWI"
+  },
+  "india_eq": {
+   "n": "Hindistan hisseleri",
+   "etf": "INDA",
+   "bench": "ACWI"
+  },
+  "korea_taiwan": {
+   "n": "Kore ve Tayvan",
+   "etf": "EWY",
+   "bench": "ACWI"
+  },
+  "industrials_def": {
+   "n": "Sanayi ve savunma",
+   "etf": "ITA",
+   "bench": "SPY"
+  },
+  "financials": {
+   "n": "Finans",
+   "etf": "XLF",
+   "bench": "SPY"
+  },
+  "energy": {
+   "n": "Enerji",
+   "etf": "XLE",
+   "bench": "SPY"
+  },
+  "healthcare": {
+   "n": "Sağlık",
+   "etf": "XLV",
+   "bench": "SPY"
+  },
+  "infrastructure": {
+   "n": "Altyapı",
+   "etf": "IGF",
+   "bench": "ACWI"
+  },
+  "ust_long": {
+   "n": "ABD uzun vade devlet tahvili",
+   "etf": "TLT",
+   "bench": "AGG"
+  },
+  "ust_mid": {
+   "n": "ABD orta vade devlet tahvili",
+   "etf": "IEF",
+   "bench": "AGG"
+  },
+  "short_bonds": {
+   "n": "Kısa vade tahvil / nakit benzeri",
+   "etf": "SHY",
+   "bench": "AGG"
+  },
+  "ig_credit": {
+   "n": "Kaliteli şirket tahvili",
+   "etf": "LQD",
+   "bench": "AGG"
+  },
+  "high_yield": {
+   "n": "Yüksek getirili şirket tahvili",
+   "etf": "HYG",
+   "bench": "AGG"
+  },
+  "em_debt": {
+   "n": "Gelişmekte olan ülke tahvili",
+   "etf": "EMB",
+   "bench": "AGG"
+  },
+  "tips": {
+   "n": "Enflasyona endeksli tahvil",
+   "etf": "TIP",
+   "bench": "AGG"
+  },
+  "gold": {
+   "n": "Altın",
+   "etf": "GLD",
+   "bench": "ACWI"
+  },
+  "commodities": {
+   "n": "Emtia",
+   "etf": "DBC",
+   "bench": "ACWI"
+  }
+ },
+ "houses": [
+  {
+   "id": "blackrock",
+   "n": "BlackRock",
+   "brand": "iShares",
+   "pub": "BlackRock Investment Institute taktik görüşü (StashAway 'General Investing Powered by BlackRock' yeniden dengelemesi üzerinden)",
+   "date": "2026-09-29",
+   "type": "uygulayıcı sayfası",
+   "url": "https://www.stashaway.sg/r/general-investing-blackrock-reoptimisation-sep-2026",
+   "views": {
+    "us_eq": [
+     1,
+     "Temeller destekleyici; ağırlık biraz azaltıldı"
+    ],
+    "em_xchina": [
+     1,
+     "Uzun vadede AI yatırımı olumlu; kazanç ivmesi yavaşladığı için kırpıldı"
+    ],
+    "europe_eq": [
+     0,
+     "Kazanç ivmesi iyileşti: olumsuzdan nötre"
+    ],
+    "us_value": [
+     1,
+     "Sektör çeşitliliği için küresel değer eklendi"
+    ],
+    "ai_semis": [
+     0,
+     "Yarı iletkenin bir kısmı AI altyapısına kaydırıldı"
+    ],
+    "ai_infra": [
+     1,
+     "AI yatırımına daha geniş maruziyet"
+    ],
+    "ust_long": [
+     -1,
+     "Uzun vadeye temkinli; uzun vade azaltıldı"
+    ],
+    "ust_mid": [
+     1,
+     "Getiri eğrisinin ortası daha cazip"
+    ],
+    "gold": [
+     1,
+     "Jeopolitik riske karşı güvenli liman olarak korunuyor"
+    ],
+    "tips": [
+     1,
+     "Enflasyon ve enerji fiyatına karşı korunuyor"
+    ]
+   },
+   "strengths": [
+    "Hisseler ek risk almanın tercih edilen kaynağı",
+    "AI yatırımının kazançlara yansıması"
+   ],
+   "risks": [
+    "Fed eylülde faiz artırdı ve şahin; yıl sonuna kadar ek sıkılaştırma fiyatlanıyor",
+    "Enflasyon ve yüksek enerji fiyatları",
+    "Jeopolitik gerilim"
+   ],
+   "validUntil": "2026-12-31",
+   "horizon": "taktik görüş, bir sonraki yeniden dengelemeye kadar"
+  },
+  {
+   "id": "vanguard",
+   "n": "Vanguard",
+   "brand": "Vanguard",
+   "pub": "10 yıllık getiri tahminleri (Vanguard Capital Markets Model)",
+   "date": "2026-06-30",
+   "type": "birincil",
+   "url": "https://corporate.vanguard.com/content/corporatesite/us/en/corp/vemo/vemo-return-forecasts.html",
+   "views": {
+    "us_eq": [
+     -1,
+     "10 yıllık beklenti yıllık %4,2–6,2: değerleme yüksek"
+    ],
+    "europe_eq": [
+     1,
+     "Gelişmiş ülkeler (ABD hariç) %4,5–6,5: ABD'nin üstünde"
+    ],
+    "em_eq": [
+     -1,
+     "Gelişmekte olanlar %2–4: en düşük beklenti"
+    ],
+    "us_value": [
+     1,
+     "ABD içinde en cazip beklenen getiri değer hisselerinde"
+    ]
+   },
+   "strengths": [
+    "Uzun vadeli, değerlemeye dayalı ve tutarlı yöntem"
+   ],
+   "risks": [
+    "Hisse beklentileri mart 2026'dan bu yana düşürüldü",
+    "10 yıllık tahmin; kısa vadeli zamanlama için tasarlanmadı"
+   ],
+   "validUntil": "2026-12-31",
+   "horizon": "10 yıllık tahmin; çeyreklik güncellenir"
+  },
+  {
+   "id": "jpmorgan",
+   "n": "J.P. Morgan AM",
+   "brand": "JPMorgan",
+   "pub": "2026 Long-Term Capital Market Assumptions (10–15 yıl)",
+   "date": "2025-09-30",
+   "type": "birincil",
+   "url": "https://am.jpmorgan.com/jp/en/asset-management/institutional/insights/portfolio-insights/ltcma/executive-summary/",
+   "views": {
+    "ust_mid": [
+     1,
+     "ABD devlet tahvili beklentisi %4,6: finansal krizden beri en yüksek"
+    ],
+    "high_yield": [
+     0,
+     "Yüksek getirili tahvil %6,1, değişmedi"
+    ],
+    "infrastructure": [
+     1,
+     "Alternatifler portföyü dayanıklı kılar (60/40+)"
+    ]
+   },
+   "strengths": [
+    "Kurumsal kârlılık dayanıklı",
+    "Yüksek faiz tahvil getirisini artırdı",
+    "Kredi kalitesi iyileşti"
+   ],
+   "risks": [
+    "Gümrük vergileri ve göç kısıtları ABD büyümesini düşürüyor",
+    "Hisse-tahvil korelasyonu yüksek: tahvil koruması zayıflayabilir",
+    "Zayıflayan dolar"
+   ],
+   "validUntil": "2026-12-31",
+   "horizon": "10-15 yıllık varsayım; yeni baskı (2027) çıkana kadar"
+  },
+  {
+   "id": "goldman",
+   "n": "Goldman Sachs AM",
+   "brand": "Goldman Sachs",
+   "pub": "2026 Investment Outlook: Seeking Catalysts Amid Complexity",
+   "date": "2025-11-18",
+   "type": "birincil",
+   "url": "https://am.gs.com/en-se/advisors/news/press-release/2025/goldman-sachs-asset-management-releases-2026-investment-outlook",
+   "views": {
+    "us_eq": [
+     1,
+     "Büyük AI şirketlerinin kazanç gücü sürüyor"
+    ],
+    "europe_eq": [
+     1,
+     "Yatırım harcaması, maliye esnekliği ve yeniden sanayileşme"
+    ],
+    "industrials_def": [
+     1,
+     "Avrupa'da savunma, enerji ve finans"
+    ],
+    "japan_eq": [
+     1,
+     "Kurumsal reformlar ve istikrarlı para politikası"
+    ],
+    "em_eq": [
+     1,
+     "ABD'ye göre %40 iskonto; daralması bekleniyor"
+    ],
+    "infrastructure": [
+     1,
+     "AI, enerji üretimi ve iletimi, yaşlanan varlıkların yenilenmesi"
+    ],
+    "high_yield": [
+     1,
+     "Gelir fırsatı (seçici)"
+    ]
+   },
+   "strengths": [
+    "Hiper ölçekli şirketlerin AI yatırımı 2026'da sürüyor",
+    "Kurumsal AI kullanımı yaygınlaşıyor"
+   ],
+   "risks": [
+    "AI yatırımlarında sert geri dönüş",
+    "Kredi döngüsünün dönmesi",
+    "ABD, Fransa ve Japonya'da maliye riskleri"
+   ],
+   "validUntil": "2026-12-31",
+   "horizon": "2026 yıllık görünümü"
+  },
+  {
+   "id": "statestreet",
+   "n": "State Street",
+   "brand": "SPDR",
+   "pub": "Street Signals: Taking stock of 2026 (CEO Ron O'Hanley)",
+   "date": "2026-01-15",
+   "type": "CEO söyleşisi (dağılım raporu değil)",
+   "url": "https://www.statestreet.com/content/statestreet/us/en/insights/street-signals-taking-stock-of-2026",
+   "views": {
+    "us_eq": [
+     0,
+     "Temeller iyi ama 'hiçbir şey sonsuza kadar büyümez'"
+    ],
+    "em_eq": [
+     1,
+     "ABD'ye göre düşük değerleme, güçlü kurumlar"
+    ],
+    "ai_infra": [
+     1,
+     "AI ile birlikte elektrik ve şebeke yatırımı"
+    ],
+    "healthcare": [
+     1,
+     "Yaşlanan ekonomilerde sağlık teknolojisi"
+    ],
+    "gold": [
+     1,
+     "Çeşitlendirme için değerli metaller"
+    ],
+    "ust_mid": [
+     1,
+     "Tahvil ağırlığı 2008'den beri en düşük; gözden kaçıyor"
+    ]
+   },
+   "strengths": [
+    "Dayanıklı ABD ekonomisi",
+    "Yeniden küreselleşme: ticaret çökmüyor, yön değiştiriyor"
+   ],
+   "risks": [
+    "Gümrük belirsizliği",
+    "Artan bütçe açıkları",
+    "Fed bağımsızlığının aşınması",
+    "Değerlemeler"
+   ],
+   "validUntil": "2026-12-31",
+   "horizon": "2026 değerlendirmesi"
+  },
+  {
+   "id": "pimco",
+   "n": "PIMCO",
+   "brand": "PIMCO",
+   "pub": "Cyclical Outlook, Ocak 2026 (Wilding, Balls) — Bluerating aktarımı",
+   "date": "2026-01-23",
+   "type": "haber aktarımı",
+   "url": "https://www.bluerating.com/?p=860536",
+   "views": {
+    "ig_credit": [
+     1,
+     "Yüksek kaliteli sabit getiri: getiri ve küresel çeşitlendirme"
+    ],
+    "high_yield": [
+     -1,
+     "Geç kredi döngüsü: riskli yüksek getirili dilimler azaltıldı"
+    ],
+    "em_debt": [
+     1,
+     "Büyük gelişmekte olanlarda yüksek reel getiri primi (seçici)"
+    ]
+   },
+   "strengths": [
+    "Gelişmiş ülkelerde faizlerin yeniden fiyatlanması cazip başlangıç getirisi sağlıyor"
+   ],
+   "risks": [
+    "K tipi ekonomi: kazananlar ve kaybedenler",
+    "Geç kredi döngüsü",
+    "Büyümenin AI yatırımına bağımlılığı"
+   ],
+   "validUntil": "2026-07-31",
+   "horizon": "6 aylık döngüsel görünüm"
+  },
+  {
+   "id": "amundi",
+   "n": "Amundi",
+   "brand": "Amundi (ETF'leri çoğunlukla Avrupa borsalarında, UCITS)",
+   "pub": "Global Investment Outlook 2026",
+   "date": "2025-11-21",
+   "type": "haber aktarımı",
+   "url": "https://www.wealthbriefing.com/html/article.php/amundi-leans-towards-emerging-market-assets-in-2026",
+   "views": {
+    "us_eq": [
+     0,
+     "Nötr"
+    ],
+    "em_eq": [
+     1,
+     "Doğu Avrupa, seçili Latin Amerika ve Asya (Hindistan, Filipinler, Kore)"
+    ],
+    "india_eq": [
+     1,
+     "Orta vadede olumlu"
+    ],
+    "japan_eq": [
+     1,
+     "Kurumsal reform ve zayıf yen"
+    ],
+    "europe_eq": [
+     1,
+     "Finans, sanayi, savunma, yeşil dönüşüm"
+    ],
+    "high_yield": [
+     -1,
+     "ABD yüksek getirili tahvile temkinli"
+    ],
+    "ig_credit": [
+     1,
+     "Kaliteli kredi çekirdek, ağırlık fazla"
+    ],
+    "em_debt": [
+     1,
+     "Yüksek gelir ve çeşitlendirme"
+    ],
+    "gold": [
+     1,
+     "Çeşitlendirici"
+    ],
+    "commodities": [
+     1,
+     "Daha geniş emtia maruziyeti"
+    ]
+   },
+   "strengths": [
+    "Yapısal olarak zayıflayan dolar gelişmekte olan para birimlerini destekler"
+   ],
+   "risks": [
+    "Güçlü dolar ve yüksek ABD faizleri gelişmekte olanlar için ana risk",
+    "Yoğunlaşmış ve pahalı hisse piyasaları"
+   ],
+   "validUntil": "2026-12-31",
+   "horizon": "2026 yıllık görünümü"
+  },
+  {
+   "id": "capitalgroup",
+   "n": "Capital Group",
+   "brand": "Capital Group",
+   "pub": "2026 Outlook: Global Resilience Takes Center Stage",
+   "date": "2025-12-16",
+   "type": "birincil",
+   "url": "https://capitalgroup.com/about-us/news-room/capital-group-issues-2026-investment-outlook.html",
+   "views": {
+    "europe_eq": [
+     1,
+     "Altyapı ve savunma harcamasıyla maliye genişlemesi"
+    ],
+    "japan_eq": [
+     1,
+     "Maliye genişlemesi ve kurumsal reform"
+    ],
+    "industrials_def": [
+     1,
+     "Yatırım harcamasına bağlı sanayi"
+    ],
+    "financials": [
+     1,
+     "Düzenleme değişikliklerinden fayda"
+    ],
+    "energy": [
+     1,
+     "Enerji ve taşımacılık"
+    ],
+    "ai_infra": [
+     1,
+     "İleri çipler, enerji altyapısı, robotik"
+    ],
+    "short_bonds": [
+     1,
+     "Nakde alternatif kısa vade tahvil"
+    ]
+   },
+   "strengths": [
+    "Liderlik teknolojiden daha dengeli bir piyasaya genişliyor",
+    "Gümrük belirsizliği azalıyor"
+   ],
+   "risks": [
+    "İşgücü piyasasında zayıflık",
+    "Yüksek AI değerlemeleri"
+   ],
+   "validUntil": "2026-12-31",
+   "horizon": "2026 yıllık görünümü"
+  },
+  {
+   "id": "fidelity",
+   "n": "Fidelity",
+   "brand": "Fidelity",
+   "pub": "3. Çeyrek 2026 Piyasa Güncellemesi (Asset Allocation Research Team)",
+   "date": "2026-07-16",
+   "type": "birincil",
+   "url": "https://clearingcustody.fidelity.com/insights/topics/market-commentary/third-quarter-2026-quarterly-market-update",
+   "views": {},
+   "strengths": [
+    "Küresel ekonomi orta döngü genişlemesinde"
+   ],
+   "risks": [
+    "AI hisselerinde yüksek değerleme",
+    "Şahinleşen Fed değerli metallere baskı yaptı"
+   ],
+   "context": "Bu güncelleme yön önerisi içermiyor: küresel ekonomi orta döngü genişlemesinde; geçen çeyrekte kazançlar küçük şirketlere ve gelişmekte olanlara genişledi, AI yatırımı büyüme hisselerini destekledi.",
+   "validUntil": "2026-10-15",
+   "horizon": "çeyreklik güncelleme"
+  },
+  {
+   "id": "bny",
+   "n": "BNY Investments",
+   "brand": "BNY",
+   "pub": "Checkpoints, Haziran 2026 (Investment Strategy & Research Group)",
+   "date": "2026-05-27",
+   "type": "birincil",
+   "url": "https://www.bny.com/assets/investments/imemea/pdfs/emea_fp_checkpoints_june26.pdf",
+   "views": {
+    "us_eq": [
+     0,
+     "Kısa vadede temkin: fiyat baskısı, yüksek faiz, AI aşırı yatırım endişesi"
+    ],
+    "us_value": [
+     1,
+     "Yüksek enflasyon ve reel faiz değeri destekler"
+    ],
+    "us_small": [
+     -1,
+     "Küçük şirketler kırılgan"
+    ],
+    "em_xchina": [
+     1,
+     "AI bağlantılı elektronik, cazip değerleme"
+    ],
+    "korea_taiwan": [
+     1,
+     "İhracat ve kazanç revizyonları güçlü"
+    ],
+    "japan_eq": [
+     1,
+     "İç talep, yönetişim reformu"
+    ],
+    "china_eq": [
+     -1,
+     "Parça parça teşvik, kırılgan kazançlar"
+    ],
+    "ust_long": [
+     -1,
+     "Devlet tahvili ağırlığı düşük"
+    ],
+    "high_yield": [
+     -1,
+     "Tarihsel olarak dar spreadler"
+    ],
+    "tips": [
+     1,
+     "ABD enflasyonu hedefin üstünde kalabilir"
+    ],
+    "infrastructure": [
+     1,
+     "İstikrar, gelir ve çeşitlendirme"
+    ],
+    "commodities": [
+     1,
+     "Reel varlıklar olumlu"
+    ]
+   },
+   "strengths": [
+    "Küresel hisselerde ağırlık fazla, değer ve döngüsel tercih",
+    "AI henüz balon değil"
+   ],
+   "risks": [
+    "Orta Doğu çatışmasının yeniden tırmanması ve enerji şoku",
+    "Merkez bankalarının faiz artırması",
+    "Hiper ölçekli şirketlerin AI'a aşırı yatırımı"
+   ],
+   "validUntil": "2026-08-31",
+   "horizon": "aylık görünüm; yaklaşık 3 ay"
+  }
+ ]
+}

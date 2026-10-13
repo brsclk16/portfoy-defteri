@@ -27,6 +27,10 @@ function fkFit(x){
   const c=x.corr;const t=c<0.3?['up','portföyünü belirgin çeşitlendirir']:c<0.5?['up','portföyünü çeşitlendirir']:c<0.75?['n','portföyünle orta düzeyde birlikte hareket eder']:['down','mevcut riskine benzer: aynı yöne bahis'];
   return `<span class="chip ${t[0]}" style="font-size:11.5px">korelasyon ${nf(c,2)} · ${t[1]}</span>`;
 }
+function fkHV(x){const H=(x.hv||[]).filter(h=>h.pos.length||h.neg.length);if(!H.length)return '';
+  return `<div style="margin-top:6px;font-size:12.5px"><span class="muted">Büyük yöneticiler:</span> ${H.map(h=>`<b>${esc(h.n)}</b> ${h.pos.length?`<span class="up">▲ ${h.pos.map(esc).join(', ')}</span>`:''}${h.pos.length&&h.neg.length?' · ':''}${h.neg.length?`<span class="down">▼ ${h.neg.map(esc).join(', ')}</span>`:''}`).join(' &nbsp;|&nbsp; ')}</div>`}
+function fkNews(x){const N=x.news||[];if(!N.length)return '';
+  return `<div style="margin-top:6px;font-size:12.5px">${N.slice(0,2).map(n=>`<div>📰 <a href="${esc(n.url||'#')}" target="_blank" rel="noopener">${esc(n.title)}</a> <span class="muted">${esc(n.src||'')} · ${esc(n.d?trDate(n.d+'T12:00:00Z',{day:'numeric',month:'short'}):'')}</span></div>`).join('')}</div>`}
 function fkInFunds(x){return (x.inFunds||[]).length?`<span class="muted" style="font-size:12px">zaten ${x.inFunds.map(f=>`${esc(f.t)} içinde %${nf(f.w,1)}`).join(', ')}</span>`:''}
 // kart için 3 fikir: güçlü hisse, çeşitlendirici hisse, ETF (önce çeşitlendirici)
 function fkPick(){const L=S.ideas&&S.ideas.lists;if(!L)return [];const ok=x=>!fkHidden(x.t)&&!fkWatched(x.t);const out=[];
@@ -38,7 +42,9 @@ function fkItem(f,full){const x=f.x;const of=x.of;
   return `<div class="fk-i" style="padding:12px 0;border-bottom:1px solid var(--line)">
     <div style="display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap;align-items:baseline"><div><span class="tag">${esc(f.lab)}</span> <b style="font-size:16px">${esc(x.t)}</b> <span class="muted">${esc(x.n||'')}${x.sec&&x.sec!=='ETF'?' · '+esc(x.sec):''}</span>${x.new?' <span class="chip up" style="font-size:11px">yeni</span>':''}</div>
       <span class="num">${usd(x.px,2)}</span></div>
+    ${x.issuer?`<div class="muted" style="font-size:12.5px;margin-top:2px">${esc(x.issuer)} · ${esc(x.basis||'')}</div>`:''}
     <div style="margin-top:4px;font-size:13.5px">${esc(fkWhy(x,f.kind,of))}</div>
+    ${fkHV(x)}${fkNews(x)}
     <div style="margin-top:6px;display:flex;gap:8px;flex-wrap:wrap;align-items:center">${fkFit(x)}${fkInFunds(x)}</div>
     <div style="margin-top:8px;display:flex;gap:8px;flex-wrap:wrap"><span class="muted" style="font-size:13px;align-self:center">Portföyüne eklemek ister misin?</span>
       <button class="btn" data-fkw="${esc(x.t)}">İzleme listesine ekle</button><button class="btn" data-fkp="${esc(x.t)}">Portföyüme ekle</button><button class="lnk2" data-fkn="${esc(x.t)}">İlgilenmiyorum</button></div></div>`}
@@ -77,6 +83,25 @@ function fkLive(){const L=S.ideas.live||{};const rows=[['stock|guclu','Hisse · 
   return `<div class="tscroll"><table class="tbl"><thead><tr><th>Liste</th><th class="r">Öneri</th>${[5,21,63].map(h=>`<th class="r">${{5:'1 hafta',21:'1 ay',63:'3 ay'}[h]} SPY üstü</th>`).join('')}</tr></thead><tbody>
   ${rows.map(([k,l])=>{const g=L[k]||{n:0};return `<tr><td><b>${l}</b></td><td class="r num">${g.n}</td>${[5,21,63].map(h=>{const x=g[h];return x?`<td class="r num ${cls(x.avg)}">${fkSig(x.avg)} <span class="muted" style="font-size:11px">%${x.hit} · ${x.n}</span></td>`:'<td class="r muted">bekliyor</td>'}).join('')}</tr>`}).join('')}</tbody></table></div>
   <p class="muted" style="font-size:12px;margin:6px 0 0">Her gün listeye yeni giren ilk 3 güçlü ve 2 çeşitlendirici aday o günün kapanış fiyatıyla kaydedilir (aynı aday 30 gün içinde tekrar sayılmaz). Sayı: ortalama SPY üstü getiri (puan), küçük: SPY'ı geçen oran ve vaka sayısı.</p>`}
+let hvLoading=null;
+function hvLoad(cb){if(S.hv!==undefined||hvLoading)return;hvLoading=fetch('data/house_views.json?t='+Math.floor(Date.now()/600000)).then(r=>r.ok?r.json():null).catch(()=>null).then(j=>{S.hv=j;hvLoading=null;if(cb)cb()})}
+function fkHouses(){const H=S.ideas.houses;if(!H||!H.card)return '';
+  if(S.hv===undefined){hvLoad(()=>{const el=$('#fkHV');if(el)el.outerHTML=fkHouses()});return '<div id="fkHV"></div>'}
+  const HV=S.hv||{houses:[]};const C=H.consensus||{};const st=v=>v>0?'<span class="up">▲ olumlu</span>':v<0?'<span class="down">▼ olumsuz</span>':'<span class="muted">● nötr</span>';
+  const th=Object.entries(C).sort((a,b)=>b[1].score-a[1].score);
+  const consTbl=`<div class="tscroll"><table class="tbl"><thead><tr><th>Tema</th><th class="r">Uzlaşı</th><th>Olumlu</th><th>Olumsuz</th></tr></thead><tbody>
+    ${th.map(([k,c])=>`<tr><td><b>${esc(c.n)}</b></td><td class="r num ${cls(c.score)}">${c.score>0?'+':''}${c.score}</td><td style="font-size:12.5px;white-space:normal">${c.pos.map(x=>`<span class="${x.stale?'muted':''}" title="${esc(x.why)}">${esc(x.h)}${x.stale?' (eski)':''}</span>`).join(', ')||'—'}</td><td style="font-size:12.5px;white-space:normal">${c.neg.map(x=>`<span class="${x.stale?'muted':''}" title="${esc(x.why)}">${esc(x.h)}${x.stale?' (eski)':''}</span>`).join(', ')||'—'}</td></tr>`).join('')}</tbody></table></div>`;
+  const cards=HV.houses.map(h=>{const K=H.card[h.id]||{rows:[]};const R=Object.fromEntries((K.rows||[]).map(r=>[r.th,r]));
+    return `<details style="border-top:1px solid var(--line);padding:10px 0"><summary style="cursor:pointer"><b>${esc(h.n)}</b> <span class="muted" style="font-size:12.5px">${esc(h.brand)} · ${esc(trDate(h.date+'T12:00:00Z',{day:'numeric',month:'short',year:'numeric'}))}${K.stale?' · <span class="down">eski</span>':''}${K.calls?` · isabet ${K.hits}/${K.calls}`:''}</span></summary>
+      <div style="font-size:13px;margin-top:6px"><div class="muted">${esc(h.pub)} · ${esc(h.type)} · ufuk: ${esc(h.horizon||'')} · <a href="${esc(h.url)}" target="_blank" rel="noopener">kaynak</a></div>
+      ${h.context?`<p style="margin:6px 0">${esc(h.context)}</p>`:''}
+      ${Object.keys(h.views||{}).length?`<div class="tscroll"><table class="tbl"><thead><tr><th>Tema</th><th>Duruş</th><th>Gerekçe</th><th class="r">Yayından beri</th></tr></thead><tbody>${Object.entries(h.views).map(([k,[v,why]])=>{const r=R[k]||{};const ok=v!==0&&isNum(r.ex)?((r.ex>0)===(v>0)):null;
+        return `<tr><td>${esc((HV.themes[k]||{}).n||k)}</td><td>${st(v)}</td><td style="white-space:normal;font-size:12.5px">${esc(why)}</td><td class="r num ${cls(r.ex)}">${isNum(r.ex)?`${fkSig(r.ex)} <span class="muted" style="font-size:11px">${esc(r.etf)}−${esc(r.bench)}</span>${ok===null?'':ok?' ✓':' ✗'}`:'<span class="muted">bekliyor</span>'}</td></tr>`}).join('')}</tbody></table></div>`:''}
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:10px;margin-top:8px"><div><b class="up">Güçlü yanlar</b><ul style="margin:4px 0;padding-left:18px">${(h.strengths||[]).map(x=>`<li>${esc(x)}</li>`).join('')}</ul></div><div><b class="down">Riskler</b><ul style="margin:4px 0;padding-left:18px">${(h.risks||[]).map(x=>`<li>${esc(x)}</li>`).join('')}</ul></div></div></div></details>`}).join('');
+  return `<section class="card sec"><h3>Büyük yöneticiler ne diyor?<span class="r muted" style="font-size:12px">${HV.houses.length} kurum · derleme ${esc(trDate((H.updatedAt||HV.updatedAt)+'T12:00:00Z',{day:'numeric',month:'short'}))}</span></h3>
+    <p class="muted" style="font-size:12.5px;margin:0 0 8px">Uzlaşı: geçerli (ufku dolmamış) olumlu görüş sayısı − olumsuz görüş sayısı. Satırın üstüne gelince gerekçe görünür.</p>${consTbl}
+    <h4 style="margin:16px 0 4px">Kurum kurum: görüş, gerekçe ve karne</h4>${cards}
+    <p class="muted" style="font-size:12px;margin:8px 0 0;line-height:1.5"><b>Karne:</b> her görüşün yayın tarihinden bu yana temanın ETF'si karşılaştırma ölçütüne göre ne yaptı (✓ görüş yönünde, ✗ tersi). Büyük kurumların kısa vadeli görünümleri sık yanılır; uzlaşı bir bağlamdır, alım sinyali değil. BlackRock ve Vanguard'ın 13F bildirimleri çoğunlukla endeks fonlarından oluştuğu için "neyi alıyorlar" sorusu piyasa ağırlığını izlemekten farksızdır; bu yüzden görüşleri, yayımladıkları görünümlerden alındı.</p></section>`}
 function viewIdeas(){
   if(S.ideas===undefined){fkLoad(()=>{if(/fikirler/.test(location.hash))render(false)});return '<div class="muted">Yükleniyor…</div>'}
   const I=S.ideas;if(!I)return `<div class="empty"><b>Fikir listesi henüz oluşmadı</b>Her iş günü sabahı (TR ~07:15) güncellenir.</div>`;const L=I.lists;
@@ -90,6 +115,7 @@ function viewIdeas(){
     ${[['momentum','Yalnızca momentum'],['dusukOynaklik','Yalnızca düşük oynaklık']].map(([k,l])=>{const x=P[k];return x?`<tr><td><b>${l}</b></td><td class="r num">${fkPct(x.cagr)}</td><td class="r num">${fkPct(x.cagrEW)}</td><td class="r num ${cls(x.cagr-x.cagrEW)}">${fkSig(x.cagr-x.cagrEW)}</td><td class="r num">${nf(x.t,1)}</td><td class="r num down">${fkPct(x.mdd)}</td></tr>`:''}).join('')}</tbody></table></div>
     <p class="muted" style="font-size:12px;margin:8px 0 0">Yöntemi sonuç iyi çıkana kadar değiştirmek geçmişe uydurma olur; bu tablo yalnızca hangi parçanın neden zayıf kaldığını gösterir. Bugünün şirketlerinden kurulan evren oynak kazananları içerdiği için düşük oynaklık burada olduğundan kötü görünür.</p></section>`})()}
   <section class="card sec"><h3>Kanıt: ETF yöntemi 2011'den bu yana</h3>${fkBT('etf')}</section>
+  ${fkHouses()}
   <section class="card sec"><h3>Canlı karne<span class="r muted" style="font-size:12px">bu listeler gerçekte ne yapıyor</span></h3>${fkLive()}</section>
   <section class="card sec"><h3>Yöntem</h3><div class="note" style="line-height:1.65">
     <p><b>Hisse:</b> ${esc(I.method.stock)}. <b>ETF:</b> ${esc(I.method.etf)}. Yöntem önceden sabitlendi; puanlanan ne ise geriye dönük test edilen de o.</p>
