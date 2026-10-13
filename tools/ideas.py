@@ -122,7 +122,7 @@ def rank01(vals, higher_better=True):
     return out
 
 
-def score_at(kind, names, px, i):
+def score_at(kind, names, px, i, wm=None, wv=None):
     """i gününde (yalnızca o güne kadarki fiyatlarla) puan ve bileşenler."""
     M, V, T = {}, {}, {}
     for t in names:
@@ -139,7 +139,8 @@ def score_at(kind, names, px, i):
     rm = rank01(M, True)
     if kind == 'stock':
         rv = rank01(V, False)
-        S = {t: W_MOM * rm[t] + W_VOL * rv[t] for t in rm if t in rv}
+        a, b = (W_MOM if wm is None else wm), (W_VOL if wv is None else wv)
+        S = {t: a * rm[t] + b * rv[t] for t in rm if t in rv}
     else:
         S = dict(rm)
     elig = {t: s for t, s in S.items() if T.get(t, -1) > 0}
@@ -147,7 +148,7 @@ def score_at(kind, names, px, i):
 
 
 # ------------------------------------------------------------------ geriye dönük test
-def backtest(kind, names, dates, px):
+def backtest(kind, names, dates, px, wm=None, wv=None):
     N = len(dates)
     me = [i for i in range(260, N - 1) if dates[i][:7] != dates[i + 1][:7]]
     hold, ew = {}, {}
@@ -156,7 +157,7 @@ def backtest(kind, names, dates, px):
     picks_hist = []
     monthly = []
     for a, i in enumerate(me):
-        elig, _, _, _, _ = score_at(kind, names, px, i)
+        elig, _, _, _, _ = score_at(kind, names, px, i, wm, wv)
         univ = [t for t in names if px.get(t) and px[t][i] and mom_12_1(px[t], i) is not None]
         if len(univ) < TOPN[kind] * 2 or not elig:
             continue
@@ -316,6 +317,12 @@ def main():
         if '--no-backtest' not in sys.argv:
             try:
                 out['backtest'][kind] = backtest(kind, names, dates, px)
+                if kind == 'stock':  # ayrıştırma: hangi etken ne katkı yaptı (yöntem değiştirilmez; yalnızca bilgi)
+                    out['backtest']['stockParts'] = {}
+                    for lab, a, b in (('momentum', 1.0, 0.0), ('dusukOynaklik', 0.0, 1.0)):
+                        r = backtest(kind, names, dates, px, a, b)
+                        if r:
+                            out['backtest']['stockParts'][lab] = {k: r[k] for k in ('cagr', 'cagrEW', 'mdd', 't', 'hitMonths')}
             except Exception as e:
                 DIAG['errors'][f'backtest:{kind}'] = f'{type(e).__name__}: {str(e)[:100]}'
     if not out['backtest'] and prev.get('backtest'):

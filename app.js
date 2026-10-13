@@ -340,7 +340,7 @@ function viewOzet(){
   const heroVal=real?money(T.value):money(hs.length?hs[hs.length-1][1]:null);
   const wk=S.weekly&&S.weekly.reports&&S.weekly.reports[0];
   return `<div class="fade">
-  ${viewStrip()}${typeof todayCard==='function'?todayCard():alertsCard()}${briefCard()}${viewEarnPre(7,true)}${realLine()}
+  ${viewStrip()}${typeof todayCard==='function'?todayCard():alertsCard()}${typeof ideasCard==='function'?ideasCard():''}${briefCard()}${viewEarnPre(7,true)}${realLine()}
   <div class="grid g-hero">
     <section class="card hero">
       <div class="lbl">${real?'Portföy değeri':'Model portföy · 1 yıl önce $10.000 ('+esc(W.src)+')'}</div>
@@ -390,6 +390,7 @@ function viewOzet(){
   </div>`;
 }
 function afterOzet(){
+  if(typeof afterIdeas==='function')afterIdeas();
   const ps=portfolioSeries();const hs=sliceRange(ps.pts,S.range.hero);
   const c=hs.length>1&&hs[hs.length-1][1]>=hs[0][1]?'#2fe39a':'#ff5d7a';
   lineChart($('#cHero'),[{name:ps.real?'Portföy':'Model',color:c,pts:hs.map(p=>[p[0],conv(p[1])])}],{area:true,fmt:(v,ax)=>sym()+nf(v,ax?0:2)});
@@ -627,7 +628,7 @@ function render(scrollTop){
     else if(R.sub==='karne'){v.innerHTML=sn+viewKarne()}else if(R.sub==='temettu'){v.innerHTML=sn+viewTemettu();after=afterTemettu}else if(R.sub==='rapor'){v.innerHTML=sn+viewRapor();after=afterRapor}else{v.innerHTML=sn+viewPozisyon()+viewTrail()+viewShareCard()+`<div class="sec">${sourcesCard()}</div>`;after=()=>{afterPozisyon();afterTrail();afterShareCard()}}}
   else if(R.r==='piyasa'){const sn=subnav('piyasa',R.sub);
     if(R.sub==='haber'){v.innerHTML=sn+viewHaber();after=()=>{$$('#nf button').forEach(b=>b.onclick=()=>{S.newsFilter=b.dataset.f;render(false)});kissadanMount()}}
-    else if(R.sub==='takvim'){v.innerHTML=sn+`<div style="margin-bottom:18px">${viewEarnPre(10)}</div><div style="margin-bottom:18px">${viewEcon()}</div><div style="margin-bottom:18px">${pmCard(5)}</div>`+viewTakvim()}else if(R.sub==='kurumsal'){v.innerHTML=sn+viewKurumsal()}else if(R.sub==='isi'){v.innerHTML=sn+viewHeat();after=afterHeat}else if(R.sub==='icgoru'){v.innerHTML=sn+viewInsight();after=afterInsight}else if(R.sub==='notlar'){v.innerHTML=sn+viewNotlar()}else if(R.sub==='arastirma'){v.innerHTML=sn+viewOrion();after=afterOrion}else if(R.sub==='canli'){v.innerHTML=sn+viewCanli();after=afterCanli}else if(R.sub==='tarayici'){v.innerHTML=sn+viewScreen();after=afterScreen}
+    else if(R.sub==='takvim'){v.innerHTML=sn+`<div style="margin-bottom:18px">${viewEarnPre(10)}</div><div style="margin-bottom:18px">${viewEcon()}</div><div style="margin-bottom:18px">${pmCard(5)}</div>`+viewTakvim()}else if(R.sub==='kurumsal'){v.innerHTML=sn+viewKurumsal()}else if(R.sub==='isi'){v.innerHTML=sn+viewHeat();after=afterHeat}else if(R.sub==='icgoru'){v.innerHTML=sn+viewInsight();after=afterInsight}else if(R.sub==='notlar'){v.innerHTML=sn+viewNotlar()}else if(R.sub==='arastirma'){v.innerHTML=sn+viewOrion();after=afterOrion}else if(R.sub==='canli'){v.innerHTML=sn+viewCanli();after=afterCanli}else if(R.sub==='tarayici'){v.innerHTML=sn+viewScreen();after=afterScreen}else if(R.sub==='fikirler'){v.innerHTML=sn+viewIdeas();after=afterIdeasPage}
     else{v.innerHTML=sn+viewEnstruman();after=afterWatch}}
   else if(R.r==='teknik'){const sn=subnav('teknik',R.sub);
     if(R.sub==='tarama'){v.innerHTML=sn+`<div class="fade">${viewTarama()}</div>`}
