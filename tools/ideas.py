@@ -2,8 +2,8 @@
 """Portföy Defteri — Günün fikirleri: her gün kanıta dayalı hisse ve ETF adayları (GitHub Actions'ta, anahtarsız).
 
 YÖNTEM (önceden sabitlendi; puanlanan ne ise geriye dönük test edilen de odur):
-  Hisse : 12-1 ay momentum (son 1 ay hariç 12 aylık getiri) sırası %60 + düşük oynaklık (1 yıllık günlük oynaklık, düşük iyi) sırası %40.
-          Yalnızca fiyatı 200 günlük ortalamasının üstündekiler (trend filtresi).
+  Hisse : (sürüm 2, 2026-10-13'ten) 12-1 ay momentum sırası; yalnızca fiyatı 200 günlük ortalamasının üstündekiler.
+          Sürüm 1 (momentum %60 + düşük oynaklık %40) geriye dönük testte reddedildi; METHOD_LOG'a bakın.
   ETF   : 12-1 ay momentum sırası; aynı trend filtresi. (Varlık sınıfları arasında momentum ve trend en uzun kanıtı olan iki etken.)
   Akademik dayanak: momentum (Jegadeesh & Titman 1993; Asness, Moskowitz & Pedersen 2013), düşük oynaklık (Frazzini & Pedersen 2014),
   trend (Moskowitz, Ooi & Pedersen 2012). Hiçbiri garanti değildir; uzun dönemli ortalama bir eğilimdir.
@@ -26,7 +26,15 @@ NOW = time.time()
 H = [5, 21, 63]
 COST = 0.001
 TOPN = {'stock': 10, 'etf': 5}
-W_MOM, W_VOL = 0.6, 0.4
+W_MOM, W_VOL = 1.0, 0.0
+METHOD_V = 2
+METHOD_LOG = [
+    {'v': 1, 'from': '2026-10-13', 'stock': '12-1 ay momentum %60 + düşük oynaklık %40; 200 günlük ortalama üstü',
+     'result': "2011'den testte aynı evrenin eşit ağırlıklısının gerisinde kaldı (yılda −9,9 puan, t=−2,7). Ayrıştırma: momentum tek başına t=+3,3, düşük oynaklık tek başına t=−3,0.",
+     'status': 'reddedildi'},
+    {'v': 2, 'from': '2026-10-13', 'stock': '12-1 ay momentum; 200 günlük ortalama üstü (ETF yöntemiyle aynı)',
+     'why': "Momentumun akademik kanıtı bu testten bağımsız; iki evrende aynı yöntem. UYARI: bu seçim sonuçlar görüldükten sonra yapıldı ve test evreni (bugünün şirketleri) momentumu kayırır; asıl hakem bu tarihten sonraki canlı karnedir.",
+     'status': 'kullanımda'}]
 # t: (ad, ihraççı, neye dayalı)
 ETF_INFO = {
     # sektör (State Street SPDR)
@@ -263,7 +271,7 @@ def score_at(kind, names, px, i, wm=None, wv=None):
         if kind == 'stock':
             V[t] = vol_1y(p, i)
     rm = rank01(M, True)
-    if kind == 'stock':
+    if kind == 'stock' and (W_VOL if wv is None else wv) > 0:
         rv = rank01(V, False)
         a, b = (W_MOM if wm is None else wm), (W_VOL if wv is None else wv)
         S = {t: a * rm[t] + b * rv[t] for t in rm if t in rv}
@@ -360,7 +368,7 @@ def live_log(log, today_lists, dates, px, i):
             key = (x['t'], kind)
             if key in have or any(e['d'] == d and e['t'] == x['t'] and e['kind'] == kind for e in log['events']):
                 continue  # aynı öneri 30 gün içinde tekrar sayılmaz
-            log['events'].append({'d': d, 't': x['t'], 'kind': kind, 'list': x['list'], 'px': x['px'], 'spy': px['SPY'][i]})
+            log['events'].append({'d': d, 't': x['t'], 'kind': kind, 'list': x['list'], 'px': x['px'], 'spy': px['SPY'][i], 'v': METHOD_V})
             added += 1
     idx = {dd: k for k, dd in enumerate(dates)}
     for e in log['events']:
@@ -379,7 +387,7 @@ def live_log(log, today_lists, dates, px, i):
     for kind in ('stock', 'etf'):
         for lst in ('guclu', 'cesit'):
             g = summ.setdefault(f'{kind}|{lst}', {'n': 0})
-            evs = [e for e in log['events'] if e['kind'] == kind and e['list'] == lst]
+            evs = [e for e in log['events'] if e['kind'] == kind and e['list'] == lst and (kind == 'etf' or e.get('v', 1) == METHOD_V)]
             g['n'] = len(evs)
             for h in H:
                 xs = [e['r'][str(h)]['ex'] for e in evs if str(h) in e.get('r', {})]
@@ -416,7 +424,8 @@ def main():
     pr = [daily_rets(px[t], i) for t in port if t in px and px[t][i]]
     port_r = [sum(v for v in col if v is not None) / max(1, sum(1 for v in col if v is not None)) if any(v is not None for v in col) else None for col in zip(*pr)] if pr else []
     out = {'updatedAt': dt.datetime.utcnow().strftime('%Y-%m-%dT%H:%M:%SZ'), 'asOf': dates[i],
-           'method': {'stock': f'12-1 ay momentum sırası %{int(W_MOM*100)} + düşük oynaklık sırası %{int(W_VOL*100)}; fiyat 200 günlük ortalamanın üstünde',
+           'methodLog': METHOD_LOG, 'methodV': METHOD_V,
+           'method': {'stock': '12-1 ay momentum sırası; fiyat 200 günlük ortalamanın üstünde (sürüm 2)',
                       'etf': '12-1 ay momentum sırası; fiyat 200 günlük ortalamanın üstünde',
                       'fit': "Portföyle 1 yıllık günlük getiri korelasyonu (portföydeki enstrümanların eşit ağırlıklı yaklaşığı); çeşitlendirici < 0,5"},
            'lists': {}, 'backtest': {}, 'universe': {'stock': len([t for t in stocks if t in px]), 'etf': len([t for t in etfs if t in px])}}
@@ -462,7 +471,7 @@ def main():
                 out['backtest'][kind] = backtest(kind, names, dates, px)
                 if kind == 'stock':  # ayrıştırma: hangi etken ne katkı yaptı (yöntem değiştirilmez; yalnızca bilgi)
                     out['backtest']['stockParts'] = {}
-                    for lab, a, b in (('momentum', 1.0, 0.0), ('dusukOynaklik', 0.0, 1.0)):
+                    for lab, a, b in (('eskiBilesik', 0.6, 0.4), ('dusukOynaklik', 0.0, 1.0)):
                         r = backtest(kind, names, dates, px, a, b)
                         if r:
                             out['backtest']['stockParts'][lab] = {k: r[k] for k in ('cagr', 'cagrEW', 'mdd', 't', 'hitMonths')}
@@ -471,6 +480,8 @@ def main():
     if not out['backtest'] and prev.get('backtest'):
         out['backtest'] = prev['backtest']
     log = rd('ideas_log.json', None) or {'events': []}
+    for e in log['events']:
+        e.setdefault('v', 1)
     DIAG['canliEklenen'] = live_log(log, today_for_log, dates, px, i)
     out['live'] = log.get('summary', {})
     wr('ideas.json', out)

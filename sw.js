@@ -1,6 +1,6 @@
 /* Portföy Defteri service worker: kabuk önbellekte, veri önce ağdan */
-const V='pd-v30';
-const SHELL=['./','index.html','style.css?v=21','analiz.js?v=21','ekler.js?v=21','teknik.js?v=21','strateji.js?v=21','duzen.js?v=25','arac.js?v=21','lab.js?v=22','ileri.js?v=21','kural.js?v=21','kontrol.js?v=23','pro.js?v=21','icgoru.js?v=21','deger.js?v=21','komut.js?v=21','orion.js?v=21','dogrula.js?v=21','dis.js?v=21','stream.js?v=21','quant.js?v=21','bugun.js?v=23','karne.js?v=4','agirlik.js?v=2','fikir.js?v=2','app.js?v=25','manifest.webmanifest','icon-192.png','icon-512.png'];
+const V='pd-v31';
+const SHELL=['./','index.html','style.css?v=21','analiz.js?v=21','ekler.js?v=21','teknik.js?v=21','strateji.js?v=21','duzen.js?v=25','arac.js?v=21','lab.js?v=22','ileri.js?v=21','kural.js?v=21','kontrol.js?v=23','pro.js?v=21','icgoru.js?v=21','deger.js?v=21','komut.js?v=21','orion.js?v=21','dogrula.js?v=21','dis.js?v=21','stream.js?v=21','quant.js?v=21','bugun.js?v=23','karne.js?v=4','agirlik.js?v=2','fikir.js?v=3','app.js?v=25','manifest.webmanifest','icon-192.png','icon-512.png'];
 self.addEventListener('install',e=>{e.waitUntil(caches.open(V).then(c=>c.addAll(SHELL)).then(()=>self.skipWaiting()))});
 self.addEventListener('activate',e=>{e.waitUntil(caches.keys().then(ks=>Promise.all(ks.filter(k=>k!==V).map(k=>caches.delete(k)))).then(()=>self.clients.claim()))});
 self.addEventListener('fetch',e=>{
