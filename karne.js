@@ -139,3 +139,22 @@ function evEarnLine(t){
   const s=[part(bp,'bp','Büyük olumlu tepki'),part(bn,'bn','büyük olumsuz tepki')].filter(Boolean);
   return s.length?`<div class="ep-k" style="margin-top:4px">${s.join('')}<span class="muted">${E.events.length} bilanço · rastgele güne göre</span></div>`:'';
 }
+
+/* ================= diğer sayfalar için: karne kanıtı ================= */
+let skLoading=null;
+function skLoad(cb){
+  if(S.sigCard!==undefined||skLoading)return;
+  skLoading=fetch('data/signals.json?t='+Math.floor(Date.now()/600000)).then(r=>r.ok?r.json():null).catch(()=>null).then(j=>{S.sigCard=j;skLoading=null;if(cb)cb()});
+}
+// bir sinyal türü işe yarıyor mu? Önce yeterli canlı kayıt (≥20 olay, 1 ay), yoksa geriye dönük karne.
+function sigEvidence(k){
+  const L=S.sigCard;if(!L)return null;const sum=L.summary||[];
+  const g=sum.find(x=>x.src==='canli'&&x.k===k&&x.h&&x.h['21']&&x.h['21'].n>=20)||sum.find(x=>x.src==='geri'&&x.k===k);
+  if(!g||!g.h)return null;const x=g.h['21'];const [c,txt]=skVerdict(x);
+  return {src:g.src,n:(x&&x.n)||0,x,txt,useful:c==='up',noise:c==='warnc',bad:c==='down',
+    note:c==='warnc'?`Sinyal karnesi: bu sinyal ${x.n} olayda rastgele bir günden ayırt edilemedi${g.src==='geri'?' (geriye dönük)':''}.`
+      :c==='up'?`Sinyal karnesi: ${x.n} olayda rastgele güne göre 1 ayda ${skSigned(x.vsBase)} puan katkı.`
+      :c==='down'?`Sinyal karnesi: bu sinyal ${x.n} olayda ters çalıştı.`:''};
+}
+// havuzdaki bilanço bulgusu: büyük olumsuz tepkiden sonraki ilk hafta (yalnızca istatistiksel olarak anlamlıysa döner)
+function evBigNegWeek(){const P=S.events&&S.events.pool;const x=P&&P.earn&&P.earn.bn&&P.earn.bn['5'];return x&&x.n>=50&&isNum(x.t)&&x.t<=-2.5?x:null}

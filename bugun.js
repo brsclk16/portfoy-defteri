@@ -5,8 +5,15 @@ function bgSafe(f,d){try{return f()}catch(e){return d}}
 function todayItems(){const I=[];const add=(score,ic,title,why,href,key)=>I.push({score,ic,title,why,href,key:key||title});
   const P=positions();const real=P.total>0;const held=P.list.filter(m=>m.qty>0);const W={};held.forEach(m=>W[m.t]=m.w);const heldT=held.map(m=>m.t);
   const scope=heldT.length?heldT:tickers();
+  const reR=()=>{if(!location.hash||/^#\/?(ozet)?$/.test(location.hash))render(false)};
+  if(typeof skLoad==='function')skLoad(reR);if(typeof evLoad==='function')evLoad(reR);
+  const EVD=k=>typeof sigEvidence==='function'?bgSafe(()=>sigEvidence(k)):null;
   // 1) stop / iz süren stop
-  heldT.forEach(t=>{const pl=bgSafe(()=>tradePlan(t));if(pl&&pl.state==='Destek kırıldı')add(95,'⛔',`${dispT(t)} plan stopunun altında`,`Fiyat ${pxf(t,pl.px)}, stop ${pxf(t,pl.stop)}. Pozisyon portföyün %${nf(W[t]||0,0)}'i. Planın bu durumda ne dediğini kontrol et.`,`#/t/${t}/plan`,'stop|'+t);
+  heldT.forEach(t=>{const pl=bgSafe(()=>tradePlan(t));
+    // plan stopu her gün güncel fiyatın altında yeniden hesaplandığı için 'Destek kırıldı' pratikte oluşmaz: bir önceki işlem gününün stopuna bakılır
+    const pv=bgSafe(()=>{const a=candles(t);return a.length>121?tradePlan(t,a.slice(0,-1)):null});const pStop=pv?pv.stop:(pl&&pl.state==='Destek kırıldı'?pl.stop:null);
+    // stop bir getiri tahmini değil zarar sınırlama kuralıdır: karne notu (tahmin gücü) burada bilerek gösterilmez
+    if(pl&&pStop&&pl.px<pStop)add(95,'⛔',`${dispT(t)} dünkü plan stopunun altında`,`Fiyat ${pxf(t,pl.px)}, önceki günün stopu ${pxf(t,pStop)}. Pozisyon portföyün %${nf(W[t]||0,0)}'i. Planın bu durumda ne dediğini kontrol et.`,`#/t/${t}/plan`,'stop|'+t);
     const tr=bgSafe(()=>trailFor(t));if(tr&&tr.on){if(tr.hit)add(92,'📉',`${dispT(t)} iz süren stopunu kırdı`,`Stop ${pxf(t,tr.lvl)} (zirve ${pxf(t,tr.hi)} − ${tr.k}×ATR), fiyat ${pxf(t,tr.px)}. Stop seviyesi alış maliyetine göre ${pct(tr.lock,1)}.`,'#/portfoy','trail|'+t);
       else if(tr.dist<2)add(68,'⚠️',`${dispT(t)} iz süren stopa çok yakın`,`Stopa %${nf(tr.dist,1)} mesafe (stop ${pxf(t,tr.lvl)}).`,'#/portfoy','trail|'+t)}});
   // 2) kurallar ve alarm seviyeleri
@@ -18,6 +25,12 @@ function todayItems(){const I=[];const add=(score,ic,title,why,href,key)=>I.push
     const days=(new Date(e.date)-Date.now())/864e5;const st=bgSafe(()=>earnStats(e.t));const em=typeof emFor==='function'?emFor(e.t,e.date):null;
     const big=em&&st&&em.em>st.avgAbs*1.25;add((days<=3?80:58)+(big?6:0)+Math.min(10,sh/2),'📅',`${dispT(e.t)} bilançosu ${days<1?'bugün/yarın':Math.ceil(days)+' gün içinde'}`,
       `${real?`Portföyün %${nf(sh,1)}'i doğrudan veya fonlar üzerinden maruz. `:''}${em?`Opsiyonlar ±%${nf(em.em,1)} fiyatlıyor`:''}${st?`${em?', ':''}geçmiş 8 bilançonun ortalaması ±%${nf(st.avgAbs,1)}`:''}${big?' → piyasa olağandan büyük hareket bekliyor':''}.`,'#/piyasa/takvim','earn|'+e.t)});
+  // 3b) son 5 işlem gününde sert olumsuz bilanço tepkisi verenler (portföyde doğrudan ya da fonlar üzerinden ≥%1)
+  const BN=typeof evBigNegWeek==='function'?bgSafe(()=>evBigNegWeek()):null;
+  if(BN&&S.events&&S.events.tickers){const d5=(series('SPY').slice(-6)[0]||[])[0]||'';
+    Object.entries(S.events.tickers).forEach(([t,T])=>{const ev=((T.earn||{}).events||[]).slice(-1)[0];if(!ev||ev.b!=='bn'||!d5||ev.d<d5)return;
+      const ex=bgSafe(()=>exposureTo(t),{usd:0});const sh=real&&P.total>0?ex.usd/P.total*100:(T.direct?5:(T.in||[]).length?1:0);if(sh<1)return;
+      add(64,'🧊',`${t} bilançoya sert düştü: dip alımı için acele etme`,`Tepki SPY'a göre ${pct(ev.ex,1)} (${trDate(ev.d+'T12:00:00Z',{day:'numeric',month:'short'})}). ${S.events.pool.tickers} şirketin ${BN.n} büyük olumsuz tepkisinde düşüş ilk hafta sürme eğiliminde: rastgele güne göre ${typeof skSigned==='function'?skSigned(BN.vsBase):nf(BN.vsBase,1)} puan. ${real?`Portföyün %${nf(sh,1)}'i maruz.`:''}`,`#/t/${T.direct?t:((T.in||[])[0]||{}).t||t}/plan`,'bn|'+t)})}
   // 4) hedef ağırlık sapması
   bgSafe(()=>driftAlerts(),[]).forEach(a=>{const m=a.txt.match(/([+-]?\d+[.,]?\d*) puan/);const v=m?Math.abs(parseFloat(m[1].replace(',','.'))):5;add(52+Math.min(15,v),'⚖️','Hedef ağırlıktan sapma',a.txt,a.href,'drift|'+a.txt)});
   // 5) kırmızı bayraklar (portföydeki hisseler, sadece kırmızılar)
@@ -39,9 +52,11 @@ function todayItems(){const I=[];const add=(score,ic,title,why,href,key)=>I.push
   // 10) canlı takip ve ORION
   ((S.paper&&S.paper.items)||[]).forEach(p=>{const s=bgSafe(()=>paperStatus(p));if(!s)return;if(s.dead)add(66,'🪦',`Canlı takip: "${p.name||'strateji'}" durdurma kuralına takıldı`,`${s.dead} tarihinde 63 günlük farkı ${pct(s.dd,1)}.`,'#/teknik/dogrula','pdead|'+p.id);
     else if(s.rebToday)add(57,'🔁',`Canlı takip: "${p.name||'strateji'}" bugün yeniden dengeleniyor`,`Yeni sepet: ${s.pick.map(dispT).join(', ')||'nakit'}${s.chg?` (değişen: ${s.chg})`:''}.`,'#/teknik/dogrula','preb|'+p.id)});
-  ((S.research&&S.research.items)||[]).filter(r=>Date.now()-new Date(r.answeredAt)<36*3600e3).slice(0,2).forEach(r=>add(50,'🔭',`Yeni ORION raporu: ${r.title}`,`${r.stance?r.stance+' · ':''}${r.summary||''}`,'#/piyasa/arastirma','orion|'+r.id));
+  ((S.research&&S.research.items)||[]).filter(r=>Date.now()-new Date(r.answeredAt)<36*3600e3).slice(0,2).forEach(r=>{const ev=EVD('orion');add(50+(ev&&ev.useful?8:0)-(ev&&(ev.noise||ev.bad)?12:0),'🔭',`Yeni ORION raporu: ${r.title}`,`${r.stance?r.stance+' · ':''}${r.summary||''}${ev&&ev.note?' '+ev.note:''}`,'#/piyasa/arastirma','orion|'+r.id)});
   // 11) plan alım bölgesi (izleme + portföy; tek madde)
-  const zones=tickers().map(t=>[t,bgSafe(()=>tradePlan(t))]).filter(([,p])=>p&&p.state==='Fiyat alım bölgesinde');if(zones.length)add(48,'🎯',`${zones.map(z=>dispT(z[0])).join(', ')} teknik alım bölgesinde`,'Planın tanımladığı geri çekilme bölgesi. Girmeden önce işlem öncesi kontrolden geçir.',`#/t/${zones[0][0]}/plan`,'zone');
+  const zones=tickers().map(t=>[t,bgSafe(()=>tradePlan(t))]).filter(([,p])=>p&&p.state==='Fiyat alım bölgesinde');if(zones.length){const ev=EVD('plan_alim');
+    // karne bu sinyalin rastgele günden ayırt edilemediğini gösteriyorsa öne çıkarılmaz (düşük öncelikli maddelere iner)
+    add(ev&&(ev.noise||ev.bad)?30:ev&&ev.useful?60:48,'🎯',`${zones.map(z=>dispT(z[0])).join(', ')} teknik alım bölgesinde`,`Planın tanımladığı geri çekilme bölgesi. Girmeden önce işlem öncesi kontrolden geçir.${ev&&ev.note?' '+ev.note+(ev.noise?' Tek başına alım gerekçesi değil.':''):''}`,`#/t/${zones[0][0]}/plan`,'zone')}
   const seen=new Set();return I.filter(i=>!seen.has(i.key)&&seen.add(i.key)).sort((a,b)=>b.score-a.score)}
 function paperStatus(p){const D=vData();if(!D)return null;const i0=D.dates.indexOf(p.start),i1=D.dates.length-1;if(i0<0)return null;const B=vBacktest(p.cfg,i0,i1);if(!B)return null;
   const K=p.kill||{days:63,under:-10};let dead=null,dd=null;if(B.curve.length>K.days){for(let k=K.days;k<B.curve.length;k++){const x=(B.curve[k][1]/B.curve[k-K.days][1]-B.spyCurve[k][1]/B.spyCurve[k-K.days][1])*100;if(x<K.under){dead=B.curve[k][0];dd=x;break}}}
