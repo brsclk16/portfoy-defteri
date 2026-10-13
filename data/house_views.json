@@ -138,63 +138,41 @@
    "id": "blackrock",
    "n": "BlackRock",
    "brand": "iShares",
-   "pub": "BlackRock Investment Institute taktik görüşü (StashAway 'General Investing Powered by BlackRock' yeniden dengelemesi üzerinden)",
-   "date": "2026-09-29",
-   "type": "uygulayıcı sayfası",
-   "url": "https://www.stashaway.sg/r/general-investing-blackrock-reoptimisation-sep-2026",
+   "pub": "Weekly market commentary | BlackRock",
+   "date": "2026-10-12",
+   "type": "otomatik: kaynak metninden özet",
+   "url": "https://www.blackrock.com/corporate/insights/blackrock-investment-institute/publications/weekly-commentary",
    "views": {
     "us_eq": [
-     1,
-     "Temeller destekleyici; ağırlık biraz azaltıldı"
-    ],
-    "em_xchina": [
-     1,
-     "Uzun vadede AI yatırımı olumlu; kazanç ivmesi yavaşladığı için kırpıldı"
-    ],
-    "europe_eq": [
      0,
-     "Kazanç ivmesi iyileşti: olumsuzdan nötre"
-    ],
-    "us_value": [
-     1,
-     "Sektör çeşitliliği için küresel değer eklendi"
+     "ABD hisselerindeki ağırlık artır pozisyonu kısa vadeli risk yönetimi amacıyla nötre düşürüldü."
     ],
     "ai_semis": [
      0,
-     "Yarı iletkenin bir kısmı AI altyapısına kaydırıldı"
-    ],
-    "ai_infra": [
-     1,
-     "AI yatırımına daha geniş maruziyet"
+     "Nötr duruş içerisinde yapay zeka ve teknoloji tercih edilmeye devam ediliyor."
     ],
     "ust_long": [
-     -1,
-     "Uzun vadeye temkinli; uzun vade azaltıldı"
+     0,
+     "Geliri sabitlemek amacıyla ABD uzun vadeli tahvillerindeki ağırlık azalt pozisyonu nötre yükseltildi."
     ],
-    "ust_mid": [
+    "short_bonds": [
      1,
-     "Getiri eğrisinin ortası daha cazip"
-    ],
-    "gold": [
-     1,
-     "Jeopolitik riske karşı güvenli liman olarak korunuyor"
-    ],
-    "tips": [
-     1,
-     "Enflasyon ve enerji fiyatına karşı korunuyor"
+     "Verim artışlarına karşı daha büyük gelir tamponu sunduğu için ön uç (kısa vadeli) tahviller ağırlık artır konuma getirildi."
     ]
    },
    "strengths": [
-    "Hisseler ek risk almanın tercih edilen kaynağı",
-    "AI yatırımının kazançlara yansıması"
+    "Yapay zeka (AI) fundemantals inancı korunmaktadır.",
+    "Yüksek getiriler potansiyel getiri oranlarını iyileştirmektedir."
    ],
    "risks": [
-    "Fed eylülde faiz artırdı ve şahin; yıl sonuna kadar ek sıkılaştırma fiyatlanıyor",
-    "Enflasyon ve yüksek enerji fiyatları",
-    "Jeopolitik gerilim"
+    "Yapay zeka (AI) yapılanması etrafındaki potansiyel oynaklık.",
+    "ABD TÜFE ve ÜFE verilerinin Fed beklentilerini ve tahvil getirilerini değiştirme riski.",
+    "Olası aşırı Fed sıkılaştırma beklentileri."
    ],
-   "validUntil": "2026-12-31",
-   "horizon": "taktik görüş, bir sonraki yeniden dengelemeye kadar"
+   "validUntil": "2027-01-12",
+   "horizon": "taktik görüş, bir sonraki yeniden dengelemeye kadar",
+   "context": "BlackRock, gelir sabitlemek ve piyasa rejimine dinamik yaklaşmak amacıyla ABD tahvillerini nötre ve kısa vadelileri ağırlık artırıma yükseltirken, ABD hisselerini nötre düşürmüştür.",
+   "auto": true
   },
   {
    "id": "vanguard",
@@ -207,24 +185,24 @@
    "views": {
     "us_eq": [
      -1,
-     "Valuations increased from already elevated levels, leading to a decline in 10-year expected annualized return ranges."
+     "Değerlemeler zaten yüksek seviyelerden yükseldi ve bu da 10 yıllık beklenen yıllık getiri aralıklarında düşüşe yol açtı."
     ],
     "us_value": [
      1,
-     "Value stocks continue to offer the most attractive expected return profile within U.S. equities."
+     "Değerli hisse senetleri, ABD hisse senetleri içinde en cazip beklenen getiri profilini sunmaya devam ediyor."
     ],
     "em_eq": [
      -1,
-     "Expected returns for emerging markets fell from a range of 3.6%–5.6% to a range of 2%–4% as markets became more expensive."
+     "Gelişmekte olan piyasalar için beklenen getiriler, piyasalar daha pahalı hale geldikçe %3,6 ila %5,6 aralığından %2 ila %4 aralığına düştü."
     ]
    },
    "strengths": [
-    "Value stocks continue to offer the most attractive expected return profile within U.S. equities."
+    "Değerli hisse senetleri, ABD hisse senetleri içinde en cazip beklenen getiri profilini sunmaya devam ediyor."
    ],
    "risks": [
     "Equity valuations became substantially more stretched.",
-    "Central banks became increasingly focused on inflation risks associated with higher energy prices, resilient growth, and AI-related investment demand.",
-    "Expected returns declined across most international markets due to expensive valuations."
+    "Merkez bankaları, yüksek enerji fiyatları, dirençli büyüme ve yapay zeka bağlantılı yatırım talebiyle ilişkili enflasyon risklerine giderek daha fazla odaklandı.",
+    "Pahalı değerlemeler nedeniyle çoğu uluslararası piyasada beklenen getiriler düştü."
    ],
    "validUntil": "2027-01-21",
    "horizon": "10 yıllık tahmin; çeyreklik güncellenir",
@@ -623,27 +601,78 @@
    "id": "vanguard",
    "n": "Vanguard",
    "archivedAt": "2026-10-13"
+  },
+  {
+   "date": "2026-09-29",
+   "pub": "BlackRock Investment Institute taktik görüşü (StashAway 'General Investing Powered by BlackRock' yeniden dengelemesi üzerinden)",
+   "views": {
+    "us_eq": [
+     1,
+     "Temeller destekleyici; ağırlık biraz azaltıldı"
+    ],
+    "em_xchina": [
+     1,
+     "Uzun vadede AI yatırımı olumlu; kazanç ivmesi yavaşladığı için kırpıldı"
+    ],
+    "europe_eq": [
+     0,
+     "Kazanç ivmesi iyileşti: olumsuzdan nötre"
+    ],
+    "us_value": [
+     1,
+     "Sektör çeşitliliği için küresel değer eklendi"
+    ],
+    "ai_semis": [
+     0,
+     "Yarı iletkenin bir kısmı AI altyapısına kaydırıldı"
+    ],
+    "ai_infra": [
+     1,
+     "AI yatırımına daha geniş maruziyet"
+    ],
+    "ust_long": [
+     -1,
+     "Uzun vadeye temkinli; uzun vade azaltıldı"
+    ],
+    "ust_mid": [
+     1,
+     "Getiri eğrisinin ortası daha cazip"
+    ],
+    "gold": [
+     1,
+     "Jeopolitik riske karşı güvenli liman olarak korunuyor"
+    ],
+    "tips": [
+     1,
+     "Enflasyon ve enerji fiyatına karşı korunuyor"
+    ]
+   },
+   "url": "https://www.stashaway.sg/r/general-investing-blackrock-reoptimisation-sep-2026",
+   "type": "uygulayıcı sayfası",
+   "id": "blackrock",
+   "n": "BlackRock",
+   "archivedAt": "2026-10-13"
   }
  ],
  "autoRun": {
-  "at": "2026-10-13T15:13:09Z",
+  "at": "2026-10-13T15:26:25Z",
   "log": {
-   "blackrock": "değişmedi: https://www.blackrock.com/corporate/insights/blackrock-investment-institute/publications/weekly-commentary: RuntimeError gemini-3.8-flash: HTTPError HTTP Error 429: Too Many Requests | gemini-flash-latest: HTTPError HTTP Error 429: Too Many  | https://www.blackrock.com/us/individual/insights/blackrock-investment-institute/weekly-commentary: RuntimeError gemini-3.8-flash: HTTPError HTTP Error 429: Too Many Requests | gemini-flash-latest: HTTPError HTTP Error 429: Too Many  | arama: RuntimeError grounding başarısız: HTTP Error 429: Too Many Requests",
-   "vanguard": "güncellendi → 2026-07-22 (3 görüş)",
-   "jpmorgan": "değişmedi: https://am.jpmorgan.com/us/en/asset-management/adv/insights/portfolio-insights/ltcma/: RuntimeError gemini-3.8-flash: HTTPError HTTP Error 429: Too Many Requests | gemini-flash-latest: HTTPError HTTP Error 429: Too Many  | https://am.jpmorgan.com/jp/en/asset-management/institutional/insights/portfolio-insights/ltcma/executive-summary/: RuntimeError gemini-3.8-flash: HTTPError HTTP Error 429: Too Many Requests | gemini-flash-latest: HTTPError HTTP Error 429: Too Many  | arama: RuntimeError grounding başarısız: HTTP Error 429: Too Many Requests",
-   "goldman": "değişmedi: https://am.gs.com/en-us/advisors/insights/article/investment-outlook: RuntimeError gemini-3.8-flash: HTTPError HTTP Error 429: Too Many Requests | gemini-flash-latest: HTTPError HTTP Error 429: Too Many  | arama: RuntimeError grounding başarısız: HTTP Error 429: Too Many Requests",
-   "statestreet": "değişmedi: https://www.ssga.com/us/en/intermediary/insights/global-market-outlook: tarih geçersiz/eski: 2025-11-30 | arama: RuntimeError grounding başarısız: HTTP Error 429: Too Many Requests",
-   "pimco": "değişmedi: https://www.pimco.com/us/en/insights/cyclical-outlook: HTTPError HTTP Error 404: Not Found | arama: RuntimeError grounding başarısız: HTTP Error 429: Too Many Requests",
-   "amundi": "değişmedi: https://research-center.amundi.com/: RuntimeError gemini-3.8-flash: HTTPError HTTP Error 429: Too Many Requests | gemini-flash-latest: HTTPError HTTP Error 429: Too Many  | arama: RuntimeError grounding başarısız: HTTP Error 429: Too Many Requests",
-   "capitalgroup": "değişmedi: https://www.capitalgroup.com/individual/insights/categories/outlook.html: RuntimeError gemini-3.8-flash: HTTPError HTTP Error 429: Too Many Requests | gemini-flash-latest: HTTPError HTTP Error 429: Too Many  | arama: RuntimeError grounding başarısız: HTTP Error 429: Too Many Requests",
-   "fidelity": "değişmedi: https://institutional.fidelity.com/advisors/insights/topics/market-commentary: RuntimeError gemini-3.8-flash: HTTPError HTTP Error 429: Too Many Requests | gemini-flash-latest: HTTPError HTTP Error 429: Too Many  | arama: RuntimeError grounding başarısız: HTTP Error 429: Too Many Requests",
-   "bny": "değişmedi: https://www.bny.com/assets/investments/imemea/pdfs/emea_fp_checkpoints_oct26.pdf: HTTPError HTTP Error 404: Not Found | https://www.bny.com/assets/investments/imemea/pdfs/emea_fp_checkpoints_sep26.pdf: HTTPError HTTP Error 404: Not Found | https://www.bny.com/assets/investments/imemea/pdfs/emea_fp_checkpoints_aug26.pdf: HTTPError HTTP Error 404: Not Found | https://www.bny.com/assets/investments/imemea/pdfs/emea_fp_checkpoints_july26.pdf: HTTPError HTTP Error 404: Not Found | https://www.bny.com/assets/investments/imemea/pdfs/emea_fp_checkpoints_jul26.pdf: HTTPError HTTP Error 404: Not Found |"
+   "blackrock": "güncellendi → 2026-10-12 (4 görüş)",
+   "vanguard": "değişmedi: https://corporate.vanguard.com/content/corporatesite/us/en/corp/vemo/vemo-return-forecasts.html: RuntimeError gemini-3.8-flash: HTTPError HTTP Error 429: Too Many Requests | gemini-3.8-flash: HTTPError HTTP Error 429: Too Many Req | arama: RuntimeError grounding başarısız: HTTP Error 429: Too Many Requests",
+   "jpmorgan": "değişmedi: https://am.jpmorgan.com/us/en/asset-management/adv/insights/portfolio-insights/ltcma/: tarih geçersiz/eski: 2026-01-01 | https://am.jpmorgan.com/jp/en/asset-management/institutional/insights/portfolio-insights/ltcma/executive-summary/: RuntimeError gemini-3.8-flash: HTTPError HTTP Error 429: Too Many Requests | gemini-3.8-flash: HTTPError HTTP Error 429: Too Many Req | arama: RuntimeError grounding başarısız: HTTP Error 429: Too Many Requests",
+   "goldman": "değişmedi: https://am.gs.com/en-us/advisors/insights/article/investment-outlook: RuntimeError gemini-3.8-flash: HTTPError HTTP Error 429: Too Many Requests | gemini-3.8-flash: HTTPError HTTP Error 429: Too Many Req",
+   "statestreet": "süre doldu, bir sonraki çalışmaya kaldı",
+   "pimco": "süre doldu, bir sonraki çalışmaya kaldı",
+   "amundi": "süre doldu, bir sonraki çalışmaya kaldı",
+   "capitalgroup": "süre doldu, bir sonraki çalışmaya kaldı",
+   "fidelity": "süre doldu, bir sonraki çalışmaya kaldı",
+   "bny": "süre doldu, bir sonraki çalışmaya kaldı"
   },
   "checked": {
-   "blackrock": "2026-10-13T15:05:12Z",
-   "vanguard": "2026-10-13T15:06:16Z",
-   "jpmorgan": "2026-10-13T15:07:49Z",
-   "goldman": "2026-10-13T15:08:22Z",
+   "blackrock": "2026-10-13T15:16:24Z",
+   "vanguard": "2026-10-13T15:18:59Z",
+   "jpmorgan": "2026-10-13T15:24:29Z",
+   "goldman": "2026-10-13T15:26:25Z",
    "statestreet": "2026-10-13T15:09:41Z",
    "pimco": "2026-10-13T15:09:59Z",
    "amundi": "2026-10-13T15:10:41Z",
@@ -651,6 +680,6 @@
    "fidelity": "2026-10-13T15:12:42Z",
    "bny": "2026-10-13T15:13:09Z"
   },
-  "sec": 584
+  "sec": 719
  }
 }
