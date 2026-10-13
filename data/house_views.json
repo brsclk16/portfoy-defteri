@@ -200,37 +200,36 @@
    "id": "vanguard",
    "n": "Vanguard",
    "brand": "Vanguard",
-   "pub": "10 yıllık getiri tahminleri (Vanguard Capital Markets Model)",
-   "date": "2026-06-30",
-   "type": "birincil",
+   "pub": "Vanguard Capital Markets Model® forecasts",
+   "date": "2026-07-22",
+   "type": "otomatik: kaynak metninden özet",
    "url": "https://corporate.vanguard.com/content/corporatesite/us/en/corp/vemo/vemo-return-forecasts.html",
    "views": {
     "us_eq": [
      -1,
-     "10 yıllık beklenti yıllık %4,2–6,2: değerleme yüksek"
-    ],
-    "europe_eq": [
-     1,
-     "Gelişmiş ülkeler (ABD hariç) %4,5–6,5: ABD'nin üstünde"
-    ],
-    "em_eq": [
-     -1,
-     "Gelişmekte olanlar %2–4: en düşük beklenti"
+     "Valuations increased from already elevated levels, leading to a decline in 10-year expected annualized return ranges."
     ],
     "us_value": [
      1,
-     "ABD içinde en cazip beklenen getiri değer hisselerinde"
+     "Value stocks continue to offer the most attractive expected return profile within U.S. equities."
+    ],
+    "em_eq": [
+     -1,
+     "Expected returns for emerging markets fell from a range of 3.6%–5.6% to a range of 2%–4% as markets became more expensive."
     ]
    },
    "strengths": [
-    "Uzun vadeli, değerlemeye dayalı ve tutarlı yöntem"
+    "Value stocks continue to offer the most attractive expected return profile within U.S. equities."
    ],
    "risks": [
-    "Hisse beklentileri mart 2026'dan bu yana düşürüldü",
-    "10 yıllık tahmin; kısa vadeli zamanlama için tasarlanmadı"
+    "Equity valuations became substantially more stretched.",
+    "Central banks became increasingly focused on inflation risks associated with higher energy prices, resilient growth, and AI-related investment demand.",
+    "Expected returns declined across most international markets due to expensive valuations."
    ],
-   "validUntil": "2026-12-31",
-   "horizon": "10 yıllık tahmin; çeyreklik güncellenir"
+   "validUntil": "2027-01-21",
+   "horizon": "10 yıllık tahmin; çeyreklik güncellenir",
+   "context": null,
+   "auto": true
   },
   {
    "id": "jpmorgan",
@@ -596,5 +595,62 @@
    "validUntil": "2026-08-31",
    "horizon": "aylık görünüm; yaklaşık 3 ay"
   }
- ]
+ ],
+ "history": [
+  {
+   "date": "2026-06-30",
+   "pub": "10 yıllık getiri tahminleri (Vanguard Capital Markets Model)",
+   "views": {
+    "us_eq": [
+     -1,
+     "10 yıllık beklenti yıllık %4,2–6,2: değerleme yüksek"
+    ],
+    "europe_eq": [
+     1,
+     "Gelişmiş ülkeler (ABD hariç) %4,5–6,5: ABD'nin üstünde"
+    ],
+    "em_eq": [
+     -1,
+     "Gelişmekte olanlar %2–4: en düşük beklenti"
+    ],
+    "us_value": [
+     1,
+     "ABD içinde en cazip beklenen getiri değer hisselerinde"
+    ]
+   },
+   "url": "https://corporate.vanguard.com/content/corporatesite/us/en/corp/vemo/vemo-return-forecasts.html",
+   "type": "birincil",
+   "id": "vanguard",
+   "n": "Vanguard",
+   "archivedAt": "2026-10-13"
+  }
+ ],
+ "autoRun": {
+  "at": "2026-10-13T15:13:09Z",
+  "log": {
+   "blackrock": "değişmedi: https://www.blackrock.com/corporate/insights/blackrock-investment-institute/publications/weekly-commentary: RuntimeError gemini-3.8-flash: HTTPError HTTP Error 429: Too Many Requests | gemini-flash-latest: HTTPError HTTP Error 429: Too Many  | https://www.blackrock.com/us/individual/insights/blackrock-investment-institute/weekly-commentary: RuntimeError gemini-3.8-flash: HTTPError HTTP Error 429: Too Many Requests | gemini-flash-latest: HTTPError HTTP Error 429: Too Many  | arama: RuntimeError grounding başarısız: HTTP Error 429: Too Many Requests",
+   "vanguard": "güncellendi → 2026-07-22 (3 görüş)",
+   "jpmorgan": "değişmedi: https://am.jpmorgan.com/us/en/asset-management/adv/insights/portfolio-insights/ltcma/: RuntimeError gemini-3.8-flash: HTTPError HTTP Error 429: Too Many Requests | gemini-flash-latest: HTTPError HTTP Error 429: Too Many  | https://am.jpmorgan.com/jp/en/asset-management/institutional/insights/portfolio-insights/ltcma/executive-summary/: RuntimeError gemini-3.8-flash: HTTPError HTTP Error 429: Too Many Requests | gemini-flash-latest: HTTPError HTTP Error 429: Too Many  | arama: RuntimeError grounding başarısız: HTTP Error 429: Too Many Requests",
+   "goldman": "değişmedi: https://am.gs.com/en-us/advisors/insights/article/investment-outlook: RuntimeError gemini-3.8-flash: HTTPError HTTP Error 429: Too Many Requests | gemini-flash-latest: HTTPError HTTP Error 429: Too Many  | arama: RuntimeError grounding başarısız: HTTP Error 429: Too Many Requests",
+   "statestreet": "değişmedi: https://www.ssga.com/us/en/intermediary/insights/global-market-outlook: tarih geçersiz/eski: 2025-11-30 | arama: RuntimeError grounding başarısız: HTTP Error 429: Too Many Requests",
+   "pimco": "değişmedi: https://www.pimco.com/us/en/insights/cyclical-outlook: HTTPError HTTP Error 404: Not Found | arama: RuntimeError grounding başarısız: HTTP Error 429: Too Many Requests",
+   "amundi": "değişmedi: https://research-center.amundi.com/: RuntimeError gemini-3.8-flash: HTTPError HTTP Error 429: Too Many Requests | gemini-flash-latest: HTTPError HTTP Error 429: Too Many  | arama: RuntimeError grounding başarısız: HTTP Error 429: Too Many Requests",
+   "capitalgroup": "değişmedi: https://www.capitalgroup.com/individual/insights/categories/outlook.html: RuntimeError gemini-3.8-flash: HTTPError HTTP Error 429: Too Many Requests | gemini-flash-latest: HTTPError HTTP Error 429: Too Many  | arama: RuntimeError grounding başarısız: HTTP Error 429: Too Many Requests",
+   "fidelity": "değişmedi: https://institutional.fidelity.com/advisors/insights/topics/market-commentary: RuntimeError gemini-3.8-flash: HTTPError HTTP Error 429: Too Many Requests | gemini-flash-latest: HTTPError HTTP Error 429: Too Many  | arama: RuntimeError grounding başarısız: HTTP Error 429: Too Many Requests",
+   "bny": "değişmedi: https://www.bny.com/assets/investments/imemea/pdfs/emea_fp_checkpoints_oct26.pdf: HTTPError HTTP Error 404: Not Found | https://www.bny.com/assets/investments/imemea/pdfs/emea_fp_checkpoints_sep26.pdf: HTTPError HTTP Error 404: Not Found | https://www.bny.com/assets/investments/imemea/pdfs/emea_fp_checkpoints_aug26.pdf: HTTPError HTTP Error 404: Not Found | https://www.bny.com/assets/investments/imemea/pdfs/emea_fp_checkpoints_july26.pdf: HTTPError HTTP Error 404: Not Found | https://www.bny.com/assets/investments/imemea/pdfs/emea_fp_checkpoints_jul26.pdf: HTTPError HTTP Error 404: Not Found |"
+  },
+  "checked": {
+   "blackrock": "2026-10-13T15:05:12Z",
+   "vanguard": "2026-10-13T15:06:16Z",
+   "jpmorgan": "2026-10-13T15:07:49Z",
+   "goldman": "2026-10-13T15:08:22Z",
+   "statestreet": "2026-10-13T15:09:41Z",
+   "pimco": "2026-10-13T15:09:59Z",
+   "amundi": "2026-10-13T15:10:41Z",
+   "capitalgroup": "2026-10-13T15:11:12Z",
+   "fidelity": "2026-10-13T15:12:42Z",
+   "bny": "2026-10-13T15:13:09Z"
+  },
+  "sec": 584
+ }
 }
