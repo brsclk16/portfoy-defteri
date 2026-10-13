@@ -512,6 +512,8 @@ def main():
     log = rd('ideas_log.json', None) or {'events': []}
     for e in log['events']:
         e.setdefault('v', 1)
+        if e['d'] > dates[i] and e['t'] in px and px[e['t']][i]:  # yarım günle kaydedilmiş öneri: son kapanışa düzelt
+            e.update(d=dates[i], px=round(px[e['t']][i], 4), spy=px['SPY'][i], r={})
     # haftalık liste: cumartesi sabahı (cuma kapanışıyla) ya da --weekly ile yayımlanır, hafta boyunca sabit kalır
     publish = '--weekly' in sys.argv or dt.datetime.utcnow().weekday() == 5
     if publish:
