@@ -88,7 +88,7 @@ def prompt_for(house, themes, text=None):
         f"{house['n']} kurumunun ({house.get('brand','')}) yayımladığı EN SON piyasa görünümünü / varlık dağılımı görüşünü internette ara ve yalnızca bulduğun yayına dayan."
     return f"""{src}
 
-GÖREV: Bu yayından {house['n']} kurumunun yatırım görüşlerini çıkar. Yalnızca açıkça yazan görüşleri al; tahmin etme, genelleme yapma.
+GÖREV: Bu yayından {house['n']} kurumunun yatırım görüşlerini çıkar. TÜM gerekçe, güçlü yan, risk ve bağlam metinlerini TÜRKÇE yaz (kaynak İngilizce olsa bile). Yalnızca açıkça yazan görüşleri al; tahmin etme, genelleme yapma.
 Tema anahtarları (yalnızca bunları kullan; metin bir temaya değinmiyorsa o temayı YAZMA):
 {keys}
 Duruş: 1 = olumlu / ağırlık artır / tercih, 0 = nötr, -1 = olumsuz / ağırlık azalt / temkinli.
@@ -109,6 +109,27 @@ def _chat(url, key, model, user, timeout=60):
     return json.loads(m.group(0))
 
 
+_LAST = [0.0]
+
+
+def _pace(gap=12):
+    """Ücretsiz katmanın dakikalık sınırına takılmamak için çağrılar arasında en az 12 sn."""
+    w = gap - (time.time() - _LAST[0])
+    if w > 0:
+        time.sleep(w)
+    _LAST[0] = time.time()
+
+
+def tr_fix(v):
+    """Model Türkçe yazmadıysa ücretsiz Google Çeviri ile çevir (Türkçe harf yoksa ve İngilizce sözcükler varsa)."""
+    if not v or re.search(r'[çğışöüÇĞİŞÖÜ]', v) or not re.search(r'\b(the|and|of|to|is|are|with|for|in)\b', v, re.I):
+        return v
+    try:
+        return AI.tr(v)
+    except Exception:
+        return v
+
+
 def ask_text(house, themes, text):
     """Hızlı çağrı: her modelde tek deneme, kısa zaman aşımı (uzun bekleme yok)."""
     user = prompt_for(house, themes, text)
@@ -118,13 +139,18 @@ def ask_text(house, themes, text):
         tries.append(('https://models.github.ai/inference/chat/completions', tok, 'openai/gpt-4.1-mini'))
     errs = []
     for url, key, mdl in tries:
-        if left() < 60:
-            break
-        try:
-            return _chat(url, key, mdl, user)
-        except Exception as e:
-            errs.append(f'{mdl}: {type(e).__name__} {str(e)[:80]}')
-            time.sleep(3)
+        for attempt in range(2):
+            if left() < 60:
+                break
+            try:
+                _pace()
+                return _chat(url, key, mdl, user)
+            except Exception as e:
+                errs.append(f'{mdl}: {type(e).__name__} {str(e)[:80]}')
+                if '429' in str(e) and attempt == 0:
+                    time.sleep(35)  # dakikalık sınır: bir kez bekleyip aynı modeli tekrar dene
+                    continue
+                break
     raise RuntimeError(' | '.join(errs) or 'model yok')
 
 
@@ -140,6 +166,7 @@ def ask_grounded(house, themes):
         if left() < 60:
             break
         try:
+            _pace()
             with urllib.request.urlopen(urllib.request.Request(url, data=body, headers={'Content-Type': 'application/json'}), timeout=75) as r:
                 j = json.loads(r.read())
         except Exception as e:
@@ -180,15 +207,20 @@ def valid(res, house, themes):
             views[k] = [int(v[0]), str(v[1])[:200]]
     if not views and not res.get('context'):
         return None, 'görüş yok'
+    views = {k: [v[0], tr_fix(v[1])] for k, v in views.items()}
     return dict(date=dd.isoformat(), views=views, pub=str(res.get('pub') or '')[:200],
-                strengths=[str(x)[:200] for x in (res.get('strengths') or [])][:3], risks=[str(x)[:200] for x in (res.get('risks') or [])][:4],
-                context=(str(res['context'])[:300] if res.get('context') else None)), None
+                strengths=[tr_fix(str(x)[:200]) for x in (res.get('strengths') or [])][:3], risks=[tr_fix(str(x)[:200]) for x in (res.get('risks') or [])][:4],
+                context=(tr_fix(str(res['context'])[:300]) if res.get('context') else None)), None
 
 
 def main():
     D = json.load(open(P, encoding='utf-8'))
     themes = D['themes']
     D.setdefault('history', [])
+    for h in D['houses']:  # önceki çalışmalardan kalan İngilizce metinler de Türkçeye çevrilir
+        h['views'] = {k: [v[0], tr_fix(v[1])] for k, v in (h.get('views') or {}).items()}
+        for f in ('strengths', 'risks'):
+            h[f] = [tr_fix(x) for x in (h.get(f) or [])]
     log = {}
     changed = False
     # en uzun süredir kontrol edilmeyenden başla (süre dolarsa sıradakiler bir sonraki çalışmaya kalır)
