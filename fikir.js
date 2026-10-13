@@ -13,7 +13,8 @@ function fkEvidence(kind){const B=S.ideas&&S.ideas.backtest&&S.ideas.backtest[ki
   const gap=B.cagr-B.cagrEW;const sig=isNum(B.t)&&B.t>=2;
   const neg=isNum(B.t)&&B.t<=-2;
   if(neg)return {B,gap,sig:false,neg,txt:`Dikkat: bu yöntem ${B.from.slice(0,4)}'den beri aynı evrenin eşit ağırlıklı halinin gerisinde kaldı (yılda ${fkSig(gap)} puan, t=${nf(B.t,1)}). Test evreni bugünün şirketlerinden oluştuğu için oynak kazananları kayırıyor ve düşük oynaklık tercihini cezalandırıyor; yine de bu listeyi alım sinyali olarak değil, inceleme listesi olarak gör.`};
-  return {B,gap,sig,txt:sig?`Bu yöntem ${B.from.slice(0,4)}'den beri her ay aynı evrenin eşit ağırlıklı haline göre yılda ${fkSig(gap)} puan fark yarattı (t=${nf(B.t,1)}, ayların %${B.hitMonths}'ında önde).`
+  const post=kind==='stock'&&(S.ideas.methodV||1)>=2?' Ancak bu sürüm test sonuçları görüldükten sonra seçildi ve test evreni (bugünün şirketleri) momentumu kayırıyor; gerçek fark muhtemelen daha küçük, asıl hakem canlı karne.':'';
+  return {B,gap,sig,txt:sig?`Geriye dönük testte bu yöntem ${B.from.slice(0,4)}'den beri aynı evrenin eşit ağırlıklı haline göre yılda ${fkSig(gap)} puan önde (t=${nf(B.t,1)}, ayların %${B.hitMonths}'ında).${post}`
     :`Bu yöntem ${B.from.slice(0,4)}'den beri aynı evrenin eşit ağırlıklı halinden istatistiksel olarak ayırt edilemedi (yılda ${fkSig(gap)} puan, t=${nf(B.t,1)}). Bir inceleme listesi olarak gör, alım sinyali değil.`}}
 function fkWhy(x,kind,of){
   const p=[`puanda ${of} ${kind==='etf'?'ETF':'hisse'} içinde ${x.rank}. sıra`,`12-1 ay momentum ${fkPct(x.mom,0)}`];
@@ -22,6 +23,7 @@ function fkWhy(x,kind,of){
   if(isNum(x.pe)&&x.pe>0)p.push(`F/K ${nf(x.pe,1)}`);
   return p.join(' · ');
 }
+function fkVolChip(x){return isNum(x.vol)&&x.vol>=60?`<span class="chip down" style="font-size:11.5px">çok oynak: yıllık %${nf(x.vol,0)} · küçük pozisyon</span>`:''}
 function fkFit(x){
   if(!isNum(x.corr))return '';
   const c=x.corr;const t=c<0.3?['up','portföyünü belirgin çeşitlendirir']:c<0.5?['up','portföyünü çeşitlendirir']:c<0.75?['n','portföyünle orta düzeyde birlikte hareket eder']:['down','mevcut riskine benzer: aynı yöne bahis'];
@@ -45,7 +47,7 @@ function fkItem(f,full){const x=f.x;const of=x.of;
     ${x.issuer?`<div class="muted" style="font-size:12.5px;margin-top:2px">${esc(x.issuer)} · ${esc(x.basis||'')}</div>`:''}
     <div style="margin-top:4px;font-size:13.5px">${esc(fkWhy(x,f.kind,of))}</div>
     ${fkHV(x)}${fkNews(x)}
-    <div style="margin-top:6px;display:flex;gap:8px;flex-wrap:wrap;align-items:center">${fkFit(x)}${fkInFunds(x)}</div>
+    <div style="margin-top:6px;display:flex;gap:8px;flex-wrap:wrap;align-items:center">${fkVolChip(x)}${fkFit(x)}${fkInFunds(x)}</div>
     <div style="margin-top:8px;display:flex;gap:8px;flex-wrap:wrap"><span class="muted" style="font-size:13px;align-self:center">Portföyüne eklemek ister misin?</span>
       <button class="btn" data-fkw="${esc(x.t)}">İzleme listesine ekle</button><button class="btn" data-fkp="${esc(x.t)}">Portföyüme ekle</button><button class="lnk2" data-fkn="${esc(x.t)}">İlgilenmiyorum</button></div></div>`}
 function ideasCard(){
