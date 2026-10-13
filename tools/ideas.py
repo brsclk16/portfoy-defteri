@@ -432,6 +432,11 @@ def main():
     syms = list(dict.fromkeys(['SPY'] + port + etfs + stocks))
     dates, px = load_prices(syms)
     i = len(dates) - 1
+    # ABD seansı sürerken (UTC 13:30–21:00) son çubuk yarım gündür: elle çalıştırmada son kapanışı kullan
+    nowu = dt.datetime.utcnow()
+    if dates[i] == nowu.date().isoformat() and nowu.hour < 21:
+        i -= 1
+        DIAG['seansIci'] = 'son çubuk yarım gün olduğu için bir önceki kapanış kullanıldı'
     DIAG['fiyat'] = {'sembol': len(px), 'gün': len(dates), 'ilk': dates[0], 'son': dates[i]}
     # portföy yaklaşığı: eşit ağırlıklı günlük getiri
     pr = [daily_rets(px[t], i) for t in port if t in px and px[t][i]]
