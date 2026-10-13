@@ -1,33 +1,32 @@
 {
- "publishedAt": "2026-10-12T06:05:00Z",
- "asOf": "2026-10-08",
- "title": "Bilanço sezonu başlıyor: Çarşamba ASML ve ABD TÜFE, perşembe TSMC",
+ "publishedAt": "2026-10-13T06:00:00Z",
+ "asOf": "2026-10-12",
+ "title": "Çipler yine satıcılı; gözler yarınki ASML bilançosu ve ABD TÜFE'de",
  "sections": [
   {
    "h": "Dün",
    "items": [
-    "Son veri günü 8 Ekim (hafta sonu nedeniyle fiyat verisi güncellenmedi): çipler sert düştü — AMD %-3,90, CRDO %-3,70, SOXX %-3,35, SMH %-2,84.",
-    "Aynı gün S&P 500 %-0,47, Nasdaq 100 %-1,39 kapattı; çip ağırlıklı pozisyonlar endeksin belirgin altında kaldı.",
-    "Günün tek artıda kapanan pozisyonu IAU (%+0,78); COPX %-1,63, VRT %-1,12, XBI %-0,63 geriledi.",
-    "Cuma piyasa toparlandı (S&P 500 %+0,59); Moderna %14 yükselişle XBI'yi destekledi."
+    "12 Ekim'de çip tarafı sert geriledi: CRDO %-7,25 ile günün en kötüsü; SOXX %-2,60, AMD %-2,28, SMH %-2,05, ASML %-1,69.",
+    "S&P 500 (SPY) neredeyse yatay kapattı (%-0,06); çip ağırlıklı pozisyonlar endeksin belirgin altında kaldı.",
+    "Artıda kapanan tek pozisyon AGNG (%+0,57); XBI %-1,54, DELL %-1,59, VRT %-1,41 düştü, IAU %-0,67 ve SLV %-0,78 hafif geriledi.",
+    "Baskının arka planında Çinli CXMT'nin bellek atılımı, Microsoft'un kendi Maia çipine yönelmesi ve Intel/Broadcom CEO'larının finansman uyarısı vardı."
    ]
   },
   {
    "h": "Bugün",
    "items": [
-    "Bugün ve yarın portföyü doğrudan ilgilendiren takvim olayı yok.",
-    "Çarşamba 08:00 TRT ASML Q3 bilançosu (tahmini saat): ASML, SMH ve SOXX için 2027 sipariş görünürlüğü belirleyici.",
-    "Çarşamba 15:30 TRT ABD TÜFE (Eylül): faiz beklentileri üzerinden IAU, SLV ve XBI'yi etkileyebilir.",
-    "Perşembe 09:00 TRT TSMC bilançosu: SMH'deki en büyük ağırlıklardan biri, yapay zekâ talebi için öncü gösterge."
+    "Yarın (14 Ekim) 08:00 TRT: ASML 3. çeyrek bilançosu (beklenen HBK ~10,82). Doğrudan ASML pozisyonunu ve SMH/SOXX'i ilgilendiriyor.",
+    "Yarın 15:30 TRT: ABD Eylül TÜFE (yıllık beklenti %3,6, önceki %3,4). Faiz beklentileri üzerinden XBI ve büyüme hisselerine duyarlı.",
+    "Perşembe 09:00 TRT: TSMC bilançosu; SMH ve SOXX'in en büyük ağırlıklarından biri olduğu için çip fonlarına yön verebilir."
    ]
   },
   {
    "h": "Teknik durum",
    "items": [
-    "Alım bölgesinde: COPX $85,75 (bölge $83,17–86,13, stop $80,39), IAU $78,87 ($78,65–79,13, stop $76,22).",
-    "Alım bölgesinde: XBI $153,77 ($152,49–153,41, stop $140,84), AGNG $36,22 ($35,76–36,16, stop $34,79).",
-    "Aşırı ısınmış: AMD $608,10 (bölge $494,87–507,07, RSI 58) ve DELL $586,06 (bölge $496,74–522,23, RSI 62).",
-    "Stop seviyesine %3'ten yakın enstrüman yok; en yakını IAU (stop'a ~%3,4)."
+    "Alım bölgesinde: ASML $1.750,24 (bölge $1.713,50–$1.757,33, stop $1.591,77), SMH $590,99 ($567,60–$592,73, stop $531,98), SOXX $544,85 ($513,54–$542,80, stop $490,49).",
+    "Alım bölgesinde: COPX $85,35 ($83,24–$84,93, stop $80,43), AGNG $36,42 ($35,76–$36,56, stop $34,79).",
+    "Aşırı ısınmış: AMD $594,24 (bölge $549,51–$570,85) ve DELL $576,76 (bölge $496,74–$522,23).",
+    "Hiçbir enstrüman stop seviyesine %3'ten yakın değil; en yakını AGNG (%4,5 mesafe)."
    ]
   }
  ]
