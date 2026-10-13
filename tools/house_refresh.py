@@ -22,6 +22,13 @@ DRY = '--dry' in sys.argv
 ONLY = set(sys.argv[sys.argv.index('--only') + 1].split(',')) if '--only' in sys.argv else None
 UA = 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0 Safari/537.36'
 GEMINI = os.environ.get('GEMINI_API_KEY', '').strip()
+T0 = time.time()
+BUDGET = 13 * 60  # saniye: süre dolunca kalan kurumlar bir sonraki çalışmaya kalır, yapılanlar her durumda kaydedilir
+SYS = 'Sen titiz bir finans analistisin. Yalnızca verilen metinde açıkça yazanı yapılandırırsın; uydurmazsın. Yalnızca JSON döndürürsün.'
+
+
+def left():
+    return BUDGET - (time.time() - T0)
 TTL = {'blackrock': 92, 'vanguard': 183, 'jpmorgan': 365, 'goldman': 365, 'statestreet': 183, 'pimco': 183, 'amundi': 365,
        'capitalgroup': 365, 'fidelity': 92, 'bny': 62}
 MON = ['jan', 'feb', 'mar', 'apr', 'may', 'june', 'july', 'aug', 'sep', 'oct', 'nov', 'dec']
@@ -55,7 +62,7 @@ def feeds(hid):
 
 def fetch_text(url):
     req = urllib.request.Request(url, headers={'User-Agent': UA, 'Accept': 'text/html,application/pdf;q=0.9,*/*;q=0.8'})
-    with urllib.request.urlopen(req, timeout=40) as r:
+    with urllib.request.urlopen(req, timeout=20) as r:
         b = r.read()
         ct = r.headers.get('Content-Type', '')
     if b[:4] == b'%PDF' or 'pdf' in ct:
@@ -91,9 +98,34 @@ YALNIZCA şu JSON'u döndür:
 "strengths":["Türkçe, en fazla 3"],"risks":["Türkçe, en fazla 4"],"context":"Türkçe tek cümle ya da null"}}"""
 
 
+def _chat(url, key, model, user, timeout=60):
+    body = json.dumps({'model': model, 'temperature': 0.1, 'max_tokens': 2000,
+                       'messages': [{'role': 'system', 'content': SYS}, {'role': 'user', 'content': user}]}).encode()
+    req = urllib.request.Request(url, data=body, headers={'Authorization': f'Bearer {key}', 'Content-Type': 'application/json', 'Accept': 'application/json'}, method='POST')
+    with urllib.request.urlopen(req, timeout=timeout) as r:
+        j = json.loads(r.read())
+    txt = j['choices'][0]['message']['content']
+    m = re.search(r'\{.*\}', txt, re.S)
+    return json.loads(m.group(0))
+
+
 def ask_text(house, themes, text):
-    AI.SYSTEM = 'Sen titiz bir finans analistisin. Yalnızca verilen metinde açıkça yazanı yapılandırırsın; uydurmazsın. Yalnızca JSON döndürürsün.'
-    return AI.ask(AI.MODELS[0], prompt_for(house, themes, text))
+    """Hızlı çağrı: her modelde tek deneme, kısa zaman aşımı (uzun bekleme yok)."""
+    user = prompt_for(house, themes, text)
+    tries = [('https://generativelanguage.googleapis.com/v1beta/openai/chat/completions', GEMINI, m) for m in AI.GEMINI_MODELS] if GEMINI else []
+    tok = os.environ.get('GITHUB_TOKEN', '').strip()
+    if tok:
+        tries.append(('https://models.github.ai/inference/chat/completions', tok, 'openai/gpt-4.1-mini'))
+    errs = []
+    for url, key, mdl in tries:
+        if left() < 60:
+            break
+        try:
+            return _chat(url, key, mdl, user)
+        except Exception as e:
+            errs.append(f'{mdl}: {type(e).__name__} {str(e)[:80]}')
+            time.sleep(3)
+    raise RuntimeError(' | '.join(errs) or 'model yok')
 
 
 def ask_grounded(house, themes):
@@ -105,8 +137,10 @@ def ask_grounded(house, themes):
         body = json.dumps({'contents': [{'parts': [{'text': prompt_for(house, themes)}]}], 'tools': [{'google_search': {}}],
                            'generationConfig': {'temperature': 0.1}}).encode()
         url = f'https://generativelanguage.googleapis.com/v1beta/models/{mdl}:generateContent?key={urllib.parse.quote(GEMINI)}'
+        if left() < 60:
+            break
         try:
-            with urllib.request.urlopen(urllib.request.Request(url, data=body, headers={'Content-Type': 'application/json'}), timeout=120) as r:
+            with urllib.request.urlopen(urllib.request.Request(url, data=body, headers={'Content-Type': 'application/json'}), timeout=75) as r:
                 j = json.loads(r.read())
         except Exception as e:
             last = e
@@ -157,11 +191,21 @@ def main():
     D.setdefault('history', [])
     log = {}
     changed = False
-    for h in D['houses']:
+    # en uzun süredir kontrol edilmeyenden başla (süre dolarsa sıradakiler bir sonraki çalışmaya kalır)
+    last = (D.get('autoRun') or {}).get('checked', {})
+    order = sorted(D['houses'], key=lambda h: last.get(h['id'], ''))
+    checked = dict(last)
+    for h in order:
         if ONLY and h['id'] not in ONLY:
             continue
+        if left() < 120:
+            log[h['id']] = 'süre doldu, bir sonraki çalışmaya kaldı'
+            continue
+        t1 = time.time()
         got, why = None, []
         for url in feeds(h['id']):
+            if left() < 90:
+                break
             try:
                 txt = fetch_text(url)
                 if len(txt) < 800:
@@ -176,7 +220,7 @@ def main():
             except Exception as e:
                 why.append(f'{url}: {type(e).__name__} {str(e)[:120]}')
             time.sleep(2)
-        if not got:
+        if not got and left() > 90:
             try:
                 res = ask_grounded(h, themes)
                 v, err = valid(res, h, themes)
@@ -197,8 +241,10 @@ def main():
             log[h['id']] = f'güncellendi → {h["date"]} ({len(h["views"])} görüş)'
         else:
             log[h['id']] = 'değişmedi: ' + ' | '.join(why)[:600]
+        checked[h['id']] = dt.datetime.utcnow().strftime('%Y-%m-%dT%H:%M:%SZ')
+        print(f"{h['id']}: {log[h['id']][:300]} ({round(time.time() - t1)} sn)", flush=True)
     D['history'] = D['history'][-200:]
-    D['autoRun'] = {'at': dt.datetime.utcnow().strftime('%Y-%m-%dT%H:%M:%SZ'), 'log': log}
+    D['autoRun'] = {'at': dt.datetime.utcnow().strftime('%Y-%m-%dT%H:%M:%SZ'), 'log': log, 'checked': checked, 'sec': round(time.time() - T0)}
     if changed:
         D['updatedAt'] = TODAY.isoformat()
     if not DRY:
