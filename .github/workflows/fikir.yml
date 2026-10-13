@@ -1,0 +1,29 @@
+name: Günün fikirleri (hisse + ETF, kanıta dayalı)
+on:
+  schedule:
+    - cron: '15 4 * * 2-6'   # TR 07:15 — önceki gün kapanışıyla; Fikir tarayıcı evreni güncellendikten sonra
+  workflow_dispatch:
+permissions:
+  contents: write
+concurrency:
+  group: fikir   # yalnızca ideas*.json yazar
+  cancel-in-progress: false
+jobs:
+  fikir:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with: {python-version: '3.12'}
+      - name: Puanla, test et, kaydet
+        run: python3 -u tools/ideas.py
+      - name: Yayınla
+        run: |
+          git config user.name "Portföy veri botu"
+          git config user.email "portfoy-bot@users.noreply.github.com"
+          git add data/ideas.json data/ideas_log.json data/_diag/ideas.json
+          git diff --cached --quiet && { echo "değişiklik yok"; exit 0; }
+          git commit -m "Günün fikirleri $(date -u +'%F')"
+          for i in 1 2 3 4 5; do git pull --rebase -X theirs origin main && git push origin HEAD:main && exit 0; sleep $((i*7)); done
+          exit 1

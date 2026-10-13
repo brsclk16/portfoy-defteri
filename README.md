@@ -23,5 +23,5 @@ Pozisyonlar (alış/satış) ve hedef ağırlıklar **repoda tutulmaz**; Supabas
 GitHub Actions'ta aynı `concurrency` grubunda en fazla bir bekleyen iş durur; yenisi gelince bekleyen iptal edilir. Eskiden 9 iş akışı tek `repo-yazma`
 grubunu paylaşıyordu ve veri toplama çalışmaları sessizce kayboluyordu. Gruplar artık gerçekte yazılan dosyalara göre (git geçmişinden çıkarıldı):
 - `veri-temel`: `icgoru.yml`, `talep.yml`, `evren.yml` — ortak dosyalar: `analysts`, `valuation`, `earnhist`, `dividends`, `inst13f`, `insider`, `fundhold`, `peers`, `universe`
-- kendi kuyruğunda: `fiyat`, `alarm`, `veri`, `uzun`, `haber`, `piyasa`, `anahtar`, `kissadan`, `sinyal`, `olay` — her biri yalnızca kendi dosyalarını yazar
+- kendi kuyruğunda: `fiyat`, `alarm`, `veri`, `uzun`, `haber`, `piyasa`, `anahtar`, `kissadan`, `sinyal`, `olay`, `fikir` — her biri yalnızca kendi dosyalarını yazar
 Yeni bir iş akışı başka bir iş akışının yazdığı dosyayı yazacaksa aynı gruba konmalı (itme döngüsündeki `-X theirs`, aynı dosyada eşzamanlı güncellemeyi ezer).
