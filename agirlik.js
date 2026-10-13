@@ -80,6 +80,15 @@ function agToday(D,cur){
   const pv=w=>Math.sqrt(w.reduce((a,x,p)=>a+x*C[p].reduce((s,c,q)=>s+c*w[q],0),0)*252)*100;
   return {idx,C,W,vol,rc:Object.fromEntries(AG_M.map(([k])=>[k,agRC(C,W[k])])),pvol:Object.fromEntries(AG_M.map(([k])=>[k,pv(W[k])])),asOf:D.dates[i]};
 }
+/* ---------- tema risk bütçesi ---------- */
+function themeRiskMax(){const v=+(S.settings&&S.settings.themeRiskMax);return v>0&&v<=100?v:60}
+// gerçek pozisyonlar varsa tema bazında risk payları (riskShares: son 1 yılın kovaryansı)
+function themeRiskNow(){const P=positions();if(!(P.total>0))return null;const w={};P.list.forEach(m=>{if(m.value>0)w[m.t]=m.w});
+  const R=typeof riskShares==='function'?riskShares(w):null;return R?{th:R.th,w,vol:R.vol}:null}
+// Telegram için uzak dosyaya yazılan anlık görüntü (ağırlıklar o günün fiyatlarıyla; alarm işi fiyat değişimiyle günceller)
+function themeRiskPayload(){const P=positions();if(!(P.total>0)||!(S.settings&&S.settings.themeRiskOn))return null;
+  const w={},px={},th={};P.list.forEach(m=>{if(m.value>0){w[m.t]=+m.w.toFixed(3);px[m.t]=quote(m.t).price;th[m.t]=themeOf(m.t).name}});
+  return {limit:themeRiskMax(),asOf:new Date().toISOString().slice(0,10),w,px,th}}
 function agPct(v,d=1){return isNum(v)?`${v<0?'−':''}%${nf(Math.abs(v),d)}`:'—'}
 function viewAgirlik(){
   const D=agData();
@@ -107,7 +116,12 @@ function viewAgirlik(){
     ${T.idx.map((j,p)=>{const t=D.ts[j];const w=T.W.cur[p]*100,rc=T.rc.cur[p];return `<tr><td><b>${esc(typeof dispT==='function'?dispT(t):t)}</b> <span class="muted" style="font-size:12px">${esc(thW(t))}</span></td><td class="r num">%${nf(T.vol[p],0)}</td><td class="r num">%${nf(w,1)}</td><td class="r num ${rc>w*1.4&&rc-w>3?'down':''}">%${nf(rc,1)}</td>${AG_M.slice(1).map(([k])=>`<td class="r num">%${nf(T.W[k][p]*100,1)}</td>`).join('')}</tr>`}).join('')}
     <tr><td class="muted">Portföy oynaklığı</td><td></td><td class="r num">%${nf(T.pvol.cur,0)}</td><td></td>${AG_M.slice(1).map(([k])=>`<td class="r num">%${nf(T.pvol[k],0)}</td>`).join('')}</tr>
   </tbody></table></div>
-  ${themeRisk.length?`<p style="margin:12px 0 0">Mevcut portföyde riskin dağılımı: ${themeRisk.map(([n,v])=>`<b>${esc(n)}</b> %${nf(v,0)}`).join(' · ')}</p>`:''}
+  ${themeRisk.length?`<p style="margin:12px 0 0">Mevcut portföyde riskin dağılımı: ${themeRisk.map(([n,v])=>`<b class="${v>themeRiskMax()?'down':''}">${esc(n)}</b> %${nf(v,0)}`).join(' · ')}</p>`:''}
+  <div style="display:flex;gap:10px;align-items:center;flex-wrap:wrap;margin-top:10px;font-size:14px">Tema risk sınırı
+    <input id="agTRM" type="number" min="20" max="100" step="5" value="${themeRiskMax()}" style="width:80px"> %
+    <label class="muted" style="display:inline-flex;gap:6px;align-items:center"><input id="agTRT" type="checkbox" ${S.settings&&S.settings.themeRiskOn?'checked':''} style="width:auto">aşılınca Telegram'a bildir</label>
+    <button class="btn" id="agTRS">Kaydet</button></div>
+  <p class="muted" style="font-size:12px;margin:6px 0 0">Bir temanın portföy riskindeki payı bu sınırı geçerse işlem öncesi kontrol ve "Bugün ne yapmalıyım" uyarır. Telegram için Ayarlar'da GitHub anahtarı gerekir; gerçek pozisyonların ağırlıkları uzak alarm dosyasına yazılır.</p>
   <div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:14px">${AG_M.slice(1).map(([k,l])=>`<button class="btn" data-agset="${k}">${l} ağırlıklarını hedef yap</button>`).join('')}</div>
   <p class="muted" style="font-size:12px;margin:8px 0 0">Hedefler Ayarlar'daki hedef ağırlıkların yerine geçer; Dengeleme sayfası alım/satım tutarlarını buna göre hesaplar. Kırmızı: riskteki payı ağırlığından belirgin büyük.</p></section>`:''}
   <section class="card sec"><h3>Nasıl okunur?</h3><div class="note" style="line-height:1.65">
@@ -133,6 +147,10 @@ function afterAgirlik(){
   if(C&&el&&typeof lineChart==='function'){const ser=AG_M.filter(([k])=>C.B[k].curve.length).map(([k,l,c])=>({name:l,color:c,pts:C.B[k].curve.filter((p,i)=>i%3===0||i===C.B[k].curve.length-1).map(p=>[p[0],Math.log10(p[1]*100)])}));
     // logaritmik ölçek: 15 yıllık birikimde ilk yıllar da okunabilsin; eksen etiketleri gerçek değeri gösterir (100 ile başlar)
     try{lineChart(el,ser,{fmt:(v,ax)=>nf(Math.pow(10,v),0),xfmt:d=>d.slice(0,4)})}catch(e){console.error(e)}}
+  const trs=$('#agTRS');if(trs)trs.onclick=async()=>{const v=+$('#agTRM').value;if(!(v>=20&&v<=100)){toast('Sınır %20–%100 arası olmalı');return}
+    S.settings.themeRiskMax=v;S.settings.themeRiskOn=$('#agTRT').checked;await saveSettings();
+    let msg='Tema risk sınırı kaydedildi';if(S.settings.themeRiskOn){if(!(S.settings.ghToken||'').trim())msg+=' · Telegram için Ayarlar\'a GitHub anahtarı gir';else if(typeof syncRemoteAlarms==='function'){const ok=await syncRemoteAlarms();msg+=ok?' · Telegram izlemesi açık':' · uzak dosya yazılamadı'}}
+    toast(msg);S.agCache=null;render(false)};
   $$('[data-agset]').forEach(b=>b.onclick=async()=>{const k=b.dataset.agset;const T=C&&C.T;if(!T)return;const D=agData();
     const tg={};T.idx.forEach((j,p)=>{tg[D.ts[j]]=Math.round(T.W[k][p]*1000)/10});
     const lbl=(AG_M.find(m=>m[0]===k)||[])[1];

@@ -54,6 +54,24 @@ for(const T of (alarms.trails||[])){const a=ctx.candles?ctx.candles(T.t):[];if(!
 for(const R of (alarms.rules||[])){let E=null;try{E=ctx.ruleEval(R)}catch(e){console.error('kural hatası',R.id,e.message)}if(!E)continue;
   if(E.ok&&st.rules[R.id]!==true)msgs.push({lvl:2,t:R.t,txt:'🎯 '+ctx.ruleText(R,E)});st.rules[R.id]=E.ok;ruleStat.push({t:d(R.t),name:R.name,ok:E.ok})}
 Object.keys(st.rules).forEach(k=>{if(!(alarms.rules||[]).some(R=>R.id===k))delete st.rules[k]});
+// Tema risk bütçesi: site, kaydettiği günün ağırlık ve fiyatlarını yazar (alarms.json → themeRisk); burada fiyat değişimiyle güncellenir.
+// Risk payı = w_i·cov(r_i, r_p)/var(r_p), son 252 gün. Sınırı geçince bir kez uyarır; sınırın 5 puan altına inince sıfırlanır.
+{const TR=alarms.themeRisk;st.themeRisk=st.themeRisk||{};
+ if(TR&&TR.limit>0&&TR.w&&Object.keys(TR.w).length){
+  const ts=Object.keys(TR.w).filter(t=>(S.hist[t]||[]).length>200&&TR.px&&TR.px[t]>0);
+  const w={};ts.forEach(t=>{const p=px(t);w[t]=TR.w[t]*((p>0?p:TR.px[t])/TR.px[t])});const sw=ts.reduce((a,t)=>a+w[t],0);
+  if(sw>0&&ts.length>1){
+    const maps=Object.fromEntries(ts.map(t=>[t,new Map(S.hist[t])]));
+    const days=(S.hist[ts[0]]||[]).map(r=>r[0]).filter(d=>ts.every(t=>maps[t].has(d))).slice(-253);
+    const R={};ts.forEach(t=>{R[t]=[];for(let k=1;k<days.length;k++)R[t].push(maps[t].get(days[k])/maps[t].get(days[k-1])-1)});
+    const n=days.length-1;const rp=[];for(let k=0;k<n;k++)rp.push(ts.reduce((a,t)=>a+w[t]/sw*R[t][k],0));
+    const mean=a=>a.reduce((x,y)=>x+y,0)/a.length;const mp=mean(rp);const vp=rp.reduce((a,x)=>a+(x-mp)**2,0)/(n-1);
+    const th={};ts.forEach(t=>{const mt=mean(R[t]);let c=0;for(let k=0;k<n;k++)c+=(R[t][k]-mt)*(rp[k]-mp);c/=(n-1);const nm=(TR.th&&TR.th[t])||'Diğer';th[nm]=(th[nm]||0)+(vp>0?w[t]/sw*c/vp*100:0)});
+    for(const [nm,v] of Object.entries(th)){
+      if(v>TR.limit&&st.themeRisk[nm]!==true){st.themeRisk[nm]=true;msgs.push({lvl:2,t:nm,txt:`🎚️ ${nm} portföy riskinin %${nf(v,0)}'ini taşıyor (sınır %${nf(TR.limit,0)}). Yeni alımı başka temaya yönelt ya da Ağırlık önerisine bak.`})}
+      else if(v<TR.limit-5&&st.themeRisk[nm])st.themeRisk[nm]=false}
+    if(SUM)ruleStat.push({t:'tema',name:'Tema risk payları',ok:Object.fromEntries(Object.entries(th).map(([k,v])=>[k,Math.round(v)]))});
+  }}}
 if(!LIVE)st.updatedAt=new Date().toISOString();if(!DRY)fs.writeFileSync(D('alert_state.json'),JSON.stringify(st,null,1)+'\n');
 const out={asOf:S.prices.asOf,messages:msgs};
 if(SUM){const q=t=>S.prices.quotes[t]||{};

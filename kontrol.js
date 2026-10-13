@@ -72,7 +72,7 @@ function pretradeHTML(lot){
   const o=pretradeData(lot);const tl=v=>isNum(v)?(v<0?'−':'')+'₺'+nf(Math.abs(v),0):'—';const pl=o.plan;const flags=[];
   if(o.buy&&pl){if(o.zonePos==='üstünde'&&o.zoneGap>3)flags.push(['warn',`Fiyat alım bölgesinin %${nf(o.zoneGap,1)} üstünde`]);if(o.rrAt!=null&&o.rrAt<1)flags.push(['warn',`Bu fiyattan TP1'e göre risk/getiri 1:${nf(o.rrAt,1)}`]);if(pl.state==='Destek kırıldı')flags.push(['down','Teknik plan: destek kırılmış']);if(pl.state==='Aşırı ısınmış')flags.push(['warn','Teknik plan: aşırı ısınmış']);if(o.zonePos==='içinde')flags.push(['up','Fiyat alım bölgesinde'])}
   if(o.buy&&o.target!=null&&o.wt1>+o.target+5)flags.push(['warn',`Hedef ağırlığı (%${nf(+o.target,0)}) %${nf(o.wt1-o.target,1)} puan aşacak`]);
-  if(o.r1&&o.r1.th[o.theme]>60&&o.buy)flags.push(['warn',`${o.theme} risk payı %${nf(o.r1.th[o.theme],0)}'e çıkıyor`]);
+  {const lim=typeof themeRiskMax==='function'?themeRiskMax():60;if(o.r1&&o.r1.th[o.theme]>lim&&o.buy)flags.push(['warn',`${o.theme} risk payı %${nf(o.r1.th[o.theme],0)}'e çıkıyor (sınır %${nf(lim,0)})`])}
   o.earn.forEach(e=>flags.push(['warn',`${e.t===o.t?'Bilanço':e.t+' bilançosu'} ${new Date(e.date).toLocaleDateString('tr-TR',{day:'numeric',month:'short'})}${e.st?` · tipik hareket ±%${nf(e.st.avgAbs,1)}`:''}`]));
   if(!o.buy&&o.tax&&o.tax.parts.some(p=>p.months>0&&p.months<=3))flags.push(['warn','Bazı lotlar Yİ-ÜFE %10 eşiğine 3 aydan az uzakta']);
   const row=(l,a,b,c)=>`<div class="pt-r"><span>${l}</span><span class="num">${a}</span>${b!==undefined?`<span class="muted">→</span><span class="num ${c||''}">${b}</span>`:''}</div>`;

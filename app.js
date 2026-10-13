@@ -277,7 +277,7 @@ async function cloudSave(key,value){
     await supa('/rest/v1/user_settings','POST',{user_id:uid,key,value});S.cloudOK=true;return true;
   }catch(e){S.cloudOK=false;S.cloudErr=e.message;toast('Buluta kaydedilemedi, yerelde tutuldu');return false}
 }
-async function saveLots(){lsSet('pd_lots',JSON.stringify(S.lots));await cloudSave('portfoy_lots',S.lots)}
+async function saveLots(){lsSet('pd_lots',JSON.stringify(S.lots));await cloudSave('portfoy_lots',S.lots);if(S.settings&&S.settings.themeRiskOn&&(S.settings.ghToken||'').trim()&&typeof syncRemoteAlarms==='function')syncRemoteAlarms().catch(()=>{})}
 async function saveSettings(){lsSet('pd_settings',JSON.stringify(S.settings));await cloudSave('portfoy_settings',S.settings)}
 
 /* ---------- live data (tarayıcıdan, kullanıcının kendi anahtarıyla) ---------- */

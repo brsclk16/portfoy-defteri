@@ -31,6 +31,9 @@ function todayItems(){const I=[];const add=(score,ic,title,why,href,key)=>I.push
     Object.entries(S.events.tickers).forEach(([t,T])=>{const ev=((T.earn||{}).events||[]).slice(-1)[0];if(!ev||ev.b!=='bn'||!d5||ev.d<d5)return;
       const ex=bgSafe(()=>exposureTo(t),{usd:0});const sh=real&&P.total>0?ex.usd/P.total*100:(T.direct?5:(T.in||[]).length?1:0);if(sh<1)return;
       add(64,'🧊',`${t} bilançoya sert düştü: dip alımı için acele etme`,`Tepki SPY'a göre ${pct(ev.ex,1)} (${trDate(ev.d+'T12:00:00Z',{day:'numeric',month:'short'})}). ${S.events.pool.tickers} şirketin ${BN.n} büyük olumsuz tepkisinde düşüş ilk hafta sürme eğiliminde: rastgele güne göre ${typeof skSigned==='function'?skSigned(BN.vsBase):nf(BN.vsBase,1)} puan. ${real?`Portföyün %${nf(sh,1)}'i maruz.`:''}`,`#/t/${T.direct?t:((T.in||[])[0]||{}).t||t}/plan`,'bn|'+t)})}
+  // 3c) tema risk bütçesi aşıldı (gerçek pozisyonlar)
+  if(real&&typeof themeRiskNow==='function'){const TR=bgSafe(()=>themeRiskNow());const lim=themeRiskMax();
+    if(TR)Object.entries(TR.th).filter(([,v])=>v>lim).forEach(([n,v])=>add(66+Math.min(10,(v-lim)/2),'🎚️',`${n} riskin %${nf(v,0)}'ini taşıyor (sınır %${nf(lim,0)})`,`Ağırlığı %${nf(Object.entries(TR.w).filter(([t])=>themeOf(t).name===n).reduce((s,[,x])=>s+x,0),0)} ama portföy dalgalanmasının %${nf(v,0)}'i buradan geliyor. Yeni alımı başka temaya yönelt ya da Ağırlık önerisi sayfasına bak.`,'#/analiz/agirlik','trisk|'+n))}
   // 4) hedef ağırlık sapması
   bgSafe(()=>driftAlerts(),[]).forEach(a=>{const m=a.txt.match(/([+-]?\d+[.,]?\d*) puan/);const v=m?Math.abs(parseFloat(m[1].replace(',','.'))):5;add(52+Math.min(15,v),'⚖️','Hedef ağırlıktan sapma',a.txt,a.href,'drift|'+a.txt)});
   // 5) kırmızı bayraklar (portföydeki hisseler, sadece kırmızılar)
