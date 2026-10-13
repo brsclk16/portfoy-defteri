@@ -1,0 +1,41 @@
+name: Büyük yöneticilerin görünümleri (otomatik güncelleme, ücretsiz model)
+on:
+  schedule:
+    - cron: '20 3 * * 5'   # her cuma TR 06:20 — cumartesi sabahı yayımlanan haftalık listeden önce
+  workflow_dispatch:
+    inputs:
+      only:
+        description: 'Yalnızca bu kurumlar (virgülle, ör. blackrock,bny); boşsa hepsi'
+        required: false
+permissions:
+  contents: write
+  models: read
+concurrency:
+  group: kurum   # yalnızca data/house_views.json yazar
+  cancel-in-progress: false
+jobs:
+  guncelle:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with: {python-version: '3.12'}
+      - run: pip install -q pypdf
+      - name: Görünümleri çek ve özetle
+        env:
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          AI_API_URL: ${{ secrets.AI_API_URL }}
+          AI_API_KEY: ${{ secrets.AI_API_KEY }}
+          AI_MODEL: ${{ secrets.AI_MODEL }}
+        run: python3 -u tools/house_refresh.py ${{ github.event.inputs.only && format('--only {0}', github.event.inputs.only) || '' }}
+      - name: Yayınla
+        run: |
+          git config user.name "Portföy veri botu"
+          git config user.email "portfoy-bot@users.noreply.github.com"
+          git add data/house_views.json
+          git diff --cached --quiet && { echo "değişiklik yok"; exit 0; }
+          git commit -m "Kurum görünümleri $(date -u +'%F')"
+          for i in 1 2 3 4 5; do git pull --rebase -X theirs origin main && git push origin HEAD:main && exit 0; sleep $((i*7)); done
+          exit 1

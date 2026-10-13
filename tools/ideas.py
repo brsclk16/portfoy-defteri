@@ -26,6 +26,7 @@ NOW = time.time()
 H = [5, 21, 63]
 COST = 0.001
 TOPN = {'stock': 10, 'etf': 5}
+PERSIST_DAYS, PERSIST_TOP, PERSIST_MIN = 5, 15, 3
 W_MOM, W_VOL = 1.0, 0.0
 METHOD_V = 2
 METHOD_LOG = [
@@ -120,38 +121,50 @@ def stock_themes(u):
 
 # ------------------------------------------------------------------ büyük yöneticiler
 def house_layer(HV, dates, px, i):
-    """Tema başına görüş özeti + her görüşün yayın tarihinden bu yana karnesi (tema ETF'si − karşılaştırma)."""
+    """Tema başına görüş özeti (yalnızca güncel ve ufku dolmamış görüşler) + kurum karnesi.
+    Karne: güncel görüşler bugüne kadar, arşivlenmiş eski görüşler arşivlendikleri güne kadar puanlanır (tema ETF'si − karşılaştırma)."""
     if not HV:
         return {}, {}
     T = HV.get('themes', {})
     today = dt.date.fromisoformat(dates[i])
-    idx = {d: k for k, d in enumerate(dates)}
     def k_on(d):
         for k in range(len(dates)):
             if dates[k] >= d:
                 return k
         return None
-    cons, card = {}, {}
-    for h in HV.get('houses', []):
-        age = (today - dt.date.fromisoformat(h['date'])).days
-        stale = dates[i] > h.get('validUntil', '9999')  # ufku geçmiş görüş uzlaşıya katılmaz
-        k0 = k_on(h['date'])
-        hits, n = 0, 0
-        rows = []
-        for th, (st, why) in (h.get('views') or {}).items():
+    def score_rows(views, k0, k1):
+        rows, hits, n = [], 0, 0
+        for th, (st, why) in (views or {}).items():
             meta = T.get(th) or {}
-            c = cons.setdefault(th, {'n': meta.get('n', th), 'pos': [], 'neg': [], 'neu': []})
-            (c['pos'] if st > 0 else c['neg'] if st < 0 else c['neu']).append({'h': h['n'], 'id': h['id'], 'date': h['date'], 'stale': stale, 'why': why})
             e, b = meta.get('etf'), meta.get('bench')
             res = None
-            if k0 is not None and e in px and b in px and px[e][k0] and px[e][i] and px[b][k0] and px[b][i] and i - k0 >= 21:
-                ex = (px[e][i] / px[e][k0] - (px[b][i] / px[b][k0])) * 100
+            if k0 is not None and k1 is not None and e in px and b in px and px[e][k0] and px[e][k1] and px[b][k0] and px[b][k1] and k1 - k0 >= 21:
+                ex = (px[e][k1] / px[e][k0] - (px[b][k1] / px[b][k0])) * 100
                 res = round(ex, 1)
                 if st != 0:
                     n += 1
                     hits += (ex > 0) == (st > 0)
             rows.append({'th': th, 'st': st, 'ex': res, 'etf': e, 'bench': b})
-        card[h['id']] = {'n': h['n'], 'date': h['date'], 'age': age, 'stale': stale, 'validUntil': h.get('validUntil'), 'horizon': h.get('horizon'), 'hits': hits, 'calls': n, 'rows': rows}
+        return rows, hits, n
+    cons, card = {}, {}
+    for h in HV.get('houses', []):
+        age = (today - dt.date.fromisoformat(h['date'])).days
+        stale = dates[i] > h.get('validUntil', '9999')  # ufku geçmiş görüş uzlaşıya katılmaz
+        for th, (st, why) in (h.get('views') or {}).items():
+            c = cons.setdefault(th, {'n': (T.get(th) or {}).get('n', th), 'pos': [], 'neg': [], 'neu': []})
+            (c['pos'] if st > 0 else c['neg'] if st < 0 else c['neu']).append({'h': h['n'], 'id': h['id'], 'date': h['date'], 'stale': stale, 'why': why})
+        rows, hits, n = score_rows(h.get('views'), k_on(h['date']), i)
+        card[h['id']] = {'n': h['n'], 'date': h['date'], 'age': age, 'stale': stale, 'validUntil': h.get('validUntil'), 'horizon': h.get('horizon'),
+                         'hits': hits, 'calls': n, 'rows': rows, 'past': []}
+    for old in HV.get('history', []):
+        c = card.get(old.get('id'))
+        if not c:
+            continue
+        k1 = k_on(old.get('archivedAt') or dates[i])
+        rows, hits, n = score_rows(old.get('views'), k_on(old['date']), k1 if k1 is not None else i)
+        c['hits'] += hits
+        c['calls'] += n
+        c['past'].append({'date': old['date'], 'pub': old.get('pub'), 'hits': hits, 'calls': n})
     for th, c in cons.items():
         c['score'] = sum(1 for x in c['pos'] if not x['stale']) - sum(1 for x in c['neg'] if not x['stale'])
     return cons, card
@@ -360,13 +373,13 @@ def corr(a, b):
 
 # ------------------------------------------------------------------ canlı kayıt ve puanlama
 def live_log(log, today_lists, dates, px, i):
-    have = {(e['t'], e['kind']) for e in log['events'] if (NOW - time.mktime(time.strptime(e['d'], '%Y-%m-%d'))) < 30 * 86400}
+    have = {(e['t'], e['kind'], e.get('list')) for e in log['events'] if (NOW - time.mktime(time.strptime(e['d'], '%Y-%m-%d'))) < 30 * 86400}
     d = dates[i]
     added = 0
     for kind, lst in today_lists.items():
         for x in lst:
-            key = (x['t'], kind)
-            if key in have or any(e['d'] == d and e['t'] == x['t'] and e['kind'] == kind for e in log['events']):
+            key = (x['t'], kind, x['list'])
+            if key in have or any(e['d'] == d and e['t'] == x['t'] and e['kind'] == kind and e.get('list') == x['list'] for e in log['events']):
                 continue  # aynı öneri 30 gün içinde tekrar sayılmaz
             log['events'].append({'d': d, 't': x['t'], 'kind': kind, 'list': x['list'], 'px': x['px'], 'spy': px['SPY'][i], 'v': METHOD_V})
             added += 1
@@ -385,7 +398,7 @@ def live_log(log, today_lists, dates, px, i):
                 e['r'][str(h)] = {'d': dates[k0 + h], 'ret': round(r_ * 100, 2), 'ex': round((r_ - rs) * 100, 2)}
     summ = {}
     for kind in ('stock', 'etf'):
-        for lst in ('guclu', 'cesit'):
+        for lst in ('guclu', 'cesit', 'haftalik'):
             g = summ.setdefault(f'{kind}|{lst}', {'n': 0})
             evs = [e for e in log['events'] if e['kind'] == kind and e['list'] == lst and (kind == 'etf' or e.get('v', 1) == METHOD_V)]
             g['n'] = len(evs)
@@ -434,12 +447,18 @@ def main():
     prev = rd('ideas.json', {}) or {}
     prev_top = {k: {x['t'] for x in v.get('guclu', []) + v.get('cesit', [])} for k, v in (prev.get('lists') or {}).items()}
     today_for_log = {}
+    weekly_lists = {}
     for kind, names in (('stock', stocks), ('etf', etfs)):
         names = [t for t in names if t in px]
         elig, S, M, V, T = score_at(kind, names, px, i)
         nrank = len(S)
         order = sorted(S.items(), key=lambda x: -x[1])
         rk = {t: k + 1 for k, (t, _) in enumerate(order)}
+        persist = {}
+        for k in range(PERSIST_DAYS):
+            ek = score_at(kind, names, px, i - k)[0] if k else elig
+            for t in [t for t, _ in sorted(ek.items(), key=lambda x: -x[1])[:PERSIST_TOP]]:
+                persist[t] = persist.get(t, 0) + 1
         rows = []
         for t, s in sorted(elig.items(), key=lambda x: -x[1])[:40]:
             c = corr(daily_rets(px[t], i), port_r) if port_r else None
@@ -454,7 +473,7 @@ def main():
                          'score': round(s * 100, 1), 'rank': rk[t], 'of': nrank, 'mom': round(M[t] * 100, 1), 'vol': round(V[t] * 100, 1) if V.get(t) else None,
                          'trend': round(T[t] * 100, 1), 'corr': None if c is None else round(c, 2), 'px': round(px[t][i], 4),
                          'pe': u.get('pe'), 'beta': u.get('beta'), 'mc': u.get('mc'),
-                         'held': t in port, 'inFunds': held_funds_holdings.get(t, []), 'new': t not in prev_top.get(kind, set())})
+                         'held': t in port, 'inFunds': held_funds_holdings.get(t, []), 'new': t not in prev_top.get(kind, set()), 'persist': persist.get(t, 0)})
         def dup_ok(r, chosen):
             g = next((g for g in DUP if r['t'] in g), None)
             return not g or not any(c['t'] in g for c in chosen)
@@ -466,6 +485,12 @@ def main():
         cesit = [dict(r, list='cesit') for r in notheld if r['corr'] is not None and r['corr'] < 0.5 and r['t'] not in {g['t'] for g in guclu}][:3]
         out['lists'][kind] = {'guclu': guclu, 'cesit': cesit, 'all': rows[:30]}
         today_for_log[kind] = guclu[:3] + cesit[:2]
+        # haftalık aday: son 5 günün en az 3'ünde ilk 15'te (günlük gürültüyü eler), önce kalıcılık sonra puan
+        steady = sorted([r for r in notheld if r['persist'] >= PERSIST_MIN], key=lambda r: (-r['persist'], -r['score']))
+        nG, nC = (5, 3) if kind == 'stock' else (3, 2)
+        wg = [dict(r, list='haftalik', role='guclu') for r in steady[:nG]]
+        wc = [dict(r, list='haftalik', role='cesit') for r in steady if r['corr'] is not None and r['corr'] < 0.5 and r['t'] not in {g['t'] for g in wg}][:nC]
+        weekly_lists[kind] = {'guclu': wg, 'cesit': wc}
         if '--no-backtest' not in sys.argv:
             try:
                 out['backtest'][kind] = backtest(kind, names, dates, px)
@@ -482,6 +507,21 @@ def main():
     log = rd('ideas_log.json', None) or {'events': []}
     for e in log['events']:
         e.setdefault('v', 1)
+    # haftalık liste: cumartesi sabahı (cuma kapanışıyla) ya da --weekly ile yayımlanır, hafta boyunca sabit kalır
+    publish = '--weekly' in sys.argv or dt.datetime.utcnow().weekday() == 5
+    if publish:
+        y, w, _ = dt.date.fromisoformat(dates[i]).isocalendar()
+        out['weekly'] = {'week': f'{y}-H{w:02d}', 'date': dates[i], 'made': out['updatedAt'], 'lists': weekly_lists,
+                         'rule': f'Son {PERSIST_DAYS} işlem gününün en az {PERSIST_MIN}\'ünde ilk {PERSIST_TOP}\'te kalan, portföyde olmayan adaylar; önce kalıcılık, sonra puan'}
+        H_ = rd('ideas_weekly.json', None) or {'weeks': []}
+        H_['weeks'] = [x for x in H_['weeks'] if x['week'] != out['weekly']['week']] + [{'week': out['weekly']['week'], 'date': dates[i],
+                       'lists': {k: {r: [x['t'] for x in v[r]] for r in ('guclu', 'cesit')} for k, v in weekly_lists.items()}}]
+        H_['weeks'] = H_['weeks'][-52:]
+        wr('ideas_weekly.json', H_)
+        for k, v in weekly_lists.items():
+            today_for_log[k] = today_for_log.get(k, []) + v['guclu'] + v['cesit']
+    elif prev.get('weekly'):
+        out['weekly'] = prev['weekly']
     DIAG['canliEklenen'] = live_log(log, today_for_log, dates, px, i)
     out['live'] = log.get('summary', {})
     wr('ideas.json', out)
@@ -492,6 +532,7 @@ def main():
     print(json.dumps({'asOf': out['asOf'], 'evren': out['universe'],
                       'hisse': [x['t'] for x in out['lists']['stock']['guclu']], 'hisseCesit': [x['t'] for x in out['lists']['stock']['cesit']],
                       'etf': [x['t'] for x in out['lists']['etf']['guclu']], 'etfCesit': [x['t'] for x in out['lists']['etf']['cesit']],
+                      'haftalik': {k: {r: [(x['t'], x['persist']) for x in v[r]] for r in ('guclu', 'cesit')} for k, v in (out.get('weekly') or {}).get('lists', {}).items()},
                       'test': {k: {kk: v.get(kk) for kk in ('from', 'cagr', 'cagrEW', 'cagrSPY', 'mdd', 'mddEW', 't', 'hitMonths')} for k, v in bt.items() if v and k in ('stock', 'etf')}, 'parcalar': bt.get('stockParts'),
                       **DIAG}, ensure_ascii=False)[:3000])
 

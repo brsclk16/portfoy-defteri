@@ -20,6 +20,7 @@ function fkWhy(x,kind,of){
   const p=[`puanda ${of} ${kind==='etf'?'ETF':'hisse'} içinde ${x.rank}. sıra`,`12-1 ay momentum ${fkPct(x.mom,0)}`];
   if(kind==='stock'&&isNum(x.vol))p.push(`yıllık oynaklık %${nf(x.vol,0)}`);
   p.push(`200 günlük ortalamanın %${nf(x.trend,0)} üstünde`);
+  if(x.list==='haftalik'&&isNum(x.persist))p.push(`son 5 işlem gününün ${x.persist}'inde ilk 15'te`);
   if(isNum(x.pe)&&x.pe>0)p.push(`F/K ${nf(x.pe,1)}`);
   return p.join(' · ');
 }
@@ -54,7 +55,7 @@ function ideasCard(){
   if(S.ideas===undefined){fkLoad(()=>{if(!location.hash||/^#\/?(ozet)?$/.test(location.hash))render(false)});return ''}
   if(!S.ideas)return '';const F=fkPick();if(!F.length)return '';
   const ev=fkEvidence('stock');
-  return `<section class="card sec fk"><h3>Günün fikirleri <span class="r muted" style="font-size:12px">${esc(trDate(S.ideas.asOf+'T12:00:00Z',{day:'numeric',month:'short'}))} kapanışıyla · <a href="#/piyasa/fikirler">tümü ve kanıt →</a></span></h3>
+  return `<section class="card sec fk"><h3>Günün fikirleri <span class="r muted" style="font-size:12px">${esc(trDate(S.ideas.asOf+'T12:00:00Z',{day:'numeric',month:'short'}))} kapanışıyla · ${S.ideas.weekly?`<a href="#/piyasa/fikirler">haftanın listesi (${esc(S.ideas.weekly.week)}) →</a>`:`<a href="#/piyasa/fikirler">tümü ve kanıt →</a>`}</span></h3>
     ${F.map(f=>fkItem(f)).join('')}
     ${ev?`<p class="muted" style="font-size:12px;margin:10px 0 0;line-height:1.5">${esc(ev.txt)} Yatırım tavsiyesi değildir.</p>`:''}</section>`}
 async function fkAddWatch(t,note){const cur=(S.watch&&S.watch.tickers)||[];if(cur.some(w=>w.t===t)||S.data.instruments[t])return true;
@@ -81,7 +82,7 @@ function fkBT(kind,label){const B=S.ideas.backtest&&S.ideas.backtest[kind];if(!B
     <details style="margin-top:8px"><summary class="muted" style="cursor:pointer">Yıl yıl (yöntem · evren · SPY)</summary><div class="tscroll"><table class="tbl"><thead><tr><th></th>${yrs.map(y=>`<th class="r">${y}</th>`).join('')}</tr></thead><tbody>
       ${['Yöntem','Evren','SPY'].map((l,k)=>`<tr><td><b>${l}</b></td>${yrs.map(y=>{const v=B.years[y][k];return `<td class="r num ${cls(v)}"${k===0&&v>=B.years[y][1]?' style="font-weight:700"':''}>${fkPct(v,0)}</td>`}).join('')}</tr>`).join('')}</tbody></table></div></details>`}
 const TOPN_TXT={stock:'10 hisse',etf:'5 ETF'};
-function fkLive(){const L=S.ideas.live||{};const rows=[['stock|guclu','Hisse · güçlü'],['stock|cesit','Hisse · çeşitlendirici'],['etf|guclu','ETF · güçlü'],['etf|cesit','ETF · çeşitlendirici']];
+function fkLive(){const L=S.ideas.live||{};const rows=[['stock|haftalik','Hisse · haftalık'],['stock|guclu','Hisse · günlük güçlü'],['stock|cesit','Hisse · günlük çeşitlendirici'],['etf|haftalik','ETF · haftalık'],['etf|guclu','ETF · günlük güçlü'],['etf|cesit','ETF · günlük çeşitlendirici']];
   return `<div class="tscroll"><table class="tbl"><thead><tr><th>Liste</th><th class="r">Öneri</th>${[5,21,63].map(h=>`<th class="r">${{5:'1 hafta',21:'1 ay',63:'3 ay'}[h]} SPY üstü</th>`).join('')}</tr></thead><tbody>
   ${rows.map(([k,l])=>{const g=L[k]||{n:0};return `<tr><td><b>${l}</b></td><td class="r num">${g.n}</td>${[5,21,63].map(h=>{const x=g[h];return x?`<td class="r num ${cls(x.avg)}">${fkSig(x.avg)} <span class="muted" style="font-size:11px">%${x.hit} · ${x.n}</span></td>`:'<td class="r muted">bekliyor</td>'}).join('')}</tr>`}).join('')}</tbody></table></div>
   <p class="muted" style="font-size:12px;margin:6px 0 0">Her gün listeye yeni giren ilk 3 güçlü ve 2 çeşitlendirici aday o günün kapanış fiyatıyla kaydedilir (aynı aday 30 gün içinde tekrar sayılmaz). Sayı: ortalama SPY üstü getiri (puan), küçük: SPY'ı geçen oran ve vaka sayısı.</p>`}
@@ -94,16 +95,23 @@ function fkHouses(){const H=S.ideas.houses;if(!H||!H.card)return '';
   const consTbl=`<div class="tscroll"><table class="tbl"><thead><tr><th>Tema</th><th class="r">Uzlaşı</th><th>Olumlu</th><th>Olumsuz</th></tr></thead><tbody>
     ${th.map(([k,c])=>`<tr><td><b>${esc(c.n)}</b></td><td class="r num ${cls(c.score)}">${c.score>0?'+':''}${c.score}</td><td style="font-size:12.5px;white-space:normal">${c.pos.map(x=>`<span class="${x.stale?'muted':''}" title="${esc(x.why)}">${esc(x.h)}${x.stale?' (eski)':''}</span>`).join(', ')||'—'}</td><td style="font-size:12.5px;white-space:normal">${c.neg.map(x=>`<span class="${x.stale?'muted':''}" title="${esc(x.why)}">${esc(x.h)}${x.stale?' (eski)':''}</span>`).join(', ')||'—'}</td></tr>`).join('')}</tbody></table></div>`;
   const cards=HV.houses.map(h=>{const K=H.card[h.id]||{rows:[]};const R=Object.fromEntries((K.rows||[]).map(r=>[r.th,r]));
-    return `<details style="border-top:1px solid var(--line);padding:10px 0"><summary style="cursor:pointer"><b>${esc(h.n)}</b> <span class="muted" style="font-size:12.5px">${esc(h.brand)} · ${esc(trDate(h.date+'T12:00:00Z',{day:'numeric',month:'short',year:'numeric'}))}${K.stale?' · <span class="down">eski</span>':''}${K.calls?` · isabet ${K.hits}/${K.calls}`:''}</span></summary>
+    return `<details style="border-top:1px solid var(--line);padding:10px 0"><summary style="cursor:pointer"><b>${esc(h.n)}</b> <span class="muted" style="font-size:12.5px">${esc(h.brand)} · ${esc(trDate(h.date+'T12:00:00Z',{day:'numeric',month:'short',year:'numeric'}))}${K.stale?' · <span class="down">eski</span>':''}${K.calls?` · isabet ${K.hits}/${K.calls}`:''}${(K.past||[]).length?` · ${K.past.length} eski görüş dahil`:''}${h.auto?' · <span class="muted">otomatik</span>':''}</span></summary>
       <div style="font-size:13px;margin-top:6px"><div class="muted">${esc(h.pub)} · ${esc(h.type)} · ufuk: ${esc(h.horizon||'')} · <a href="${esc(h.url)}" target="_blank" rel="noopener">kaynak</a></div>
       ${h.context?`<p style="margin:6px 0">${esc(h.context)}</p>`:''}
       ${Object.keys(h.views||{}).length?`<div class="tscroll"><table class="tbl"><thead><tr><th>Tema</th><th>Duruş</th><th>Gerekçe</th><th class="r">Yayından beri</th></tr></thead><tbody>${Object.entries(h.views).map(([k,[v,why]])=>{const r=R[k]||{};const ok=v!==0&&isNum(r.ex)?((r.ex>0)===(v>0)):null;
         return `<tr><td>${esc((HV.themes[k]||{}).n||k)}</td><td>${st(v)}</td><td style="white-space:normal;font-size:12.5px">${esc(why)}</td><td class="r num ${cls(r.ex)}">${isNum(r.ex)?`${fkSig(r.ex)} <span class="muted" style="font-size:11px">${esc(r.etf)}−${esc(r.bench)}</span>${ok===null?'':ok?' ✓':' ✗'}`:'<span class="muted">bekliyor</span>'}</td></tr>`}).join('')}</tbody></table></div>`:''}
       <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:10px;margin-top:8px"><div><b class="up">Güçlü yanlar</b><ul style="margin:4px 0;padding-left:18px">${(h.strengths||[]).map(x=>`<li>${esc(x)}</li>`).join('')}</ul></div><div><b class="down">Riskler</b><ul style="margin:4px 0;padding-left:18px">${(h.risks||[]).map(x=>`<li>${esc(x)}</li>`).join('')}</ul></div></div></div></details>`}).join('');
-  return `<section class="card sec"><h3>Büyük yöneticiler ne diyor?<span class="r muted" style="font-size:12px">${HV.houses.length} kurum · derleme ${esc(trDate((H.updatedAt||HV.updatedAt)+'T12:00:00Z',{day:'numeric',month:'short'}))}</span></h3>
+  return `<section class="card sec"><h3>Büyük yöneticiler ne diyor?<span class="r muted" style="font-size:12px">${HV.houses.length} kurum · güncelleme ${esc(trDate((HV.updatedAt||H.updatedAt)+'T12:00:00Z',{day:'numeric',month:'short'}))}${HV.autoRun?` · otomatik kontrol ${esc(trDate(HV.autoRun.at,{day:'numeric',month:'short'}))} (her cuma)`:' · her cuma otomatik kontrol'}</span></h3>
     <p class="muted" style="font-size:12.5px;margin:0 0 8px">Uzlaşı: geçerli (ufku dolmamış) olumlu görüş sayısı − olumsuz görüş sayısı. Satırın üstüne gelince gerekçe görünür.</p>${consTbl}
     <h4 style="margin:16px 0 4px">Kurum kurum: görüş, gerekçe ve karne</h4>${cards}
     <p class="muted" style="font-size:12px;margin:8px 0 0;line-height:1.5"><b>Karne:</b> her görüşün yayın tarihinden bu yana temanın ETF'si karşılaştırma ölçütüne göre ne yaptı (✓ görüş yönünde, ✗ tersi). Büyük kurumların kısa vadeli görünümleri sık yanılır; uzlaşı bir bağlamdır, alım sinyali değil. BlackRock ve Vanguard'ın 13F bildirimleri çoğunlukla endeks fonlarından oluştuğu için "neyi alıyorlar" sorusu piyasa ağırlığını izlemekten farksızdır; bu yüzden görüşleri, yayımladıkları görünümlerden alındı.</p></section>`}
+function fkWeekly(){const W=S.ideas&&S.ideas.weekly;if(!W)return `<section class="card sec"><h3>Haftanın listesi</h3><p class="muted">İlk haftalık liste cumartesi sabahı (cuma kapanışıyla) yayımlanacak.</p></section>`;
+  const L=W.lists||{};const lab={guclu:'Haftalık · güçlü',cesit:'Haftalık · çeşitlendirici'};
+  const part=(kind,title)=>{const g=(L[kind]&&L[kind].guclu)||[],c=(L[kind]&&L[kind].cesit)||[];
+    return `<h4 style="margin:14px 0 2px">${title}</h4>${g.map(x=>fkItem({x,kind,lab:lab.guclu})).join('')||'<div class="muted">Kalıcı aday yok</div>'}${c.length?`<div class="muted" style="font-size:12.5px;margin-top:10px">Portföyünü çeşitlendirenler (korelasyon &lt; 0,5)</div>${c.map(x=>fkItem({x,kind,lab:lab.cesit})).join('')}`:''}`};
+  return `<section class="card sec"><h3>Haftanın listesi · ${esc(W.week)}<span class="r muted" style="font-size:12px">${esc(trDate(W.date+'T12:00:00Z',{day:'numeric',month:'long'}))} kapanışıyla · hafta boyunca sabit</span></h3>
+    <p class="muted" style="font-size:12.5px;margin:0 0 4px">${esc(W.rule)}. Günlük liste her sabah değişebilir; bu liste yalnızca istikrarlı adayları tutar.</p>
+    ${part('stock','Hisseler')}${part('etf','ETF\'ler')}</section>`}
 function viewIdeas(){
   if(S.ideas===undefined){fkLoad(()=>{if(/fikirler/.test(location.hash))render(false)});return '<div class="muted">Yükleniyor…</div>'}
   const I=S.ideas;if(!I)return `<div class="empty"><b>Fikir listesi henüz oluşmadı</b>Her iş günü sabahı (TR ~07:15) güncellenir.</div>`;const L=I.lists;
@@ -111,6 +119,7 @@ function viewIdeas(){
     <h4 style="margin:16px 0 4px">Portföyünü çeşitlendirenler (korelasyon &lt; 0,5)</h4>${(L[kind].cesit||[]).map(x=>fkItem({x,kind,lab:'Çeşitlendirici'})).join('')||'<div class="muted">Şu an trend filtresini geçen düşük korelasyonlu aday yok.</div>'}
     <details style="margin-top:12px"><summary class="muted" style="cursor:pointer">İlk 30 sıralama</summary>${fkTable(L[kind].all,kind)}</details></section>`;
   return `<div class="fade"><div class="sec-t" style="margin-top:0"><div><h2>Günün fikirleri</h2><p>Kanıta dayalı günlük hisse ve ETF adayları · ${esc(trDate(I.asOf+'T12:00:00Z',{day:'numeric',month:'long'}))} kapanışıyla · portföydekiler hariç</p></div></div>
+  ${fkWeekly()}
   ${sec('stock','Hisseler')}${sec('etf','ETF\'ler')}
   <section class="card sec"><h3>Kanıt: hisse yöntemi 2011'den bu yana</h3>${fkBT('stock')}</section>
   ${(()=>{const P=I.backtest&&I.backtest.stockParts;if(!P)return '';return `<section class="card sec"><h3>Denenip bırakılanlar<span class="r muted" style="font-size:12px">şeffaflık için</span></h3><div class="tscroll"><table class="tbl"><thead><tr><th>Etken</th><th class="r">Yıllık</th><th class="r">Evren</th><th class="r">Fark</th><th class="r">t</th><th class="r">En sert düşüş</th></tr></thead><tbody>
