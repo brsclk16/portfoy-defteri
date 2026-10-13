@@ -14,8 +14,8 @@ on:
         default: 'hepsi'
 permissions:
   contents: write
-concurrency:
-  group: ${{ github.event_name == 'pull_request' && format('piyasa-pr-{0}', github.ref) || 'repo-yazma' }}
+concurrency:  # dosya bazında ayrıldı: ortak tek kuyruk bekleyen işleri iptal ediyordu (bkz. README)
+  group: ${{ github.event_name == 'pull_request' && format('piyasa-pr-{0}', github.ref) || github.workflow }}
   cancel-in-progress: false
 jobs:
   topla:

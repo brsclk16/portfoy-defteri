@@ -8,8 +8,8 @@ on:
   workflow_dispatch:
 permissions:
   contents: write
-concurrency:
-  group: ${{ github.event_name == 'pull_request' && format('fiyat-pr-{0}', github.ref) || 'repo-yazma' }}
+concurrency:  # dosya bazında ayrıldı: ortak tek kuyruk bekleyen işleri iptal ediyordu (bkz. README)
+  group: ${{ github.event_name == 'pull_request' && format('fiyat-pr-{0}', github.ref) || github.workflow }}
   cancel-in-progress: false
 jobs:
   topla:

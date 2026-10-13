@@ -9,8 +9,8 @@ on:
   workflow_dispatch:
 permissions:
   contents: write
-concurrency:
-  group: repo-yazma
+concurrency:  # dosya bazında ayrıldı: ortak tek kuyruk bekleyen işleri iptal ediyordu (bkz. README)
+  group: ${{ github.workflow }}
   cancel-in-progress: false
 jobs:
   topla:

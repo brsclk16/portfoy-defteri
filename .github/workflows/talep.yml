@@ -8,8 +8,8 @@ on:
     paths: ['data/r/**', 'data/q/**', 'data/watchlist.json']
 permissions:
   contents: write
-concurrency:
-  group: repo-yazma
+concurrency:  # dosya bazında ayrıldı: ortak tek kuyruk bekleyen işleri iptal ediyordu (bkz. README)
+  group: veri-temel
   cancel-in-progress: false
 jobs:
   talep:

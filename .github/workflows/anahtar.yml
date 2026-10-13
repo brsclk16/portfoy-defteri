@@ -6,8 +6,8 @@ on:
     paths: ['tools/check_keys.py', '.github/workflows/anahtar.yml']
 permissions:
   contents: write
-concurrency:
-  group: repo-yazma
+concurrency:  # dosya bazında ayrıldı: ortak tek kuyruk bekleyen işleri iptal ediyordu (bkz. README)
+  group: ${{ github.workflow }}
   cancel-in-progress: false
 jobs:
   kontrol:
