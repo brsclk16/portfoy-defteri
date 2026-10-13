@@ -1,7 +1,7 @@
 name: Büyük yöneticilerin görünümleri (otomatik güncelleme, ücretsiz model)
 on:
   schedule:
-    - cron: '20 3 * * 5'   # her cuma TR 06:20 — cumartesi sabahı yayımlanan haftalık listeden önce
+    - cron: '20 3 * * 2,5'   # salı ve cuma TR 06:20 — ücretsiz model kotası sınırlı; en eski kontrol edilen kurumdan başlar
   workflow_dispatch:
     inputs:
       only:
