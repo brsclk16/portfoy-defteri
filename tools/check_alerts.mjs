@@ -79,6 +79,20 @@ if(SUM){const q=t=>S.prices.quotes[t]||{};
   out.plans=Object.entries(plans).map(([t,P])=>({t:d(t),state:P.state,px:+P.px.toFixed(2),zone:[+P.zone.lo.toFixed(2),+P.zone.hi.toFixed(2)],stop:+P.stop.toFixed(2),tp1:+P.tp1.p.toFixed(2),rr1:+P.rr1.toFixed(2),rsi:Math.round(P.rsi)}));
   const now=Date.now();out.events=(S.data.events||[]).filter(e=>{const x=new Date(e.date)-now;return x>-6*3600e3&&x<48*3600e3}).map(e=>({date:e.date,title:e.title,tickers:e.tickers,importance:e.importance}));
   out.news=(S.data.news||[]).filter(n=>now-new Date(n.publishedAt)<24*3600e3).slice(0,8).map(n=>({title:n.title,tickers:n.tickers,impact:n.impact,importance:n.importance}));}
+if(SUM){/* beklenti → gerçekleşen (data/outcomes.json, tools/build_outcomes.py): son 4 günün olayları ve önemli haberleri, hazır Türkçe satırlar */
+  const O=rd('outcomes.json',null)||{},now=Date.now(),pc=(v,d=1)=>ctx.pct(v,d);
+  const num=(v,u)=>!isNum(v)?'—':u==='%'?'%'+nf(v,v%1?1:0):nf(v,v%1?(Math.abs(v)<10?2:1):0)+(u&&u!=='%'?' '+u:'');
+  const mv=(m,n)=>(m||[]).slice(0,n).map(x=>`${x.t} ${pc(x.d1)}`).join(', ');
+  out.outcomes=(S.data.events||[]).filter(e=>{const x=now-new Date(e.date);return x>0&&x<96*3600e3}).map(e=>{const o=(O.events||{})[e.id];
+    if(!o)return {date:e.date,title:e.title,pending:true,text:`${e.title}: sonuç henüz işlenmedi`};
+    const parts=[];(o.vals||[]).forEach(v=>parts.push(`${v.name} beklenti ${num(v.fc,v.unit)} → ${num(v.act,v.unit)}`));
+    if(o.kind==='bilanco'){if(isNum(o.epsAct))parts.push(`HBK beklenti ${isNum(o.epsEst)?nf(o.epsEst,2):'—'} → ${nf(o.epsAct,2)}${isNum(o.surprisePct)?` (${pc(o.surprisePct)}, beklentinin ${o.beat})`:''}`);
+      if(isNum(o.move))parts.push(`${o.co} tepkisi ${pc(o.move)}`)}
+    const m=mv(o.moves,3);const pending=!parts.length&&!m;
+    return {date:e.date,title:e.title,pending,text:pending?`${e.title}: sonuç henüz işlenmedi`:`${e.title}: ${parts.join('; ')||'sayısal beklenti yok'}${m?` · takip edilenler ${m}`:''}`}});
+  const VT={tuttu:'fiyat beklenen yönde',ters:'fiyat ters yönde',etkisiz:'belirgin tepki yok'};
+  out.newsOutcomes=(S.data.news||[]).filter(n=>(n.importance||0)>=3&&now-new Date(n.publishedAt)<96*3600e3).map(n=>{const o=(O.news||{})[n.id];if(!o||!(o.moves||[]).length)return null;
+    return {title:n.title,text:`${n.title}: beklenti ${{olumlu:'olumlu',olumsuz:'olumsuz',karisik:'karışık',notr:'nötr'}[n.impact]||n.impact||'—'} → ${VT[o.v5||o.v1]||'yön karşılaştırılmadı'} (${mv(o.moves,3)})`}}).filter(Boolean)}
 if(SUM)out.rules=ruleStat;
 if(TG&&msgs.length){const txt=msgs.sort((a,b)=>b.lvl-a.lvl).map(m=>'• '+m.txt).join('\n')+'\n\nhttps://brsclk16.github.io/portfoy-defteri/';
   try{const r=await fetch(`https://api.telegram.org/bot${TGT}/sendMessage`,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({chat_id:TGC,text:'🔔 Portföy Defteri\n'+txt,disable_web_page_preview:true})});out.telegram=r.ok?'gönderildi':'hata '+r.status}catch(e){out.telegram='hata'}}

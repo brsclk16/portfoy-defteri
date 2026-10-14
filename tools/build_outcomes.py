@@ -116,6 +116,9 @@ cards = (load('earnings.json', {}) or {}).get('cards') or []
 MK = [('PCE', 'PCE'), ('ISM', 'ISM'), ('tarım dışı', 'NFP'), ('istihdam', 'NFP'), ('GSYH', 'GDP'), ('büyüme', 'GDP'),
       ('TCMB', 'TCMB'), ('Fed', 'FOMC'), ('FOMC', 'FOMC'), ('TÜFE', 'CPI'), ('enflasyon', 'CPI')]
 
+TRN = {'PCE': 'Çekirdek PCE', 'NFP': 'Tarım dışı istihdam', 'ISM': 'ISM imalat', 'GDP': 'GSYH', 'CPI': 'TÜFE',
+       'FOMC': 'Fed politika faizi', 'TCMB': 'TCMB politika faizi', 'TR-TÜFE': 'Türkiye TÜFE'}
+
 def macro_vals(e, t0):
     out = []
     title = e.get('title', '')
@@ -137,7 +140,9 @@ def macro_vals(e, t0):
         k = 'TR-TÜFE'
     for x in mev:
         if x.get('k') == k and x.get('d') == t0.strftime('%Y-%m-%d') and x.get('act') is not None:
-            out.append({'name': x.get('name'), 'fc': x.get('fc'), 'act': x.get('act'), 'prev': x.get('prev'),
+            nm = str(x.get('name') or '')
+            sfx = ' (aylık)' if 'm/m' in nm.lower() or 'mom' in nm.lower() else ' (yıllık)' if 'y/y' in nm.lower() or 'yoy' in nm.lower() else ''
+            out.append({'name': TRN.get(k, nm) + sfx, 'fc': x.get('fc'), 'act': x.get('act'), 'prev': x.get('prev'),
                         'unit': '%' if k in ('PCE', 'CPI', 'TR-TÜFE', 'GDP', 'TCMB', 'FOMC') else ('bin' if k == 'NFP' else None),
                         'better': x.get('better')})
     return out
