@@ -401,18 +401,37 @@ function afterOzet(){
     if(s.length===tickers().length&&!S.perfSel)s=[t];else s=s.includes(t)?s.filter(x=>x!==t):s.concat(t);
     S.perfSel=s.length?s:null;render(false)});
 }
+/* ---------- geçmiş haber/olay sonuçları (data/outcomes.json, tools/build_outcomes.py) ---------- */
+const OC_V={tuttu:['Fiyat beklenen yönde gitti','up'],ters:['Fiyat ters yönde gitti','down'],etkisiz:['Belirgin tepki yok','']};
+function ocMoves(mv,n=5){return (mv||[]).slice(0,n).map(m=>`<span class="tag" title="${esc(m.day1||'')} günü; baz ${esc(m.base||'')} kapanışı">${esc(m.t)} <b class="${cls(m.d1)}">${pct(m.d1,1)}</b>${isNum(m.x1)?` <i class="dim">SPY'a göre ${pct(m.x1,1)}</i>`:''}${isNum(m.d5)?` · 5g <b class="${cls(m.d5)}">${pct(m.d5,1)}</b>`:''}</span>`).join('')}
+function ocNews(n){const O=S.outc&&S.outc.news&&S.outc.news[n.id];if(!O||!(O.moves||[]).length)return '';
+  const v=OC_V[O.v5||O.v1];
+  return `<div class="oc"><b>Sonra ne oldu?</b>${O.exp?` <span class="muted">Beklenti: ${esc(IMPACT[O.exp]||O.exp)}</span>`:''}${v?` → <span class="${v[1]}">${v[0]}${O.v5?' (5 gün)':''}</span>`:''}<div class="ocm">${ocMoves(O.moves)}</div></div>`}
+function ocNum(v,u){return isNum(v)?(u==='%'?'%'+nf(v,v%1?1:0):nf(v,Math.abs(v)<10&&v%1?2:v%1?1:0)+(u&&u!=='%'?' '+u:'')):'—'}
+function ocEvent(e){if(new Date(e.date)>new Date())return '';const O=S.outc&&S.outc.events&&S.outc.events[e.id];
+  if(!O)return `<div class="oc"><span class="muted">Sonuç bekleniyor</span></div>`;
+  const rows=[];
+  (O.vals||[]).forEach(x=>{const c=x.better===true?'up':x.better===false?'down':'';rows.push(`${esc(x.name)}: beklenti ${ocNum(x.fc,x.unit)} → <b class="${c}">gerçekleşen ${ocNum(x.act,x.unit)}</b>${isNum(x.prev)?` <span class="dim">(önceki ${ocNum(x.prev,x.unit)})</span>`:''}`)});
+  if(O.kind==='bilanco'){
+    if(isNum(O.epsAct))rows.push(`HBK: beklenti ${isNum(O.epsEst)?nf(O.epsEst,2):'—'} → <b class="${cls(O.surprisePct)}">gerçekleşen ${nf(O.epsAct,2)}</b>${isNum(O.surprisePct)?` (${pct(O.surprisePct,1)}, beklentinin ${esc(O.beat||'')})`:''}`);
+    else if(isNum(O.epsEst))rows.push(`HBK beklentisi ${nf(O.epsEst,2)} · gerçekleşen henüz işlenmedi`);
+    if(isNum(O.move))rows.push(`${esc(O.co)} hisse tepkisi <b class="${cls(O.move)}">${pct(O.move,1)}</b>${isNum(O.move5)?` · 5 günde <b class="${cls(O.move5)}">${pct(O.move5,1)}</b>`:''}`);
+    if(O.guidance)rows.push(`Rehberlik: ${esc(O.guidance)}`)}
+  const mv=(O.moves||[]).length?`<div class="ocm"><span class="muted" style="font-size:12px">Takip ettiklerin${O.kind==='makro'||O.kind==='fed'?' (o günkü hareket; tek nedeni bu veri olmayabilir)':''}:</span> ${ocMoves(O.moves,O.kind==='makro'||O.kind==='fed'?6:5)}</div>`:'';
+  if(!rows.length&&!mv)return `<div class="oc"><span class="muted">Sonuç bekleniyor</span></div>`;
+  return `<div class="oc"><b>Beklenti ve gerçekleşen</b>${rows.map(r=>`<div>${r}</div>`).join('')}${mv}</div>`}
 function evRow(e){
   const d=new Date(e.date);const days=Math.ceil((d-Date.now())/864e5);
   const imp=`<span class="imp">${[1,2,3].map(k=>`<i class="${k<=(e.importance||1)?'on':''}"></i>`).join('')}</span>`;
   return `<div class="ev"><div class="dt"><b>${d.toLocaleDateString('tr-TR',{day:'2-digit',timeZone:'Europe/Istanbul'})}</b><span>${d.toLocaleDateString('tr-TR',{month:'short',timeZone:'Europe/Istanbul'})}</span></div>
-  <div><div class="ti">${esc(e.title)}${imp}</div><div class="no">${esc(KIND[e.kind]||e.kind||'')}${e.note?' · '+esc(e.note):''}${(e.tickers||[]).length?' · '+e.tickers.map(t=>`<a href="#/t/${t}">${t}</a>`).join(', '):''}</div></div>
-  <div class="in">${days<=0?'bugün':days===1?'yarın':days+' gün'}<div class="dim" style="text-align:right">${/T00:00:00/.test(e.date)?'':d.toLocaleTimeString('tr-TR',{hour:'2-digit',minute:'2-digit',timeZone:'Europe/Istanbul'})}</div></div></div>`;
+  <div><div class="ti">${esc(e.title)}${imp}</div><div class="no">${esc(KIND[e.kind]||e.kind||'')}${e.note?' · '+esc(e.note):''}${(e.tickers||[]).length?' · '+e.tickers.map(t=>`<a href="#/t/${t}">${t}</a>`).join(', '):''}</div>${ocEvent(e)}</div>
+  <div class="in">${days<0?'geçti':days===0?'bugün':days===1?'yarın':days+' gün'}<div class="dim" style="text-align:right">${/T00:00:00/.test(e.date)?'':d.toLocaleTimeString('tr-TR',{hour:'2-digit',minute:'2-digit',timeZone:'Europe/Istanbul'})}</div></div></div>`;
 }
 function nwRow(n){
   return `<article class="nw"><div class="im ${esc(n.impact||'')}"></div><div>
   <a class="t" href="${esc(n.url)}" target="_blank" rel="noopener">${esc(n.title)}</a>
   <div class="m"><span>${esc(n.source||'')}</span><span>·</span><span>${esc(trDate(n.publishedAt,{day:'numeric',month:'short'}))}</span>${n.impact?`<span class="tag">${esc(IMPACT[n.impact]||n.impact)}</span>`:''}${(n.tickers||[]).map(t=>`<a class="tag" href="#/t/${t}" style="text-decoration:none">${t}</a>`).join('')}</div>
-  ${n.summary?`<p>${esc(n.summary)}</p>`:''}${n.whyItMatters?`<div class="why"><b>Neden önemli:</b> ${esc(n.whyItMatters)}</div>`:''}</div></article>`;
+  ${n.summary?`<p>${esc(n.summary)}</p>`:''}${n.whyItMatters?`<div class="why"><b>Neden önemli:</b> ${esc(n.whyItMatters)}</div>`:''}${ocNews(n)}</div></article>`;
 }
 
 function viewEnstruman(){
@@ -480,7 +499,7 @@ function viewInst(t){
   <div class="grid g-main sec">
     <section class="card"><h3>İlgili haberler <span class="r muted">${news.length}</span></h3><div class="news">${news.map(nwRow).join('')||'<div class="muted">Şimdilik ilgili haber yok.</div>'}</div></section>
     <div class="grid" style="align-content:start">
-      <section class="card"><h3>Yaklaşan olaylar</h3>${evs.map(evRow).join('')||'<div class="muted">—</div>'}</section>
+      <section class="card"><h3>Yaklaşan olaylar</h3>${evs.map(evRow).join('')||'<div class="muted">—</div>'}</section>${pastEvents(t,45)}
       <section class="card src"><h3>Kaynaklar</h3>${(i.sources||[]).map(s=>`<a href="${esc(s.url)}" target="_blank" rel="noopener">${esc(s.title)} ↗</a>`).join('')}</section>
     </div>
   </div></div>`;
@@ -610,7 +629,13 @@ function viewTakvim(){
   const ev=(S.data.events||[]).filter(e=>new Date(e.date)>=new Date(Date.now()-864e5));
   const groups={};ev.forEach(e=>{const k=new Date(e.date).toLocaleDateString('tr-TR',{month:'long',year:'numeric',timeZone:'Europe/Istanbul'});(groups[k]||(groups[k]=[])).push(e)});
   return `<div class="fade"><div class="sec-t" style="margin-top:0"><div><h2>Takvim</h2><p>Bilançolar, makro veriler ve Fed · saatler İstanbul saati · Google Takvim'ine de işlendi</p></div></div>
-  ${Object.entries(groups).map(([k,v])=>`<section class="card sec"><h3>${esc(k)}</h3>${v.map(evRow).join('')}</section>`).join('')||'<div class="empty">Yaklaşan olay yok</div>'}</div>`;
+  ${Object.entries(groups).map(([k,v])=>`<section class="card sec"><h3>${esc(k)}</h3>${v.map(evRow).join('')}</section>`).join('')||'<div class="empty">Yaklaşan olay yok</div>'}${pastEvents(null,30)}</div>`;
+}
+function pastEvents(t,days){
+  const now=Date.now();const ev=(S.data.events||[]).filter(e=>{const d=new Date(e.date).getTime();return d<now-864e5&&d>now-days*864e5&&(!t||(e.tickers||[]).includes(t)||(e.holdings||[]).includes(t))}).reverse();
+  if(!ev.length)return '';
+  return `<section class="card sec"><h3>Gerçekleşenler <span class="r muted">son ${days} gün · beklenti neydi, ne oldu</span></h3>${ev.map(evRow).join('')}
+  <p class="muted" style="font-size:12px;margin:10px 0 0">Tepki: olayın fiyata yansıdığı ilk işlem günü (kapanıştan sonraki olaylarda ertesi gün) ve 5 işlem günü sonrası getiri; "SPY'a göre" piyasa genelinden ayrışma. Aynı gün başka gelişmeler de fiyatı etkilemiş olabilir.</p></section>`;
 }
 
 /* ---------- router ---------- */
@@ -660,8 +685,8 @@ async function loadData(){
   const v='?t='+Math.floor(Date.now()/60000);
   const [d,p,h]=await Promise.all(['portfolio','prices','history'].map(n=>fetch('data/'+n+'.json'+v).then(r=>{if(!r.ok)throw new Error(n+'.json '+r.status);return r.json()})));
   const opt=n=>fetch('data/'+n+'.json'+v).then(r=>r.ok?r.json():null).catch(()=>null);
-  const [m,w,wl,er,ins,oh,mo,mk,va,lg,br,dv,i13,eh,un,ec,ms,aw,cl,an,pr,fh,me,fu,rs,frd,ct,opn,pmk,shv,evd,dg,ppr,lpx]=await Promise.all([opt('macro'),opt('weekly'),opt('watchlist'),opt('earnings'),opt('insider'),opt('ohlc'),opt('monthly'),opt('markets'),opt('valuation'),opt('long'),opt('brief'),opt('dividends'),opt('inst13f'),opt('earnhist'),opt('universe'),opt('econ'),opt('mstrip'),opt('answers'),opt('calls'),opt('analysts'),opt('peers'),opt('fundhold'),opt('macroev'),opt('fund'),opt('research/index'),opt('fred'),opt('cot'),opt('options'),opt('pm'),opt('shortvol'),opt('evds'),opt('_diag/ext'),opt('paper'),opt('long_px')]);
-  S.data=d;S.prices=p;try{Object.values(d.instruments).forEach(i=>{if(i.watchlist||!i.theme||THEMES.some(x=>x.t.includes(i.ticker)))return;let T=THEMES.find(x=>x.name===i.theme);if(!T){T={name:i.theme,t:[],c:['#c792ff','#ff9f5c','#7ee0c3','#f58fd0','#a3b8ff'][THEMES.length%5]};THEMES.push(T)}T.t.push(i.ticker)})}catch(e){}S.hist=h;S.macro=m;S.weekly=w;if(wl)S.watch=wl;S.earn=er;S.insider=ins;S.ohlc=oh;S.monthly=mo;S.markets=mk;S.valuation=va;S.long=lg;S.brief=br;S.divs=dv;S.inst13=i13;S.ehist=eh;S.univ=un;S.econ=ec;S.mstrip=ms;S.answers=aw;S.calls=cl;S.analysts=an;S.peers=pr;S.fundhold=fh;S.macroev=me;S.fund=fu;S.research=rs;S.fred=frd;S.cot=ct;S.options=opn;S.pm=pmk;S.shortvol=shv;S.evds=evd;S.diag=dg;S.paper=ppr;S.longpx=lpx;S._rh=null;S.labCache={};S.mcCache={};
+  const [m,w,wl,er,ins,oh,mo,mk,va,lg,br,dv,i13,eh,un,ec,ms,aw,cl,an,pr,fh,me,fu,rs,frd,ct,opn,pmk,shv,evd,dg,ppr,lpx,outc]=await Promise.all([opt('macro'),opt('weekly'),opt('watchlist'),opt('earnings'),opt('insider'),opt('ohlc'),opt('monthly'),opt('markets'),opt('valuation'),opt('long'),opt('brief'),opt('dividends'),opt('inst13f'),opt('earnhist'),opt('universe'),opt('econ'),opt('mstrip'),opt('answers'),opt('calls'),opt('analysts'),opt('peers'),opt('fundhold'),opt('macroev'),opt('fund'),opt('research/index'),opt('fred'),opt('cot'),opt('options'),opt('pm'),opt('shortvol'),opt('evds'),opt('_diag/ext'),opt('paper'),opt('long_px'),opt('outcomes')]);
+  S.data=d;S.prices=p;try{Object.values(d.instruments).forEach(i=>{if(i.watchlist||!i.theme||THEMES.some(x=>x.t.includes(i.ticker)))return;let T=THEMES.find(x=>x.name===i.theme);if(!T){T={name:i.theme,t:[],c:['#c792ff','#ff9f5c','#7ee0c3','#f58fd0','#a3b8ff'][THEMES.length%5]};THEMES.push(T)}T.t.push(i.ticker)})}catch(e){}S.hist=h;S.macro=m;S.weekly=w;if(wl)S.watch=wl;S.earn=er;S.insider=ins;S.ohlc=oh;S.monthly=mo;S.markets=mk;S.valuation=va;S.long=lg;S.brief=br;S.divs=dv;S.inst13=i13;S.ehist=eh;S.univ=un;S.econ=ec;S.mstrip=ms;S.answers=aw;S.calls=cl;S.analysts=an;S.peers=pr;S.fundhold=fh;S.macroev=me;S.fund=fu;S.research=rs;S.fred=frd;S.cot=ct;S.options=opn;S.pm=pmk;S.shortvol=shv;S.evds=evd;S.diag=dg;S.paper=ppr;S.longpx=lpx;S.outc=outc;S._rh=null;S.labCache={};S.mcCache={};
 }
 async function boot(){
   const th=lsGet('pd_theme');if(th)document.documentElement.dataset.theme=th;

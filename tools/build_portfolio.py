@@ -38,3 +38,6 @@ for t, d in inst.items():
                                'day': str(d.get('priceAsOf', ''))[:10], 'hi52': d.get('high52'), 'lo52': d.get('low52')})
 json.dump(P, open(os.path.join(D, 'prices.json'), 'w'), separators=(',', ':'))
 print(f'{len(inst)} enstrüman, {len(news)} haber, {len(events)} olay, {len(signals)} sinyal')
+# geçmiş haber/olayların sonucu (beklenti → gerçekleşen, takip edilen ETF/hisselerin tepkisi) — data/outcomes.json
+import subprocess
+subprocess.run([sys.executable, os.path.join(os.path.dirname(os.path.abspath(__file__)), 'build_outcomes.py')], check=False)

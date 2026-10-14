@@ -21,6 +21,9 @@ jobs:
         with: {python-version: '3.12'}
       - name: Fiyatlar
         run: python3 -u tools/fetch_prices.py ${{ (github.event.schedule == '27 21 * * 1-5' || github.event_name != 'schedule') && '--markets' || '' }} ${{ github.event_name == 'pull_request' && '--dry' || '' }}
+      - name: Haber ve olay sonuçları (beklenti → gerçekleşen, fiyat tepkisi)
+        if: github.event.schedule == '27 21 * * 1-5' || github.event_name == 'workflow_dispatch'
+        run: python3 -u tools/build_outcomes.py || echo "sonuç hesaplanamadı"
       - name: Yayınla
         if: github.event_name != 'pull_request'
         run: |

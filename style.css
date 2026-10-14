@@ -184,6 +184,9 @@ main{padding-top:26px;padding-bottom:40px;min-height:70vh}
 .ev .dt span{font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:.06em}
 .ev .ti{font-weight:600}
 .ev .no{color:var(--muted);font-size:13px}
+.oc{margin-top:8px;font-size:13px;padding:8px 12px;border-radius:10px;background:var(--panel2);border-left:2px solid var(--line2);line-height:1.55}
+.oc>div{margin-top:2px}.oc .up{color:var(--up)}.oc .down{color:var(--down)}
+.ocm{display:flex;flex-wrap:wrap;gap:6px;align-items:center;margin-top:6px}.ocm .tag i{font-style:normal}
 .ev .in{font:12px var(--mono);color:var(--accent);white-space:nowrap}
 .imp{display:inline-flex;gap:2px;margin-left:6px;vertical-align:middle}
 .imp i{width:5px;height:5px;border-radius:50%;background:var(--line2)}
