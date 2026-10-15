@@ -1,6 +1,67 @@
 {
- "updatedAt": "2026-09-28T13:30:00Z",
+ "updatedAt": "2026-10-15T06:00:00Z",
  "cards": [
+  {
+   "id": "ASML-2026Q3",
+   "t": "ASML",
+   "company": "ASML Holding",
+   "date": "2026-10-14",
+   "quarter": "Q3 2026",
+   "time": "piyasa öncesi",
+   "eps": {
+    "act": 13.3,
+    "est": 10.82,
+    "surprisePct": 22.9
+   },
+   "rev": {
+    "act": 11.66,
+    "est": 11.72,
+    "unit": "mlr €",
+    "yoy": 55,
+    "surprisePct": -0.5
+   },
+   "guidance": "2026 satış aralığının alt ucu yükseltilerek 44–45 mlr €'ya çekildi; 4. çeyrek satış öngörüsü beklentilerin üzerinde.",
+   "reaction": {
+    "pct": -3.9,
+    "from": "2026-10-13",
+    "to": "2026-10-14"
+   },
+   "highlights": [
+    "Net kâr 4,96 mlr € ile 4,1 mlr €'luk beklentiyi belirgin aştı; satışlar beklentinin hafif altında kaldı.",
+    "Brüt marj %57,5 ile şirket rehberinin üzerinde geldi.",
+    "Şirket 2027–2028'de talebi tam karşılayamayacağını, müşterilerin 2029–2030 için şimdiden sipariş ilgisi gösterdiğini söyledi.",
+    "EUV kapasite artışı büyük ölçüde Zeiss optik tedarikine bağlı."
+   ],
+   "affects": [
+    {
+     "t": "ASML",
+     "note": "doğrudan pozisyon"
+    },
+    {
+     "t": "SMH",
+     "note": "fonun büyük holdinglerinden"
+    },
+    {
+     "t": "SOXX",
+     "note": "fon holdingi"
+    }
+   ],
+   "summary": "Kâr ve rehberlik güçlüydü, satışlar ise beklentinin hafif altında kaldı. ABD işlemlerinde hisse, çip hisselerindeki genel satışla birlikte günü %3,9 düşüşle kapattı.",
+   "sources": [
+    {
+     "title": "CNBC — ASML Q3 sonuçları ve 2029–2030 sipariş ilgisi",
+     "url": "https://www.cnbc.com/2026/10/14/asml-3q-earnings-ai-demand-orders-capacity.html"
+    },
+    {
+     "title": "Quartz — ASML 2026 satış aralığını yükseltti",
+     "url": "https://qz.com/asml-quarterly-earnings-profit-customers-orders-2030-101426"
+    },
+    {
+     "title": "SEC EDGAR — ASML 6-K",
+     "url": "https://www.sec.gov/Archives/edgar/data/937966/000162828026065813/form6-kquarterlyfilings.htm"
+    }
+   ]
+  },
   {
    "id": "DELL-2026Q2",
    "t": "DELL",

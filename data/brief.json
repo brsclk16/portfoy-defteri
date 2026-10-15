@@ -1,33 +1,38 @@
 {
- "publishedAt": "2026-10-14T05:59:03Z",
- "asOf": "2026-10-12",
- "title": "Çipler baskıda: ASML bilançosu ve ABD enflasyonu günün sınavı",
+ "publishedAt": "2026-10-15T06:05:00Z",
+ "asOf": "2026-10-14",
+ "title": "Çip ve donanımda sert satış; gözler bugün TSMC bilançosu ve ABD verilerinde",
  "sections": [
   {
    "h": "Dün",
    "items": [
-    "En sert düşüş CRDO'da: %-7,25; yarı iletken fonları da geriledi (SOXX %-2,60, SMH %-2,05, AMD %-2,28).",
-    "Pozitif kapatan tek pozisyon AGNG (%+0,57); XBI %-1,54, VRT %-1,41, DELL %-1,59.",
-    "S&P 500 (SPY) yatay (%-0,06); portföydeki çip ağırlığı endeksin belirgin altında kaldı. Değerli metaller hafif ekside (IAU %-0,67, SLV %-0,78).",
-    "Verinin tarihi 12 Ekim (betik asOf); gece Broadcom CEO'sunun yapay zekâ yorumları ve Çin bellek rekabeti haberleri sektörde baskı yarattı."
+    "En sert düşüşler DELL −%11,3 (Barclays'in kurumsal yapay zeka uyarısı), CRDO −%9,6 ve SLV −%6,1 oldu.",
+    "VRT −%6,1, AMD −%5,7, SOXX −%4,5, SMH −%4,0, ASML −%3,9; S&P 500 (SPY) −%1,1 ile portföyün çoğu endeksin belirgin altında kaldı.",
+    "Günü artıda kapatan tek pozisyon AGNG (+%1,1); XBI yatay (−%0,02)."
    ]
   },
   {
    "h": "Bugün",
    "items": [
-    "08:00 TRT – ASML Q3 bilançosu (HBK beklentisi ~10,82 €): ASML pozisyonunu ve SMH/SOXX'u doğrudan etkiler.",
-    "15:30 TRT – ABD Eylül TÜFE (beklenti aylık %0,6, yıllık %3,6; çekirdek aylık %0,2): faiz beklentisi üzerinden XBI, altın ve gümüş için kritik.",
-    "Yarın 09:00 TRT civarı – TSMC Q3 bilançosu (HBK beklentisi ~28,97 TWD): SMH ve SOXX'un en büyük holdinglerinden.",
-    "Yarın 15:30 TRT – ABD perakende satışlar ve ÜFE; 22 Ekim'de TCMB faiz kararı."
+    "TSMC 3. çeyrek bilançosu bu sabah ~09:00 TRT: SMH ve SOXX'in en büyük holdinglerinden; dünkü çip satışının devam edip etmeyeceği açısından kritik.",
+    "15:30 TRT'de ABD perakende satışlar, ÜFE ve haftalık işsizlik başvuruları: faiz beklentisi üzerinden XBI, IAU ve SLV'yi en çok ilgilendirir.",
+    "Yaklaşan: 22 Ekim TCMB faiz kararı, 26 Ekim Southern Copper (COPX) bilançosu."
    ]
   },
   {
    "h": "Teknik durum",
    "items": [
-    "Alım bölgesinde: ASML 1.717,76 $ (bölge 1.711,58–1.721,88, stop 1.591,43), SMH 588,12 $ (575,45–588,60), SOXX 543,90 $ (513,10–542,80).",
-    "Alım bölgesinde: CRDO 198,31 $ (187,87–199,04, stop 159,69), COPX 84,40 $ (83,30–84,32), AGNG 36,15 $ (35,76–36,06).",
-    "Aşırı ısınmış: AMD 605,53 $ (RSI 57, bölge 549,51–570,85) ve DELL 572,47 $ (RSI 58).",
-    "Stop'a %3'ten yakın enstrüman yok; IAU, SLV, VRT ve XBI alım bölgesinin üzerinde."
+    "Alım bölgesinde: AMD 570,82 $ (bölge 558,26–565,97), DELL 507,93 $ (496,74–508,64), SMH 564,74 $ (553,49–559,55), SLV 50,22 $ (49,55–49,85), AGNG 36,56 $ (36,44–36,66).",
+    "Stop'a %3'ten yakın: COPX 80,82 $ / stop 78,83 $ (~%2,5) ve AGNG 36,56 $ / stop 35,82 $ (~%2,0).",
+    "Aşırı ısınmış enstrüman yok; RSI'lar 32–48 aralığında, en düşük SLV (32) ve VRT (34)."
+   ]
+  },
+  {
+   "h": "Beklenti → gerçekleşen",
+   "items": [
+    "ASML Q3: HBK beklenti 10,82 → 13,30 (+%22,9, beklentinin üstünde); ASML −%3,9 · SOXX −%4,5, SMH −%4,0.",
+    "ASML'nin rekor kâr ve 2030'a uzanan talep haberleri olumlu beklentiye rağmen fiyat ters yönde (ASML −%3,9, SMH −%4,0, SOXX −%4,5).",
+    "ABD TÜFE: sayısal beklenti işlenmedi · takip edilenler DELL −%11,3, CRDO −%9,6, SLV −%6,1."
    ]
   }
  ]
