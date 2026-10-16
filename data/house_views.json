@@ -1,5 +1,5 @@
 {
- "updatedAt": "2026-10-13",
+ "updatedAt": "2026-10-16",
  "note": "Büyük varlık yöneticilerinin yayımlanmış görünümlerinden derlendi. Duruş: 1 olumlu/ağırlık artır, 0 nötr, -1 olumsuz/ağırlık azalt. Her görüş kendi yayın tarihindedir; her görüşün geçerlilik tarihi (validUntil) yayının ufkuna göre konur; geçenler 'eski' sayılır ve uzlaşıya katılmaz. Kaynak bağlantıları birincil yayın ya da yayını aktaran haber/uygulayıcı sayfasıdır (tür alanında belirtilir). Bu kurumların kısa vadeli görünümleri sık yanılır; sitede her görüş, yayın tarihinden bu yana temanın gerçekte ne yaptığıyla karnelenir.",
  "themes": {
   "us_eq": {
@@ -213,36 +213,35 @@
    "id": "jpmorgan",
    "n": "J.P. Morgan AM",
    "brand": "JPMorgan",
-   "pub": "2026 Long-Term Capital Market Assumptions (10–15 yıl)",
-   "date": "2025-09-30",
-   "type": "birincil",
+   "pub": "Long-Term Capital Market Assumptions | J.P. Morgan Asset Management",
+   "date": "2026-10-01",
+   "type": "otomatik: kaynak metninden özet",
    "url": "https://am.jpmorgan.com/jp/en/asset-management/institutional/insights/portfolio-insights/ltcma/executive-summary/",
    "views": {
-    "ust_mid": [
+    "us_eq": [
      1,
-     "ABD devlet tahvili beklentisi %4,6: finansal krizden beri en yüksek"
-    ],
-    "high_yield": [
-     0,
-     "Yüksek getirili tahvil %6,1, değişmedi"
+     "Profit margins of over 15% push our U.S. large cap equity forecast up 80bps, to 7.5%."
     ],
     "infrastructure": [
      1,
-     "Alternatifler portföyü dayanıklı kılar (60/40+)"
+     "Global infrastructure is returning 7.1% as real asset returns are resilient in the face of persistent inflation volatility."
     ]
    },
    "strengths": [
-    "Kurumsal kârlılık dayanıklı",
-    "Yüksek faiz tahvil getirisini artırdı",
-    "Kredi kalitesi iyileşti"
+    "Küresel sermaye harcamaları ve yapay zeka yatırımları üretkenliği ve büyüme tahminlerini desteklemektedir.",
+    "ABD büyük ölçekli hisse senedi tahminleri kar marjları ile yükselmiştir.",
+    "Normalleşen tahvil ve getiri oranları tahviller ile alternatif varlıklar için çekici bir giriş noktası sunmaktadır."
    ],
    "risks": [
-    "Gümrük vergileri ve göç kısıtları ABD büyümesini düşürüyor",
-    "Hisse-tahvil korelasyonu yüksek: tahvil koruması zayıflayabilir",
-    "Zayıflayan dolar"
+    "Ekonomik milliyetçilik ve artan harcamalar enflasyon oynaklığı riski taşımaktadır.",
+    "Nüfus dinamikleri, bütçe açıkları, enerji geçişi ve jeopolitik parçalanma endişe kaynağıdır.",
+    "Yüksek büyüme ve mali açıklar daha yüksek reel oranlar ile daha büyük vade risk primlerine yol açmaktadır.",
+    "K şeklindeki ekonomi yapısı, sermaye ve emek arasındaki eşitsizlikleri sürdürme riski barındırmaktadır."
    ],
-   "validUntil": "2026-12-31",
-   "horizon": "10-15 yıllık varsayım; yeni baskı (2027) çıkana kadar"
+   "validUntil": "2027-10-01",
+   "horizon": "10-15 yıllık varsayım; yeni baskı (2027) çıkana kadar",
+   "context": "J.P. Morgan Asset Management'ın 2027 Uzun Vadeli Sermaye Piyasası Varsayımları raporu, ekonomik milliyetçilik, teknoloji benimsenmesi ve sermaye akışlarındaki değişimlerin önümüzdeki 10 ila 15 yıllık dönemdeki getirileri nasıl şekillendirdiğini incelemektedir.",
+   "auto": true
   },
   {
    "id": "goldman",
@@ -378,61 +377,25 @@
    "id": "amundi",
    "n": "Amundi",
    "brand": "Amundi (ETF'leri çoğunlukla Avrupa borsalarında, UCITS)",
-   "pub": "Global Investment Outlook 2026",
-   "date": "2025-11-21",
-   "type": "haber aktarımı",
-   "url": "https://www.wealthbriefing.com/html/article.php/amundi-leans-towards-emerging-market-assets-in-2026",
-   "views": {
-    "us_eq": [
-     0,
-     "Nötr"
-    ],
-    "em_eq": [
-     1,
-     "Doğu Avrupa, seçili Latin Amerika ve Asya (Hindistan, Filipinler, Kore)"
-    ],
-    "india_eq": [
-     1,
-     "Orta vadede olumlu"
-    ],
-    "japan_eq": [
-     1,
-     "Kurumsal reform ve zayıf yen"
-    ],
-    "europe_eq": [
-     1,
-     "Finans, sanayi, savunma, yeşil dönüşüm"
-    ],
-    "high_yield": [
-     -1,
-     "ABD yüksek getirili tahvile temkinli"
-    ],
-    "ig_credit": [
-     1,
-     "Kaliteli kredi çekirdek, ağırlık fazla"
-    ],
-    "em_debt": [
-     1,
-     "Yüksek gelir ve çeşitlendirme"
-    ],
-    "gold": [
-     1,
-     "Çeşitlendirici"
-    ],
-    "commodities": [
-     1,
-     "Daha geniş emtia maruziyeti"
-    ]
-   },
+   "pub": "Amundi Research Center",
+   "date": "2026-10-12",
+   "type": "otomatik: kaynak metninden özet",
+   "url": "https://research-center.amundi.com/",
+   "views": {},
    "strengths": [
-    "Yapısal olarak zayıflayan dolar gelişmekte olan para birimlerini destekler"
+    "Sabit getirili varlıklarda ve seçilmiş hisse senedi piyasalarında beklenen getirilerin iyileşmesi",
+    "Yapay zekanın sunduğu kayda değer ekonomik büyüme fırsatları",
+    "Hindistan'ın imalat ve tüketici harcamaları dinamikleriyle süregelen dönüşümü"
    ],
    "risks": [
-    "Güçlü dolar ve yüksek ABD faizleri gelişmekte olanlar için ana risk",
-    "Yoğunlaşmış ve pahalı hisse piyasaları"
+    "Uzun vadeli tahvil getirilerinin çok yıllı zirvelerde kalması ve artan tahvil oynaklığı",
+    "Merkez bankası para politikası değişimleri ve jeopolitik gelişmeler",
+    "Yapay zeka alanındaki aşırı coşku ve güçlü yönetişim gerektiren riskler"
    ],
-   "validUntil": "2026-12-31",
-   "horizon": "2026 yıllık görünümü"
+   "validUntil": "2027-10-12",
+   "horizon": "2026 yıllık görünümü",
+   "context": "Metin, Amundi Araştırma Merkezi ana sayfasına ait makale başlıkları ve genel piyasa gözlemlerinden oluştuğu için belirli temalara yönelik açık ve doğrudan bir yatırım duruşu/önerisi içermemektedir.",
+   "auto": true
   },
   {
    "id": "capitalgroup",
@@ -652,34 +615,108 @@
    "id": "blackrock",
    "n": "BlackRock",
    "archivedAt": "2026-10-13"
+  },
+  {
+   "date": "2025-11-21",
+   "pub": "Global Investment Outlook 2026",
+   "views": {
+    "us_eq": [
+     0,
+     "Nötr"
+    ],
+    "em_eq": [
+     1,
+     "Doğu Avrupa, seçili Latin Amerika ve Asya (Hindistan, Filipinler, Kore)"
+    ],
+    "india_eq": [
+     1,
+     "Orta vadede olumlu"
+    ],
+    "japan_eq": [
+     1,
+     "Kurumsal reform ve zayıf yen"
+    ],
+    "europe_eq": [
+     1,
+     "Finans, sanayi, savunma, yeşil dönüşüm"
+    ],
+    "high_yield": [
+     -1,
+     "ABD yüksek getirili tahvile temkinli"
+    ],
+    "ig_credit": [
+     1,
+     "Kaliteli kredi çekirdek, ağırlık fazla"
+    ],
+    "em_debt": [
+     1,
+     "Yüksek gelir ve çeşitlendirme"
+    ],
+    "gold": [
+     1,
+     "Çeşitlendirici"
+    ],
+    "commodities": [
+     1,
+     "Daha geniş emtia maruziyeti"
+    ]
+   },
+   "url": "https://www.wealthbriefing.com/html/article.php/amundi-leans-towards-emerging-market-assets-in-2026",
+   "type": "haber aktarımı",
+   "id": "amundi",
+   "n": "Amundi",
+   "archivedAt": "2026-10-16"
+  },
+  {
+   "date": "2025-09-30",
+   "pub": "2026 Long-Term Capital Market Assumptions (10–15 yıl)",
+   "views": {
+    "ust_mid": [
+     1,
+     "ABD devlet tahvili beklentisi %4,6: finansal krizden beri en yüksek"
+    ],
+    "high_yield": [
+     0,
+     "Yüksek getirili tahvil %6,1, değişmedi"
+    ],
+    "infrastructure": [
+     1,
+     "Alternatifler portföyü dayanıklı kılar (60/40+)"
+    ]
+   },
+   "url": "https://am.jpmorgan.com/jp/en/asset-management/institutional/insights/portfolio-insights/ltcma/executive-summary/",
+   "type": "birincil",
+   "id": "jpmorgan",
+   "n": "J.P. Morgan AM",
+   "archivedAt": "2026-10-16"
   }
  ],
  "autoRun": {
-  "at": "2026-10-13T15:26:25Z",
+  "at": "2026-10-16T08:30:31Z",
   "log": {
-   "blackrock": "güncellendi → 2026-10-12 (4 görüş)",
-   "vanguard": "değişmedi: https://corporate.vanguard.com/content/corporatesite/us/en/corp/vemo/vemo-return-forecasts.html: RuntimeError gemini-3.8-flash: HTTPError HTTP Error 429: Too Many Requests | gemini-3.8-flash: HTTPError HTTP Error 429: Too Many Req | arama: RuntimeError grounding başarısız: HTTP Error 429: Too Many Requests",
-   "jpmorgan": "değişmedi: https://am.jpmorgan.com/us/en/asset-management/adv/insights/portfolio-insights/ltcma/: tarih geçersiz/eski: 2026-01-01 | https://am.jpmorgan.com/jp/en/asset-management/institutional/insights/portfolio-insights/ltcma/executive-summary/: RuntimeError gemini-3.8-flash: HTTPError HTTP Error 429: Too Many Requests | gemini-3.8-flash: HTTPError HTTP Error 429: Too Many Req | arama: RuntimeError grounding başarısız: HTTP Error 429: Too Many Requests",
-   "goldman": "değişmedi: https://am.gs.com/en-us/advisors/insights/article/investment-outlook: RuntimeError gemini-3.8-flash: HTTPError HTTP Error 429: Too Many Requests | gemini-3.8-flash: HTTPError HTTP Error 429: Too Many Req",
-   "statestreet": "süre doldu, bir sonraki çalışmaya kaldı",
-   "pimco": "süre doldu, bir sonraki çalışmaya kaldı",
-   "amundi": "süre doldu, bir sonraki çalışmaya kaldı",
-   "capitalgroup": "süre doldu, bir sonraki çalışmaya kaldı",
-   "fidelity": "süre doldu, bir sonraki çalışmaya kaldı",
-   "bny": "süre doldu, bir sonraki çalışmaya kaldı"
+   "statestreet": "değişmedi: https://www.ssga.com/us/en/intermediary/insights/global-market-outlook: tarih geçersiz/eski: 2025-11-30 | arama: RuntimeError grounding başarısız: HTTP Error 429: Too Many Requests",
+   "pimco": "değişmedi: https://www.pimco.com/us/en/insights/cyclical-outlook: HTTPError HTTP Error 404: Not Found | arama: RuntimeError grounding başarısız: HTTP Error 429: Too Many Requests",
+   "amundi": "güncellendi → 2026-10-12 (0 görüş)",
+   "capitalgroup": "değişmedi: https://www.capitalgroup.com/individual/insights/categories/outlook.html: RuntimeError gemini-3.8-flash: HTTPError HTTP Error 503: Service Unavailable | gemini-flash-latest: HTTPError HTTP Error 503: Service | arama: RuntimeError grounding başarısız: HTTP Error 429: Too Many Requests",
+   "fidelity": "değişmedi: https://institutional.fidelity.com/advisors/insights/topics/market-commentary: tarih okunamadı | arama: RuntimeError grounding başarısız: HTTP Error 429: Too Many Requests",
+   "bny": "değişmedi: https://www.bny.com/assets/investments/imemea/pdfs/emea_fp_checkpoints_oct26.pdf: HTTPError HTTP Error 404: Not Found | https://www.bny.com/assets/investments/imemea/pdfs/emea_fp_checkpoints_sep26.pdf: HTTPError HTTP Error 404: Not Found | https://www.bny.com/assets/investments/imemea/pdfs/emea_fp_checkpoints_aug26.pdf: HTTPError HTTP Error 404: Not Found | https://www.bny.com/assets/investments/imemea/pdfs/emea_fp_checkpoints_july26.pdf: HTTPError HTTP Error 404: Not Found | https://www.bny.com/assets/investments/imemea/pdfs/emea_fp_checkpoints_jul26.pdf: HTTPError HTTP Error 404: Not Found |",
+   "blackrock": "değişmedi: https://www.blackrock.com/corporate/insights/blackrock-investment-institute/publications/weekly-commentary: yeni değil (2026-10-12 ≤ 2026-10-12) | https://www.blackrock.com/us/individual/insights/blackrock-investment-institute/weekly-commentary: RuntimeError gemini-3.8-flash: HTTPError HTTP Error 503: Service Unavailable | gemini-flash-latest: HTTPError HTTP Error 503: Service | arama: RuntimeError grounding başarısız: HTTP Error 429: Too Many Requests",
+   "vanguard": "değişmedi: https://corporate.vanguard.com/content/corporatesite/us/en/corp/vemo/vemo-return-forecasts.html: yeni değil (2026-07-22 ≤ 2026-07-22) | arama: RuntimeError grounding başarısız: HTTP Error 429: Too Many Requests",
+   "jpmorgan": "güncellendi → 2026-10-01 (2 görüş)",
+   "goldman": "değişmedi: https://am.gs.com/en-us/advisors/insights/article/investment-outlook: tarih geçersiz/eski: 2025-10-24 | arama: RuntimeError grounding başarısız: HTTP Error 429: Too Many Requests"
   },
   "checked": {
-   "blackrock": "2026-10-13T15:16:24Z",
-   "vanguard": "2026-10-13T15:18:59Z",
-   "jpmorgan": "2026-10-13T15:24:29Z",
-   "goldman": "2026-10-13T15:26:25Z",
-   "statestreet": "2026-10-13T15:09:41Z",
-   "pimco": "2026-10-13T15:09:59Z",
-   "amundi": "2026-10-13T15:10:41Z",
-   "capitalgroup": "2026-10-13T15:11:12Z",
-   "fidelity": "2026-10-13T15:12:42Z",
-   "bny": "2026-10-13T15:13:09Z"
+   "blackrock": "2026-10-16T08:26:40Z",
+   "vanguard": "2026-10-16T08:27:52Z",
+   "jpmorgan": "2026-10-16T08:29:04Z",
+   "goldman": "2026-10-16T08:30:31Z",
+   "statestreet": "2026-10-16T08:20:24Z",
+   "pimco": "2026-10-16T08:21:00Z",
+   "amundi": "2026-10-16T08:21:30Z",
+   "capitalgroup": "2026-10-16T08:22:49Z",
+   "fidelity": "2026-10-16T08:24:00Z",
+   "bny": "2026-10-16T08:24:40Z"
   },
-  "sec": 719
+  "sec": 672
  }
 }
