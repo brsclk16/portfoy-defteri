@@ -1,6 +1,89 @@
 {
  "reports": [
   {
+   "id": "2026-W42",
+   "weekEnd": "2026-10-16",
+   "range": "12–16 Ekim 2026",
+   "publishedAt": "2026-10-16T22:40:54Z",
+   "title": "AI finansman kaygısı ve sıcak enflasyon: Dell %23, Credo %22 düştü",
+   "movers": [
+    {
+     "t": "AGNG",
+     "pct": 3.31
+    },
+    {
+     "t": "IAU",
+     "pct": -0.66
+    },
+    {
+     "t": "SLV",
+     "pct": -5.97
+    },
+    {
+     "t": "XBI",
+     "pct": -6.13
+    },
+    {
+     "t": "COPX",
+     "pct": -6.73
+    },
+    {
+     "t": "ASML",
+     "pct": -7.8
+    },
+    {
+     "t": "SMH",
+     "pct": -10.53
+    },
+    {
+     "t": "SOXX",
+     "pct": -11.8
+    },
+    {
+     "t": "AMD",
+     "pct": -13.05
+    },
+    {
+     "t": "VRT",
+     "pct": -14.98
+    },
+    {
+     "t": "CRDO",
+     "pct": -21.63
+    },
+    {
+     "t": "DELL",
+     "pct": -22.95
+    }
+   ],
+   "summary": [
+    "Portföy açısından yılın en sert haftalarından biri yaşandı. Yapay zekâ yatırımlarının nasıl finanse edileceğine dair soru işaretleri (CoreWeave tahvillerindeki satış, Broadcom CEO'su Hock Tan'ın sermayeye erişim uyarısı) ile beklentinin üzerinde gelen ABD enflasyonu aynı haftaya denk geldi. 12 enstrümandan yalnızca AGNG (+%3,3) artıda kapattı; en kötüsü %23,0 düşüşle Dell oldu, Credo %21,6 ile onu izledi. S&P 500 (SPY) %2,0 gerilerken eşit ağırlıklı portföy ortalaması yaklaşık %9,9 eksi; yani endeksin yaklaşık 8 puan gerisinde. Nasdaq 100 haftayı yaklaşık %5,5 kayıpla, Philadelphia yarı iletken endeksi cuma günü üst üste sekizinci düşüşüyle kapattı.",
+    "Yarı iletkenlerde SMH %10,5, SOXX %11,8 geriledi; AMD %13,1 kaybetti. Satışın kaynağı talep değil finansman ve değerleme kaygısıydı: TSMC 3. çeyrekte geliri %50,9 artışla 46,4 milyar $'a, net kârı %68,7 artışla 23,7 milyar $'a çıkararak rekor kırdı, ASML de rekor kâr açıklayıp 2026 satış tahminini yükseltti; buna rağmen ikisinin hisseleri de düştü (ASML −%7,8). Bellek tarafında Çinli CXMT'nin ilerlemesi ve arz fazlası endişesi Micron ve SK Hynix'i vurdu, bu da SOXX'i SMH'den daha fazla etkiledi. AI altyapısında en ağır darbeyi kaldıraçlı ve değerlemesi yükselmiş isimler aldı: Barclays'in notu düşürmesiyle Dell salı günü %11,3, çarşamba %6,8 düştü; Credo pazartesi %7,3, çarşamba %9,6 kaybetti; Vertiv 21 Ekim'deki bilançosu öncesinde %15,0 geriledi. Para savunmacı sektörlere döndü: AbbVie ve Eli Lilly rekor seviyelere yaklaşırken AGNG %3,3 kazandı; XBI ise cuma günkü %3,6'lık düşüşle haftayı %6,1 eksi kapattı. Metallerde ons altın %0,7, IAU %0,7 geriledi; Fed'in faiz artırabileceği beklentisi altını baskılasa da düşüş sınırlı kaldı. Gümüş (SLV) %6,0, bakır madencileri (COPX) %6,7 düştü; bakırda ABD enflasyonu ve Şili'deki grev riskinin azalması fiyatları aşağı çekti.",
+    "Dolar/TL %0,5 yükselerek 49,52'ye çıktı ve TL bazında kayıpları aynı oranda hafifletti: TL'de SPY yaklaşık %1,5, IAU %0,1 ekside; Dell %22,5, Credo %21,2 kayıpta, eşit ağırlıklı portföy ortalaması TL'de yaklaşık %9,4 eksi. Çeşitlendirme bu hafta yalnızca kısmen işe yaradı: altın ve AGNG tampon görevi gördü, ama biyotek, gümüş ve bakır da genel risk iştahı kaybıyla düştü. 12 enstrümanın 7'sinin yapay zekâ temasına bağlı olması, faiz ve finansman kaygısı aynı anda yükseldiğinde portföyün büyük bölümünün birlikte hareket ettiğini açıkça gösterdi."
+   ],
+   "highlights": [
+    "ABD enflasyonu: Eylül TÜFE yıllık %3,7 ile %3,6 beklentisini aştı (Ağustos %3,4); çekirdek TÜFE aylık %0,3 ile %0,2 beklentinin üzerinde geldi. CME FedWatch'a göre Ekim toplantısında faiz artırımı olasılığı %51,5'e çıktı; 10 yıllık ABD tahvil faizi hafta içinde %5,3'e kadar yükseldi, cuma %5,09'da kapandı.",
+    "CoreWeave: Tahvil getirilerinin %15 civarına çıkması AI altyapısının borçla finansmanını sorgulattı; Nvidia CEO'su Jensen Huang'ın kaygıları önemsiz bulması perşembe kısa bir rahatlama sağladı, ancak cuma CoreWeave yaklaşık %12 düştü ve AMD (−%6,0), Micron, Broadcom da sert geriledi.",
+    "Dell (−%23,0): Barclays notu 'Overweight'tan 'Equal Weight'e indirdi, hedefi 574 $; kurumsal AI harcamalarında anlamlı bir dönüş görmediğini ve donanım büyümesinin önemli kısmının bellek fiyat artışından geldiğini savundu. Hisse 451,5 $ ile analistlerin ortalama hedefi 593 $'ın belirgin altına indi.",
+    "TSMC ve ASML: TSMC altıncı çeyrek üst üste rekor kâr açıkladı ve ileri teknoloji talebinin kapasiteyi aştığını teyit etti. ASML'nin Çin'e satışları çeyreklik %109 arttı, şirket Çin'in yıllık satışlardaki payının ~%20 olmasını bekliyor; Tayvan'ın Çin'e AI çipi ihracatını sıkılaştırma hazırlığı bu açıdan izlenmeli.",
+    "Sağlık rotasyonu: AbbVie–Genmab'in epcoritamab Faz 3 çalışmasında hastalık ilerleme riskini %51 azaltması ve Merck–Moderna'nın kanser aşısı çalışmalarını genişletmesi sektöre ilgiyi artırdı; Moderna yıl başından bu yana yaklaşık yedi kat yükselerek rekor gördü (AGNG, XBI).",
+    "Bakır: Anglo American CEO'su AI ve veri merkezleri kaynaklı bakır kıtlığı nedeniyle teknoloji şirketlerinden yoğun ilgi gördüklerini söyledi; Teck ile planlanan 54 milyar $'lık birleşmede kritik onay Çin'de bekliyor (COPX)."
+   ],
+   "nextWeek": [
+    "20 Ekim (salı, kapanış sonrası): Intuitive Surgical ve Netflix bilançoları — sağlık rotasyonunun sürüp sürmediği açısından AGNG için gösterge niteliğinde.",
+    "21 Ekim (çarşamba): Vertiv 3. çeyrek bilançosu — haftada %15 düşen VRT için doğrudan; veri merkezi sipariş defteri Dell ve Credo'daki AI altyapı kaygılarına da ışık tutacak. Aynı gün kapanış sonrası Lam Research ve Texas Instruments bilançoları SMH/SOXX ve ASML için ekipman ve analog talebi okuması sunacak.",
+    "22 Ekim (perşembe): TCMB faiz kararı (mevcut politika faizi %37) — dolar/TL üzerinden tüm pozisyonların TL getirisini etkiler; aynı gün ABD haftalık işsizlik başvuruları.",
+    "23 Ekim (cuma): Michigan tüketici güveni (beklenti 46,3, önceki 48,1) — 28 Ekim Fed toplantısı öncesinde faiz artırımı beklentilerini şekillendirecek son verilerden; tahvil faizleri çip ve AI altyapı hisselerinin değerlemesini doğrudan etkiliyor.",
+    "Bir sonraki hafta (26–29 Ekim): Southern Copper (26 Ekim) ve Teck (29 Ekim) bilançoları COPX için, Fed kararı (28 Ekim) ise tüm portföy için ana olay."
+   ],
+   "watch": [
+    "Faiz riski: Fed'in 28 Ekim'de faiz artırma olasılığı yarı yarıya fiyatlanıyor; 10 yıllık faizin %5'in üzerinde kalması yüksek çarpanlı çip ve AI altyapı hisselerinde baskıyı sürdürebilir.",
+    "AI finansman zinciri: CoreWeave gibi borçla büyüyen altyapı şirketlerinin kredi maliyetleri izlenmeli; buradaki gerilim Dell, Vertiv, Credo ve AMD'nin müşteri talebine dolaylı olarak yansıyabilir.",
+    "Yoğunlaşma: 12 enstrümanın 7'si aynı temaya bağlı; bu hafta portföy ile S&P 500 arasındaki ~8 puanlık fark, tema bazlı riskin ne kadar büyük olabileceğini gösterdi.",
+    "Çin ve ihracat kısıtları: Tayvan'ın Çin'e AI çipi satışlarını kısıtlama hazırlığı ve Çinli bellek üreticilerinin ilerlemesi hem ASML'nin Çin gelirini hem de SOXX'teki bellek ağırlığını etkileyebilir."
+   ]
+  },
+  {
    "id": "2026-W41",
    "weekEnd": "2026-10-09",
    "range": "5–9 Ekim 2026",
