@@ -1,6 +1,51 @@
 {
- "updatedAt": "2026-10-15T06:00:00Z",
+ "updatedAt": "2026-10-16T05:55:58Z",
  "cards": [
+  {
+   "id": "TSM-2026Q3",
+   "t": "TSM",
+   "company": "Taiwan Semiconductor Manufacturing (TSMC)",
+   "date": "2026-10-15",
+   "quarter": "Q3 2026",
+   "time": "piyasa öncesi",
+   "rev": {
+    "act": 46.72,
+    "unit": "mlr $",
+    "yoy": 41
+   },
+   "guidance": "4. çeyrek için 52,3–54,3 mlr $ gelir öngörüldü; 2026 büyüme beklentisi yaklaşık %44.",
+   "highlights": [
+    "Gelir ve kâr beklentileri aştı; şirket üst üste rekor kâr açıkladı.",
+    "Yapay zekâ çip talebiyle HPC'nin satışlardaki payı %68'e çıktı.",
+    "4. çeyrek gelir rehberi piyasa beklentilerinin üzerinde verildi.",
+    "Şirket ABD'de (Teksas dahil) ek fabrika seçeneklerini değerlendiriyor; tüketici pazarlarında baskı uyarısı yaptı."
+   ],
+   "affects": [
+    {
+     "t": "SMH",
+     "note": "fonun en büyük holdinglerinden"
+    },
+    {
+     "t": "SOXX",
+     "note": "fon holdingi"
+    }
+   ],
+   "summary": "TSMC, yapay zekâ talebiyle beklentileri aşan bir çeyrek ve güçlü bir 4. çeyrek rehberi açıkladı. Buna rağmen ABD işlemlerinde hisse, yapay zekâ hisselerindeki genel satışla yaklaşık %2 geriledi.",
+   "sources": [
+    {
+     "title": "Motley Fool — TSMC Q3 2026 kazanç çağrısı dökümü",
+     "url": "https://www.fool.com/earnings/call-transcripts/2026/10/15/tsmc-tsm-q3-2026-earnings-call-transcript/"
+    },
+    {
+     "title": "Quartz — TSMC rekor kâr ve 4. çeyrek öngörüsü",
+     "url": "https://qz.com/tsmc-record-profit-ai-chip-demand-101526"
+    },
+    {
+     "title": "SiliconANGLE — güçlü sonuçlara rağmen hisse düştü",
+     "url": "https://siliconangle.com/2026/10/15/tsmc-posts-strong-third-quarter-results-but-shares-drop-amid-ai-selloff/"
+    }
+   ]
+  },
   {
    "id": "ASML-2026Q3",
    "t": "ASML",
