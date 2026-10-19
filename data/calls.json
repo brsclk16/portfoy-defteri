@@ -348,6 +348,37 @@
   ],
   "TSM": [
    {
+    "q": "Q3 2026",
+    "date": "2026-10-15",
+    "tone": "olumlu",
+    "toneChg": "önceki çeyreğe göre daha olumlu",
+    "summary": "TSMC 3. çeyrekte geliri çeyreklik %16,2 artırarak 46,7 milyar dolara çıkardı ve kendi verdiği 44,6-45,8 milyar dolarlık aralığın üzerine geçti; büyümenin ana kaynağı yine yapay zekâ ve HPC talebiydi. Brüt marj 2 nm geçişinin etkisiyle 1,3 puan gerileyerek %66,4'e indi, ancak yönetim yıllık büyüme beklentisini yaklaşık %44'e yükseltti ve talebin hâlâ arzın üzerinde olduğunu vurguladı.",
+    "guidance": "4. çeyrek için gelir 52,3-54,3 milyar dolar (orta noktada çeyreklik yaklaşık %14, yıllık %58 artış), brüt marj %65-67, faaliyet marjı %56,5-58,5 öngörülüyor (1 dolar = 31,8 TWD). 2026 dolar bazlı gelir artışı beklentisi yaklaşık %44'e çıkarıldı; yatırım bütçesi 60-64 milyar dolarda korundu.",
+    "highlights": [
+     "HPC gelirleri çeyreklik %22 artışla toplamın %68'ine ulaştı; akıllı telefon payı %21, otomotiv geliri çeyreklik %23 büyüdü",
+     "7 nm ve altı teknolojiler wafer gelirinin %79'u oldu; 2 nm payı bir çeyrekte %3'ten %8'e yükseldi, 3 nm %33, 5 nm %28",
+     "Faaliyet marjı %58,7, hisse başı kâr 29,43 TWD, özsermaye kârlılığı %45,5; çeyreklik yatırım harcaması 13,8 milyar dolar",
+     "Yurt dışı fabrikaların 2026'daki marj seyreltmesinin yaklaşık 2 puan olacağı, N2 ailesi kapasitesinin 2027'de iki katından fazla artacağı belirtildi"
+    ],
+    "qa": [
+     "Enerji, HBM ve alt tabaka gibi tedarik kısıtları soruldu; C.C. Wei talebin arzın üzerinde kaldığını ve 2024-2029 için verilen yapay zekâ hızlandırıcı büyüme tahmininin (yıllık ortalama %50'lerin ortası-üstü) muhtemelen aşılacağını söyledi.",
+     "2027 kapasite artışı ve 2026 sonrası yatırım bütçesi için rakam istendi; yönetim bunun için erken olduğunu, ekipman fiyat enflasyonunun gerçek olduğunu ama gelir büyümesinin yatırım büyümesini geçmesinin beklendiğini belirtti.",
+     "Gelişmiş paketlemede Intel'in EMIB-T çözümüyle rekabet ve High-NA EUV zamanlaması gündeme geldi; Wei CoWoS'un müşterilerin ilk tercihi olmaya devam ettiğini, High-NA'yı olgunlaştığında 2030'da kullanacaklarını söyledi.",
+     "ABD'de Texas genişlemesi ve bir müşterinin 'Terafab' projesi soruldu; yönetim değerlendirmenin sürdüğünü ancak fabrikayı TSMC'nin işletmesi gerektiğini, henüz karar olmadığını ifade etti."
+    ],
+    "risks": [
+     "2 nm üretim artışı ve yurt dışı fabrikalar nedeniyle marj baskısı; yurt dışı seyreltmenin beş yıllık dönemin ikinci yarısında 3-4 puana çıkması bekleniyor",
+     "Ekipman fiyatlarındaki artış ve arka uç (paketleme) kapasitesindeki sıkışıklık",
+     "Bir IDM müşterisinin üretimi içselleştirme ihtimali ve gelişmiş paketlemede artan rekabet"
+    ],
+    "sources": [
+     {
+      "title": "TSMC 3Q26 Earnings Conference Call Transcript (investor.tsmc.com)",
+      "url": "https://investor.tsmc.com/english/encrypt/files/encrypt_file/reports/2026-10/eba4fac72873bf546b669bd2b5d973df5c93215d/TSMC%203Q26%20Transcript.pdf"
+     }
+    ]
+   },
+   {
     "q": "Q2 2026",
     "date": "2026-07-16",
     "tone": "olumlu",
@@ -957,5 +988,5 @@
    }
   ]
  },
- "updatedAt": "2026-10-15T07:51:56Z"
+ "updatedAt": "2026-10-19T07:40:27Z"
 }
