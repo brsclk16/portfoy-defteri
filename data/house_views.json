@@ -1,5 +1,5 @@
 {
- "updatedAt": "2026-10-16",
+ "updatedAt": "2026-10-20",
  "note": "Büyük varlık yöneticilerinin yayımlanmış görünümlerinden derlendi. Duruş: 1 olumlu/ağırlık artır, 0 nötr, -1 olumsuz/ağırlık azalt. Her görüş kendi yayın tarihindedir; her görüşün geçerlilik tarihi (validUntil) yayının ufkuna göre konur; geçenler 'eski' sayılır ve uzlaşıya katılmaz. Kaynak bağlantıları birincil yayın ya da yayını aktaran haber/uygulayıcı sayfasıdır (tür alanında belirtilir). Bu kurumların kısa vadeli görünümleri sık yanılır; sitede her görüş, yayın tarihinden bu yana temanın gerçekte ne yaptığıyla karnelenir.",
  "themes": {
   "us_eq": {
@@ -138,40 +138,50 @@
    "id": "blackrock",
    "n": "BlackRock",
    "brand": "iShares",
-   "pub": "Weekly market commentary | BlackRock",
-   "date": "2026-10-12",
+   "pub": "Weekly market commentary",
+   "date": "2026-10-19",
    "type": "otomatik: kaynak metninden özet",
    "url": "https://www.blackrock.com/corporate/insights/blackrock-investment-institute/publications/weekly-commentary",
    "views": {
     "us_eq": [
      0,
-     "ABD hisselerindeki ağırlık artır pozisyonu kısa vadeli risk yönetimi amacıyla nötre düşürüldü."
+     "AI'yi nötr duruşumuz içinde desteklemeye devam ediyoruz"
     ],
-    "ai_semis": [
-     0,
-     "Nötr duruş içerisinde yapay zeka ve teknoloji tercih edilmeye devam ediliyor."
-    ],
-    "ust_long": [
-     0,
-     "Geliri sabitlemek amacıyla ABD uzun vadeli tahvillerindeki ağırlık azalt pozisyonu nötre yükseltildi."
-    ],
-    "short_bonds": [
+    "ust_mid": [
      1,
-     "Verim artışlarına karşı daha büyük gelir tamponu sunduğu için ön uç (kısa vadeli) tahviller ağırlık artır konuma getirildi."
+     "Hala kısa vadelileri tercih ederek ABD Hazine tahvillerini yükselttik"
+    ],
+    "japan_eq": [
+     -1,
+     "Japonya’nın devlet tahvillerinde eğrinin istisnai derecede dik olması nedeniyle daha az underweight olduk"
+    ],
+    "em_debt": [
+     1,
+     "Özellikle Latin Amerika'da gelişen piyasa yerel para birimi borcunu tercih etme eğilimini sürdürüyoruz"
+    ],
+    "high_yield": [
+     1,
+     "Kredi piyasalarında yüksek dereceli yüksek getirili tahvillerde tatlı noktayı bularak ters barbell yaklaşımını tercih ediyoruz"
+    ],
+    "ig_credit": [
+     -1,
+     "Yatırım yapılabilir derecede yapay zeka ile ilgili ihraç baskılarından ve en zayıf borçlular arasındaki yeniden finansman risklerinden kaçınıyoruz"
     ]
    },
    "strengths": [
-    "Yapay zeka (AI) fundemantals inancı korunmaktadır.",
-    "Yüksek getiriler potansiyel getiri oranlarını iyileştirmektedir."
+    "Daha yüksek tahvil getirileri, yatırımcıların gelir için eskisi kadar uzağa gitmek zorunda kalmamasını sağlıyor",
+    "Avrupa Merkez Bankası, piyasa stresi artarsa tepki verecek daha fazla araca sahip",
+    "Euro bölgesindeki bugünkü başlangıç noktası, euro bölgesi borç krizine kıyasla maddesel olarak farklı"
    ],
    "risks": [
-    "Yapay zeka (AI) yapılanması etrafındaki potansiyel oynaklık.",
-    "ABD TÜFE ve ÜFE verilerinin Fed beklentilerini ve tahvil getirilerini değiştirme riski.",
-    "Olası aşırı Fed sıkılaştırma beklentileri."
+    "Sermaye için yoğunlaşan rekabet, borçluları daha sıkı bir inceleme altına sokuyor",
+    "Fransa'nın 10 yıllık tahvil getirisi yüzde 5'e yaklaştı ve Alman Bund'larına kıyasla makaslar genişliyor",
+    "Teknoloji hisseleri, yapay zeka altyapısının rekor hızdaki gelişimine yönelik incelemeler nedeniyle baskı altında kaldı",
+    "Fransa'nın mali ve siyasi riskleri yatırımcıların ek tazminat talep etmesine yol açıyor"
    ],
-   "validUntil": "2027-01-12",
+   "validUntil": "2027-01-19",
    "horizon": "taktik görüş, bir sonraki yeniden dengelemeye kadar",
-   "context": "BlackRock, gelir sabitlemek ve piyasa rejimine dinamik yaklaşmak amacıyla ABD tahvillerini nötre ve kısa vadelileri ağırlık artırıma yükseltirken, ABD hisselerini nötre düşürmüştür.",
+   "context": "Yüksek tahvil getirileri yeni yatırım fırsatları yaratırken, sermaye için artan rekabet borçlular üzerindeki denetimi artırmakta ve yatırımcıların seçici olmasını gerektirmektedir.",
    "auto": true
   },
   {
@@ -220,11 +230,11 @@
    "views": {
     "us_eq": [
      1,
-     "Profit margins of over 15% push our U.S. large cap equity forecast up 80bps, to 7.5%."
+     "%15'in üzerindeki kâr marjları, ABD'deki büyük sermaye sermayesi tahminimizi 80 baz puan artırarak %7,5'e yükseltiyor."
     ],
     "infrastructure": [
      1,
-     "Global infrastructure is returning 7.1% as real asset returns are resilient in the face of persistent inflation volatility."
+     "Kalıcı enflasyon oynaklığı karşısında reel varlık getirilerinin dirençli olması nedeniyle küresel altyapı %7,1 getiri sağlıyor."
     ]
    },
    "strengths": [
@@ -378,73 +388,67 @@
    "n": "Amundi",
    "brand": "Amundi (ETF'leri çoğunlukla Avrupa borsalarında, UCITS)",
    "pub": "Amundi Research Center",
-   "date": "2026-10-12",
+   "date": "2026-10-19",
    "type": "otomatik: kaynak metninden özet",
    "url": "https://research-center.amundi.com/",
    "views": {},
    "strengths": [
-    "Sabit getirili varlıklarda ve seçilmiş hisse senedi piyasalarında beklenen getirilerin iyileşmesi",
-    "Yapay zekanın sunduğu kayda değer ekonomik büyüme fırsatları",
-    "Hindistan'ın imalat ve tüketici harcamaları dinamikleriyle süregelen dönüşümü"
+    "IMF'nin 2026 küresel büyüme tahminini %3.1'e yükseltmesi",
+    "Sabit getirili ve seçilmiş hisse senedi piyasalarında beklenen getirilerin iyileşmesi"
    ],
    "risks": [
-    "Uzun vadeli tahvil getirilerinin çok yıllı zirvelerde kalması ve artan tahvil oynaklığı",
-    "Merkez bankası para politikası değişimleri ve jeopolitik gelişmeler",
-    "Yapay zeka alanındaki aşırı coşku ve güçlü yönetişim gerektiren riskler"
+    "Artan tahvil getirileri ve tahvil oynaklığı",
+    "Değişen para politikaları",
+    "Jeopolitik gelişmeler"
    ],
-   "validUntil": "2027-10-12",
+   "validUntil": "2027-10-19",
    "horizon": "2026 yıllık görünümü",
-   "context": "Metin, Amundi Araştırma Merkezi ana sayfasına ait makale başlıkları ve genel piyasa gözlemlerinden oluştuğu için belirli temalara yönelik açık ve doğrudan bir yatırım duruşu/önerisi içermemektedir.",
+   "context": "Metin, yapay zeka yatırım patlamasının desteğiyle IMF'nin 2026 küresel büyüme tahminini yukarı yönlü revize ettiğini, tahvil getirilerinin ve oynaklığın yüksek seyrettiğini belirtmektedir ancak belirli varlık sınıfları için doğrudan portföy yönlendirmesi veya duruşu içermemektedir.",
    "auto": true
   },
   {
    "id": "capitalgroup",
    "n": "Capital Group",
    "brand": "Capital Group",
-   "pub": "2026 Outlook: Global Resilience Takes Center Stage",
-   "date": "2025-12-16",
-   "type": "birincil",
-   "url": "https://capitalgroup.com/about-us/news-room/capital-group-issues-2026-investment-outlook.html",
+   "pub": "2026 Midyear Investment Outlook | Capital Group",
+   "date": "2026-06-24",
+   "type": "otomatik: kaynak metninden özet",
+   "url": "https://www.capitalgroup.com/individual/insights/categories/outlook.html",
    "views": {
-    "europe_eq": [
+    "ai_semis": [
      1,
-     "Altyapı ve savunma harcamasıyla maliye genişlemesi"
-    ],
-    "japan_eq": [
-     1,
-     "Maliye genişlemesi ve kurumsal reform"
-    ],
-    "industrials_def": [
-     1,
-     "Yatırım harcamasına bağlı sanayi"
-    ],
-    "financials": [
-     1,
-     "Düzenleme değişikliklerinden fayda"
-    ],
-    "energy": [
-     1,
-     "Enerji ve taşımacılık"
+     "Yapay zeka patlamasından faydalanan NVIDIA, Broadcom ve TSMC gibi yarı iletken şirketlerine talep artıyor."
     ],
     "ai_infra": [
      1,
-     "İleri çipler, enerji altyapısı, robotik"
+     "Amazon, Alphabet, Meta, Microsoft ve Oracle gibi devlerin sermaye yatırımları Çin'in endüstriyel patlamasını aşacak hızda."
     ],
-    "short_bonds": [
+    "em_eq": [
      1,
-     "Nakde alternatif kısa vade tahvil"
+     "Gelişmekte olan piyasalarda kurumsal kazançların bu yıl toplamda %49.2 oranında büyümesi bekleniyor."
+    ],
+    "china_eq": [
+     1,
+     "Çin hisseleri için 2026 yılı kazanç büyümesi tahmini %5.2 seviyesindedir."
+    ],
+    "ig_credit": [
+     1,
+     "Yatırımcılar cazip verimlerden ödün vermeden yüksek kaliteli tahvillerde yer alabilir."
     ]
    },
    "strengths": [
-    "Liderlik teknolojiden daha dengeli bir piyasaya genişliyor",
-    "Gümrük belirsizliği azalıyor"
+    "Şirket karlarındaki güçlü büyüme hisse senedi piyasası kazançlarını desteklemektedir.",
+    "Tahviller, portföylere daha güçlü getiri potansiyeli ve daha iyi çeşitlendirme sunmaktadır.",
+    "Yüksek başlangıç getirileri getirileri desteklemeye ve dalgalanmayı tamponlamaya yardımcı olabilir."
    ],
    "risks": [
-    "İşgücü piyasasında zayıflık",
-    "Yüksek AI değerlemeleri"
+    "İran'daki savaş belirsizlik eklemekte ve enflasyon endişelerini artırmaktadır.",
+    "Yüksek petrol fiyatları piyasayı etkileyen konular arasındadır."
    ],
-   "validUntil": "2026-12-31",
-   "horizon": "2026 yıllık görünümü"
+   "validUntil": "2027-06-24",
+   "horizon": "2026 yıllık görünümü",
+   "context": "Capital Group'un 2026 Yıl Ortası Görünüm raporu; savaşlar, yapay zeka yayılımı, enflasyon, yüksek petrol fiyatları ve ABD ara seçimleri gibi piyasayı yönlendiren konuları ele alarak öz sermaye ve sabit getirili yatırım temalarını belirlemektedir.",
+   "auto": true
   },
   {
    "id": "fidelity",
@@ -689,34 +693,110 @@
    "id": "jpmorgan",
    "n": "J.P. Morgan AM",
    "archivedAt": "2026-10-16"
+  },
+  {
+   "date": "2026-10-12",
+   "pub": "Amundi Research Center",
+   "views": {},
+   "url": "https://research-center.amundi.com/",
+   "type": "otomatik: kaynak metninden özet",
+   "id": "amundi",
+   "n": "Amundi",
+   "archivedAt": "2026-10-20"
+  },
+  {
+   "date": "2025-12-16",
+   "pub": "2026 Outlook: Global Resilience Takes Center Stage",
+   "views": {
+    "europe_eq": [
+     1,
+     "Altyapı ve savunma harcamasıyla maliye genişlemesi"
+    ],
+    "japan_eq": [
+     1,
+     "Maliye genişlemesi ve kurumsal reform"
+    ],
+    "industrials_def": [
+     1,
+     "Yatırım harcamasına bağlı sanayi"
+    ],
+    "financials": [
+     1,
+     "Düzenleme değişikliklerinden fayda"
+    ],
+    "energy": [
+     1,
+     "Enerji ve taşımacılık"
+    ],
+    "ai_infra": [
+     1,
+     "İleri çipler, enerji altyapısı, robotik"
+    ],
+    "short_bonds": [
+     1,
+     "Nakde alternatif kısa vade tahvil"
+    ]
+   },
+   "url": "https://capitalgroup.com/about-us/news-room/capital-group-issues-2026-investment-outlook.html",
+   "type": "birincil",
+   "id": "capitalgroup",
+   "n": "Capital Group",
+   "archivedAt": "2026-10-20"
+  },
+  {
+   "date": "2026-10-12",
+   "pub": "Weekly market commentary | BlackRock",
+   "views": {
+    "us_eq": [
+     0,
+     "ABD hisselerindeki ağırlık artır pozisyonu kısa vadeli risk yönetimi amacıyla nötre düşürüldü."
+    ],
+    "ai_semis": [
+     0,
+     "Nötr duruş içerisinde yapay zeka ve teknoloji tercih edilmeye devam ediliyor."
+    ],
+    "ust_long": [
+     0,
+     "Geliri sabitlemek amacıyla ABD uzun vadeli tahvillerindeki ağırlık azalt pozisyonu nötre yükseltildi."
+    ],
+    "short_bonds": [
+     1,
+     "Verim artışlarına karşı daha büyük gelir tamponu sunduğu için ön uç (kısa vadeli) tahviller ağırlık artır konuma getirildi."
+    ]
+   },
+   "url": "https://www.blackrock.com/corporate/insights/blackrock-investment-institute/publications/weekly-commentary",
+   "type": "otomatik: kaynak metninden özet",
+   "id": "blackrock",
+   "n": "BlackRock",
+   "archivedAt": "2026-10-20"
   }
  ],
  "autoRun": {
-  "at": "2026-10-16T08:30:31Z",
+  "at": "2026-10-20T08:51:42Z",
   "log": {
    "statestreet": "değişmedi: https://www.ssga.com/us/en/intermediary/insights/global-market-outlook: tarih geçersiz/eski: 2025-11-30 | arama: RuntimeError grounding başarısız: HTTP Error 429: Too Many Requests",
    "pimco": "değişmedi: https://www.pimco.com/us/en/insights/cyclical-outlook: HTTPError HTTP Error 404: Not Found | arama: RuntimeError grounding başarısız: HTTP Error 429: Too Many Requests",
-   "amundi": "güncellendi → 2026-10-12 (0 görüş)",
-   "capitalgroup": "değişmedi: https://www.capitalgroup.com/individual/insights/categories/outlook.html: RuntimeError gemini-3.8-flash: HTTPError HTTP Error 503: Service Unavailable | gemini-flash-latest: HTTPError HTTP Error 503: Service | arama: RuntimeError grounding başarısız: HTTP Error 429: Too Many Requests",
+   "amundi": "güncellendi → 2026-10-19 (0 görüş)",
+   "capitalgroup": "güncellendi → 2026-06-24 (5 görüş)",
    "fidelity": "değişmedi: https://institutional.fidelity.com/advisors/insights/topics/market-commentary: tarih okunamadı | arama: RuntimeError grounding başarısız: HTTP Error 429: Too Many Requests",
    "bny": "değişmedi: https://www.bny.com/assets/investments/imemea/pdfs/emea_fp_checkpoints_oct26.pdf: HTTPError HTTP Error 404: Not Found | https://www.bny.com/assets/investments/imemea/pdfs/emea_fp_checkpoints_sep26.pdf: HTTPError HTTP Error 404: Not Found | https://www.bny.com/assets/investments/imemea/pdfs/emea_fp_checkpoints_aug26.pdf: HTTPError HTTP Error 404: Not Found | https://www.bny.com/assets/investments/imemea/pdfs/emea_fp_checkpoints_july26.pdf: HTTPError HTTP Error 404: Not Found | https://www.bny.com/assets/investments/imemea/pdfs/emea_fp_checkpoints_jul26.pdf: HTTPError HTTP Error 404: Not Found |",
-   "blackrock": "değişmedi: https://www.blackrock.com/corporate/insights/blackrock-investment-institute/publications/weekly-commentary: yeni değil (2026-10-12 ≤ 2026-10-12) | https://www.blackrock.com/us/individual/insights/blackrock-investment-institute/weekly-commentary: RuntimeError gemini-3.8-flash: HTTPError HTTP Error 503: Service Unavailable | gemini-flash-latest: HTTPError HTTP Error 503: Service | arama: RuntimeError grounding başarısız: HTTP Error 429: Too Many Requests",
+   "blackrock": "güncellendi → 2026-10-19 (6 görüş)",
    "vanguard": "değişmedi: https://corporate.vanguard.com/content/corporatesite/us/en/corp/vemo/vemo-return-forecasts.html: yeni değil (2026-07-22 ≤ 2026-07-22) | arama: RuntimeError grounding başarısız: HTTP Error 429: Too Many Requests",
-   "jpmorgan": "güncellendi → 2026-10-01 (2 görüş)",
+   "jpmorgan": "değişmedi: https://am.jpmorgan.com/us/en/asset-management/adv/insights/portfolio-insights/ltcma/: yeni değil (2026-09-01 ≤ 2026-10-01) | https://am.jpmorgan.com/jp/en/asset-management/institutional/insights/portfolio-insights/ltcma/executive-summary/: yeni değil (2026-10-01 ≤ 2026-10-01) | arama: RuntimeError grounding başarısız: HTTP Error 429: Too Many Requests",
    "goldman": "değişmedi: https://am.gs.com/en-us/advisors/insights/article/investment-outlook: tarih geçersiz/eski: 2025-10-24 | arama: RuntimeError grounding başarısız: HTTP Error 429: Too Many Requests"
   },
   "checked": {
-   "blackrock": "2026-10-16T08:26:40Z",
-   "vanguard": "2026-10-16T08:27:52Z",
-   "jpmorgan": "2026-10-16T08:29:04Z",
-   "goldman": "2026-10-16T08:30:31Z",
-   "statestreet": "2026-10-16T08:20:24Z",
-   "pimco": "2026-10-16T08:21:00Z",
-   "amundi": "2026-10-16T08:21:30Z",
-   "capitalgroup": "2026-10-16T08:22:49Z",
-   "fidelity": "2026-10-16T08:24:00Z",
-   "bny": "2026-10-16T08:24:40Z"
+   "blackrock": "2026-10-20T08:47:27Z",
+   "vanguard": "2026-10-20T08:48:42Z",
+   "jpmorgan": "2026-10-20T08:50:30Z",
+   "goldman": "2026-10-20T08:51:42Z",
+   "statestreet": "2026-10-20T08:43:14Z",
+   "pimco": "2026-10-20T08:43:50Z",
+   "amundi": "2026-10-20T08:44:23Z",
+   "capitalgroup": "2026-10-20T08:44:59Z",
+   "fidelity": "2026-10-20T08:46:14Z",
+   "bny": "2026-10-20T08:46:54Z"
   },
-  "sec": 672
+  "sec": 577
  }
 }
