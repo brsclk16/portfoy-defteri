@@ -1,39 +1,38 @@
 {
- "publishedAt": "2026-10-20T05:56:12Z",
- "asOf": "2026-10-16",
- "title": "Çip satışı sürerken SOXX ve COPX alım bölgesinde; gözler Vertiv'de",
+ "publishedAt": "2026-10-21T05:56:00Z",
+ "asOf": "2026-10-20",
+ "title": "Biyoteknoloji öne çıktı, çipler yatay; Vertiv bilançosu 28 Ekim'e kaydı",
  "sections": [
   {
    "h": "Dün",
    "items": [
-    "Son işlem günü (16 Ekim) tüm pozisyonlar S&P 500'ün (SPY −%1,11) gerisinde kaldı; en sert düşüş AMD −%5,95, CRDO −%4,93 ve DELL −%4,58.",
-    "Fonlarda SOXX −%4,14, XBI −%3,65, SMH −%3,41; VRT −%3,88.",
-    "En dirençli kalemler AGNG +%0,03, IAU −%0,17 ve SLV −%0,79 oldu; SOX endeksi 8 günlük düşüş serisiyle 2006'dan beri en kötü seriyi gördü."
+    "En iyi: XBI +%3,64, AGNG +%2,32, DELL +%1,34 (Super Micro'nun güçlü ön satış rakamları sunucu hisselerini taşıdı).",
+    "En zayıf: VRT −%1,22, ASML −%0,99, CRDO −%0,75; SMH ve SOXX −%0,38.",
+    "S&P 500 (SPY) +%0,34 — portföyde sağlık fonları endeksi geçerken çip ve bakır tarafı geride kaldı."
    ]
   },
   {
    "h": "Bugün",
    "items": [
-    "Vertiv bilançosu takvimde 21 Ekim 18:00 TRT (VRT, saat tahmini); ancak Finnhub tarihi 28 Ekim gösteriyor, şirket duyurusundan teyit edilmeli.",
-    "TCMB faiz kararı 22 Ekim 14:00 TRT; önceki politika faizi %37.",
-    "Moderna bilançosu şirket duyurusuna göre 6 Kasım'a kaydı; takvim kaydı düzeltildi (XBI)."
+    "Yarın 14:00 TRT: TCMB faiz kararı (önceki %37) — TL ve TL bazlı getiri hesabı için takipte.",
+    "Yarın 15:30 TRT: ABD haftalık işsizlik başvuruları (beklenti 200 bin).",
+    "Vertiv bilançosu şirket duyurusuna göre 21 değil 28 Ekim'de (açılış öncesi, konferans 18:00 TRT); takvim düzeltildi."
    ]
   },
   {
    "h": "Teknik durum",
    "items": [
-    "SOXX alım bölgesinde: $501,93 (bölge $491,70–$503,69), stop $460,39, TP1 $535,11, RSI 37.",
-    "COPX alım bölgesinde: $79,69 (bölge $79,37–$79,85), stop $73,69, TP1 $84,93; risk/ödül 0,9 ile zayıf.",
-    "AMD ($538,05) ve DELL ($455,44) betikte 'aşırı ısınmış' etiketli, fiyat alım bölgesinin üzerinde; stop'a %3'ten yakın enstrüman yok.",
-    "VRT RSI 28 ile aşırı satım bölgesinde, $206,08 (bölge $200,81–$202,04, stop $181,09)."
+    "Alım bölgesinde: AMD 534,74 $ (483,64–535,58), DELL 461,56 $ (460,82–463,59), SOXX 500,01 $ (492,82–495,82'nin hemen üstü), IAU 77,44 $ (77,41–77,87).",
+    "VRT 203,56 $ ile bölgede (200,81–202,04 hemen üstü) ve RSI 28 ile aşırı satım tarafında; stop 181,10 $.",
+    "XBI 153,24 $ ve AGNG 38,11 $ bölgenin üst ucunda; stop'a %3'ten yakın enstrüman yok."
    ]
   },
   {
    "h": "Beklenti → gerçekleşen",
    "items": [
-    "Arm-Qualcomm Davasındaki Jüri Kararı: beklenti olumsuz → fiyat beklenen yönde (AMD −%6,0, SMH −%3,4, SOXX −%4,1).",
-    "ASML yıllık gelir beklentisini yükseltti: beklenti olumlu → fiyat beklenen yönde (ASML +%0,3, SMH +%1,6).",
-    "TSMC rekor 3. çeyrek kârı: beklenti olumlu → fiyat ters yönde (SMH −%3,4)."
+    "Çinli Teknoloji Devlerinden Nvidia'ya 35 Milyar Dolarlık Çip Siparişi: beklenti olumlu → fiyat ters yönde (SMH −%0,4, SOXX −%0,4)",
+    "ASML Sipariş ve Marj Artışıyla Yıllık Gelir Beklentisini Yükseltti: beklenti olumlu → fiyat beklenen yönde (ASML +%0,3, SMH +%1,6)",
+    "Nvidia Destekli Nscale ile Anthropic 45 Milyar Dolarlık Bulut Anlaşması Görüşmesinde: beklenti olumlu → fiyat ters yönde (SMH −%0,4, SOXX −%0,4)"
    ]
   }
  ]
