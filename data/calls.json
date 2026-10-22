@@ -986,7 +986,43 @@
      }
     ]
    }
+  ],
+  "NOVO.B": [
+   {
+    "q": "Q2 2026",
+    "date": "2026-08-05",
+    "tone": "nötr",
+    "summary": "Yönetim, Wegovy hapının hızlı yayılması ve ABD dışındaki obezite büyümesiyle çeyreği güçlü buldu ve yıllık beklentiyi ikinci kez yukarı çekti. Buna karşın düşen gerçekleşen fiyatlar, brüt marjdaki gerileme ve SUSE kalp-damar çalışmasının başarısız olması tabloyu dengeledi.",
+    "guidance": "2026 için düzeltilmiş satış ve düzeltilmiş faaliyet kârı büyümesi beklentisi sabit kurla %0 ile -%6 arasına yükseltildi (Mayıs'taki aralık -%4 ile -%12 idi). 2027 rehberliği Şubat 2027'de verilecek.",
+    "highlights": [
+     "Düzeltilmiş satışlar 78,5 milyar DKK; sabit kurla %7 büyüme (ABD %4, uluslararası %10), düzeltilmiş faaliyet kârı %11 arttı.",
+     "Obezite satışları %16 arttı; Wegovy hapı 5 milyonu aşan toplam reçeteye ve 17 Temmuz itibarıyla haftalık 267 bin reçeteye ulaştı.",
+     "Düzeltilmiş brüt marj %78,2'ye indi (Q2 2025: %82,7); üretim kapasitesi anlaşmaları için yaklaşık 3 milyar DKK tek seferlik maliyet yazıldı.",
+     "Çalışan sayısı yıllık yaklaşık 12 bin azalarak ~66.700'e indi; 8 milyar DKK tasarruf planın önünde."
+    ],
+    "qa": [
+     "İkinci yarı görünümü: ilk yarıdaki ~%2'lik büyüme temposu, Kanada ve Brezilya'da semaglutid patent bitişi ve 2025'teki tek seferlik iskonto düzeltmelerinin tekrarlanmayacak olması.",
+     "ABD'de Wegovy'de hacim artışının düşük fiyatlarla dengelenmesi ve Medicare köprü programının kalıcılığı.",
+     "CagriSema'nın diyabetteki konumu (REIMAGINE 4'te %15,2 kilo kaybı, A1C'de tirzepatide'e karşı eşdeğerlik sağlanamadı) ve ABD onay kararının 2026 sonu beklenmesi.",
+     "2027 büyümesi ve iş geliştirme: yönetim büyük birleşme yerine küçük varlık alımlarına odaklandığını söyledi."
+    ],
+    "risks": [
+     "ABD'de yoğunlaşan rekabet ve gerçekleşen fiyatlarda daha fazla düşüş baskısı.",
+     "Bazı pazarlarda semaglutid patent korumasının bitmesiyle jenerik girişleri.",
+     "Ziltivekimab (SUSE) çalışmasındaki başarısızlık sonrası boru hattı riski."
+    ],
+    "sources": [
+     {
+      "title": "Earnings Whispers – Novo Nordisk Q2 2026 görüşme metni",
+      "url": "https://earningswhispers.com/transcript/NVO/Q22026"
+     },
+     {
+      "title": "BioSpace – Novo Nordisk 2026 beklentisini yükseltti (basın bülteni)",
+      "url": "https://www.biospace.com/press-releases/novo-nordisk-raises-adjusted-sales-and-adjusted-operating-profit-outlook-for-2026"
+     }
+    ]
+   }
   ]
  },
- "updatedAt": "2026-10-19T07:40:27Z"
+ "updatedAt": "2026-10-22T07:40:47Z"
 }
