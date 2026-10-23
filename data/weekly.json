@@ -1,6 +1,90 @@
 {
  "reports": [
   {
+   "id": "2026-W43",
+   "weekEnd": "2026-10-23",
+   "range": "19–23 Ekim 2026",
+   "publishedAt": "2026-10-23T22:40:14Z",
+   "title": "Meta'nın harcama planı AI'ı yine vurdu; sağlık öne çıktı, Credo %13 düştü",
+   "movers": [
+    {
+     "t": "XBI",
+     "pct": 3.62
+    },
+    {
+     "t": "AGNG",
+     "pct": 3.23
+    },
+    {
+     "t": "DELL",
+     "pct": 1.05
+    },
+    {
+     "t": "AMD",
+     "pct": -2.26
+    },
+    {
+     "t": "SMH",
+     "pct": -2.33
+    },
+    {
+     "t": "SOXX",
+     "pct": -3.08
+    },
+    {
+     "t": "IAU",
+     "pct": -4.07
+    },
+    {
+     "t": "ASML",
+     "pct": -4.25
+    },
+    {
+     "t": "SLV",
+     "pct": -5.42
+    },
+    {
+     "t": "VRT",
+     "pct": -5.86
+    },
+    {
+     "t": "COPX",
+     "pct": -8.61
+    },
+    {
+     "t": "CRDO",
+     "pct": -13.21
+    }
+   ],
+   "summary": [
+    "Hafta, ilk üç gün toparlanma ile başladı ama perşembe günü sert bir satışla bozuldu. Meta'nın 3. çeyrek sonuçlarında yapay zekâ harcamalarını daha da artırma planı ve bunun nasıl finanse edileceği sorusu, İran kaynaklı petrol yükselişiyle aynı güne denk geldi; Nasdaq 100 perşembe yaklaşık %2,9 düşerek dört ayın en kötü gününü yaşadı. 12 enstrümanın 3'ü artıda kapattı: en iyisi %3,6 ile XBI, onu %3,2 ile AGNG izledi. En kötüsü %13,2 kayıpla Credo oldu. S&P 500 (SPY) haftayı yalnızca %0,4 eksi kapatırken eşit ağırlıklı portföy ortalaması yaklaşık %3,4 geriledi; yani endeksin yaklaşık 3 puan gerisinde kalındı.",
+    "Yarı iletkenlerde SMH %2,3, SOXX %3,1, AMD %2,3, ASML %4,3 geriledi; kayıpların neredeyse tamamı perşembe geldi (SMH −%6,0, AMD −%8,1, ASML −%6,9). Talep tarafında haberler olumsuz değildi: ASML yıllık gelir beklentisinin alt bandını 44–45 milyar €'ya yükseltti, TSMC rekor kârın ardından ABD'de yeni kapasite seçeneklerini konuştu. Sorun yine değerleme ve finansmandı. AI altyapısında Dell, Super Micro'nun güçlü ön sonuçlarıyla salı-çarşamba yükselip haftayı %1,1 artıda bitirdi; Vertiv ise Nvidia ile modüler AI fabrikası duyurusuna rağmen Meta haberiyle perşembe %7,8 düştü ve haftayı %5,9 eksi kapattı. Credo'da perşembe (−%10,7) ve cuma (−%9,5) üst üste sert kayıplar yaşandı; cuma günkü düşüşte MaxLinear CEO'sunun 1.6T aktif elektrik kablosu pazarının %20–30'unu hedeflediğini söylemesi, yani Credo'nun neredeyse tek başına hâkim olduğu alanda rekabet kaygısı belirleyici oldu. Sağlıkta tablo daha iyiydi: XBI pazartesi-salı %6'ya yakın yükselip Moderna-Merck melanom aşısı verisinin beklentiyi karşılamamasıyla son üç günde bir kısmını geri verdi; AGNG, Eli Lilly ve Merck haberleriyle haftayı %3,2 artıda kapattı. Metallerde ons altın %4,2 düşüp Temmuz'dan bu yana ilk kez 4.000 $'ın altına indi (IAU −%4,1); petroldeki yükseliş Fed'in daha sıkı kalacağı beklentisini güçlendirdi. Gümüş (SLV) %5,4, bakır madencileri (COPX) %8,6 kaybetti; Southern Copper rekor çeyrek açıklamasına rağmen perşembe %7 civarı düştü.",
+    "Dolar/TL %0,4 yükselerek 49,69'a çıktı; TL bazında kayıplar bu kadar hafifledi. TL'de SPY yaklaşık yatay (−%0,1), XBI %4,0, AGNG %3,6 artıda; Credo %12,9, COPX %8,3 ekside, eşit ağırlıklı portföy ortalaması TL'de yaklaşık %3,1 eksi. Çeşitlendirme bu hafta kısmen çalıştı: sağlık tarafı (XBI ve AGNG) AI satışına karşı gerçek bir tampon oldu. Buna karşılık altın, faiz artırımı beklentisi ve güçlü petrol nedeniyle bu kez koruma sağlamadı, hatta gümüş ve bakırla birlikte düştü. Portföyün yarıdan fazlasının AI temasına bağlı olması, perşembe gibi günlerde kayıpların aynı anda geldiğini bir kez daha gösterdi."
+   ],
+   "highlights": [
+    "Meta: Gelir beklentiyi aşsa da daha yüksek yatırım harcaması planı hisseyi perşembe yaklaşık %7 düşürdü; satış GE Vernova (−%11), Vertiv (−%7,8), Eaton gibi güç ekipmanı şirketlerine de yayıldı.",
+    "ASML: Güçlü sipariş ve marj artışıyla 2026 gelir beklentisini 44–45 milyar €'ya çekti; buna rağmen hisse perşembe %6,9 düşüp haftayı %4,3 eksi kapattı.",
+    "Credo: MaxLinear, Credo'nun pazarın yaklaşık %93–99'una sahip olduğu 1.6T aktif elektrik kablosu (AEC) segmentinde %20–30 pay hedeflediğini açıkladı; hisse cuma sabah 6 ayın dibini gördü. Aynı hafta bir yöneticinin yaklaşık 4,75 milyon $'lık hisse satışı da bildirildi.",
+    "Dell / Super Micro: Super Micro'nun beklentinin çok üzerindeki ön satış rakamları AI sunucu talebine güveni artırdı; Dell çarşamba %5,3 yükseldi, perşembe %6,8 geri verdi, haftayı %1,1 artıda bitirdi.",
+    "Moderna–Merck: Melanom aşısı Faz 3'te nüks veya ölüm riskini %42 azalttı, ancak yüksek beklentiyi aşamadı ve iki hisse de sert düştü; XBI bu haberden sonra iki gün geriledi ama haftayı yine %3,6 artıda kapattı.",
+    "Bakır: Southern Copper üst üste ikinci çeyrekte rekor satış ve net kâr açıkladı, 2026 için 918 bin ton üretim bekliyor; Hudbay ile Mitsubishi Arizona'daki Copper World projesine onay verdi. Buna karşın bakır fiyatındaki geri çekilmeyle COPX haftayı %8,6 eksi kapattı."
+   ],
+   "nextWeek": [
+    "27 Ekim (Salı): ABD dayanıklı mal siparişleri (beklenti %1,6) ve Conference Board tüketici güveni (beklenti 80,5) — genel risk iştahı ve faiz beklentileri için.",
+    "28 Ekim (Çarşamba): Fed faiz kararı (%4,00; piyasada değişiklik beklenmiyor, Aralık'ta artırım olasılığı yüksek fiyatlanıyor). Basın toplantısındaki ton IAU, SLV ve değerlemesi yüksek AI hisseleri için haftanın ana belirleyicisi.",
+    "28 Ekim: Vertiv 3. çeyrek bilançosu (açılış öncesi, HBK beklentisi ~1,85 $) — doğrudan VRT pozisyonu ve Meta sonrası AI altyapı talebine dair ilk somut cevap; aynı gün Biogen (XBI).",
+    "29 Ekim (Perşembe): Intel bilançosu (kapanış sonrası; SMH/SOXX), Eli Lilly ve Merck (AGNG), Teck Resources (COPX); ayrıca ABD PCE enflasyon verisi bekleniyor.",
+    "Hafta içinde Microsoft, Alphabet ve Amazon sonuçları: AI yatırım harcaması planları SMH, SOXX, AMD, Dell, Vertiv ve Credo'nun yönünü doğrudan etkileyecek.",
+    "30 Ekim (Cuma): AbbVie bilançosu — AGNG'nin en büyük holdinglerinden; hafta içinde açıklanan zayıf Faz 3 verisinin ardından boru hattı yorumları önemli."
+   ],
+   "watch": [
+    "Faiz ve petrol: Petroldeki yükseliş ve Fed'in yıl sonuna doğru artırım yapabileceği beklentisi hem büyüme hisselerini hem altını aynı anda baskılıyor; Fed'in mesajı bu iki etkiyi büyütebilir ya da hafifletebilir.",
+    "AI harcamalarının finansmanı: Meta sonrası piyasa, büyük teknoloji şirketlerinin yatırım artışını ödül değil risk olarak okumaya başladı. Microsoft, Alphabet ve Amazon'un mesajları bu algıyı ya pekiştirecek ya da kıracak; portföyün 7 enstrümanı bu temaya bağlı.",
+    "Credo'da rekabet: MaxLinear'ın AEC pazarına girişi, Credo'nun çok yüksek pazar payına dayanan değerlemesi için yeni bir risk; hisse üç haftadır düşüyor.",
+    "Bakırda arz riski: Teck'in Highland Valley madeninde grev bildirimi ve Şili'deki hava kaynaklı üretim aksamaları bakır fiyatını destekleyebilir, ama son haftalarda COPX'i fiyat düşüşü ve genel risk iştahı yönetiyor."
+   ]
+  },
+  {
    "id": "2026-W42",
    "weekEnd": "2026-10-16",
    "range": "12–16 Ekim 2026",
