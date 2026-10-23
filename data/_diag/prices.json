@@ -1,1 +1,1 @@
-{"at":"2026-10-22T21:33:15Z","ok":15,"errs":{"XAUUSD<XAUUSD=X>":"XAUUSD=X: HTTP Error 404: Not Found"},"merge":"15 fiyat işlendi, asOf=2026-10-22\n"}
+{"at":"2026-10-23T00:02:41Z","ok":15,"errs":{"XAUUSD<XAUUSD=X>":"XAUUSD=X: HTTP Error 404: Not Found"},"merge":"15 fiyat işlendi, asOf=2026-10-21\n","markets":{"tr":27,"vix":28,"uup":28.920000076293945}}
