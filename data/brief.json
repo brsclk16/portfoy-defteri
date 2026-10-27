@@ -1,40 +1,39 @@
 {
- "publishedAt": "2026-10-26T06:05:00Z",
+ "publishedAt": "2026-10-27T05:56:59Z",
  "asOf": "2026-10-23",
- "title": "Bilanço ve Fed haftası başlıyor; CRDO %9,5 düştü, ASML ve IAU alım bölgesinde",
+ "title": "Fed ve Vertiv bilançosu yarın; çip fonları alım bölgesinde, IAU stop'a yakın",
  "sections": [
   {
    "h": "Dün",
    "items": [
-    "Son işlem günü (Cuma 23 Ekim): en iyi AMD +%1,74, DELL +%0,77, SMH +%0,74; S&P 500 (SPY) −%0,52 ile çip tarafı piyasanın önünde kapattı.",
-    "En kötü CRDO −%9,51 (147,29 $); XBI −%1,38, SLV −%1,26 ve IAU −%0,67 de geriledi.",
-    "Hafta sonu verisi yok: fiyatlar ve haberler Cuma kapanışına ait."
+    "Son işlenen kapanışta (23 Ekim) en iyi AMD +%1,74, DELL +%0,77 ve SMH +%0,74; S&P 500 (SPY) aynı gün yaklaşık -%0,5 kapattı.",
+    "En kötü CRDO -%9,51; onu XBI -%1,38 ve SLV -%1,26 izledi.",
+    "Yarı iletken tarafında haber akışı olumlu: Broadcom'un Anthropic çipleri için 63 milyar $'lık finansmanı ve Nvidia'nın Vera Rubin gelir potansiyeli açıklaması SMH/SOXX'i ilgilendiriyor."
    ]
   },
   {
    "h": "Bugün",
    "items": [
-    "Bugün 15:00 TRT: Southern Copper bilançosu (takvimdeki tarih) — COPX'i ilgilendiriyor; şirket rekor Q3 sonuçlarını 23 Ekim'de duyurmuş görünüyor, tarih teyit edilmeli.",
-    "Çarşamba 28 Ekim: Vertiv ve Biogen bilançoları (piyasa öncesi) ve 21:00 TRT Fed faiz kararı (beklenti %4,00 sabit) — VRT, XBI ve tüm faiz duyarlı pozisyonlar.",
-    "Perşembe 29 Ekim: Eli Lilly, Merck, Teck (AGNG/COPX) piyasa öncesi; Intel (SMH/SOXX) piyasa sonrası. Cuma AbbVie (AGNG)."
+    "Bugün 15:30 TRT ABD dayanıklı mal siparişleri, 17:00 TRT CB tüketici güveni; doğrudan pozisyon olayı yok.",
+    "Yarın (28 Ekim) 15:30 TRT Biogen (XBI) ve 18:00 TRT Vertiv bilançosu — VRT doğrudan pozisyon, beklenti HBK ~1,85 $.",
+    "Yarın 21:00 TRT Fed faiz kararı (mevcut %4,00); altın/gümüş (IAU, SLV) ve büyüme ağırlıklı fonlar için günün ana olayı.",
+    "29 Ekim'de ABD GSYH ve çekirdek PCE ile Intel, Lilly, Merck, Teck bilançoları yoğun bir gün getiriyor."
    ]
   },
   {
    "h": "Teknik durum",
    "items": [
-    "ASML alım bölgesinde: 1.571,80 $ (bölge 1.567,34–1.576,77 $), stop 1.483,70 $, TP1 1.717 $, RSI 36.",
-    "IAU alım bölgesinde: 75,15 $ (bölge 74,89–75,34 $), stop 73,44 $ — stop'a yalnızca ~%2,3 mesafe var.",
-    "DELL aşırı ısınmış: 456,44 $, alım bölgesi 398,18–406,40 $'ın belirgin üzerinde.",
-    "VRT (RSI 28) ve COPX (RSI 25) aşırı satım bölgesine yakın; ikisi de alım bölgesinin üzerinde."
+    "Alım bölgesinde: ASML (1.567,59–1.583,72 $), DELL (463,48–467,82 $), SMH (523,64–536,65 $), SOXX (479,72–491,96 $).",
+    "IAU da alım bölgesinde (74,89–75,34 $) ama fiyat 75,42 $ ile stop'a (73,48 $) yaklaşık %2,6 uzaklıkta.",
+    "AGNG RSI 67 ile en ısınmış enstrüman; fiyat 38,65 $ ile bölgenin üzerinde, TP1 39,17 $.",
+    "COPX (RSI 28) ve SLV (RSI 32) aşırı satım bölgesine yakın."
    ]
   },
   {
    "h": "Beklenti → gerçekleşen",
    "items": [
-    "Southern Copper 3. çeyrekte rekor finansal sonuçlar açıkladı: beklenti olumlu → belirgin tepki yok (COPX −%0,1)",
-    "Moderna ve Merck kanser aşısı verileri sonrası sert düştü: beklenti olumsuz → fiyat ters yönde (AGNG +%2,0, XBI −%0,8)",
-    "Meta harcama belirsizliğiyle Vertiv geriledi: beklenti olumsuz → fiyat beklenen yönde (VRT −%7,8)",
-    "TCMB faiz kararı: sonuç henüz işlenmedi."
+    "Southern Copper bilançosu (Q3 2026): sayısal beklenti yok · takip edilenler COPX +%1,0",
+    "Nvidia, Vera Rubin Çiplerinin Gelir Potansiyelini Açıkladı: beklenti olumlu → fiyat beklenen yönde (SMH +%2,7, SOXX +%2,9)"
    ]
   }
  ]
