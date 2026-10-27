@@ -1,5 +1,5 @@
 {
- "updatedAt": "2026-10-23",
+ "updatedAt": "2026-10-27",
  "note": "Büyük varlık yöneticilerinin yayımlanmış görünümlerinden derlendi. Duruş: 1 olumlu/ağırlık artır, 0 nötr, -1 olumsuz/ağırlık azalt. Her görüş kendi yayın tarihindedir; her görüşün geçerlilik tarihi (validUntil) yayının ufkuna göre konur; geçenler 'eski' sayılır ve uzlaşıya katılmaz. Kaynak bağlantıları birincil yayın ya da yayını aktaran haber/uygulayıcı sayfasıdır (tür alanında belirtilir). Bu kurumların kısa vadeli görünümleri sık yanılır; sitede her görüş, yayın tarihinden bu yana temanın gerçekte ne yaptığıyla karnelenir.",
  "themes": {
   "us_eq": {
@@ -388,21 +388,24 @@
    "n": "Amundi",
    "brand": "Amundi (ETF'leri çoğunlukla Avrupa borsalarında, UCITS)",
    "pub": "Amundi Research Center",
-   "date": "2026-10-22",
+   "date": "2026-10-26",
    "type": "otomatik: kaynak metninden özet",
    "url": "https://research-center.amundi.com/",
-   "views": {},
+   "views": {
+    "india_eq": [
+     0,
+     "Hindistan, Amundi Research Center'ın ana sayfasındaki filtreler ve içerik başlıkları arasında yer almaktadır."
+    ]
+   },
    "strengths": [
-    "IMF, AI yatırımlarının desteğiyle 2026 küresel büyüme tahminini %3,1'e yükseltmiştir.",
-    "Sabit getirili menkul kıymetler ve seçilmiş hisse senedi piyasalarında beklenen getiriler iyileşmektedir."
+    "Sabit getirili ve seçilmiş hisse senedi piyasalarında beklenen getirilerin iyileştiği doğrulanmıştır."
    ],
    "risks": [
-    "Artan tahvil getirileri ve tahvil oynaklığı piyasaları etkilemektedir.",
-    "ABD ara seçimlerinin bölünmüş bir hükümete, mali çıkmaza ve politika belirsizliğine yol açma potansiyeli bulunmaktadır."
+    "Artan tahvil oynaklığı ve daha yüksek getirilerin sabit getirili menkul kıymetler ile hisse senetleri üzerindeki olası etkileri."
    ],
-   "validUntil": "2027-10-22",
+   "validUntil": "2027-10-26",
    "horizon": "2026 yıllık görünümü",
-   "context": "Metin genel olarak tahvil getirilerindeki artışı, yapay zeka coşkusunu, para politikasındaki değişimleri, jeopolitik gelişmeleri ve ABD ara seçimlerinin piyasalar ile makro çevre üzerindeki olası etkilerini ele almaktadır.",
+   "context": "Yükselen tahvil getirileri, değişen para politikaları ve jeopolitik gelişmeler makro ortamı ve yeni yatırım fırsatlarını şekillendirmektedir.",
    "auto": true
   },
   {
@@ -778,34 +781,44 @@
    "id": "amundi",
    "n": "Amundi",
    "archivedAt": "2026-10-23"
+  },
+  {
+   "date": "2026-10-22",
+   "pub": "Amundi Research Center",
+   "views": {},
+   "url": "https://research-center.amundi.com/",
+   "type": "otomatik: kaynak metninden özet",
+   "id": "amundi",
+   "n": "Amundi",
+   "archivedAt": "2026-10-27"
   }
  ],
  "autoRun": {
-  "at": "2026-10-23T08:53:11Z",
+  "at": "2026-10-27T09:23:01Z",
   "log": {
-   "statestreet": "değişmedi: https://www.ssga.com/us/en/intermediary/insights/global-market-outlook: tarih geçersiz/eski: 2025-11-30 | arama: RuntimeError grounding başarısız: HTTP Error 429: Too Many Requests",
+   "jpmorgan": "değişmedi: https://am.jpmorgan.com/us/en/asset-management/adv/insights/portfolio-insights/ltcma/: yeni değil (2026-09-01 ≤ 2026-10-01) | https://am.jpmorgan.com/jp/en/asset-management/institutional/insights/portfolio-insights/ltcma/executive-summary/: yeni değil (2026-09-30 ≤ 2026-10-01) | arama: RuntimeError grounding başarısız: HTTP Error 429: Too Many Requests",
+   "goldman": "değişmedi: https://am.gs.com/en-us/advisors/insights/article/investment-outlook: tarih geçersiz/eski: 2025-10-24 | arama: RuntimeError grounding başarısız: HTTP Error 429: Too Many Requests",
+   "statestreet": "değişmedi: https://www.ssga.com/us/en/intermediary/insights/global-market-outlook: tarih okunamadı | arama: RuntimeError grounding başarısız: HTTP Error 429: Too Many Requests",
    "pimco": "değişmedi: https://www.pimco.com/us/en/insights/cyclical-outlook: HTTPError HTTP Error 404: Not Found | arama: RuntimeError grounding başarısız: HTTP Error 429: Too Many Requests",
-   "amundi": "güncellendi → 2026-10-22 (0 görüş)",
+   "amundi": "güncellendi → 2026-10-26 (1 görüş)",
    "capitalgroup": "değişmedi: https://www.capitalgroup.com/individual/insights/categories/outlook.html: yeni değil (2026-06-24 ≤ 2026-06-24) | arama: RuntimeError grounding başarısız: HTTP Error 429: Too Many Requests",
-   "fidelity": "değişmedi: https://institutional.fidelity.com/advisors/insights/topics/market-commentary: tarih okunamadı | arama: RuntimeError grounding başarısız: HTTP Error 429: Too Many Requests",
-   "bny": "değişmedi: https://www.bny.com/assets/investments/imemea/pdfs/emea_fp_checkpoints_oct26.pdf: HTTPError HTTP Error 404: Not Found | https://www.bny.com/assets/investments/imemea/pdfs/emea_fp_checkpoints_sep26.pdf: HTTPError HTTP Error 404: Not Found | https://www.bny.com/assets/investments/imemea/pdfs/emea_fp_checkpoints_aug26.pdf: HTTPError HTTP Error 404: Not Found | https://www.bny.com/assets/investments/imemea/pdfs/emea_fp_checkpoints_july26.pdf: HTTPError HTTP Error 404: Not Found | https://www.bny.com/assets/investments/imemea/pdfs/emea_fp_checkpoints_jul26.pdf: HTTPError HTTP Error 404: Not Found |",
-   "blackrock": "değişmedi: https://www.blackrock.com/corporate/insights/blackrock-investment-institute/publications/weekly-commentary: yeni değil (2026-10-19 ≤ 2026-10-19) | https://www.blackrock.com/us/individual/insights/blackrock-investment-institute/weekly-commentary: yeni değil (2026-10-19 ≤ 2026-10-19) | arama: RuntimeError grounding başarısız: HTTP Error 429: Too Many Requests",
-   "vanguard": "değişmedi: https://corporate.vanguard.com/content/corporatesite/us/en/corp/vemo/vemo-return-forecasts.html: RuntimeError gemini-3.8-flash: HTTPError HTTP Error 503: Service Unavailable | gemini-flash-latest: TimeoutError The read operation t",
-   "jpmorgan": "süre doldu, bir sonraki çalışmaya kaldı",
-   "goldman": "süre doldu, bir sonraki çalışmaya kaldı"
+   "fidelity": "değişmedi: https://institutional.fidelity.com/advisors/insights/topics/market-commentary: RuntimeError gemini-3.8-flash: TimeoutError The read operation timed out | gemini-flash-latest: TimeoutError The read operation timed",
+   "bny": "süre doldu, bir sonraki çalışmaya kaldı",
+   "blackrock": "süre doldu, bir sonraki çalışmaya kaldı",
+   "vanguard": "süre doldu, bir sonraki çalışmaya kaldı"
   },
   "checked": {
    "blackrock": "2026-10-23T08:51:50Z",
    "vanguard": "2026-10-23T08:53:11Z",
-   "jpmorgan": "2026-10-20T08:50:30Z",
-   "goldman": "2026-10-20T08:51:42Z",
-   "statestreet": "2026-10-23T08:42:10Z",
-   "pimco": "2026-10-23T08:42:46Z",
-   "amundi": "2026-10-23T08:44:54Z",
-   "capitalgroup": "2026-10-23T08:46:41Z",
-   "fidelity": "2026-10-23T08:48:34Z",
+   "jpmorgan": "2026-10-27T09:12:32Z",
+   "goldman": "2026-10-27T09:14:32Z",
+   "statestreet": "2026-10-27T09:16:51Z",
+   "pimco": "2026-10-27T09:17:27Z",
+   "amundi": "2026-10-27T09:18:48Z",
+   "capitalgroup": "2026-10-27T09:20:52Z",
+   "fidelity": "2026-10-27T09:23:01Z",
    "bny": "2026-10-23T08:49:14Z"
   },
-  "sec": 728
+  "sec": 780
  }
 }
