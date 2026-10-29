@@ -1,6 +1,101 @@
 {
- "updatedAt": "2026-10-27T05:56:14Z",
+ "updatedAt": "2026-10-29T05:55:01Z",
  "cards": [
+  {
+   "id": "VRT-2026Q3",
+   "t": "VRT",
+   "company": "Vertiv Holdings",
+   "date": "2026-10-28",
+   "quarter": "Q3 2026",
+   "time": "piyasa öncesi",
+   "eps": {
+    "act": 2.21,
+    "est": 1.85,
+    "surprisePct": 19.5
+   },
+   "rev": {
+    "act": 4.31,
+    "est": 3.8,
+    "unit": "mlr $",
+    "yoy": 61,
+    "surprisePct": 13.6
+   },
+   "guidance": "2026 rehberliği yükseltildi: orta noktada net satış 14,65 mlr $, düzeltilmiş HBK 7,15 $ (2025'e göre %70 artış).",
+   "reaction": {
+    "pct": 16.5,
+    "from": 208.56,
+    "to": 242.94
+   },
+   "highlights": [
+    "Net satışlar yıllık %61 artışla 4,31 mlr $; büyümenin %55'i organik, ~%6'sı satın almalardan.",
+    "Organik siparişler bir önceki yılın iki katını aştı.",
+    "Hisse günü %16,5 yükselişle S&P 500'ün en iyi performans gösteren hissesi oldu."
+   ],
+   "affects": [
+    {
+     "t": "VRT",
+     "note": "portföydeki doğrudan pozisyon"
+    }
+   ],
+   "summary": "Vertiv, yapay zekâ veri merkezi talebiyle hem HBK'da (%19,5) hem gelirde (%13,6) beklentileri aştı ve yıllık rehberliğini yükseltti. Sipariş defterinin ikiye katlanması piyasaya talebin sürdüğü mesajını verdi.",
+   "sources": [
+    {
+     "title": "SEC 8-K — Vertiv Q3 2026 sonuçları",
+     "url": "https://www.sec.gov/Archives/edgar/data/1674101/000162828026067707/vrt-20261028.htm"
+    },
+    {
+     "title": "Nasdaq/RTTNews — Vertiv Raises 2026 Guidance",
+     "url": "https://www.nasdaq.com/articles/vertiv-raises-2026-guidance"
+    }
+   ]
+  },
+  {
+   "id": "BIIB-2026Q3",
+   "t": "BIIB",
+   "company": "Biogen",
+   "date": "2026-10-28",
+   "quarter": "Q3 2026",
+   "time": "piyasa öncesi",
+   "eps": {
+    "act": 2.62,
+    "est": 2.01,
+    "surprisePct": 30.1
+   },
+   "rev": {
+    "act": 2.8,
+    "est": 2.68,
+    "unit": "mlr $",
+    "yoy": 10.6,
+    "surprisePct": 4.5
+   },
+   "guidance": "2026 düzeltilmiş HBK aralığı 12,20–13,00 $'a daraltıldı; raporlanan bazda alt sınır yükseltildi.",
+   "reaction": {
+    "pct": -3.4,
+    "to": 244.05
+   },
+   "highlights": [
+    "Büyüme portföyü geliri %49 artışla 1,26 mlr $; Apellis ürünleri ilk tam çeyrek katkısını verdi.",
+    "GAAP bazında çeyrek zararla kapandı (geçen yıl kâr).",
+    "Şirket 2027 sonuna kadar yıllık 250 mln $ sinerji hedefliyor."
+   ],
+   "affects": [
+    {
+     "t": "XBI",
+     "note": "fonda ~%1,5 ağırlık"
+    }
+   ],
+   "summary": "Biogen yeni ürünler ve Apellis katkısıyla HBK ve gelirde beklentileri aştı, yıllık kâr görünümünü daralttı. Güçlü rakamlara rağmen hisse günü %3,4 geriledi.",
+   "sources": [
+    {
+     "title": "SEC 8-K — Biogen Q3 2026 sonuçları",
+     "url": "https://www.sec.gov/Archives/edgar/data/875045/000087504526000094/biib-20261028.htm"
+    },
+    {
+     "title": "Nasdaq — Biogen Q3 2026 toplam gelir 2,8 mlr $",
+     "url": "https://www.nasdaq.com/articles/biogen-inc-reports-third-quarter-2026-total-revenue-28-billion"
+    }
+   ]
+  },
   {
    "id": "TSM-2026Q3",
    "t": "TSM",

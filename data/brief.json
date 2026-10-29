@@ -1,40 +1,39 @@
 {
- "publishedAt": "2026-10-28T05:55:34Z",
- "asOf": "2026-10-26",
- "title": "Fed kararı ve Vertiv bilançosu aynı gün; çipler Meta haberleriyle güçlü",
+ "publishedAt": "2026-10-29T05:55:44Z",
+ "asOf": "2026-10-27",
+ "title": "Vertiv'in %16,5'lik bilanço sıçraması sonrası gözler PCE, GSYH ve Intel'de",
  "sections": [
   {
    "h": "Dün",
    "items": [
-    "Son kapanışta (26 Ekim) çip tarafı öndeydi: SOXX +%2,85, VRT +%2,81, AMD +%2,80, SMH +%2,74, CRDO +%2,62, DELL +%2,33.",
-    "En zayıflar SLV −%0,12 ve AGNG +%0,03; S&P 500 (SPY) aynı gün +%0,71 ile çip ağırlıklı pozisyonların gerisinde kaldı.",
-    "Nvidia ve AMD'nin Meta'nın hisse satışından toplam 4 milyar dolarlık pay alacağı haberi SMH/SOXX ve AMD için olumlu gündem yarattı."
+    "VRT güçlü bilanço ve yükseltilen 2026 rehberliğiyle %16,5 yükseldi (242,94 $); S&P 500 (SPY) yalnızca %0,3 arttı.",
+    "Çipler de pozitifti: CRDO +%3,7, AMD +%3,2, SOXX +%2,1, SMH +%1,7; XBI +%1,7.",
+    "Zayıf taraf: DELL %1,6 ve SLV %0,2 geriledi; Fed faizi beklendiği gibi %4'te sabit bıraktı."
    ]
   },
   {
    "h": "Bugün",
    "items": [
-    "Vertiv Q3 bilançosu bugün 18:00 TRT'de (piyasa öncesi) — doğrudan VRT pozisyonunu ilgilendiriyor; HBK beklentisi 1,85 $.",
-    "Fed faiz kararı bugün 21:00 TRT; beklenti %4,00'te sabit. Faiz hassas XBI ile altın/gümüş (IAU, SLV) için kritik.",
-    "Biogen bilançosu 15:30 TRT (XBI holdingi).",
-    "Yarın 15:30 TRT: ABD Q3 GSYH ve çekirdek PCE; Eli Lilly ve Merck (AGNG), Teck (COPX) piyasa öncesi, Intel (SMH/SOXX) 23:05 TRT."
+    "15:30 TRT: ABD Q3 GSYH öncü verisi (beklenti %3,2) ve Eylül çekirdek PCE (beklenti aylık %0,3) — faiz beklentileri üzerinden SMH/SOXX, XBI ve altın-gümüş (IAU/SLV) için önemli.",
+    "Piyasa öncesi (saat tahmini ~15:00–15:30 TRT): Eli Lilly, Merck ve Teck bilançoları — AGNG'nin büyük holdingleri ile COPX'i ilgilendiriyor.",
+    "23:05 TRT: Intel bilançosu (HBK beklentisi ~0,40 $) — SOXX ve SMH'yi etkileyebilir; yarın 15:30 TRT'de AbbVie."
    ]
   },
   {
    "h": "Teknik durum",
    "items": [
-    "Alım bölgesinde: CRDO $167,43 (bölge $163,61–$167,07, stop $139,07), SLV $49,16 (bölge $49,09–$49,38, stop $47,29), AGNG $38,40 (bölge $37,09–$38,06, stop $36,44).",
-    "Aşırı ısınmış: AMD $560,26 (bölge $520,56–$553,90) ve DELL $501,96 (bölge $444,75–$450,35).",
-    "Stop seviyesine %3'ten yakın enstrüman yok; en yakını SLV (stop'a ~%3,8)."
+    "Alım bölgesinde: AMD 578,44 $ (bölge 565,97–580,56), SMH 567,67 $ (555,31–568,31), SOXX 521,94 $ (511,15–523,57).",
+    "VRT 242,94 $ ile bölgenin (216,28–240,98) hemen üstüne çıktı; SLV 49,06 $ ile bölgenin (49,09–49,38) hemen altında, stop 47,33 $.",
+    "DELL 493,79 $ ile aşırı ısınmış görünümde (bölge 444,75–450,35); stop'a %3'ten yakın enstrüman yok."
    ]
   },
   {
    "h": "Beklenti → gerçekleşen",
    "items": [
-    "Southern Copper bilançosu (Q3 2026): sayısal beklenti yok · takip edilenler COPX +%1,0",
-    "Nvidia'nın Meta'ya 3 milyar dolarlık yatırımı: beklenti olumlu → fiyat beklenen yönde (SMH +%3,0, SOXX +%3,9)",
-    "TSMC'nin paketlemede %20'ye varan fiyat artışı hazırlığı: beklenti karışık → yön karşılaştırılmadı (AMD +%5,5, SMH +%3,0, SOXX +%3,9)",
-    "Broadcom'un 63 milyar dolarlık Anthropic finansmanı: beklenti olumlu → fiyat beklenen yönde (SMH +%3,0, SOXX +%3,9)"
+    "Fed faiz kararı: beklenti %4 → %4; VRT +%16,5, CRDO +%3,7, AMD +%3,2.",
+    "Vertiv bilançosu: HBK beklenti 1,85 → 2,21 (+%19,5, beklentinin üstünde); VRT +%16,5.",
+    "Biogen bilançosu: HBK beklenti 2,01 → 2,62 (+%30,1, beklentinin üstünde); XBI +%1,7.",
+    "Meta finansmanına Nvidia/AMD katılımı haberi: beklenti olumlu → fiyat beklenen yönde (AMD +%3,2, SMH +%1,7, SOXX +%2,1)."
    ]
   }
  ]
