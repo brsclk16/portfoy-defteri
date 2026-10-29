@@ -160,6 +160,41 @@
   ],
   "VRT": [
    {
+    "q": "Q3 2026",
+    "date": "2026-10-28",
+    "tone": "olumlu",
+    "toneChg": "önceki çeyreğe göre daha olumlu",
+    "summary": "Vertiv üçüncü çeyrekte 4,31 mlr $ net satışla (%61 artış, organik %55) kendi verdiği 3,75 mlr $'lık rehberliği belirgin biçimde aştı; düzeltilmiş HBK 2,21 $ ile 1,80 $'lık rehberliğin üzerinde geldi. Organik siparişlerin yıllık bazda iki katından fazla artması ve yıllık rehberliğin tüm ana kalemlerde yükseltilmesi görüşmenin tonunu belirledi. Yönetim yapay zekâ kaynaklı veri merkezi yatırımlarının hızlandığını vurgularken 2027 için sayısal hedef vermedi.",
+    "guidance": "2026 yıllık rehberliği 14,45-14,85 mlr $ satış (orta nokta 14,65 mlr $, önceki 14 mlr $), 7,10-7,20 $ düzeltilmiş HBK (orta nokta 7,15 $, önceki 6,70 $) ve 2,6-2,8 mlr $ düzeltilmiş serbest nakit akışına yükseltildi. Q4 için 4,31-4,51 mlr $ satış (%49-51 organik büyüme) ve 2,22-2,28 $ düzeltilmiş HBK bekleniyor.",
+    "highlights": [
+     "Net satış 4.312,8 mn $ ile yıllık %61 arttı (organik %55, satın almaların katkısı yaklaşık %6); Amerika bölgesi 2.988,8 mn $ ile %74,5 büyüdü.",
+     "Organik siparişler yıllık bazda %100'ün üzerinde arttı; book-to-bill ve backlog tutarı açıklanmadı, sipariş görünürlüğü 12-18 ay olarak korundu.",
+     "Düzeltilmiş faaliyet kârı %83 artışla 1.086,9 mn $'a, düzeltilmiş faaliyet marjı 290 baz puan artışla %25,2'ye çıktı.",
+     "Düzeltilmiş serbest nakit akışı %50 artışla 652,2 mn $ oldu; Q2'de tedarik sorunları nedeniyle kayan yaklaşık 100-150 mn $ gelir bu çeyreğe taşındı."
+    ],
+    "qa": [
+     "Sipariş artışının kalıcılığı: Evercore ve Bernstein analistleri %100+ sipariş büyümesinin birikmiş talepten mi kaynaklandığını ve sipariş ufkunun uzayıp uzamadığını sordu; yönetim bunun gerçek talep ve pay kazanımı olduğunu, 12-18 aylık backlog görünürlüğünün değişmediğini söyledi.",
+     "Marj ve 2027 beklentisi: UBS, BNP Paribas ve Vertical Research soruları Q4 rehberliğinin sınırlı çeyreklik artışına ve 2027 marjlarına yoğunlaştı; CFO rehberlikte ihtiyat payı olduğunu, uzun vadeli %30-35 artımsal marj çerçevesinin sürdüğünü ve 2027 rehberliğinin gelecek çeyrekte verileceğini belirtti.",
+     "Ürün kalitesi ve tedarik zinciri: Melius ve Wells Fargo, kalite şikâyetleri ile Q2'deki tedarik aksaklıklarını sordu; yönetim yeni ürün yoğunluğunun kaliteyi etkileyebildiğini kabul edip iyileşme gördüğünü, fabrika dayanıklılığı çalışmalarının sürdüğünü aktardı.",
+     "800 V DC ve yeni teknolojiler: Goldman Sachs, Baird ve Loop Capital 800 V ürünleri ile NVIDIA platformlarına bağlı fırsatları sordu; yönetim 800 V DC'den 2027'de gelir, 2028'de yaygın kullanım beklediğini söyledi."
+    ],
+    "risks": [
+     "Hızlı kapasite artışı kısa vadede verimsizlik yaratıyor; ürün kalitesi ve tedarik zinciri konuları analistlerin gündeminde kaldı.",
+     "Envanter yıllık bazda %100'ün üzerinde arttı; yönetim bunu büyümeye ve tedarik güvenliğine bağlasa da işletme sermayesi yükü büyüyor.",
+     "Bültende tarifeler, uzun vadeli sabit fiyatlı sözleşmeler ve sipariş zamanlaması/iptali risk olarak sayılıyor; 2027 için sayısal rehberlik henüz yok."
+    ],
+    "sources": [
+     {
+      "title": "Vertiv Holdings Co - Form 8-K Exhibit 99.1 (Q3 2026 sonuç bülteni), SEC",
+      "url": "https://www.sec.gov/Archives/edgar/data/0001674101/000162828026067707/q32026exhibit991vrt10282026.htm"
+     },
+     {
+      "title": "Vertiv Holdings Co (VRT) Q3 F2026 earnings call transcript - Earnings Whispers",
+      "url": "https://beta.earningswhispers.com/transcript/VRT"
+     }
+    ]
+   },
+   {
     "q": "Q2 2026",
     "date": "2026-07-29",
     "tone": "olumlu",
@@ -675,6 +710,44 @@
   ],
   "WELL": [
    {
+    "q": "Q3 2026",
+    "date": "2026-10-27",
+    "tone": "olumlu",
+    "toneChg": "benzer",
+    "summary": "Welltower üçüncü çeyrekte normalize FFO'yu yıllık %24,6 büyüterek hisse başına 1,67 $'a çıkardı; büyümenin ana motoru, doluluk ve fiyatlamanın birlikte yükseldiği yaşlı konutu işletme (SHO) portföyü oldu. Şirket yatırım temposunu sürdürdü ve yıllık beklentilerini ikinci kez üst üste yukarı çekti. Ancak GAAP hisse başına kârın tahminlerin altında kalması ve kaldıraçtaki artış, sonuç sonrası hissede satış baskısıyla birlikte anıldı.",
+    "guidance": "2026 normalize FFO beklentisi 6,36-6,44 $ aralığından 6,47-6,53 $'a, hisse başına net gelir beklentisi 3,11-3,19 $'dan 3,31-3,37 $'a yükseltildi. Toplam aynı mağaza NOI büyümesi beklentisi %15,0-16,25, SHO için %20,25-21,75 (orta nokta 100 baz puan yukarı); rehberlik ilave yatırım veya sermaye işlemi içermiyor.",
+    "highlights": [
+     "Normalize FFO hisse başına 1,67 $ (3Ç25: 1,34 $, +%24,6); GAAP hisse başına net gelir 0,54 $ (3Ç25: 0,41 $).",
+     "Toplam aynı mağaza NOI +%15,8, SHO aynı mağaza NOI +%21,0; SHO'da doluluk 320 baz puan arttı, oda başına gelir (RevPOR) +%5,3, aynı mağaza doluluğu %90,2.",
+     "Çeyrekte 4,1 milyar $ brüt yatırım ve 484 milyon $ satış/kredi geri ödemesi; yıl başından beri 21,0 milyar $ yatırım kapandı ya da sözleşmeye bağlandı (7,7 milyar $'ı çeyrek sonrasında).",
+     "Net borç/düzeltilmiş FAVÖK 3,02x (3Ç25: 2,36x), likidite yaklaşık 9,5 milyar $; çeyreklik temettü 0,85 $/hisse olarak açıklandı."
+    ],
+    "qa": [],
+    "risks": [
+     "Agresif satın alma temposuyla kaldıraç bir yılda 2,36x'ten 3,02x'e çıktı; çeyrek sonrası 7,7 milyar $'lık işlemlerin bir kısmı hâlâ kapanış koşullarına bağlı.",
+     "Rehberlik yalnızca duyurulmuş işlemleri içeriyor; şirketin kendi risk bölümünde faiz ve kur, Medicare/Medicaid düzenlemeleri ve operatör sorunları sayılıyor.",
+     "GAAP hisse başına kâr analist tahminlerinin altında kaldı ve hisse sonuç sonrası değer kaybetti; bu durum yüksek beklentilerin fiyatlandığına işaret ediyor olabilir."
+    ],
+    "sources": [
+     {
+      "title": "Welltower 8-K – 3Q26 kazanç bülteni ve ek bilgi paketi (SEC)",
+      "url": "https://www.sec.gov/Archives/edgar/data/0000766704/000076670426000043/a3q26combinedearningsrel.htm"
+     },
+     {
+      "title": "Welltower 8-K – 3Q26 basın bülteni (SEC)",
+      "url": "https://www.sec.gov/Archives/edgar/data/0000766704/000076670426000043/a3q26pressreleaseprnnewswi.htm"
+     },
+     {
+      "title": "Why Is Welltower Stock Rising After Its Third Quarter 2026 Earnings (Finviz)",
+      "url": "https://finviz.com/news/408624/why-is-welltower-stock-rising-22-after-its-third-quarter-2026-earnings"
+     },
+     {
+      "title": "Welltower (WELL) Q3 2026: EPS Beats by 135%, Guidance Lifted (24/7 Wall St.)",
+      "url": "https://247wallst.com/cards/welltower-q3-2026-earnings-well-01m5wyxs2zgn4nnazk3fqrnpwh"
+     }
+    ]
+   },
+   {
     "q": "Q2 2026",
     "date": "2026-07-28",
     "tone": "olumlu",
@@ -713,6 +786,36 @@
    }
   ],
   "BIIB": [
+   {
+    "q": "Q3 2026",
+    "date": "2026-10-28",
+    "tone": "olumlu",
+    "toneChg": "benzer",
+    "summary": "Biogen üçüncü çeyrekte toplam gelirini yıllık %11 artışla yaklaşık 2,80 mlr $'a taşıdı; büyüme portföyü %49 genişleyerek temel ilaç gelirinin %63'üne ulaştı. Buna karşın MS ürünlerindeki erime sürdü ve 284 mn $'lık edinilmiş Ar-Ge/kilometre taşı giderleri nedeniyle GAAP bazında hisse başı zarar oluştu. Yönetim 2026 gelir beklentisini korurken kâr aralığının alt ucunu yukarı çekti.",
+    "guidance": "2026 gelirinin 2025'e göre orta tek haneli oranda artması beklentisi korundu; düzeltilmiş HBK aralığı 12,00-13,00 $'dan 12,20-13,00 $'a daraltıldı (edinilmiş Ar-Ge etkisi yaklaşık -3,20 $, Apellis seyrelmesi yaklaşık -0,55 $ dahil). Non-GAAP Ar-Ge ile SG&A toplamının yaklaşık 4,95 mlr $ olması öngörülüyor.",
+    "highlights": [
+     "Toplam gelir 2.804 mn $ ile yıllık %11 arttı (sabit kurda %10); düzeltilmiş HBK 2,62 $ (Q3 2025: 4,81 $), GAAP HBK -0,14 $.",
+     "Büyüme portföyü geliri 1,26 mlr $ (+%49): Spinraza 461 mn $ (+%23), Syfovre 191 mn $ (+%27), Skyclarys 178 mn $ (+%34), Zurzuvae 84 mn $ (+%53).",
+     "Leqembi'nin Eisai tarafından raporlanan küresel satışı 202 mn $'a çıktı (+%67, ABD 107 mn $); Biogen'in kaydettiği iş birliği geliri 68,4 mn $.",
+     "MS ürün geliri 919 mn $'a geriledi (yıllık -%13); Vumerity 192 mn $ ile %11 düştü."
+    ],
+    "qa": [],
+    "risks": [
+     "MS franchise'ında Tecfidera jenerikleri ve Tysabri biyobenzeri kaynaklı süregelen gelir kaybı (çeyrekte -%13).",
+     "Apellis alımı sonrası bilanço: nakit 30 Eylül itibarıyla 1,30 mlr $'a inerken uzun vadeli borç 7,29 mlr $'a yükseldi; edinilmiş Ar-Ge harcamaları GAAP kârlılığı baskılıyor.",
+     "ABD ilaç fiyatlandırma düzenlemeleri (IRA, Medicare Part D yeniden yapılandırması, MFN girişimleri) 10-Q'da risk olarak belirtiliyor."
+    ],
+    "sources": [
+     {
+      "title": "Biogen Q3 2026 basın bülteni (Form 8-K Ek 99.1, SEC)",
+      "url": "https://www.sec.gov/Archives/edgar/data/0000875045/000087504526000094/exhibit991-q32026pressrele.htm"
+     },
+     {
+      "title": "Biogen Form 10-Q, 30 Eylül 2026 dönemi (SEC)",
+      "url": "https://www.sec.gov/Archives/edgar/data/0000875045/000087504526000096/biib-20260930.htm"
+     }
+    ]
+   },
    {
     "q": "Q2 2026",
     "date": "2026-07-29",
@@ -886,6 +989,45 @@
   ],
   "SCCO": [
    {
+    "q": "Q3 2026",
+    "date": "2026-10-22",
+    "tone": "olumlu",
+    "toneChg": "benzer",
+    "summary": "Southern Copper, LME bakır ortalamasının 6,41 $/lb'ye çıkması ve güçlü yan ürün gelirleri sayesinde üst üste ikinci çeyrekte rekor kâr açıkladı; satışlar yaklaşık 4,7 mlr $'a, net kâr 1,8 mlr $'a yükseldi. Peru'daki düşük tenör ve geri kazanım nedeniyle madenden bakır üretimi yıllık %1 geriledi, yan ürün öncesi birim maliyet arttı. Yönetim proje bütçelerini enflasyon açısından gözden geçirdiğini, güncel capex ve 2027 rehberliğini Ocak 2027'de vereceğini belirtti.",
+    "guidance": "2026 bakır üretim beklentisi 918 bin ton (ilk planın %0,7 üstü; yönetim yıl sonunun 920 bin tonun biraz altında kapanacağını söyledi), molibden 29 bin ton. 2027 üretim ve güncel capex rehberliği Ocak 2027'deki yıl sonu sonuçlarıyla açıklanacak; net nakit maliyetin mevcut seviyede veya biraz daha iyi olması bekleniyor.",
+    "highlights": [
+     "Net satış 4.696,6 mn $ (yıllık +%39,1); net kâr 1.801,8 mn $ (+%62,7), EPS 2,15 $",
+     "Düzeltilmiş FAVÖK 3.040,2 mn $ (+%53,9), marj %64,7; operasyonel nakit akışı ~2,2 mlr $",
+     "Yan ürün sonrası net nakit maliyet 0,09 $/lb (3Ç25: 0,42 $/lb); yan ürün öncesi maliyet ~2,46 $/lb ile yaklaşık %10 arttı",
+     "Madenden bakır üretimi 232.396 ton (yıllık -%1,1); Tia Maria 30 Eylül itibarıyla %49,6 tamam (önceki çeyrek %42), üretim 2028 ilk yarısında; hisse başı 1,30 $ nakit temettü"
+    ],
+    "qa": [
+     "Morgan Stanley Tia Maria'daki takvim kaymasını sordu; yönetim mekanik montaj ve bazı mühendislik işlerinin beklenenden uzun sürdüğünü, işletmeye geçişin 2028 ilk yarısına kaydığını anlattı.",
+     "Capex ve 2027 üretim/maliyet sorularına yönetim şimdilik değişiklik duyurmadı; ayrıntıların Ocak 2027 görüşmesinde verileceğini, net nakit maliyetin yatay veya biraz daha iyi olabileceğini söyledi.",
+     "4. çeyrek yan ürün öncesi maliyette düşüş ihtimali görüldüğü, ancak bunun üretim hedeflerinin tutturulmasına bağlı olduğu ifade edildi.",
+     "Bradesco BBI hızla biriken nakit karşısında hissedar dağıtımlarının artıp artmayacağını ve büyük projelerde enflasyon kaynaklı capex artış riskini sordu; yönetim maliyet baskılarını değerlendirdiğini belirtti."
+    ],
+    "risks": [
+     "Peru operasyonlarında düşen cevher tenörü ve geri kazanım oranları üretimi ve birim maliyeti baskılıyor.",
+     "Tia Maria'da gecikme ve proje bütçelerinde enflasyon kaynaklı capex artışı riski.",
+     "Kârlılığın yüksek bakır ve yan ürün fiyatlarına bağımlılığı; fiyat geri çekilmesi marjları hızla etkileyebilir."
+    ],
+    "sources": [
+     {
+      "title": "Southern Copper 3Q26 basın bülteni (SEC Form 8-K Ex. 99.1)",
+      "url": "https://www.sec.gov/Archives/edgar/data/0001001838/000110465926117588/scco-ex99d1.htm"
+     },
+     {
+      "title": "Southern Copper (SCCO) Q3 2026 Earnings Call: Record Profit and Project Updates (Mitrade)",
+      "url": "https://www.mitrade.com/insights/news/live-news/article-0-2193501-20261026"
+     },
+     {
+      "title": "Southern Copper FY2026 Q3 earnings call (Bullfincher)",
+      "url": "https://bullfincher.io/companies/southern-copper-corporation/earnings-call/fy2026-q3"
+     }
+    ]
+   },
+   {
     "q": "Q2 2026",
     "date": "2026-07-22",
     "tone": "olumlu",
@@ -1024,5 +1166,5 @@
    }
   ]
  },
- "updatedAt": "2026-10-22T07:40:47Z"
+ "updatedAt": "2026-10-29T07:42:58Z"
 }
