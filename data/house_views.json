@@ -1,5 +1,5 @@
 {
- "updatedAt": "2026-10-27",
+ "updatedAt": "2026-10-30",
  "note": "Büyük varlık yöneticilerinin yayımlanmış görünümlerinden derlendi. Duruş: 1 olumlu/ağırlık artır, 0 nötr, -1 olumsuz/ağırlık azalt. Her görüş kendi yayın tarihindedir; her görüşün geçerlilik tarihi (validUntil) yayının ufkuna göre konur; geçenler 'eski' sayılır ve uzlaşıya katılmaz. Kaynak bağlantıları birincil yayın ya da yayını aktaran haber/uygulayıcı sayfasıdır (tür alanında belirtilir). Bu kurumların kısa vadeli görünümleri sık yanılır; sitede her görüş, yayın tarihinden bu yana temanın gerçekte ne yaptığıyla karnelenir.",
  "themes": {
   "us_eq": {
@@ -138,50 +138,32 @@
    "id": "blackrock",
    "n": "BlackRock",
    "brand": "iShares",
-   "pub": "Weekly market commentary",
-   "date": "2026-10-19",
+   "pub": "BlackRock Weekly Market Commentary",
+   "date": "2026-10-26",
    "type": "otomatik: kaynak metninden özet",
    "url": "https://www.blackrock.com/corporate/insights/blackrock-investment-institute/publications/weekly-commentary",
    "views": {
-    "us_eq": [
-     0,
-     "AI'yi nötr duruşumuz içinde desteklemeye devam ediyoruz"
-    ],
-    "ust_mid": [
+    "short_bonds": [
      1,
-     "Hala kısa vadelileri tercih ederek ABD Hazine tahvillerini yükselttik"
+     "Gelirleri için kısa vadeli tahvilleri tercih ediyoruz"
     ],
-    "japan_eq": [
+    "ust_long": [
      -1,
-     "Japonya’nın devlet tahvillerinde eğrinin istisnai derecede dik olması nedeniyle daha az underweight olduk"
-    ],
-    "em_debt": [
-     1,
-     "Özellikle Latin Amerika'da gelişen piyasa yerel para birimi borcunu tercih etme eğilimini sürdürüyoruz"
-    ],
-    "high_yield": [
-     1,
-     "Kredi piyasalarında yüksek dereceli yüksek getirili tahvillerde tatlı noktayı bularak ters barbell yaklaşımını tercih ediyoruz"
-    ],
-    "ig_credit": [
-     -1,
-     "Yatırım yapılabilir derecede yapay zeka ile ilgili ihraç baskılarından ve en zayıf borçlular arasındaki yeniden finansman risklerinden kaçınıyoruz"
+     "Enerji güvenliğini güçlendirmek için gereken yatırım, daha uzun vadeli getiriler üzerinde yukarı yönlü baskı oluşturabilir"
     ]
    },
    "strengths": [
-    "Daha yüksek tahvil getirileri, yatırımcıların gelir için eskisi kadar uzağa gitmek zorunda kalmamasını sağlıyor",
-    "Avrupa Merkez Bankası, piyasa stresi artarsa tepki verecek daha fazla araca sahip",
-    "Euro bölgesindeki bugünkü başlangıç noktası, euro bölgesi borç krizine kıyasla maddesel olarak farklı"
+    "Küresel ekonominin yapay zeka yatırımları ve kamu harcamaları sayesinde enerji şokuna karşı dirençli olması",
+    "ABD'nin net enerji ihracatçısı olarak daha büyük bir korumaya sahip olması"
    ],
    "risks": [
-    "Sermaye için yoğunlaşan rekabet, borçluları daha sıkı bir inceleme altına sokuyor",
-    "Fransa'nın 10 yıllık tahvil getirisi yüzde 5'e yaklaştı ve Alman Bund'larına kıyasla makaslar genişliyor",
-    "Teknoloji hisseleri, yapay zeka altyapısının rekor hızdaki gelişimine yönelik incelemeler nedeniyle baskı altında kaldı",
-    "Fransa'nın mali ve siyasi riskleri yatırımcıların ek tazminat talep etmesine yol açıyor"
+    "Stratejik rezervler ve yönü değiştirilmiş petrol sevkiyatları gibi tamponların zayıflaması",
+    "Avrupa'nın kışa girerken tarihi olarak düşük gaz rezervleriyle daha savunmasız olması",
+    "Enerji sistemlerini güçlendirmenin devasa sermaye gerektirmesi ve devlet tahvili getirilerini yukarı itmesi"
    ],
-   "validUntil": "2027-01-19",
+   "validUntil": "2027-01-26",
    "horizon": "taktik görüş, bir sonraki yeniden dengelemeye kadar",
-   "context": "Yüksek tahvil getirileri yeni yatırım fırsatları yaratırken, sermaye için artan rekabet borçlular üzerindeki denetimi artırmakta ve yatırımcıların seçici olmasını gerektirmektedir.",
+   "context": "Orta Doğu enerji şokunun rafinaj ve nakliye darboğazları gibi aşağı yönlü baskılarla evrilmesi ve bölgeler ile varlık sınıfları arasında seçiciliğin önem kazandığı belirtilmektedir.",
    "auto": true
   },
   {
@@ -189,34 +171,44 @@
    "n": "Vanguard",
    "brand": "Vanguard",
    "pub": "Vanguard Capital Markets Model® forecasts",
-   "date": "2026-07-22",
+   "date": "2026-10-21",
    "type": "otomatik: kaynak metninden özet",
    "url": "https://corporate.vanguard.com/content/corporatesite/us/en/corp/vemo/vemo-return-forecasts.html",
    "views": {
     "us_eq": [
-     -1,
-     "Değerlemeler zaten yüksek seviyelerden yükseldi ve bu da 10 yıllık beklenen yıllık getiri aralıklarında düşüşe yol açtı."
-    ],
-    "us_value": [
      1,
-     "Değerli hisse senetleri, ABD hisse senetleri içinde en cazip beklenen getiri profilini sunmaya devam ediyor."
+     "Değerlemeler iyileşti ve daha güçlü kazançlar ile kâr marjları yüksek getiri görünümünü destekledi."
+    ],
+    "us_small": [
+     0,
+     "Değer ve küçük sermayeli hisseler zayıfladı."
     ],
     "em_eq": [
-     -1,
-     "Gelişmekte olan piyasalar için beklenen getiriler, piyasalar daha pahalı hale geldikçe %3,6 ila %5,6 aralığından %2 ila %4 aralığına düştü."
+     1,
+     "Değerlemelerin yumuşaması ve temellerin güçlenmesiyle beklenen getiriler arttı."
+    ],
+    "high_yield": [
+     1,
+     "Daha yüksek getiriler ve daha geniş spreadler kredi piyasalarındaki beklenen getirileri artırdı."
+    ],
+    "em_debt": [
+     1,
+     "Daha yüksek getiriler ve daha geniş spreadler beklenen getirileri artırdı."
     ]
    },
    "strengths": [
-    "Değerli hisse senetleri, ABD hisse senetleri içinde en cazip beklenen getiri profilini sunmaya devam ediyor."
+    "Güçlü kurumsal temeller ve iyileşen değerlemeler",
+    "Yükselen egemen tahvil getirileri ve genişleyen kredi spreadleri",
+    "Yapay zeka bağlantılı teknoloji, büyüme ve büyük sermayeli ABD hisselerinin üstün performans göstermesi"
    ],
    "risks": [
-    "Equity valuations became substantially more stretched.",
-    "Merkez bankaları, yüksek enerji fiyatları, dirençli büyüme ve yapay zeka bağlantılı yatırım talebiyle ilişkili enflasyon risklerine giderek daha fazla odaklandı.",
-    "Pahalı değerlemeler nedeniyle çoğu uluslararası piyasada beklenen getiriler düştü."
+    "Yüksek uzun vadeli faiz oranlarının yarattığı iskonto oranı baskısı",
+    "ABD hisselerinin yüksek değerlenmeye devam etmesi",
+    "Tarihsel dönemde gözlemlenmemiş aşırı olumsuz senaryoların model tarafından eksik tahmin edilebilme ihtimali"
    ],
-   "validUntil": "2027-01-21",
+   "validUntil": "2027-04-22",
    "horizon": "10 yıllık tahmin; çeyreklik güncellenir",
-   "context": null,
+   "context": "Vanguard Capital Markets Model® tahminlerine göre, üçüncü çeyrekte destekleyici hale gelen değerlemeler ve yükselen egemen tahvil getirileri sayesinde küresel sermaye piyasalarına yönelik görünümler genellikle iyileşmiştir.",
    "auto": true
   },
   {
@@ -791,34 +783,92 @@
    "id": "amundi",
    "n": "Amundi",
    "archivedAt": "2026-10-27"
+  },
+  {
+   "date": "2026-10-19",
+   "pub": "Weekly market commentary",
+   "views": {
+    "us_eq": [
+     0,
+     "AI'yi nötr duruşumuz içinde desteklemeye devam ediyoruz"
+    ],
+    "ust_mid": [
+     1,
+     "Hala kısa vadelileri tercih ederek ABD Hazine tahvillerini yükselttik"
+    ],
+    "japan_eq": [
+     -1,
+     "Japonya’nın devlet tahvillerinde eğrinin istisnai derecede dik olması nedeniyle daha az underweight olduk"
+    ],
+    "em_debt": [
+     1,
+     "Özellikle Latin Amerika'da gelişen piyasa yerel para birimi borcunu tercih etme eğilimini sürdürüyoruz"
+    ],
+    "high_yield": [
+     1,
+     "Kredi piyasalarında yüksek dereceli yüksek getirili tahvillerde tatlı noktayı bularak ters barbell yaklaşımını tercih ediyoruz"
+    ],
+    "ig_credit": [
+     -1,
+     "Yatırım yapılabilir derecede yapay zeka ile ilgili ihraç baskılarından ve en zayıf borçlular arasındaki yeniden finansman risklerinden kaçınıyoruz"
+    ]
+   },
+   "url": "https://www.blackrock.com/corporate/insights/blackrock-investment-institute/publications/weekly-commentary",
+   "type": "otomatik: kaynak metninden özet",
+   "id": "blackrock",
+   "n": "BlackRock",
+   "archivedAt": "2026-10-30"
+  },
+  {
+   "date": "2026-07-22",
+   "pub": "Vanguard Capital Markets Model® forecasts",
+   "views": {
+    "us_eq": [
+     -1,
+     "Değerlemeler zaten yüksek seviyelerden yükseldi ve bu da 10 yıllık beklenen yıllık getiri aralıklarında düşüşe yol açtı."
+    ],
+    "us_value": [
+     1,
+     "Değerli hisse senetleri, ABD hisse senetleri içinde en cazip beklenen getiri profilini sunmaya devam ediyor."
+    ],
+    "em_eq": [
+     -1,
+     "Gelişmekte olan piyasalar için beklenen getiriler, piyasalar daha pahalı hale geldikçe %3,6 ila %5,6 aralığından %2 ila %4 aralığına düştü."
+    ]
+   },
+   "url": "https://corporate.vanguard.com/content/corporatesite/us/en/corp/vemo/vemo-return-forecasts.html",
+   "type": "otomatik: kaynak metninden özet",
+   "id": "vanguard",
+   "n": "Vanguard",
+   "archivedAt": "2026-10-30"
   }
  ],
  "autoRun": {
-  "at": "2026-10-27T09:23:01Z",
+  "at": "2026-10-30T10:26:08Z",
   "log": {
-   "jpmorgan": "değişmedi: https://am.jpmorgan.com/us/en/asset-management/adv/insights/portfolio-insights/ltcma/: yeni değil (2026-09-01 ≤ 2026-10-01) | https://am.jpmorgan.com/jp/en/asset-management/institutional/insights/portfolio-insights/ltcma/executive-summary/: yeni değil (2026-09-30 ≤ 2026-10-01) | arama: RuntimeError grounding başarısız: HTTP Error 429: Too Many Requests",
-   "goldman": "değişmedi: https://am.gs.com/en-us/advisors/insights/article/investment-outlook: tarih geçersiz/eski: 2025-10-24 | arama: RuntimeError grounding başarısız: HTTP Error 429: Too Many Requests",
-   "statestreet": "değişmedi: https://www.ssga.com/us/en/intermediary/insights/global-market-outlook: tarih okunamadı | arama: RuntimeError grounding başarısız: HTTP Error 429: Too Many Requests",
-   "pimco": "değişmedi: https://www.pimco.com/us/en/insights/cyclical-outlook: HTTPError HTTP Error 404: Not Found | arama: RuntimeError grounding başarısız: HTTP Error 429: Too Many Requests",
-   "amundi": "güncellendi → 2026-10-26 (1 görüş)",
-   "capitalgroup": "değişmedi: https://www.capitalgroup.com/individual/insights/categories/outlook.html: yeni değil (2026-06-24 ≤ 2026-06-24) | arama: RuntimeError grounding başarısız: HTTP Error 429: Too Many Requests",
-   "fidelity": "değişmedi: https://institutional.fidelity.com/advisors/insights/topics/market-commentary: RuntimeError gemini-3.8-flash: TimeoutError The read operation timed out | gemini-flash-latest: TimeoutError The read operation timed",
-   "bny": "süre doldu, bir sonraki çalışmaya kaldı",
-   "blackrock": "süre doldu, bir sonraki çalışmaya kaldı",
-   "vanguard": "süre doldu, bir sonraki çalışmaya kaldı"
+   "bny": "değişmedi: https://www.bny.com/assets/investments/imemea/pdfs/emea_fp_checkpoints_oct26.pdf: HTTPError HTTP Error 404: Not Found | https://www.bny.com/assets/investments/imemea/pdfs/emea_fp_checkpoints_sep26.pdf: HTTPError HTTP Error 404: Not Found | https://www.bny.com/assets/investments/imemea/pdfs/emea_fp_checkpoints_aug26.pdf: HTTPError HTTP Error 404: Not Found | https://www.bny.com/assets/investments/imemea/pdfs/emea_fp_checkpoints_july26.pdf: HTTPError HTTP Error 404: Not Found | https://www.bny.com/assets/investments/imemea/pdfs/emea_fp_checkpoints_jul26.pdf: HTTPError HTTP Error 404: Not Found |",
+   "blackrock": "güncellendi → 2026-10-26 (2 görüş)",
+   "vanguard": "güncellendi → 2026-10-21 (5 görüş)",
+   "jpmorgan": "değişmedi: https://am.jpmorgan.com/us/en/asset-management/adv/insights/portfolio-insights/ltcma/: tarih geçersiz/eski: 2027-09-01 | https://am.jpmorgan.com/jp/en/asset-management/institutional/insights/portfolio-insights/ltcma/executive-summary/: yeni değil (2026-09-01 ≤ 2026-10-01) | arama: RuntimeError grounding başarısız: HTTP Error 429: Too Many Requests",
+   "goldman": "değişmedi: https://am.gs.com/en-us/advisors/insights/article/investment-outlook: tarih okunamadı | arama: RuntimeError grounding başarısız: HTTP Error 429: Too Many Requests",
+   "statestreet": "değişmedi: https://www.ssga.com/us/en/intermediary/insights/global-market-outlook: tarih geçersiz/eski: 2025-11-30 | arama: RuntimeError grounding başarısız: HTTP Error 429: Too Many Requests",
+   "pimco": "süre doldu, bir sonraki çalışmaya kaldı",
+   "amundi": "süre doldu, bir sonraki çalışmaya kaldı",
+   "capitalgroup": "süre doldu, bir sonraki çalışmaya kaldı",
+   "fidelity": "süre doldu, bir sonraki çalışmaya kaldı"
   },
   "checked": {
-   "blackrock": "2026-10-23T08:51:50Z",
-   "vanguard": "2026-10-23T08:53:11Z",
-   "jpmorgan": "2026-10-27T09:12:32Z",
-   "goldman": "2026-10-27T09:14:32Z",
-   "statestreet": "2026-10-27T09:16:51Z",
+   "blackrock": "2026-10-30T10:16:05Z",
+   "vanguard": "2026-10-30T10:17:27Z",
+   "jpmorgan": "2026-10-30T10:21:42Z",
+   "goldman": "2026-10-30T10:23:20Z",
+   "statestreet": "2026-10-30T10:26:08Z",
    "pimco": "2026-10-27T09:17:27Z",
    "amundi": "2026-10-27T09:18:48Z",
    "capitalgroup": "2026-10-27T09:20:52Z",
    "fidelity": "2026-10-27T09:23:01Z",
-   "bny": "2026-10-23T08:49:14Z"
+   "bny": "2026-10-30T10:14:45Z"
   },
-  "sec": 780
+  "sec": 725
  }
 }
