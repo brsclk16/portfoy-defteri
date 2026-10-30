@@ -1,5 +1,5 @@
 {
- "updatedAt": "2026-10-29T05:55:01Z",
+ "updatedAt": "2026-10-30T05:55:33Z",
  "cards": [
   {
    "id": "VRT-2026Q3",
@@ -322,6 +322,179 @@
     {
      "title": "SEC 8-K — Southern Copper Q3 2026 sonuç duyurusu",
      "url": "https://www.sec.gov/Archives/edgar/data/0001001838/000110465926117588/scco-ex99d1.htm"
+    }
+   ]
+  },
+  {
+   "id": "INTC-2026Q3",
+   "t": "INTC",
+   "company": "Intel",
+   "date": "2026-10-29",
+   "quarter": "Q3 2026",
+   "time": "piyasa sonrası",
+   "eps": {
+    "act": 0.52,
+    "est": 0.4,
+    "surprisePct": 30.1
+   },
+   "rev": {
+    "act": 16.51,
+    "est": 16.49,
+    "unit": "mlr $",
+    "yoy": 21,
+    "surprisePct": 0.1
+   },
+   "guidance": "4. çeyrek gelir rehberi 15–16 mlr $ ile ~17 mlr $'lık piyasa beklentisinin belirgin altında kaldı.",
+   "highlights": [
+    "Veri merkezi gelirleri yıllık %78 artışla son 15 yılın en hızlı büyümesini gösterdi.",
+    "Arz darboğazları ve bellek fiyatlarının baskıladığı PC talebi zayıflığı rehberi aşağı çekti.",
+    "CEO Lip-Bu Tan güçlü CPU talebini karşılayamadıklarını söyledi; Nova Lake'in 18A-P sürecinde üretileceği teyit edildi.",
+    "Hisse seans sonrasında yaklaşık %20 değer kaybetti."
+   ],
+   "affects": [
+    {
+     "t": "SOXX",
+     "note": "fonda ~%10,2 ağırlık"
+    },
+    {
+     "t": "SMH",
+     "note": "yarı iletken duyarlılığı üzerinden dolaylı"
+    }
+   ],
+   "summary": "Intel 3. çeyrekte HBK'da beklentiyi aştı, gelir beklentiyle uyumlu geldi. Ancak zayıf 4. çeyrek rehberi hissede seans sonrası sert satışa yol açtı.",
+   "sources": [
+    {
+     "title": "CNBC — Intel Q3 2026 sonuçları",
+     "url": "https://www.cnbc.com/2026/10/29/intel-intc-q3-earnings-report-2026-.html"
+    },
+    {
+     "title": "NYT — Intel earnings",
+     "url": "https://www.nytimes.com/2026/10/29/technology/intel-earnings.html"
+    }
+   ]
+  },
+  {
+   "id": "LLY-2026Q3",
+   "t": "LLY",
+   "company": "Eli Lilly",
+   "date": "2026-10-29",
+   "quarter": "Q3 2026",
+   "time": "piyasa öncesi",
+   "rev": {
+    "act": 24.4,
+    "unit": "mlr $",
+    "yoy": 39
+   },
+   "guidance": "2026 gelir beklentisi 91–92 mlr $'a yükseltildi.",
+   "highlights": [
+    "Mounjaro ve Zepbound talebiyle gelir yıllık %39 arttı.",
+    "Satış hacmi %53 artarken gerçekleşen fiyatlar %15 geriledi.",
+    "Faz 2 Alzheimer programı (mevidalen) sonlandırıldı."
+   ],
+   "reaction": {
+    "pct": 6.63,
+    "from": 1288.3,
+    "to": 1373.7
+   },
+   "affects": [
+    {
+     "t": "AGNG",
+     "note": "fonda ~%3,5 ağırlık"
+    }
+   ],
+   "summary": "Lilly obezite ve diyabet ilaçlarındaki güçlü talep sayesinde satış beklentilerini aştı ve yıllık rehberini yükseltti. Hisse günü %6,6 yükselişle kapattı.",
+   "sources": [
+    {
+     "title": "Nasdaq — Eli Lilly Q3 2026 sonuç duyurusu",
+     "url": "https://www.nasdaq.com/articles/eli-lilly-and-company-reports-q3-2026-revenue-244-billion-and-updates-full-year-guidance"
+    },
+    {
+     "title": "CNBC — Lilly Q3 2026",
+     "url": "https://www.cnbc.com/2026/10/29/eli-lilly-lly-earnings-q3-2026.html"
+    }
+   ]
+  },
+  {
+   "id": "MRK-2026Q3",
+   "t": "MRK",
+   "company": "Merck & Co.",
+   "date": "2026-10-29",
+   "quarter": "Q3 2026",
+   "time": "piyasa öncesi",
+   "eps": {
+    "act": 2.49,
+    "est": 2.1,
+    "surprisePct": 18.5
+   },
+   "rev": {
+    "act": 18.09,
+    "est": 17.33,
+    "unit": "mlr $",
+    "yoy": 5,
+    "surprisePct": 4.4
+   },
+   "guidance": "2026 düzeltilmiş HBK rehberi 2,66–2,76 $'dan 2,77–2,82 $'a, satış rehberi 66,8–67,3 mlr $'a yükseltildi.",
+   "highlights": [
+    "Keytruda satışları 8,60 mlr $, deri altı Keytruda Qlex 830 mln $.",
+    "Gardasil 1,99 mlr $ ile toparlandı; hayvan sağlığı 1,68 mlr $.",
+    "Keytruda patent süresi sonu öncesi yeni ürünlere yatırım sürüyor."
+   ],
+   "reaction": {
+    "pct": 3.83,
+    "from": 140.93,
+    "to": 146.33
+   },
+   "affects": [
+    {
+     "t": "AGNG",
+     "note": "fonda ~%3,5 ağırlık"
+    }
+   ],
+   "summary": "Merck hem kâr hem satışta beklentiyi aştı ve yıl rehberini yükseltti. Hisse günü %3,8 yükselişle kapattı.",
+   "sources": [
+    {
+     "title": "SEC 8-K — Merck Q3 2026",
+     "url": "https://www.sec.gov/Archives/edgar/data/310158/000110465926119825/tm2628203d1_8k.htm"
+    },
+    {
+     "title": "Nasdaq — Merck Q3 2026 sonuçları",
+     "url": "https://www.nasdaq.com/articles/merck-co-inc-announces-third-quarter-2026-financial-results"
+    }
+   ]
+  },
+  {
+   "id": "TECK-2026Q3",
+   "t": "TECK",
+   "company": "Teck Resources",
+   "date": "2026-10-29",
+   "quarter": "Q3 2026",
+   "time": "piyasa öncesi",
+   "guidance": "2026 görünümü güncellendi; ayrıntı kaynaklarda.",
+   "highlights": [
+    "Rekor bakır fiyatlarıyla kâr ve üretim güçlendi; kâr ve gelir beklentileri aştı.",
+    "Çeyreklik 0,125 $ temettü açıklandı.",
+    "İşçi anlaşmazlığı ve Çin'in incelemesi birleşme sürecine gölge düşürüyor."
+   ],
+   "reaction": {
+    "pct": 1.08,
+    "from": 63.04,
+    "to": 63.72
+   },
+   "affects": [
+    {
+     "t": "COPX",
+     "note": "fonda ~%5,4 ağırlık"
+    }
+   ],
+   "summary": "Teck, yüksek bakır fiyatlarının desteğiyle 3. çeyrekte beklentileri aştı. Hisse günü %1,1 yükselişle kapattı.",
+   "sources": [
+    {
+     "title": "SEC 6-K — Teck Resources",
+     "url": "https://www.sec.gov/Archives/edgar/data/886986/000095014226002887/eh260849449_6k.htm"
+    },
+    {
+     "title": "Mining.com — Teck profit surges",
+     "url": "https://www.mining.com/teck-profit-surges-as-copper-prices-hit-record-highs/"
     }
    ]
   }

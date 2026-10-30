@@ -1,39 +1,40 @@
 {
- "publishedAt": "2026-10-29T05:55:44Z",
- "asOf": "2026-10-27",
- "title": "Vertiv'in %16,5'lik bilanço sıçraması sonrası gözler PCE, GSYH ve Intel'de",
+ "publishedAt": "2026-10-30T05:56:18Z",
+ "asOf": "2026-10-28",
+ "title": "Intel'in zayıf rehberi çipleri baskılıyor; Lilly ve Merck beklentiyi aştı",
  "sections": [
   {
    "h": "Dün",
    "items": [
-    "VRT güçlü bilanço ve yükseltilen 2026 rehberliğiyle %16,5 yükseldi (242,94 $); S&P 500 (SPY) yalnızca %0,3 arttı.",
-    "Çipler de pozitifti: CRDO +%3,7, AMD +%3,2, SOXX +%2,1, SMH +%1,7; XBI +%1,7.",
-    "Zayıf taraf: DELL %1,6 ve SLV %0,2 geriledi; Fed faizi beklendiği gibi %4'te sabit bıraktı."
+    "29 Ekim'de S&P 500 (SPY) %0,38 geriledi; portföyün çoğu endeksin altında kaldı.",
+    "En kötüler: CRDO −%4,8, DELL −%3,7, SLV −%3,6, AMD −%2,1, SOXX −%1,6.",
+    "En iyiler: AGNG +%1,8 (Lilly ve Merck bilançoları), VRT +%1,2, ASML +%0,8.",
+    "Önceki gün (28 Ekim) VRT bilanço sonrası +%16,5 yükselmişti."
    ]
   },
   {
    "h": "Bugün",
    "items": [
-    "15:30 TRT: ABD Q3 GSYH öncü verisi (beklenti %3,2) ve Eylül çekirdek PCE (beklenti aylık %0,3) — faiz beklentileri üzerinden SMH/SOXX, XBI ve altın-gümüş (IAU/SLV) için önemli.",
-    "Piyasa öncesi (saat tahmini ~15:00–15:30 TRT): Eli Lilly, Merck ve Teck bilançoları — AGNG'nin büyük holdingleri ile COPX'i ilgilendiriyor.",
-    "23:05 TRT: Intel bilançosu (HBK beklentisi ~0,40 $) — SOXX ve SMH'yi etkileyebilir; yarın 15:30 TRT'de AbbVie."
+    "Intel seans sonrası ~%20 düştü (zayıf 4. çeyrek rehberi); SOXX'te ~%10 ağırlıkla açılışta baskı yaratabilir, SMH ve AMD de etkilenebilir.",
+    "AbbVie 3. çeyrek bilançosu 15:30 TRT (saat tahmini); AGNG'de ~%3,5 ağırlık.",
+    "Gelecek hafta: ISM imalat 2 Kasım, AMD bilançosu 3 Kasım 23:30 TRT ve ABD ara seçimleri 3 Kasım."
    ]
   },
   {
    "h": "Teknik durum",
    "items": [
-    "Alım bölgesinde: AMD 578,44 $ (bölge 565,97–580,56), SMH 567,67 $ (555,31–568,31), SOXX 521,94 $ (511,15–523,57).",
-    "VRT 242,94 $ ile bölgenin (216,28–240,98) hemen üstüne çıktı; SLV 49,06 $ ile bölgenin (49,09–49,38) hemen altında, stop 47,33 $.",
-    "DELL 493,79 $ ile aşırı ısınmış görünümde (bölge 444,75–450,35); stop'a %3'ten yakın enstrüman yok."
+    "IAU alım bölgesinde (75,01–75,46 $, fiyat 75,57 $); stop 73,62 $'a yalnızca ~%2,6 uzaklıkta.",
+    "SMH alım bölgesinde (560,46–563,83 $, fiyat 561,67 $); stop 528,82 $, TP1 575,45 $.",
+    "Aşırı ısınmış görünenler: AGNG (39,27 $, RSI 70), AMD (566,42 $), DELL (475,51 $)."
    ]
   },
   {
    "h": "Beklenti → gerçekleşen",
    "items": [
-    "Fed faiz kararı: beklenti %4 → %4; VRT +%16,5, CRDO +%3,7, AMD +%3,2.",
-    "Vertiv bilançosu: HBK beklenti 1,85 → 2,21 (+%19,5, beklentinin üstünde); VRT +%16,5.",
-    "Biogen bilançosu: HBK beklenti 2,01 → 2,62 (+%30,1, beklentinin üstünde); XBI +%1,7.",
-    "Meta finansmanına Nvidia/AMD katılımı haberi: beklenti olumlu → fiyat beklenen yönde (AMD +%3,2, SMH +%1,7, SOXX +%2,1)."
+    "Intel bilançosu (Q3 26): HBK beklenti 0,40 → 0,52 (+%30,1, beklentinin üstünde); buna rağmen rehber hisseyi seans sonrası sert düşürdü.",
+    "Eli Lilly bilançosu (Q3 26): HBK beklenti 6,61 → 7,48 (+%13,1) · AGNG +%1,8.",
+    "Merck bilançosu (Q3 26): HBK beklenti 2,10 → 2,49 (+%18,5) · AGNG +%1,8.",
+    "Teck Resources bilançosu (Q3 2026): HBK beklenti 1,01 → 1,88 (+%86,6) · COPX −%1,2."
    ]
   }
  ]
