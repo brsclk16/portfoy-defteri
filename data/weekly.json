@@ -1,6 +1,89 @@
 {
  "reports": [
   {
+   "id": "2026-W44",
+   "weekEnd": "2026-10-30",
+   "range": "26–30 Ekim 2026",
+   "publishedAt": "2026-10-30T22:42:30Z",
+   "title": "Vertiv %20 uçtu; Intel'in cuma çöküşü çip kazançlarını sildi",
+   "movers": [
+    {
+     "t": "VRT",
+     "pct": 19.69
+    },
+    {
+     "t": "XBI",
+     "pct": 4.25
+    },
+    {
+     "t": "CRDO",
+     "pct": 2.56
+    },
+    {
+     "t": "AGNG",
+     "pct": 2.4
+    },
+    {
+     "t": "ASML",
+     "pct": -0.42
+    },
+    {
+     "t": "SMH",
+     "pct": -0.83
+    },
+    {
+     "t": "SOXX",
+     "pct": -1.4
+    },
+    {
+     "t": "COPX",
+     "pct": -1.74
+    },
+    {
+     "t": "AMD",
+     "pct": -2.25
+    },
+    {
+     "t": "IAU",
+     "pct": -2.94
+    },
+    {
+     "t": "DELL",
+     "pct": -7.12
+    },
+    {
+     "t": "SLV",
+     "pct": -8.52
+    }
+   ],
+   "summary": [
+    "Hafta iki ayrı parçadan oluştu. Pazartesiden perşembeye AI tarafı güçlü bir toparlanma yaşadı: perşembe kapanışında SMH %6,5, SOXX %7,5, AMD %9,6, Vertiv %26,6 artıdaydı. Cuma günü ise Intel'in nakit yakacağını açıklamasıyla hissenin tarihinin en sert günlük düşüşünü (yaklaşık %29) yaşaması küresel bir çip satışını tetikledi; Amazon'un gelecek yıl için daha yüksek yatırım harcaması sinyali de AI harcamalarının finansmanı kaygısını yeniden alevlendirdi. Sonuçta 12 enstrümanın 4'ü artıda kapattı. En iyisi %19,7 ile Vertiv, en kötüsü %8,5 kayıpla gümüş (SLV) oldu. S&P 500 (SPY) haftayı %0,6 eksi kapatırken eşit ağırlıklı portföy ortalaması yaklaşık %0,3 artıda kaldı; yani endeksin yaklaşık 0,9 puan önünde bitirildi, bunun büyük kısmı Vertiv'den geldi.",
+    "Yarı iletkenlerde cuma tek başına haftayı belirledi: SOXX o gün %8,2, SMH %6,9, AMD %10,8, ASML %6,6 düştü; haftalık bazda SMH %0,8, SOXX %1,4, AMD %2,3, ASML %0,4 ekside kaldı. Talep tarafındaki haberler (SK Hynix'in rekor kârı, Meta'nın AI finansmanı için büyük kaynak araması, Nvidia–Anthropic veri merkezi kredisi) olumluydu; satışın kaynağı Intel'e özgü sorunlar ve sektörün yüksek değerlemesiydi. AI altyapısında ayrışma belirgindi: Vertiv, organik siparişlerini iki katından fazla artırdığı ve yıllık beklentisini yükselttiği güçlü 3. çeyrekle çarşamba %16,5 yükseldi; cuma %5,4 düşse de haftanın açık ara lideri oldu. Dell ise salı %7,5 yükseldikten sonra Intel'in zayıf PC talebi uyarısıyla cuma %10,8 düşüp haftayı %7,1 eksi kapattı. Credo salı %10,8'lik sıçramanın ardından cuma %8,6 geriledi ama haftayı %2,6 artıda bitirdi. Biyotekte XBI %4,3, AGNG %2,4 yükseldi; Eli Lilly'nin %39'luk gelir artışı ve cuma günü savunmacı sektörlere yönelim sağlığı destekledi. Metallerde tablo zayıftı: Fed faizi %3,75–4,00'te tuttu ama iki üye artırım yönünde oy kullandı ve piyasa Aralık'ta artırımı büyük olasılık olarak fiyatlıyor. Bu, faiz getirmeyen metallere baskı yaptı: ons altın %3,2 düşerek 3.884 $'a indi (IAU −%2,9, cuma 52 haftanın en düşüğünü gördü), gümüş %8,5 kaybetti. Bakır madencileri (COPX) perşembeye kadar %3,8 artıdayken cuma %5,4 düşerek haftayı %1,7 eksi kapattı.",
+    "Dolar/TL %0,5 yükselerek 49,95'e çıktı. TL bazında SPY yaklaşık yatay (−%0,04), eşit ağırlıklı portföy ortalaması ise yaklaşık %0,8 artıda; Vertiv TL'de %20,3, XBI %4,8 kazandırırken gümüş %8,0, Dell %6,6 kaybettirdi. Çeşitlendirme bu hafta yine kısmen çalıştı: cuma günkü çip satışında sağlık tarafı (AGNG cuma da artıda kapattı) tampon görevi gördü. Altın ise Fed'in sıkı duruşu nedeniyle üst üste ikinci hafta koruma sağlamadı ve AI satışıyla aynı gün düştü. Portföyün AI'a bağlı yarısında kayıpların yine tek bir günde toplandığı, ancak şirkete özgü güçlü bir sonuçla (Vertiv) bunun dengelenebildiği görüldü."
+   ],
+   "highlights": [
+    "Vertiv: 3. çeyrekte net satışlar %61 artışla 4,31 milyar $'a, düzeltilmiş hisse başı kâr %78 artışla 2,21 $'a çıktı; organik siparişler iki katından fazla arttı. 2026 satış beklentisi 650 milyon $ yükseltilerek 14,45–14,85 milyar $'a çekildi; hisse çarşamba %16,5 yükseldi.",
+    "Intel: Zayıf PC pazarı, üretim sorunları ve yüksek yatırım harcaması nedeniyle bu yıl nakit yakacağını açıkladı; hisse cuma yaklaşık %29 düşerek tarihinin en kötü gününü yaşadı ve SOXX'u %8,2, SMH'ı %6,9 aşağı çekti.",
+    "AMD ve Dell: Cuma günü ikisi de %10,8 düştü. AMD perşembe kapanışında haftalık %9,6 artıdaydı; Dell'de ise Intel'in PC uyarısı sunucu ve PC tarafına doğrudan yansıdı (HP de yaklaşık %9 geriledi).",
+    "Eli Lilly (AGNG/XBI tarafı): 3. çeyrek geliri Mounjaro ve Zepbound talebiyle %39 artarak 24,4 milyar $'a ulaştı; Biogen de gelirini %11 artırdı. Cuma günü sağlık sektörü yükselen az sayıdaki gruptan biriydi.",
+    "Fed: Faiz 10-2 oyla %3,75–4,00'te sabit tutuldu; Lisa Cook ve Beth Hammack 25 baz puan artırım istedi. Vadeli piyasalar Aralık toplantısında artırım olasılığını yaklaşık %83 olarak fiyatladı; bu, altın ve gümüş üzerindeki baskının temel nedeni oldu.",
+    "Bakır: Teck'in Kanada'daki en büyük bakır madeni Highland Valley'de grev başladı; arz tarafını destekleyen bu habere rağmen COPX cuma genel satışa katılarak %5,4 düştü."
+   ],
+   "nextWeek": [
+    "2 Kasım (Pzt): ABD ISM imalat endeksi (önceki 54,5) — COPX, SMH/SOXX ve metaller için büyüme sinyali; güçlü veri Fed artırım beklentisini de besleyebilir.",
+    "3 Kasım (Salı): AMD 3. çeyrek bilançosu (kapanış sonrası) — cuma %10,8 düşen AMD ve ağırlığı yüksek olduğu SMH/SOXX için haftanın ana olayı; Intel sonrası veri merkezi ve PC talebine dair yorumlar kritik.",
+    "3 Kasım (Salı): ABD ara seçimleri ve Türkiye Ekim enflasyonu — seçim sonucu sağlık politikası (XBI, AGNG) ve genel risk iştahı açısından, TÜFE ise TL ve TCMB beklentileri açısından önemli.",
+    "4 Kasım (Çarş): Novo Nordisk bilançosu, ISM hizmet ve ADP istihdamı; Hudbay Minerals bilançosu — Novo AGNG/XBI tarafındaki obezite ilacı rekabeti için, Hudbay COPX için izlenecek.",
+    "6 Kasım (Cuma): ABD tarım dışı istihdam ve işsizlik oranı (önceki 29 bin, %4,2) ile Moderna bilançosu — istihdam verisi Aralık faiz artırımı olasılığını ve dolayısıyla altın/gümüşü doğrudan etkileyebilir."
+   ],
+   "watch": [
+    "Faiz artırımı riski: Fed'de iki üyenin artırım yönünde oy kullanması ve piyasanın Aralık'ı büyük olasılıkla fiyatlaması hem yüksek değerlemeli AI hisselerini hem de altın/gümüşü aynı anda baskılıyor; iki koruma ayağının birlikte zayıflaması çeşitlendirmeyi sınırlıyor.",
+    "Değerli metallerde dip arayışı: IAU cuma 52 haftanın en düşüğünü gördü, SLV 52 haftalık dibine (42,51 $) yaklaşık %5 uzaklıkta; ons altın 4.000 $'ın altında kalıcılaşıyor.",
+    "Yoğunlaşma riski: Portföyün yarıdan fazlası AI temasına bağlı ve son iki haftada kayıplar tek günlere (23 Ekim perşembe, 30 Ekim cuma) yığıldı. AMD bilançosu bu kırılganlığı yeniden test edecek.",
+    "Vertiv'in sert yükselişi: Hisse bir haftada %20 değer kazandı ve portföy içindeki ağırlığı kendiliğinden arttı; cuma günkü %5,4'lük geri çekilme, güçlü sonuca rağmen sektör satışlarından etkilenebildiğini gösterdi."
+   ]
+  },
+  {
    "id": "2026-W43",
    "weekEnd": "2026-10-23",
    "range": "19–23 Ekim 2026",
