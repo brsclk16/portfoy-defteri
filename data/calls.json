@@ -446,6 +446,57 @@
   ],
   "INTC": [
    {
+    "q": "Q3 2026",
+    "date": "2026-10-29",
+    "tone": "temkinli",
+    "toneChg": "daha temkinli",
+    "summary": "Intel, 16,5 milyar dolar gelir ve 0,38 dolarlık öngörüsünün üzerinde 0,52 dolar düzeltilmiş hisse başına kârla üçüncü çeyreği rehberliğin ötesinde kapattı; veri merkezi tarafı yıllık %78 büyürken istemci geliri kendi beklentisinin altında kaldı. Asıl gündem ise dördüncü çeyrek görünümü oldu: yönetim, bellek sıkıntısının hızlandırdığı PC düzeltmesini ve İsrail'deki Fab 28'de yaşanan kazanın yol açtığı uzun duruşu öne çıkardı. Zayıf rehberliğin ardından hisse ertesi gün yaklaşık %28,6 geriledi.",
+    "guidance": "Dördüncü çeyrek için 15,0–16,0 milyar dolar gelir (orta nokta 15,5 milyar dolar; piyasa beklentisi yaklaşık 17,1 milyar dolardı), %38 düzeltilmiş brüt marj ve 0,25 dolar düzeltilmiş hisse başına kâr öngörülüyor; CCPG gelirinin çeyreklik %20'den fazla düşmesi, DCAI gelirinin ise orta onlu yüzdelerde artması bekleniyor. 2026 brüt yatırım harcaması yaklaşık 20 milyar dolar; 2027'de güçlü artış beklenirken rakam verilmedi ve serbest nakit akışının pozitif olması öngörülmüyor.",
+    "highlights": [
+     "Gelir yıllık %21 artışla 16,5 milyar dolar; düzeltilmiş brüt marj %44,1 ile rehberliğin yaklaşık 200 baz puan üzerinde, faaliyet nakit akışı 5,1 milyar dolar",
+     "DCAI geliri 7,3 milyar dolar (çeyreklik %17, yıllık %78 artış) ve özel amaçlı silikon geliri çeyreklik %50'den fazla büyüdü; CCPG ise 8,1 milyar dolara geriledi (çeyreklik %9, yıllık %5 düşüş)",
+     "Intel Foundry geliri 6,7 milyar dolar, faaliyet zararı 1,9 milyar dolar (çeyreklik 236 milyon dolar iyileşme); harici dökümhane geliri 411 milyon dolara çıktı, ancak yönetim 118 milyon dolarlık artışın büyük bölümünü tek seferlik bir müşteri programına bağladı",
+     "18A maliyetleri ilk çeyreğe göre yaklaşık %40, Intel 3 maliyetleri yaklaşık %15 düştü; 14A için 0.9 PDK ekimde yayımlandı, 1.0 PDK 2027'nin ilk çeyreğine hedefleniyor; ağustostaki 23 milyar dolarlık hisse satışı sonrası nakit ve kısa vadeli yatırımlar yaklaşık 54 milyar dolar"
+    ],
+    "qa": [
+     "2027 çerçevesi ve yatırım bütçesi soruldu; Zinsner resmi yıl tahmini vermedi, 2027'yi hem büyüme hem yatırım yılı olarak tanımladı. Analistin dile getirdiği yaklaşık 30 milyar dolarlık harcama beklentisini ise doğrulamadı, rakamın henüz kesinleşmediğini söyledi.",
+     "Dördüncü çeyrekteki sorunların ne zaman düzeleceği ve PC stok erimesinin süresi sorgulandı; yönetim Fab 28'in yaklaşık iki haftalık duruş sonrası bu hafta sonuna doğru yeniden üretime başlamasını beklediğini, stok düzeltmesinin en az ilk çeyreğe uzanacağını ve bir kısmının ikinci çeyreğe sarkabileceğini belirtti; bellek tarafında 2027 için iyimser olmadığını da ekledi.",
+     "Brüt marj ve sunucu rekabeti üzerinde duruldu; Zinsner artan gelirin %40–60'ının brüt kâra yansıması yönündeki kuralını yineledi, özel amaçlı silikonun marjının şirket ortalamasının altında olduğunu kabul etti ve 2027 pazar payının büyük ölçüde arza bağlı olacağını söyledi. BofA'nın dördüncü çeyrek DCAI'sini yıllıklandıran 30'lu milyar dolarların ortası çerçevesini iyi bir başlangıç noktası olarak nitelese de bir hedef vermedi.",
+     "Harici müşteriler soruldu; Tan, EMIB paketlemede birkaç müşterinin önümüzdeki iki çeyrekte açıklanabileceğini söyledi, 18A-P için dış ilgiden söz etti, ancak isim veya gelir takvimi paylaşmadı; 14A'da daha ciddi müşteri çalışmasının 1.0 PDK sonrasına kaldığını aktardı."
+    ],
+    "risks": [
+     "Bellek fiyatları ve kıtlığı PC talebini baskılıyor; 2026'da PC birim pazarının yaklaşık %12, 2027'de yaklaşık %10 daralması bekleniyor",
+     "Fab 28 kazası dördüncü çeyrekte yaklaşık 300 milyon dolar gelir ve 200 baz puan brüt marj etkisi yaratıyor, ilk çeyrekte de benzer gelir etkisi öngörülüyor; değerlendirme henüz erken aşamada",
+     "2027'nin ilk yarısında Intel 3 plaka ve gelişmiş alt katman kısıtları sürerken yatırım artışı serbest nakit akışını baskılıyor; dökümhanede kesinleşmiş harici müşteri hâlâ açıklanmış değil"
+    ],
+    "sources": [
+     {
+      "title": "Motley Fool – Intel (INTC) Q3 2026 Earnings Call Transcript",
+      "url": "https://www.fool.com/earnings/call-transcripts/2026/10/30/intel-intc-q3-2026-earnings-call-transcript/"
+     },
+     {
+      "title": "MarketBeat – Intel Q3 2026 Earnings Results & Call Transcript",
+      "url": "https://www.marketbeat.com/earnings/reports/2026-10-29-intel-co-stock/"
+     },
+     {
+      "title": "Intel – Intel Reports Third-Quarter 2026 Financial Results",
+      "url": "https://www.intc.com/news-events/press-releases/detail/1786/intel-reports-third-quarter-2026-financial-results"
+     },
+     {
+      "title": "Investing.com (GuruFocus) – Intel Q3 2026 Earnings Call Highlights",
+      "url": "https://ca.investing.com/news/company-news/intel-corp-intc-q3-2026-earnings-call-highlights-data-center-surge-and-foundry-progress--4916218"
+     },
+     {
+      "title": "Motley Fool – Why Intel Stock Crashed on Friday",
+      "url": "https://www.fool.com/investing/2026/10/30/why-intel-stock-crashed-on-friday/"
+     },
+     {
+      "title": "Yahoo Finance – Intel Stock Sank More Than 20% on Its Q4 Guide",
+      "url": "https://finance.yahoo.com/markets/stocks/articles/intel-stock-sank-more-20-130449546.html"
+     }
+    ]
+   },
+   {
     "q": "Q2 2026",
     "date": "2026-07-23",
     "tone": "olumlu",
@@ -486,6 +537,49 @@
   ],
   "LLY": [
    {
+    "q": "Q3 2026",
+    "date": "2026-10-29",
+    "tone": "olumlu",
+    "toneChg": "benzer",
+    "summary": "Eli Lilly, %53'lük hacim artışının %15'lik fiyat düşüşünü fazlasıyla karşılamasıyla gelirini yıllık %39 artırarak 24,4 milyar dolara taşıdı ve 2026 gelir beklentisini yeniden yükseltti. Yönetim, Medicare GLP-1 köprü programının hızlı benimsenmesini ve ABD dışındaki Mounjaro talebini sürprizin ana kaynakları olarak gösterdi; buna karşın AtaiBeckley'nin de aralarında olduğu anlaşmalardan gelen satın alınan Ar-Ge gideri hisse başına kâr beklentisini aşağı çekti.",
+    "guidance": "2026 gelir beklentisi 85–87 milyar dolardan 91–92 milyar dolara, düzeltilmiş performans marjı %49–50,5'ten %52–52,5'e yükseltildi; düzeltilmiş hisse başına kâr beklentisi ise 4,57 dolarlık satın alınan Ar-Ge gideri nedeniyle 35,50–36,50 dolardan 35–36 dolara indi. 30 Eylül sonrası oluşacak bu tür giderler rehberliğe dahil değil, 2027 rehberliği ocaktaki görüşmede verilecek.",
+    "highlights": [
+     "Mounjaro geliri %65 artışla 10,7 milyar dolar, Zepbound %49 artışla 5,35 milyar dolar; ikisinin toplamı 16,1 milyar dolar, Foundayo'nun geliri ise önceki çeyrekteki 98 milyon dolardan 184 milyon dolara çıktı",
+     "Düzeltilmiş brüt marj %84,4, düzeltilmiş performans marjı %54,2 (5,9 puan artış); düzeltilmiş hisse başına kâr 4,57 dolarlık satın alınan Ar-Ge gideri sonrasında 7,48 dolar (Q3 2025: 7,20 dolar)",
+     "ABD geliri %34 artışla 15,1 milyar dolar, ABD dışı gelir %47 artışla 9,3 milyar dolar; çeyrek gelirinde 410 milyon dolarlık tek seferlik Jardiance kilometre taşı ödemesini de içeren yaklaşık 900 milyon dolarlık kalem var",
+     "1 Temmuz'da başlayan Medicare köprü programında 500 binden fazla kişi Lilly ilacı aldı; Faz 3 karşılaştırmasında retatrutide A1C'yi %2,2 (semaglutid 2 mg: %1,8) düşürürken %20–21 kilo kaybı (semaglutid: %9,4) sağladı, FDA haftalık bazal insülin Onswik'i onayladı"
+    ],
+    "qa": [
+     "Medicare köprü programının yapısı soruldu; yönetim hastaların yaklaşık %75'inin enjeksiyonu seçtiğini, yeni başlayan her 10 hastanın 7'sinin Lilly ilacını tercih ettiğini ve hastaların yaklaşık %80'inin daha önce tedavi görmediğini aktardı. Programın pilot sonrası devamı için CMS'nin kendi analizine ve olası Part D geçişine işaret edildi.",
+     "Foundayo lansmanı ve ağızdan alınan Wegovy rekabeti ele alındı; ABD'de ağızdan obezite tedavisine başlayanların yaklaşık 10'da 4'ünün Foundayo'yu seçtiği, hastaların yaklaşık %25'inin idame dozlarında olduğu, 4 ülkedeki uluslararası lansmanın beklentilerle uyumlu ilerlediği ve ABD GLP-1 hacminin yaklaşık yarısını oluşturan tip 2 diyabet onayının incelemede olduğu söylendi.",
+     "2027 işveren kapsamı ve fiyat baskısı sorgulandı; ticari erişimin büyük ölçüde sabit kalacağı, artışın Medicare ve Medicaid'den geleceği, bunun karma etkisiyle reçete başına net fiyatı düşüreceği ve 2026'daki yaklaşık 2 milyar dolarlık tek seferlik kalemlerin 2027'de tekrarlanmayacağı belirtildi.",
+     "Rehberliğin neden sürekli yukarı sapma gösterdiği ve ABD dışı fiyat stratejisi soruldu; yönetim köprü programı ile penetrasyonun beklentiyi aşmasıyla ilk rehberliğe göre yaklaşık 10 milyar dolarlık iyileşme oluştuğunu, Hindistan, Brezilya ve Kanada'daki jenerik girişlerine rağmen payların korunduğunu ve obezitede ülkeler arası fiyat bandını daraltmayı hedeflediklerini anlattı."
+    ],
+    "risks": [
+     "Net fiyat baskısının sürmesi: ABD'de düzeltmeler hariç %10, ABD dışında Mounjaro'nun Çin'de geri ödeme listesine girmesiyle %29 fiyat düşüşü; 2027'de Medicare ve Medicaid ağırlığının artması reçete başına net fiyatı daha da aşağı çekebilir",
+     "2026'daki yaklaşık 2 milyar dolarlık tek seferlik gelirin 2027 büyümesi için yüksek baz oluşturması",
+     "Merida anlaşmasından beklenen satın alınan Ar-Ge giderinin mevcut kâr rehberliğinde yer almaması; köprü programının pilot sonrası kalıcılığının CMS kararına bağlı olması"
+    ],
+    "sources": [
+     {
+      "title": "Eli Lilly (LLY) Q3 2026 Earnings Call Transcript – The Motley Fool",
+      "url": "https://www.fool.com/earnings/call-transcripts/2026/10/29/eli-lilly-lly-q3-2026-earnings-call-transcript/"
+     },
+     {
+      "title": "Lilly Q3 2026 finansal sonuçlar basın bülteni – Lilly Investor Relations",
+      "url": "https://investor.lilly.com/node/55191"
+     },
+     {
+      "title": "LLY Stock Jumps as Q3 Earnings Beat Estimates, 2026 Sales View Raised – Zacks",
+      "url": "https://www.zacks.com/stock/news/3018734/lly-stock-jumps-as-q3-earnings-beat-estimates-2026-sales-view-raised"
+     },
+     {
+      "title": "Eli Lilly Sells 53% More at Lower Prices: Rapid Earnings Reaction – The Motley Fool",
+      "url": "https://www.fool.com/investing/2026/10/29/eli-lilly-sells-53-more-at-lower-prices-rapid-earnings-reaction/"
+     }
+    ]
+   },
+   {
     "q": "Q2 2026",
     "date": "2026-08-05",
     "tone": "olumlu",
@@ -517,6 +611,53 @@
    }
   ],
   "ABBV": [
+   {
+    "q": "Q3 2026",
+    "date": "2026-10-30",
+    "tone": "olumlu",
+    "toneChg": "benzer",
+    "summary": "AbbVie üçüncü çeyrekte 17,4 milyar dolar gelir ve %10,3 büyüme açıkladı; gelir kendi beklentisini 200 milyon dolar aştı, düzeltilmiş hisse başı kâr 3,82 dolar oldu (0,11 dolarlık IPR&D gideri dahil; bu gider hariç rehberlik orta noktasının 0,07 dolar üzerinde). Büyümeyi yine Skyrizi ve Rinvoq ile nöroloji taşırken Humira, Imbruvica ve Juvederm geriledi. Apogee alımını tamamlayan yönetim gelir beklentisini yıl içinde üçüncü kez yükseltti ve 2027'de de üst düzey büyüme beklediğini söyledi.",
+    "guidance": "2026 düzeltilmiş HBK rehberliği 13,76–13,96 dolardan 13,95–13,99 dolara daraltılarak yükseltildi; 0,11 dolarlık orta nokta artışı aynı tutardaki 3. çeyrek IPR&D giderini karşılıyor ve orta nokta 13,97 dolarla Temmuz'daki seviyeye dönüyor. Toplam gelir beklentisi 200 milyon dolar artırılarak yaklaşık 67,8 milyar dolar oldu; 4. çeyrek için yaklaşık 18,4 milyar dolar gelir ve 3,83–3,87 dolar düzeltilmiş HBK öngörüldü.",
+    "highlights": [
+     "Skyrizi 5,8 milyar dolara (operasyonel %22,9 artış), Rinvoq 2,7 milyar dolara (operasyonel %24,3 artış) ulaştı; Humira operasyonel %30,6 düşüşle 683 milyon dolara indi.",
+     "Nöroloji operasyonel %19,5 büyüyerek 3,4 milyar dolara çıktı; Qulipta %38,5, Ubrelvy %26,9 arttı, Vraylar %14,3 artışla yaklaşık 1,1 milyar dolar oldu. Yıllık nöroloji beklentisi 300 milyon dolar artırılarak 13 milyar dolara yükseltildi.",
+     "Yıllık ürün beklentileri Skyrizi için 21,8 milyar, Rinvoq için 10,3 milyar dolara çekildi; yönetim iki ürünün 2026'da birlikte yaklaşık 6 milyar dolar büyüme getireceğini belirtti.",
+     "Boru hattında FDA, Skyrizi'nin Crohn için deri altı indüksiyonunu ve Parkinson ilacı Juvmo'yu (tavapadon) onayladı; Epkinly ilk basamak DLBCL Faz 3 çalışmasında ilerleme veya ölüm riskini %51 azalttı. Çeyreklik temettü %5,2 artışla 1,82 dolara çıkıyor (Şubat 2027'den itibaren)."
+    ],
+    "qa": [
+     "2027 modeli: 2027 rehberliği 4. çeyrek görüşmesine bırakıldı; analistler ödeyici görüşmelerini sordu, yönetim büyük sözleşmelerin kapandığını, immünolojide düşük tek haneli iskonto varsayımının makul olduğunu ve Vraylar'ın IRA fiyatının 2027'de başladığını hatırlattı.",
+     "Skyrizi deri altı indüksiyonun Crohn'daki pay etkisi: tam erişimin yaklaşık 60 gün veya biraz daha uzun süreceği, 2027'nin ilk iki çeyreğinde hızlı pay artışı beklendiği söylendi.",
+     "Değeri yeterince fiyatlanmayan varlıklar ve boru hattı: yönetim etentamig ile Temab-A'yı çok milyar dolarlık fırsat olarak gösterdi; emraclidine'de 150 mg doza geçişin gerekçesi, Rinvoq'un HS Faz 3 sonucundaki plasebo farkı beklentisi ve Epkinly + R-CHOP'un rekabet gücü soruldu.",
+     "Sermaye dağıtımı ve politika: Apogee sonrası büyük dönüştürücü anlaşma yerine tamamlayıcı alımlar ve obezitede farklılaşmış varlıklara açıklık vurgulandı; 340B pilot programının finansal etkisi için erken olduğu, Botox'un IRA kapsamına ilişkin davada mahkemenin şirket lehine karar verdiği ancak hükümetin itiraz edebileceği belirtildi."
+    ],
+    "risks": [
+     "Imbruvica'da IRA fiyatlaması ve rekabet nedeniyle %26,1 operasyonel düşüş; Vraylar'ın IRA fiyatının 2027'de devreye girmesi ve 340B pilotunun henüz ölçülemeyen etkisi.",
+     "TrenibotE için FDA'dan gelen ret mektubu (üretim/CMC kaynaklı) ABD kararını 2027 ortasına öteledi; Juvmo'nun geniş Medicare kapsamı da 2028'den önce beklenmiyor.",
+     "Estetik segmenti operasyonel %1,8 geriledi; Juvederm'de %11,8 düşüşte zayıf tüketici güveni etkili oldu."
+    ],
+    "sources": [
+     {
+      "title": "AbbVie (ABBV) Q3 2026 Earnings Call Transcript (Motley Fool)",
+      "url": "https://www.fool.com/earnings/call-transcripts/2026/10/30/abbvie-abbv-q3-2026-earnings-call-transcript/"
+     },
+     {
+      "title": "AbbVie Reports Third-Quarter 2026 Financial Results (AbbVie)",
+      "url": "https://news.abbvie.com/2026-10-30-AbbVie-Reports-Third-Quarter-2026-Financial-Results"
+     },
+     {
+      "title": "Earnings call transcript: AbbVie beats Q3 2026 estimates and raises outlook (Investing.com)",
+      "url": "https://www.investing.com/news/transcripts/earnings-call-transcript-abbvie-beats-q3-2026-estimates-and-raises-outlook-93CH-4989444"
+     },
+     {
+      "title": "AbbVie Inc (ABBV) Q3 2026 Earnings Call Highlights (Yahoo Finance)",
+      "url": "https://finance.yahoo.com/healthcare/articles/abbvie-inc-abbv-q3-2026-070810215.html"
+     },
+     {
+      "title": "The top 5 analyst questions from AbbVie's Q3 earnings call (StockStory)",
+      "url": "https://stockstory.org/us/stocks/nyse/abbv/news/earnings-call/the-top-5-analyst-questions-from-abbvies-q3-earnings-call-2"
+     }
+    ]
+   },
    {
     "q": "Q2 2026",
     "date": "2026-07-31",
@@ -601,6 +742,53 @@
    }
   ],
   "MRK": [
+   {
+    "q": "Q3 2026",
+    "date": "2026-10-29",
+    "tone": "olumlu",
+    "toneChg": "önceki çeyreğe göre daha olumlu",
+    "summary": "Merck üçüncü çeyrekte satışlarını %5 artırarak 18,1 milyar dolara çıkardı ve non-GAAP hisse başı 2,49 dolarla (SciBrunch lisansına bağlı 0,12 dolarlık gider dahil) 17,3 milyar dolar ve yaklaşık 2,08 dolar olan beklentileri aştı; yine de bu kârlılık geçen yılın 2,58 dolarının altında kaldı. Yönetim, Keytruda, Winrevair ve Gardasil'deki güce ek olarak sac-TMT ve intismeran'ın olumlu Faz 3 sonuçlarını öne çıkardı; ancak çeyreğin yaklaşık 550 milyon dolarının ABD alım zamanlamasından geldiğini ve 2027'nin bir yatırım yılı olacağını da not etti.",
+    "guidance": "2026 satış rehberliği 66,3–67,3 milyar dolardan 66,8–67,3 milyar dolara daraltıldı; non-GAAP HBK beklentisi 2,66–2,76 dolardan 2,77–2,82 dolara yükseltildi. Brüt marj yaklaşık %81, faaliyet giderleri 42,4–42,9 milyar dolar (önceki 42,0–42,7), vergi oranı %32–33 (önceki %35–36) olarak öngörülüyor; 2027 için ise ılımlı satış büyümesi ve orta-yüksek tek haneli temel gider artışı işaret edildi.",
+    "highlights": [
+     "Keytruda/Keytruda Qlex satışları %6 artışla 8,6 milyar dolar oldu; bunun 830 milyon doları deri altı Qlex formundan geldi.",
+     "Winrevair %93 artışla 694 milyon dolara, Welireg %58 artışla 307 milyon dolara ulaştı.",
+     "Gardasil satışları %14 artışla yaklaşık 2 milyar dolar, Hayvan Sağlığı satışları %4 artışla 1,7 milyar dolar oldu.",
+     "GAAP HBK 2,04 dolar (geçen yıl 2,32), non-GAAP HBK 2,49 dolar (geçen yıl 2,58); non-GAAP brüt marj %81,4, faaliyet giderleri %12 artışla 7,4 milyar dolar."
+    ],
+    "qa": [
+     "2027 görünümü ve konsensüs: CFO, BRIDION, Januvia ailesi ve Adempas kaynaklı 2 milyar doları aşan baskıya rağmen ılımlı büyüme beklediklerini, Keytruda patent kaybı döneminde sığ bir satış düşüşü ve ardından toparlanma öngördüklerini söyledi.",
+     "550 milyon dolarlık alım zamanlaması faydasının dökümü: 200 milyon Keytruda, 50 milyon Winrevair, 300 milyon aşılar; 300 milyon dolarlık kısım dördüncü çeyrekte, aşılardan kalan 250 milyon dolar 2027'de tersine dönecek.",
+     "Keytruda Qlex'in hyaluronidaz davası: yönetim fikri mülkiyetine güvendiğini, Hollanda kararının esasa ilişkin olmadığını belirtti ve ABD'de 2027 sonuna kadar %30–40 benimseme hedefini korudu.",
+     "Boru hattı: 2030'ların ortası için 70 milyar dolarlık fırsatın artırılmasının beklendiği; analistler ayrıca sac-TMT'nin Çin verilerinin küresel çalışmalara yansımasını, RAS portföyünü, intismeran verilerini ve Lipfendra lansmanını (üçüncü çeyrekte 11.000'den fazla reçete, satış rakamı paylaşılmadı) sordu."
+    ],
+    "risks": [
+     "Hollanda mahkemesinin ihtiyati tedbiri nedeniyle Qlex'in İtalya, Danimarka, Hollanda, Fransa, Belçika ve İrlanda'ya tedarik edilememesi.",
+     "2027'de jenerik rekabet, alım zamanlamasının tersine dönmesi ve artan yatırım harcamalarının kâr beklentilerini baskılaması; yönetime göre bazı analist tahminleri bu mesajı henüz yansıtmıyor.",
+     "Aşı tereddüdü ve düşen kullanım eğilimi ile ABD'de IRA fiyat belirlemesi ve Almanya gibi pazarlardaki fiyat baskısı."
+    ],
+    "sources": [
+     {
+      "title": "Merck Q3 2026 Earnings Call Transcript (Merck IR, PDF)",
+      "url": "https://www.merck.com/wp-content/uploads/sites/124/2026/10/MRK-USQ_Transcript_2026-10-29.pdf"
+     },
+     {
+      "title": "Merck Announces Third-Quarter 2026 Financial Results (Merck basın bülteni)",
+      "url": "https://www.merck.com/news/merck-co-inc-rahway-n-j-usa-announces-third-quarter-2026-financial-results-highlights-multiple-milestones-advancing-broad-diverse-pipeline"
+     },
+     {
+      "title": "3Q26 Merck Earnings Announcement (PDF)",
+      "url": "https://www.merck.com/wp-content/uploads/sites/124/2026/10/3Q26-Merck-Earnings-Announcement.pdf"
+     },
+     {
+      "title": "Merck Co Inc Q3 Earnings Call Highlights (MarketBeat)",
+      "url": "https://www.marketbeat.com/instant-alerts/transcript-merck-co-inc-q3-earnings-call-highlights-2026-10-30/"
+     },
+     {
+      "title": "Merck posts strong Q3 on oncology, vaccine growth (Tradingpedia)",
+      "url": "https://www.tradingpedia.com/2026/10/29/merck-posts-strong-q3-on-oncology-vaccine-growth/"
+     }
+    ]
+   },
    {
     "q": "Q2 2026",
     "date": "2026-08-04",
@@ -957,6 +1145,57 @@
   ],
   "TECK": [
    {
+    "q": "Q3 2026",
+    "date": "2026-10-29",
+    "tone": "olumlu",
+    "toneChg": "daha temkinli",
+    "summary": "Teck hâlâ bağımsız şirket olarak raporladı; rekor bakır fiyatları ve düşen izabe ücretleriyle düzeltilmiş FAVÖK geçen yılın yaklaşık iki katına, 2,3 milyar Kanada dolarına çıktı, marj ise %51 oldu (önceki çeyrekte %61). Ağustos-Eylül'deki fırtına, sel ve elektrik kesintileri Quebrada Blanca (QB) üretimini önceki çeyreğe göre düşürdü; 24 Ekim'de Highland Valley'de (HVC) grev başladı. Anglo American birleşmesi tamamlanmadı: kalan tek büyük onay Çin'in SAMR kurumu ve yönetim kapanış için duyurudan itibaren 12-18 aylık takvimi korudu.",
+    "guidance": "2026 üretim rehberliği değişmedi (bakır 455-530 bin ton, QB 200-235 bin ton, çinko konsantresi 410-460 bin ton, rafine çinko 190-230 bin ton), ancak bakır net nakit birim maliyeti 1,85-2,20'den 1,80-2,00 ABD doları/lb'ye, çinko net nakit birim maliyeti 0,65-0,75'ten 0,30-0,40 ABD doları/lb'ye indirildi. Yatırım aralıkları korunurken sürdürülebilir yatırımın 1,3-1,5 milyar Kanada doları aralığının üst yarısında, kapitalize sıyırmanın 455-560 milyon Kanada doları aralığının üst ucunda olması bekleniyor.",
+    "highlights": [
+     "Gelir 4,52 milyar Kanada doları (geçen yıl 3,39 milyar); düzeltilmiş FAVÖK 2,31 milyar (1,17 milyar), düzeltilmiş hisse başına kâr 1,88 Kanada doları (0,76); faaliyetlerden nakit akışı 1,6 milyar",
+     "Bakır üretimi yıllık %11 artışla 115.700 ton, ortalama fiyat 6,40 ABD doları/lb; bakır net nakit birim maliyeti 2,09'dan 1,77 ABD doları/lb'ye geriledi",
+     "QB 47.200 ton bakır üretti (Q2'de 55.800, geçen yıl 39.600); birim maliyet Q2'deki 1,83'ten 2,48 ABD doları/lb'ye çıktı, günlük işleme 117.000 ton, geri kazanım %81",
+     "Net nakit çeyrekte 655 milyon artışla 1,9 milyar Kanada dolarına ulaştı; likidite 10,9 milyar (6,7 milyarı nakit). Trail'de 888 milyon Kanada doları vergi öncesi değer düşüklüğü iptali kaydedildi"
+    ],
+    "qa": [
+     "Çin SAMR süreci ve bakır konsantresi tedarik güvencesi haberleri: yönetim görüşme içeriğini paylaşmadı, süreci yapıcı olarak niteledi, sona başlangıçtan daha yakın olduklarını söyledi ve 12-18 aylık takvimi yineledi",
+     "QB'de tenör ve üretim: ikinci ve üçüncü fazların açılmasıyla 2027'de tenörün görece istikrarlı kalması bekleniyor; 2027-2028 rehberliğinin muhafazakâr olduğu görüşü kabul edilmedi, rehberlik değiştirilmedi",
+     "Bakım ve maden ömrü: QB'de 2027'de üç büyük duruş var, ilki birinci çeyrekte; Red Dog'un mevcut ömrü yaklaşık 2031, yakın cevher yataklarına yönelik uzatma çalışmaları ön fizibilite aşamasında",
+     "Çinko işleme ücretlerinin 2027'de spot piyasadaki yönü sürdürmesi bekleniyor (rakam verilmedi); Trail'de germanyum, antimon ve galyum kapasitesi için Canada Growth Fund ile finansman görüşmeleri henüz sonuçlanmadı"
+    ],
+    "risks": [
+     "HVC'de yaklaşık 1.200 işçinin (USW Local 7619) grevi sürüyor; tesis azaltılmış kapasiteyle çalışıyor ve üretim etkisi grevin süresine bağlı, yönetim yine de yıl sonu üretimini 115-135 bin ton aralığının üst ucuna yakın bekliyor",
+     "Birleşmenin kapanışı SAMR onayına bağlı; 2 Ekim tarihli haberler Çin'in birleşik şirketten bakır konsantresi arzı güvencesi istediğini aktarıyor, yönetim bunu doğrulamadı",
+     "Aşırı hava QB ve Carmen de Andacollo'yu etkiledi (Andacollo 45-55 bin ton aralığının alt ucuna işaret ediyor); Antamina'da 27 Ekim'de ölümlü bir kaza yaşandı"
+    ],
+    "sources": [
+     {
+      "title": "Teck (TECK) Q3 2026 Earnings Call Transcript (The Motley Fool)",
+      "url": "https://www.fool.com/earnings/call-transcripts/2026/10/30/teck-teck-q3-2026-earnings-call-transcript/"
+     },
+     {
+      "title": "Teck Reports Unaudited Third Quarter Results for 2026 (GlobeNewswire / Manila Times)",
+      "url": "https://www.manilatimes.net/2026/10/29/tmt-newswire/globenewswire/teck-reports-unaudited-third-quarter-results-for-2026/2456849/amp"
+     },
+     {
+      "title": "Earnings call transcript: Teck tops Q3 2026 estimates as shares fall (Investing.com)",
+      "url": "https://za.investing.com/news/stock-market-news/earnings-call-transcript-teck-tops-q3-2026-estimates-as-shares-fall-93CH-4541142"
+     },
+     {
+      "title": "Teck Resources (TECK) Q3 2026 Earnings Call: EBITDA Doubles, Cost Guidance Cut (TradingKey)",
+      "url": "https://www.tradingkey.com/news/transcripts/262254265-tradingkey"
+     },
+     {
+      "title": "Workers strike at Teck Resources Highland Valley Copper operations (BNN Bloomberg)",
+      "url": "https://www.bnnbloomberg.ca/business/company-news/2026/10/26/workers-strike-at-teck-resources-highland-valley-copper-operations/"
+     },
+     {
+      "title": "Anglo-Teck Controls Just 5% of Copper Yet China Wants Guarantees Before Merger Approval (The Deep Dive)",
+      "url": "https://thedeepdive.ca/anglo-teck-controls-just-5-of-copper-yet-china-wants-guarantees-before-merger-approval/"
+     }
+    ]
+   },
+   {
     "q": "Q2 2026",
     "date": "2026-07-23",
     "tone": "olumlu",
@@ -1166,5 +1405,5 @@
    }
   ]
  },
- "updatedAt": "2026-10-29T07:42:58Z"
+ "updatedAt": "2026-11-02T07:48:26Z"
 }
