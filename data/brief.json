@@ -1,41 +1,39 @@
 {
- "publishedAt": "2026-11-02T05:57:42Z",
- "asOf": "2026-10-30",
- "title": "Intel çipleri vurdu; AMD bilançosu ve Fed'in faiz sözleri haftanın sınavı",
+ "publishedAt": "2026-11-03T05:57:17Z",
+ "asOf": "2026-11-02",
+ "title": "Çipler yine sert düştü; gözler bu gece AMD bilançosu ve ara seçimde",
  "sections": [
   {
    "h": "Dün",
    "items": [
-    "Son seans 30 Ekim cuma: S&P 500 (SPY) −%1,8, Nasdaq 100 (QQQ) −%3,5; portföyde yalnızca AGNG +%0,7 ile artıda kapandı.",
-    "En kötüler: AMD −%10,9, DELL −%10,8, CRDO −%8,7, SOXX −%8,2, SMH −%7,0, ASML −%6,6. Tetikleyici, Intel'in zayıf görünümü (hisse yaklaşık −%29).",
-    "Metallerde de satış: SLV −%5,7, COPX −%5,2, IAU −%3,5. VRT −%5,5, XBI −%1,1."
+    "2 Kasım pazartesi: S&P 500 (SPY) −%0,5, Nasdaq 100 (QQQ) −%1,4; portföyün çip ve yapay zekâ ayağı endekslerin belirgin altında kaldı.",
+    "En kötüler: AMD −%7,5, DELL −%7,4, CRDO −%7,3, SOXX −%3,8, VRT −%3,6, SMH −%2,7, ASML −%2,5, XBI −%2,5.",
+    "En iyiler: SLV +%2,2, IAU +%1,7, COPX +%1,2, AGNG +%0,6.",
+    "Günün haberi Marvell'in Lumentum'u 115 milyar dolara hisseyle satın alması oldu: Marvell −%13, Lumentum −%12. XBI'da Twist −%15; genomik satışını açıklayan şirket haberi yok."
    ]
   },
   {
    "h": "Bugün",
    "items": [
-    "Bugün 19:00 TRT: ABD ISM imalat (Ekim, önceki 54,5); COPX, IAU, SLV, SMH ve SOXX için büyüme ve faiz okuması.",
-    "Yarın 10:00 TRT: Türkiye TÜFE (Ekim). Yarın ABD ara seçimleri de var.",
-    "Yarın 23:30 TRT (saat tahmini): AMD Q3 bilançosu, beklenen HBK ~1,97 $. AMD doğrudan, SMH ve SOXX holding üzerinden etkilenir.",
-    "Cuma 17:30 TRT: tarım dışı istihdam (önceki 29 bin). Fed'den Logan'ın en az iki faiz artırımı gerektiğini söylemesi veriyi öne çıkarıyor."
+    "10:00 TRT: Türkiye TÜFE (Ekim). 18:00 TRT: ABD JOLTS iş ilanları (beklenti 7,15 mn, önceki 7,08 mn). ABD ara seçimleri de bugün.",
+    "23:30 TRT (saat tahmini): AMD Q3 bilançosu, beklenen HBK ~1,97 $, gelir ~13,2 mlr $. AMD doğrudan, SMH ve SOXX holding üzerinden etkilenir; dünkü %7,5'lik düşüş sonrası geliyor.",
+    "Yarın 09:00 TRT: Novo Nordisk Q3 (AGNG holdingi). 16:15 TRT: ADP (beklenti 68 bin). 18:00 TRT: ISM hizmet (beklenti 54,8)."
    ]
   },
   {
    "h": "Teknik durum",
    "items": [
-    "Alım bölgesi içinde: ASML 1.565,90 (1.562,89–1.572,28), SLV 44,60 (44,51–44,77), XBI 155,98 (151,56–156,75).",
-    "Bölgenin hemen üstünde: SMH 522,49 (515,60–518,74), AMD 504,80 (495,56–502,35), COPX 71,96 (70,89–71,32), VRT 232,50 (220,99–230,66).",
-    "Aşırı ısınmış: AGNG (39,56, RSI 72). Ters uçta SLV RSI 24, COPX RSI 30.",
-    "Stop'a %3'ten yakın enstrüman yok; en yakını SLV: %4,6 (stop 42,55)."
+    "Alım bölgesi: VRT 224,24 (bölge 220,99–223,62; stop 203,66, TP1 260,86). XBI 152,05 (bölge 151,35–152,77; stop 140,83, TP1 158,29, getiri/risk 0,55).",
+    "Aşırı ısınmış: AGNG 39,81, RSI 74, bölgenin üzerinde (35,79–39,17; stop 34,91).",
+    "Stop'a %3'ten yakın enstrüman yok. AMD 466,84 ile bölgenin (445,31–460,87) hemen üzerinde; SLV'de RSI 29."
    ]
   },
   {
    "h": "Beklenti → gerçekleşen",
    "items": [
-    "Intel bilançosu (Q3 26): HBK beklenti 0,40 → 0,52 (+%30,1, beklentinin üstünde) · takip edilenler SOXX −%8,2, SMH −%7,0.",
-    "Eli Lilly bilançosu (Q3 26): HBK beklenti 6,61 → 7,48 (+%13,1, beklentinin üstünde) · takip edilenler AGNG +%1,8.",
-    "Altın bir yıllık dibe geriledi, gümüş 50 doların altına indi: beklenti olumsuz → fiyat beklenen yönde (IAU −%3,5, SLV −%5,7, COPX −%5,2).",
-    "Intel'in PC ve bellek uyarısı Dell'i düşürdü: beklenti olumsuz → fiyat beklenen yönde (DELL −%10,8)."
+    "ABD ISM imalat (Ekim): beklenti 54,5 → 55,5; SOXX −%3,8, SMH −%2,7, SLV +%2,2.",
+    "Marvell–Lumentum: beklenti karışık → yön karşılaştırılmadı (SMH −%2,7, SOXX −%3,8).",
+    "Intel kaynaklı çip satışı: beklenti olumsuz → fiyat beklenen yönde (SMH −%2,7, SOXX −%3,8, AMD −%7,5)."
    ]
   }
  ]
