@@ -1,6 +1,58 @@
 {
- "updatedAt": "2026-10-30T05:55:33Z",
+ "updatedAt": "2026-11-04T06:05:00Z",
  "cards": [
+  {
+   "id": "AMD-2026Q3",
+   "t": "AMD",
+   "company": "Advanced Micro Devices",
+   "date": "2026-11-03",
+   "quarter": "Q3 2026",
+   "time": "piyasa sonrası",
+   "eps": {
+    "act": 2.09,
+    "est": 1.969,
+    "surprisePct": 6.1
+   },
+   "rev": {
+    "act": 13.38,
+    "est": 13.22,
+    "unit": "mlr $",
+    "yoy": 45,
+    "surprisePct": 1.2
+   },
+   "guidance": "4. çeyrek gelir öngörüsü ~17 mlr $ (±%3; 16,49–17,51 mlr $), yıllık ~%65 büyüme ve beklentilerin üzerinde.",
+   "highlights": [
+    "Gelir yıllık %45 artışla 13,38 mlr $ ile şirket rekoru; Lisa Su çeyreği şirket tarihinin en büyük ve en kârlı çeyreği olarak niteledi.",
+    "Veri merkezi geliri %97 artışla yaklaşık 8,5 mlr $'a çıktı; EPYC ve Instinct satışları rekor kırdı.",
+    "Hisse 3 Kasım'ı 483,90 $'dan kapattı, sonuç sonrası uzatılmış seansta yaklaşık %7–8 yükseldi; normal seans tepkisi henüz veride yok.",
+    "Yorumcular nakit akışındaki zayıflığa ve büyümenin ön maliyetine dikkat çekti."
+   ],
+   "affects": [
+    {
+     "t": "AMD",
+     "note": "portföydeki doğrudan pozisyon"
+    },
+    {
+     "t": "SMH",
+     "note": "holding (ağırlık %5,76)"
+    },
+    {
+     "t": "SOXX",
+     "note": "holding (ağırlık %9,58)"
+    }
+   ],
+   "summary": "AMD, veri merkezi gelirini neredeyse ikiye katlayarak HBK'da %6,1, gelirde %1,2 pozitif sürpriz yaptı. 4. çeyrek için verdiği ~17 mlr $ öngörü, yapay zekâ çip talebinin hızlandığı mesajını verdi.",
+   "sources": [
+    {
+     "title": "SEC 8-K — AMD Q3 2026 sonuçları",
+     "url": "https://www.sec.gov/Archives/edgar/data/2488/000000248826000188/amd-20261103.htm"
+    },
+    {
+     "title": "CNBC — AMD stock jumps 8% on earnings",
+     "url": "https://www.cnbc.com/2026/11/03/amd-amd-q3-earnings-report-2026-.html"
+    }
+   ]
+  },
   {
    "id": "VRT-2026Q3",
    "t": "VRT",

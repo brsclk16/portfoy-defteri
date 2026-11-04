@@ -1,39 +1,42 @@
 {
- "publishedAt": "2026-11-03T05:57:17Z",
- "asOf": "2026-11-02",
- "title": "Çipler yine sert düştü; gözler bu gece AMD bilançosu ve ara seçimde",
+ "publishedAt": "2026-11-04T05:56:44Z",
+ "asOf": "2026-11-03",
+ "title": "AMD güçlü öngörüyle seans sonrası sıçradı; gözler Novo ve ISM hizmette",
  "sections": [
   {
    "h": "Dün",
    "items": [
-    "2 Kasım pazartesi: S&P 500 (SPY) −%0,5, Nasdaq 100 (QQQ) −%1,4; portföyün çip ve yapay zekâ ayağı endekslerin belirgin altında kaldı.",
-    "En kötüler: AMD −%7,5, DELL −%7,4, CRDO −%7,3, SOXX −%3,8, VRT −%3,6, SMH −%2,7, ASML −%2,5, XBI −%2,5.",
-    "En iyiler: SLV +%2,2, IAU +%1,7, COPX +%1,2, AGNG +%0,6.",
-    "Günün haberi Marvell'in Lumentum'u 115 milyar dolara hisseyle satın alması oldu: Marvell −%13, Lumentum −%12. XBI'da Twist −%15; genomik satışını açıklayan şirket haberi yok."
+    "3 Kasım salı: S&P 500 (SPY) +%0,3; çipler önceki günün kaybının bir kısmını geri aldı: SOXX +%2,5, SMH +%2,0.",
+    "En iyiler: CRDO +%7,8, VRT +%5,2, DELL +%4,0, AMD +%3,7, XBI +%1,9, ASML +%1,7.",
+    "En kötüler: SLV −%1,6, COPX −%1,6, IAU −%0,7, AGNG −%0,4.",
+    "Kapanış sonrası AMD 3. çeyrekte gelirini %45 artırıp 13,38 mlr $'a çıkardı; 4. çeyrek için ~17 mlr $ öngördü ve hisse uzatılmış seansta yaklaşık %7–8 yükseldi."
    ]
   },
   {
    "h": "Bugün",
    "items": [
-    "10:00 TRT: Türkiye TÜFE (Ekim). 18:00 TRT: ABD JOLTS iş ilanları (beklenti 7,15 mn, önceki 7,08 mn). ABD ara seçimleri de bugün.",
-    "23:30 TRT (saat tahmini): AMD Q3 bilançosu, beklenen HBK ~1,97 $, gelir ~13,2 mlr $. AMD doğrudan, SMH ve SOXX holding üzerinden etkilenir; dünkü %7,5'lik düşüş sonrası geliyor.",
-    "Yarın 09:00 TRT: Novo Nordisk Q3 (AGNG holdingi). 16:15 TRT: ADP (beklenti 68 bin). 18:00 TRT: ISM hizmet (beklenti 54,8)."
+    "Novo Nordisk 3. çeyrek bilançosu bu sabah (~09:00 TRT, saat tahmini; HBK beklentisi ~4,85): AGNG'yi ilgilendiriyor.",
+    "ABD: ADP özel sektör istihdamı 16:15 TRT (beklenti 67 bin), ISM hizmet 18:00 TRT (beklenti 54,8): faiz beklentileri üzerinden XBI, IAU ve SLV'yi, risk iştahı üzerinden çipleri ilgilendiriyor.",
+    "Yarın 23:30 TRT Natera (XBI, saat tahmini). Moderna (XBI) takvimde 6 Kasım; bir haber başlığı perşembeyi işaret ediyor, tarih netleşmedi.",
+    "Cuma 16:30 TRT tarım dışı istihdam (beklenti 63 bin, işsizlik %4,2): SMH, SOXX, XBI, IAU, SLV için haftanın ana verisi."
    ]
   },
   {
    "h": "Teknik durum",
    "items": [
-    "Alım bölgesi: VRT 224,24 (bölge 220,99–223,62; stop 203,66, TP1 260,86). XBI 152,05 (bölge 151,35–152,77; stop 140,83, TP1 158,29, getiri/risk 0,55).",
-    "Aşırı ısınmış: AGNG 39,81, RSI 74, bölgenin üzerinde (35,79–39,17; stop 34,91).",
-    "Stop'a %3'ten yakın enstrüman yok. AMD 466,84 ile bölgenin (445,31–460,87) hemen üzerinde; SLV'de RSI 29."
+    "Alım bölgesinde: DELL $408,40 (bölge $400,61–$408,73, stop $356,17), SMH $518,52 (bölge $516,85–$519,96, stop $493,19).",
+    "Bölge sınırında: COPX $71,71 (üst sınır $71,32, stop $67,82) ve XBI $154,97 (üst sınır $153,95, stop $140,82); betik ikisini de bölgede sayıyor.",
+    "Aşırı ısınmış: AGNG $39,66, RSI 71 (TP1 $40,37).",
+    "Stop'a %3'ten yakın enstrüman yok; en yakın olan SMH, %4,9 mesafede."
    ]
   },
   {
    "h": "Beklenti → gerçekleşen",
    "items": [
-    "ABD ISM imalat (Ekim): beklenti 54,5 → 55,5; SOXX −%3,8, SMH −%2,7, SLV +%2,2.",
-    "Marvell–Lumentum: beklenti karışık → yön karşılaştırılmadı (SMH −%2,7, SOXX −%3,8).",
-    "Intel kaynaklı çip satışı: beklenti olumsuz → fiyat beklenen yönde (SMH −%2,7, SOXX −%3,8, AMD −%7,5)."
+    "AMD bilançosu (Q3 2026): HBK beklenti 1,97 → 2,09 (+%6,1, beklentinin üstünde) · takip edilenler AMD +%3,7, SOXX +%2,5, SMH +%2,0. Bu fiyatlar açıklama öncesi seansa ait; bilançoya gerçek tepki bugünkü seansta görülecek.",
+    "ABD ISM İmalat PMI (Ekim): ISM imalat beklenti 54,5 → 55,5 · takip edilenler SOXX −%3,8, SMH −%2,7, SLV +%2,2.",
+    "Eli Lilly'nin Güçlü 3. Çeyrek Sonuçları Hissede Artış Sağladı: beklenti olumlu → fiyat ters yönde (AGNG −%0,4).",
+    "ABD ara seçimleri: sonuç henüz işlenmedi."
    ]
   }
  ]
