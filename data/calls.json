@@ -2,6 +2,37 @@
  "data": {
   "AMD": [
    {
+    "q": "Q3 2026",
+    "date": "2026-11-03",
+    "tone": "olumlu",
+    "toneChg": "önceki çeyreğe göre daha olumlu",
+    "summary": "AMD üçüncü çeyrekte yıllık %45 artışla 13,4 milyar dolar rekor gelire ulaştı; veri merkezi geliri neredeyse iki katına çıkarak toplam gelirin %64'üne yükseldi. MI455X ve Helios raflarının ilk kez gelir yazacak biçimde sevk edildiği çeyrekte yönetim, 2027 için toplam gelirde %80'in üzerinde büyüme beklentisini açıkladı. Güçlü talebe karşın bellek maliyetleri, arz kısıtı ve PC pazarındaki zayıflama görüşmenin temkinli başlıkları oldu.",
+    "guidance": "Q4 2026 için yaklaşık 17 milyar dolar gelir (±%3, yıllık ~%66), yaklaşık %55 non-GAAP brüt marj ve yaklaşık 3,75 milyar dolar non-GAAP gider öngörülüyor; veri merkezi çeyreklik ~%50 artarken client ve oyun %20'den fazla gerileyecek. 2027'de gelirin %80'in üzerinde büyümesi, sunucu gelirinin yaklaşık iki katına çıkması ve veri merkezinin gelirin %80'inden fazlasını oluşturması bekleniyor.",
+    "highlights": [
+     "Veri merkezi geliri yıllık %97, çeyreklik %27 artışla 8,5 milyar dolar; segment faaliyet marjı bir yıl önceki %25'ten %34'e çıktı.",
+     "Non-GAAP brüt marj %56, faaliyet kârı 3,9 milyar dolar (%29 marj), non-GAAP HBK yıllık %74 artışla 2,09 dolar; GAAP HBK 1,46 dolar ve 1,1 milyar dolarlık nakit dışı warrant gideri içeriyor.",
+     "Client geliri 2,9 milyar dolar (yıllık +%7, çeyreklik -%4), oyun geliri 773 milyon dolar (yıllık -%40), embedded 1,1 milyar dolar (yıllık +%29).",
+     "Serbest nakit akışı 554 milyon dolarda kaldı; envanter çeyreklik yaklaşık 3 milyar dolar artışla 11,5 milyar dolara yükseldi."
+    ],
+    "qa": [
+     "Barclays 2027 büyümesinin wafer, paketleme ve bellek tedarikiyle desteklenip desteklenmediğini sordu; Lisa Su talebin arzın üzerinde olduğunu ve kapasitenin ortaklarla artırıldığını söyledi.",
+     "BofA müşterilerin finansman, arazi ve güç hazırlığını, özel ASIC rekabetini sordu; yönetim 2027 altyapı görünürlüğünün iyi olduğunu, seçimde asıl belirleyicinin toplam sahip olma maliyeti olduğunu belirtti.",
+     "TD Cowen ve Bernstein HBM fiyatlarını ve 2027 brüt marjını sordu; yönetim maliyet paylaşımı ve uzun vadeli anlaşmalar üzerinde çalışıldığını, marjın veri merkezi karmasına bağlı olarak dalgalanabileceğini ve çeyreklik görünürlüğün sınırlı olduğunu aktardı.",
+     "UBS warrant'ların etkisini sordu; Jean Hu nakit dışı değer düzeltmelerinin artmasının beklendiğini, hisse sayısı etkisinin ancak koşullar gerçekleşince doğacağını söyledi."
+    ],
+    "risks": [
+     "Bellek ve bileşen maliyetlerindeki enflasyon ile 2027'de PC birim pazarında çift haneli daralma planlanması.",
+     "Talebin arzın gerisinde kaldığı ortamda Helios rampasının tedarik ve müşteri altyapısına bağımlılığı.",
+     "Karma etkisiyle brüt marjda oynaklık ve warrant kaynaklı GAAP dalgalanması."
+    ],
+    "sources": [
+     {
+      "title": "AMD (AMD) Q3 2026 Earnings Call Transcript — Motley Fool",
+      "url": "https://www.fool.com/earnings/call-transcripts/2026/11/04/amd-amd-q3-2026-earnings-call-transcript/"
+     }
+    ]
+   },
+   {
     "q": "Q2 2026",
     "date": "2026-08-04",
     "tone": "olumlu",
@@ -691,6 +722,37 @@
   ],
   "AMGN": [
    {
+    "q": "Q3 2026",
+    "date": "2026-11-03",
+    "tone": "olumlu",
+    "toneChg": "benzer",
+    "summary": "Amgen üçüncü çeyrekte toplam gelirini %8 artışla 10,4 milyar dolara, non-GAAP hisse başı kârını %14 artışla 6,45 dolara taşıdı. Repatha, Evenity, Tezspire, Uplizna, Blincyto ve Imdelltra'daki büyüme, Prolia ve Xgeva'daki biyobenzer kaybını telafi etti ve yönetim yıllık beklentisini yeniden yükseltti. Görüşmenin ağırlığını MariTide programı ile Sjögren ve küçük hücreli akciğer kanseri fırsatları oluşturdu.",
+    "guidance": "2026 gelir rehberliği önceki 38,2-39,4 milyar dolardan 38,9-39,7 milyar dolara, non-GAAP HBK rehberliği 22,30-23,50 dolardan 22,90-23,70 dolara yükseltildi. Non-GAAP faaliyet marjı ürün satışlarının %45-46'sı olarak hedefleniyor; CFO 2027'de bu seviyeye göre marj düşüşü beklemediklerini söyledi.",
+    "highlights": [
+     "Repatha %37 artışla 1,1 milyar dolar, Evenity %39 artışla 751 milyon dolar, Tezspire %43 artışla 538 milyon dolar.",
+     "Uplizna %191 artışla 451 milyon dolar, Blincyto %27 artışla 496 milyon dolar, Imdelltra iki katından fazla artışla 406 milyon dolar.",
+     "Biyobenzer rekabetiyle Prolia %45 düşüşle 632 milyon dolara, Xgeva %47 düşüşle 288 milyon dolara geriledi; Tepezza %6 azalışla 526 milyon dolar oldu.",
+     "Serbest nakit akışı 3,7 milyar dolar (önceki yıl 4,2 milyar dolar); non-GAAP faaliyet marjı %47,3, nakit ve benzerleri 13,2 milyar dolar."
+    ],
+    "qa": [
+     "MariTide: Morgan Stanley, Jefferies, BMO ve Citi kapasite, otoenjektör, yan etki süresi ve Medicare erişimini sordu; yönetim tüketici odaklı bir lansman planladığını, Faz III verilerinin gelecek yıl geleceğini ve kör veri paylaşmadığını söyledi.",
+     "Sjögren: Goldman Sachs ve TD Cowen, sistemik hastalıkta olumlu Faz III sonrası 434 hastalık semptomatik çalışmayı ve düzenleyici yolu sordu; veriler Q4'te bekleniyor, yönetim strateji ayrıntısı vermedi.",
+     "Imdelltra: JPMorgan ve Evercore ISI izleme süresini ve pazar büyüklüğünü sordu; yönetim ABD'de küçük hücreli akciğer kanserinde 35.000 hastalık adreslenebilir popülasyondan söz etti, ürüne özel rehberlik vermedi.",
+     "İş geliştirme: UBS sektördeki yoğun satın almalar karşısında Amgen'in sessizliğini sordu; Bradway önceliklerin değişmediğini ve getiri disiplininin sürdüğünü söyledi."
+    ],
+    "risks": [
+     "Prolia ve Xgeva'da hacim ve net fiyat kaybının sürmesi.",
+     "FDA'nın Tavneos için gönüllü geri çekme talep etmesi; şirket duruşma talep etti.",
+     "Q4'te operasyonel giderlerin belirgin artması ve MariTide için ABD dışında ödeme kapsamının zor olması."
+    ],
+    "sources": [
+     {
+      "title": "Amgen (AMGN) Q3 2026 Earnings Call Transcript — Motley Fool",
+      "url": "https://www.fool.com/earnings/call-transcripts/2026/11/04/amgen-amgn-q3-2026-earnings-call-transcript/"
+     }
+    ]
+   },
+   {
     "q": "Q2 2026",
     "date": "2026-08-04",
     "tone": "olumlu",
@@ -1069,6 +1131,45 @@
   ],
   "NVO": [
    {
+    "q": "Q3 2026",
+    "date": "2026-11-04",
+    "tone": "olumlu",
+    "toneChg": "önceki çeyreğe göre daha olumlu",
+    "summary": "Novo Nordisk üçüncü çeyrekte düzeltilmiş satışlarını sabit kurla %4 artışla 79,2 milyar DKK'ya, düzeltilmiş faaliyet kârını %27 artışla 31,7 milyar DKK'ya taşıdı; kâr artışında geçen yılın düşük karşılaştırma tabanı da etkili oldu. Wegovy hapının yükselişi ve obezite satışlarındaki %22 artış yıllık beklentinin yükseltilmesini sağladı. Yönetim 2027 için rakam vermedi, olumlu ve olumsuz etkenleri sıralamakla yetindi; CFO Karsten Knudsen'in ayrılacağı da açıklandı.",
+    "guidance": "2026 düzeltilmiş satış ve faaliyet kârı büyümesi beklentisi sabit kurla önceki %0 ile -%6 aralığından -%2 ile +%2 aralığına yükseltildi; serbest nakit akışı 60-70 milyar DKK bekleniyor. 2027 rehberliği yıllık sonuçlarla birlikte verilecek.",
+    "highlights": [
+     "Wegovy hapı Q3'te 5.394 milyon DKK sattı; ABD'de oral obezite segmentindeki yeni marka reçetelerinin yaklaşık %80'ini aldı ve kümülatif reçete sayısı 8 milyonu aştı.",
+     "Uluslararası Operasyonlar satışı %8 arttı; 2027'nin ilk yarısına kadar hapın 20'den fazla pazara yayılması hedefleniyor.",
+     "Raporlanan Q3 faaliyet kârı 23.011 milyon DKK ile sabit kurda %9 düştü; ziltivekimab ve üretim ağı yeniden yapılanmasıyla ilgili 8,7 milyar DKK değer düşüklüğü etkili oldu.",
+     "Serbest nakit akışı yaklaşık 28 milyar DKK; CagriSema REDEFINE 9'da 68. haftada %21 kilo kaybı sağladı, ABD lansmanı onaya bağlı olarak 2027 başı için hazırlanıyor."
+    ],
+    "qa": [
+     "ABD fiyatı: Yönetim Ozempic'te yıllık %10-15, Wegovy'de %30-35 fiyat erozyonundan söz etti; liste fiyatları 1 Ocak 2027'de düşecek, MFN etkisinin ise fiyatlanmış olduğu belirtildi.",
+     "Medicare Bridge: Q3'teki hacim artışının büyük kısmı programdan geldi, 2027 sonrası durumu belirsiz; ödeyicilerin kaygısı fiyattan çok hacim ve toplam maliyet.",
+     "Q4 aralığı: Örtük aralığın genişliği soruldu; CFO bunu kategori oynaklığına, geçen yılki yaklaşık 3 milyar DKK'lık ABD brüt-net düzeltmesine ve Kanada'daki münhasırlık kaybına bağladı.",
+     "2027 ve boru hattı: Yönetim rakam vermedi, üçlü agonistin Faz I'deki yan etki kayıtları konusunda beklentilerin dikkatli yönetilmesi gerektiğini söyledi."
+    ],
+    "risks": [
+     "ABD'de süren fiyat erozyonu ve Medicare Bridge programının 2027 sonrası belirsizliği.",
+     "Kanada gibi pazarlarda münhasırlık kaybı ile Çin'deki baskılar.",
+     "2026'daki olumlu brüt-net etkisinin 2027'de aynı ölçekte tekrarlanmaması ve CFO değişimi."
+    ],
+    "sources": [
+     {
+      "title": "Novo raises full-year outlook — GlobeNewswire basın bülteni",
+      "url": "https://www.globenewswire.com/news-release/2026/11/04/3395015/0/en/novo-raises-full-year-outlook-on-continued-glp-1-momentum-with-third-quarter-adjusted-operating-profit-increasing-27-at-cer-to-dkk-31-720-million.html"
+     },
+     {
+      "title": "Novo Nordisk Q3 2026 Earnings Call — BigGo Finance görüşme özeti",
+      "url": "https://finance.biggo.com/news/US_NVO_2026-11-04"
+     },
+     {
+      "title": "Novo Nordisk (Q3 2026) Earnings Call Highlights — Yahoo Finance",
+      "url": "https://finance.yahoo.com/healthcare/articles/novo-nordisk-nvo-q3-2026-190719869.html"
+     }
+    ]
+   },
+   {
     "q": "Q2 2026",
     "date": "2026-08-05",
     "tone": "temkinli",
@@ -1403,7 +1504,43 @@
      }
     ]
    }
+  ],
+  "FCX": [
+   {
+    "q": "Q3 2026",
+    "date": "2026-10-27",
+    "tone": "nötr",
+    "summary": "Freeport-McMoRan üçüncü çeyrekte 6,54 $/lb gerçekleşen bakır fiyatının desteğiyle hisse başına 1,20 dolar kâr (düzeltilmiş 0,88 dolar) ve 7,5 milyar dolar gelir açıkladı. Buna karşın 2026 ve 2027 bakır satış tahminleri aşağı çekildi, 2027 sermaye harcaması arttı ve enerji maliyetleri yükseldi. Yönetim Grasberg'deki toparlanmayla 2027'de %20'nin üzerinde hacim artışı hedeflediğini vurguladı.",
+    "guidance": "Bakır satışının 2026'da yaklaşık 3,0 milyar lb, 2027'de yaklaşık 3,7 milyar lb, 2028'de 4 milyar lb'nin üzerinde olması bekleniyor. 2026 birim net nakit maliyet tahmini 1,90 $/lb'de korundu, 2027 sermaye harcaması Temmuz tahmininin yaklaşık 400 milyon dolar üzerinde 5,2 milyar dolar öngörülüyor.",
+    "highlights": [
+     "Q3 satışları 749 milyon lb bakır, 105 bin ons altın ve 22 milyon lb molibden; birim net nakit maliyet 2,07 $/lb.",
+     "Grasberg Block Cave üçüncü çeyrekte kapasitenin %67'sinde çalıştı; hedef 2027 ortasında yaklaşık %80, yıl sonunda tam kapasiteye yakın seviye.",
+     "Q4'te bakır satışının çeyreklik %17 artması, altın satışının neredeyse üç katına çıkması bekleniyor.",
+     "Net borç 3,2 milyar dolarlık proje borcu hariç 1,8 milyar dolar; yıl başından bu yana hissedarlara yaklaşık 1 milyar dolar dağıtıldı."
+    ],
+    "qa": [
+     "Barclays ve UBS Grasberg üretim seyrini sordu; Q1 2027'nin yılın en düşük çeyreği olabileceği, artışın ikinci yarıda hızlanacağı ve beş yıllık planın büyük ölçüde korunduğu aktarıldı.",
+     "Scotiabank ve Deutsche Bank sermaye harcamasını sordu; artışın yaklaşık yarısı ek maden ekipmanından geliyor, 4,5 milyar dolarlık Bagdad projesi ise 2027 tahmininde yer almıyor.",
+     "BMO, Wells Fargo ve Raymond James liç programını sordu; 2027-2028 tahminlerinde 300 milyon lb var, 800 milyon lb ise sahadaki sonuçlara bağlı bir hedef olarak tahminlerin dışında tutuluyor.",
+     "JPMorgan ve Goldman Sachs maliyetleri sordu; 2026 enerji maliyeti artışı yaklaşık 500 milyon dolar, en büyük etken dizel."
+    ],
+    "risks": [
+     "ABD operasyonlarında aşırı hava olayları, düşük geri kazanım oranları ve El Abra'daki şev yönetimi.",
+     "Enerji, asit ve malzeme enflasyonunun maliyetlere ve proje sermayesine yansıması.",
+     "Endonezya'da kuraklığa bağlı su kısıtı ve Grasberg rampasındaki zamanlama riski."
+    ],
+    "sources": [
+     {
+      "title": "Freeport-McMoRan (FCX) Q3 2026 Earnings Call Transcript — Motley Fool",
+      "url": "https://www.fool.com/earnings/call-transcripts/2026/10/27/freeport-mcmoran-fcx-q3-2026-earnings-call-transcript/"
+     },
+     {
+      "title": "Freeport-McMoRan FY2026 Q3 earnings call — Bullfincher",
+      "url": "https://bullfincher.io/companies/freeport-mcmoran/earnings-call/fy2026-q3"
+     }
+    ]
+   }
   ]
  },
- "updatedAt": "2026-11-02T07:48:26Z"
+ "updatedAt": "2026-11-05T07:44:16Z"
 }
