@@ -1,41 +1,39 @@
 {
- "publishedAt": "2026-11-04T05:56:44Z",
- "asOf": "2026-11-03",
- "title": "AMD güçlü öngörüyle seans sonrası sıçradı; gözler Novo ve ISM hizmette",
+ "publishedAt": "2026-11-05T05:58:03Z",
+ "asOf": "2026-11-04",
+ "title": "Seçim rallisi S&P'yi %1,65 taşıdı; VRT, DELL ve CRDO sert ayrıştı",
  "sections": [
   {
    "h": "Dün",
    "items": [
-    "3 Kasım salı: S&P 500 (SPY) +%0,3; çipler önceki günün kaybının bir kısmını geri aldı: SOXX +%2,5, SMH +%2,0.",
-    "En iyiler: CRDO +%7,8, VRT +%5,2, DELL +%4,0, AMD +%3,7, XBI +%1,9, ASML +%1,7.",
-    "En kötüler: SLV −%1,6, COPX −%1,6, IAU −%0,7, AGNG −%0,4.",
-    "Kapanış sonrası AMD 3. çeyrekte gelirini %45 artırıp 13,38 mlr $'a çıkardı; 4. çeyrek için ~17 mlr $ öngördü ve hisse uzatılmış seansta yaklaşık %7–8 yükseldi."
+    "S&P 500 (SPY) +%1,65: Demokratların Kongre zaferi ve WTI'daki −%9,0'luk düşüş endeksleri taşıdı.",
+    "En sert düşüşler veri merkezi cephesinde: VRT −%12,9, CRDO −%9,6, DELL −%8,8; ASML −%3,6, SOXX −%3,1, SMH −%2,8. AMD +%1,0 ile ayrıştı.",
+    "En iyiler: SLV +%5,2, COPX +%4,0, IAU +%3,7, AGNG +%3,6, XBI +%2,7. Moderna FDA grip aşısı onayıyla +%13,1."
    ]
   },
   {
    "h": "Bugün",
    "items": [
-    "Novo Nordisk 3. çeyrek bilançosu bu sabah (~09:00 TRT, saat tahmini; HBK beklentisi ~4,85): AGNG'yi ilgilendiriyor.",
-    "ABD: ADP özel sektör istihdamı 16:15 TRT (beklenti 67 bin), ISM hizmet 18:00 TRT (beklenti 54,8): faiz beklentileri üzerinden XBI, IAU ve SLV'yi, risk iştahı üzerinden çipleri ilgilendiriyor.",
-    "Yarın 23:30 TRT Natera (XBI, saat tahmini). Moderna (XBI) takvimde 6 Kasım; bir haber başlığı perşembeyi işaret ediyor, tarih netleşmedi.",
-    "Cuma 16:30 TRT tarım dışı istihdam (beklenti 63 bin, işsizlik %4,2): SMH, SOXX, XBI, IAU, SLV için haftanın ana verisi."
+    "Bugün 16:30 TRT ABD haftalık işsizlik başvuruları (beklenti 197 bin); 23:30 TRT Natera bilançosu (saat tahmini, XBI).",
+    "Yarın 15:30 TRT Moderna bilançosu (saat tahmini): XBI'nin en büyük holdingi FDA onayı ve %13'lük sıçrama sonrası sınanacak.",
+    "Yarın 16:30 TRT tarım dışı istihdam (beklenti 63 bin, önceki 29 bin; işsizlik %4,2): SMH, SOXX, XBI, IAU ve SLV için faiz beklentisi belirleyici."
    ]
   },
   {
    "h": "Teknik durum",
    "items": [
-    "Alım bölgesinde: DELL $408,40 (bölge $400,61–$408,73, stop $356,17), SMH $518,52 (bölge $516,85–$519,96, stop $493,19).",
-    "Bölge sınırında: COPX $71,71 (üst sınır $71,32, stop $67,82) ve XBI $154,97 (üst sınır $153,95, stop $140,82); betik ikisini de bölgede sayıyor.",
-    "Aşırı ısınmış: AGNG $39,66, RSI 71 (TP1 $40,37).",
-    "Stop'a %3'ten yakın enstrüman yok; en yakın olan SMH, %4,9 mesafede."
+    "IAU 76,37 $ ile alım bölgesinde (74,64–76,59); stop 73,01 $, %4,6 uzakta.",
+    "Kapanışlar bölgenin hemen üzerinde: COPX 74,56 $ (73,97–74,44), SLV 47,16 $ (46,53–46,82), XBI 159,10 $ (151,94–156,83). DELL 372,36 $ ile bölgeye (357,85–365,69) yaklaştı, RSI 31.",
+    "AGNG aşırı ısınmış: 41,11 $, RSI 79, plan bölgesi 37,23–38,33 $.",
+    "Stop'a %3'ten yakın enstrüman yok."
    ]
   },
   {
    "h": "Beklenti → gerçekleşen",
    "items": [
-    "AMD bilançosu (Q3 2026): HBK beklenti 1,97 → 2,09 (+%6,1, beklentinin üstünde) · takip edilenler AMD +%3,7, SOXX +%2,5, SMH +%2,0. Bu fiyatlar açıklama öncesi seansa ait; bilançoya gerçek tepki bugünkü seansta görülecek.",
-    "ABD ISM İmalat PMI (Ekim): ISM imalat beklenti 54,5 → 55,5 · takip edilenler SOXX −%3,8, SMH −%2,7, SLV +%2,2.",
-    "Eli Lilly'nin Güçlü 3. Çeyrek Sonuçları Hissede Artış Sağladı: beklenti olumlu → fiyat ters yönde (AGNG −%0,4).",
+    "Novo Nordisk bilançosu (Q3 2026): HBK beklenti 0,81 → 0,87 (+%7,4, beklentinin üstünde) · AGNG +%3,6.",
+    "AMD bilançosu (Q3 2026): HBK beklenti 1,97 → 2,09 (+%6,1, beklentinin üstünde); ertesi seans AMD +%1,0, SMH −%2,8, SOXX −%3,1.",
+    "FDA, Moderna'nın mRNA grip aşısını onayladı: beklenti olumlu → fiyat beklenen yönde (XBI +%2,7).",
     "ABD ara seçimleri: sonuç henüz işlenmedi."
    ]
   }

@@ -1,6 +1,59 @@
 {
- "updatedAt": "2026-11-04T06:05:00Z",
+ "updatedAt": "2026-11-05T05:57:12Z",
  "cards": [
+  {
+   "id": "NOVO.B-2026Q3",
+   "t": "NOVO.B",
+   "company": "Novo Nordisk",
+   "date": "2026-11-04",
+   "quarter": "Q3 2026",
+   "time": "piyasa öncesi",
+   "eps": {
+    "act": 0.87,
+    "est": 0.81,
+    "surprisePct": 7.4
+   },
+   "rev": {
+    "act": 11.9,
+    "est": 11.39,
+    "unit": "mlr $",
+    "yoy": 4,
+    "surprisePct": 4.5
+   },
+   "guidance": "2026 görünümünü yükseltti: sabit kurda satış büyümesi -%2 ile +%2 aralığında, serbest nakit akışı 60–70 mlr DKK bekleniyor.",
+   "reaction": {
+    "pct": 4.95,
+    "from": 40.19,
+    "to": 42.18
+   },
+   "highlights": [
+    "Düzeltilmiş satış sabit kurda %4 artışla 79,2 mlr DKK; düzeltilmiş faaliyet kârı %27 artışla 31,7 mlr DKK (karşılaştırma bazı da destekledi).",
+    "Obezite ürünleri satışı %22 arttı; oral Wegovy reçeteleri ocaktaki lansmandan bu yana 8 milyona ulaştı.",
+    "Net kâr değer düşüklüğü etkisiyle %16 gerileyerek 16,74 mlr DKK oldu; CFO Karsten Munk Knudsen şirketten ayrılıyor.",
+    "HBK ve gelir ADR bazında ve dolar cinsinden; Finnhub verisinde HBK 5,91/4,85 (+%21,9) görünüyor, kaynaklar arası fark var."
+   ],
+   "affects": [
+    {
+     "t": "AGNG",
+     "note": "holding (ağırlık %3,51)"
+    }
+   ],
+   "summary": "Novo Nordisk, Wegovy hapının güçlü seyriyle üçüncü çeyrekte beklentilerin üzerinde sonuç açıkladı ve 2026 görünümünü yükseltti. Hisse (NVO) 4 Kasım'da yaklaşık %5 yükseldi; ancak CEO 2027 için rakamsal yönlendirme vermedi.",
+   "sources": [
+    {
+     "title": "SEC 6-K — Novo Nordisk Q3 2026",
+     "url": "https://www.sec.gov/Archives/edgar/data/353278/000162828026069805/caq32026.htm"
+    },
+    {
+     "title": "CNBC — Novo raises full-year outlook as Wegovy pill sales impress",
+     "url": "https://www.cnbc.com/2026/11/04/novo-q3-earnings-wegovy-sales.html"
+    },
+    {
+     "title": "Nasdaq/RTTNews — Novo Q3 adj. operating profit increases",
+     "url": "https://www.nasdaq.com/articles/novo-nordisk-q3-adj-operating-profit-increases-obesity-sales-22-raises-2026-outlook"
+    }
+   ]
+  },
   {
    "id": "AMD-2026Q3",
    "t": "AMD",
