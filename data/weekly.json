@@ -1,6 +1,89 @@
 {
  "reports": [
   {
+   "id": "2026-W45",
+   "weekEnd": "2026-11-06",
+   "range": "2–6 Kasım 2026",
+   "publishedAt": "2026-11-06T22:47:37Z",
+   "title": "Seçim sonrası AI satışı: çipler 2020'den beri en kötü günü yaşadı",
+   "movers": [
+    {
+     "t": "SLV",
+     "pct": 5.11
+    },
+    {
+     "t": "IAU",
+     "pct": 4.76
+    },
+    {
+     "t": "AGNG",
+     "pct": 1.97
+    },
+    {
+     "t": "COPX",
+     "pct": -0.92
+    },
+    {
+     "t": "XBI",
+     "pct": -2.42
+    },
+    {
+     "t": "ASML",
+     "pct": -9.01
+    },
+    {
+     "t": "AMD",
+     "pct": -11.05
+    },
+    {
+     "t": "SMH",
+     "pct": -11.25
+    },
+    {
+     "t": "SOXX",
+     "pct": -13.13
+    },
+    {
+     "t": "CRDO",
+     "pct": -20.28
+    },
+    {
+     "t": "VRT",
+     "pct": -21.35
+    },
+    {
+     "t": "DELL",
+     "pct": -22.56
+    }
+   ],
+   "summary": [
+    "Haftanın tek konusu ABD ara seçimleri sonrası AI ve çip hisselerindeki sert satış oldu. Demokratların Kongre'nin iki kanadını da kazanması ve veri merkezi projelerinin oylamalarda büyük ölçüde reddedilmesi çarşamba günü veri merkezi tedarikçilerini vurdu; perşembe ise satış tüm çip sektörüne yayıldı ve PHLX Yarı İletken Endeksi %12,25 düşerek Mart 2020'den bu yana en kötü gününü yaşadı. Cuma günü güçlü istihdam verisiyle kısmi bir tepki alımı geldi ama haftayı kurtarmaya yetmedi. 12 enstrümanın yalnızca 3'ü artıda kapattı: en iyisi %5,1 ile gümüş (SLV), en kötüsü %22,6 kayıpla Dell oldu. S&P 500 (SPY) haftayı %2,7 eksi kapatırken eşit ağırlıklı portföy ortalaması yaklaşık %8,3 geriledi; yani endeksin yaklaşık 5,6 puan gerisinde kalındı.",
+    "AI altyapısı tarafı haftanın en ağır kaybını yaşadı: Dell %22,6, Vertiv %21,4, Credo %20,3 düştü. Üçü de çarşamba ve perşembe günlerinde üst üste çift haneli ya da çift haneye yakın kayıplar verdi (Vertiv çarşamba yaklaşık %13, perşembe yaklaşık %14; Dell sırasıyla yaklaşık %10 ve %14; Credo yaklaşık %11 ve %17). Satışın arkasında seçimle gelen düzenleme kaygısı (veri merkezi inşaatının yavaşlayabileceği endişesi), yılın en çok kazandıranlarında kâr realizasyonu ve yüksek değerlemeler bir arada gösteriliyor. Yarı iletkenlerde SOXX %13,1, SMH %11,3, AMD %11,1, ASML %9,0 kaybetti. AMD'nin rekor çeyrek sonuçları (gelir %45 artışla 13,38 milyar $, veri merkezi %97 artışla 8,5 milyar $) salı akşamı gelse de perşembe hisse %15'in üzerinde düştü; cuma %11 toparlandı. Biyotekte XBI %2,4 geriledi (perşembe yaklaşık %6 düştü, Moderna'nın grip aşısı onayı ve güçlü çeyreği kısmen destek verdi); AGNG ise %2,0 artıyla sağlık tarafında ayrıştı. Metaller haftanın kazananı oldu: seçim sonuçlarının geldiği çarşamba ons altın tek günde %4,1 yükseldi ve haftayı %4,8 artıyla 4.072 $'da kapattı; IAU %4,8, SLV %5,1 kazandı. Bakır madencileri (COPX) %0,9 ile sınırlı kayıpla dalgalı bir hafta geçirdi.",
+    "Dolar/TL %0,4 yükselerek 50,14'e çıktı. TL bazında SPY yaklaşık %2,3, eşit ağırlıklı portföy ortalaması ise yaklaşık %8,0 kaybettirdi; gümüş TL'de %5,6, altın fonu %5,2 kazandırırken Dell %22,2, Vertiv %21,0 kaybettirdi. Çeşitlendirme bu hafta önceki iki haftanın aksine işe yaradı: Fed'in Aralık'ta faiz artırabileceği beklentisi sürse de altın ve gümüş, hisse satışının en sert olduğu günlerde yükselerek gerçek bir tampon oldu; sağlık tarafı (AGNG) da artıda kaldı. Yine de portföyün yarısından fazlasının AI temasına bağlı olması, tek bir siyasi olayın ortalamayı endeksin çok altına çekebildiğini gösterdi."
+   ],
+   "highlights": [
+    "Çip sektöründe tarihi gün: PHLX Yarı İletken Endeksi 5 Kasım'da %12,25 düşerek Mart 2020'den bu yana en büyük günlük kaybını yaşadı; SOXX %12,2, SMH %11,2, Micron %17,5 geriledi. Aynı gün S&P 500 %4'ün üzerinde, Nasdaq %5,5 düştü ve piyasa değerinden yaklaşık 3 trilyon $ silindi.",
+    "Veri merkezi oylamaları: Ara seçimlerde Demokratlar iki meclisi de kazanırken, veri merkezi projeleriyle ilgili yerel oylamaların biri hariç tamamında seçmen projelere karşı çıktı. Goldman Sachs, ABD'de planlanan veri merkezi kapasitesinin yaklaşık %45'inin yeni seçilen valilerin olası kısıtlamalarıyla karşılaşabileceğini tahmin ediyor.",
+    "AMD: 3. çeyrek geliri yıllık %45 artışla 13,38 milyar $'a, veri merkezi geliri %97 artışla 8,5 milyar $'a çıktı; oyun gelirleri ise yaklaşık %40 düştü. Sonuçlar beklentiyi aşsa da hisse sektör satışıyla haftayı %11,1 eksi kapattı.",
+    "Marvell, optik bileşen üreticisi Lumentum'u tamamı hisseyle yaklaşık 115 milyar $'a satın alacağını açıkladı; seyrelme ve finansman kaygısıyla Marvell hissesi pazartesi %13 düştü. Haftanın başındaki bu satış, sektördeki gerginliğin ilk işaretiydi.",
+    "Moderna: FDA mRNA tabanlı mevsimsel grip aşısını 50 yaş üstü için onayladı; şirket 3. çeyrekte beklentileri aşıp kâra geçti ve 2026 gelir büyüme beklentisini %15–25'e yükseltti. Hisse haftayı yaklaşık %15 artıda kapattı (XBI holdingi).",
+    "Novo Nordisk Wegovy hapının güçlü satışlarıyla 3. çeyrekte beklentileri aşıp yıllık görünümünü yükseltti; Eli Lilly ise Hims & Hers ile obezite ilaçlarına erişim ortaklığı kurdu (ikisi de AGNG holdingi). Not: SOXX bu hafta 3'e 1 pay bölünmesi yaptı; fiyatın yaklaşık üçte birine inmesi kayıp değildir, haftalık getiri bölünmeye göre düzeltilerek hesaplandı."
+   ],
+   "nextWeek": [
+    "10 Kasım Salı 16:30 TSİ – ABD Ekim enflasyonu (TÜFE): Cuma günkü güçlü istihdam verisi (165 bin yeni iş, işsizlik %4,1) Aralık'ta faiz artırımı beklentisini güçlendirdi; yüksek bir TÜFE hem büyüme hisselerine (SMH, SOXX, AMD) hem de faiz getirmeyen altın ve gümüşe (IAU, SLV) baskı yapabilir.",
+    "10 Kasım Salı (kapanış sonrası) – CoreWeave bilançosu: AI bulut kiralama tarafındaki harcama iştahı, seçim sonrası sorgulanan veri merkezi yatırımlarının ilk testi; Vertiv, Dell, Credo ve AMD için yön verici olabilir.",
+    "12 Kasım Perşembe (kapanış sonrası) – Applied Materials (beklenti HBK ~4,06 $) ve Cisco (~1,15 $) bilançoları: Çip ekipmanı siparişleri ASML ve çip fonları (SMH, SOXX) için, Cisco'nun AI ağ talebi ise Credo için önemli. Aynı gün Nebius (açılış öncesi) ve Cerebras (kapanış sonrası) da sonuç açıklıyor.",
+    "12 Kasım Perşembe – Hudbay Minerals (COPX holdingi, beklenti HBK ~0,36 $) ve Twist Bioscience (XBI holdingi) bilançoları; ayrıca haftalık işsizlik başvuruları (önceki 189 bin).",
+    "13 Kasım Cuma 16:30 TSİ – ABD Ekim üretici fiyatları (ÜFE): TÜFE ile birlikte Fed'in Aralık kararına dair beklentiyi şekillendirecek; metaller ve faize duyarlı büyüme hisseleri için önemli.",
+    "17 Kasım Salı (bir sonraki hafta) – Nvidia bilançosu: SMH ve SOXX'un en büyük holdinglerinden biri; seçim sonrası AI talebine dair en kritik veri olacak, hafta boyunca beklenti fiyatlaması görülebilir."
+   ],
+   "watch": [
+    "Düzenleme riski: Yeni Kongre ve valilerin veri merkezi inşaatına getirebileceği kısıtlamalar netleşene kadar Vertiv, Dell ve Credo'da oynaklık yüksek kalabilir; bu üç hisse 52 haftalık zirvelerinin %45–61 altında.",
+    "Fed ve faizler: 10 yıllık ABD tahvil faizi %4,86'ya çıktı ve piyasa Aralık'ta artırımı ağırlıklı olarak fiyatlıyor. Bu hafta altın bu baskıya rağmen yükseldi; ancak enflasyon verisi sürpriz yaparsa metallerdeki tampon etkisi zayıflayabilir.",
+    "Yoğunlaşma: Portföyün 12 enstrümanından 7'si (SMH, SOXX, AMD, ASML, CRDO, VRT, DELL) AI temasına bağlı ve bu hafta hepsi aynı yönde %9–23 düştü. Cuma günkü tepki alımının kalıcı olup olmadığı ve sert günlerin tekrarlanıp tekrarlanmadığı izlenmeli."
+   ]
+  },
+  {
    "id": "2026-W44",
    "weekEnd": "2026-10-30",
    "range": "26–30 Ekim 2026",
