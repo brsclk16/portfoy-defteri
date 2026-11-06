@@ -865,31 +865,31 @@
   }
  ],
  "autoRun": {
-  "at": "2026-11-03T11:14:32Z",
+  "at": "2026-11-06T11:21:38Z",
   "log": {
+   "goldman": "değişmedi: https://am.gs.com/en-us/advisors/insights/article/investment-outlook: tarih geçersiz/eski: 2025-10-24 | arama: RuntimeError grounding başarısız: HTTP Error 429: Too Many Requests",
+   "statestreet": "değişmedi: https://www.ssga.com/us/en/intermediary/insights/global-market-outlook: tarih geçersiz/eski: 2025-11-30 | arama: RuntimeError grounding başarısız: HTTP Error 429: Too Many Requests",
    "pimco": "değişmedi: https://www.pimco.com/us/en/insights/cyclical-outlook: HTTPError HTTP Error 404: Not Found | arama: RuntimeError grounding başarısız: HTTP Error 429: Too Many Requests",
-   "amundi": "değişmedi: https://research-center.amundi.com/: tarih okunamadı | arama: RuntimeError grounding başarısız: HTTP Error 429: Too Many Requests",
+   "amundi": "değişmedi: https://research-center.amundi.com/: yeni değil (2026-10-01 ≤ 2026-10-26) | arama: RuntimeError grounding başarısız: HTTP Error 429: Too Many Requests",
    "capitalgroup": "değişmedi: https://www.capitalgroup.com/individual/insights/categories/outlook.html: yeni değil (2026-06-24 ≤ 2026-06-24) | arama: RuntimeError grounding başarısız: HTTP Error 429: Too Many Requests",
    "fidelity": "değişmedi: https://institutional.fidelity.com/advisors/insights/topics/market-commentary: tarih okunamadı | arama: RuntimeError grounding başarısız: HTTP Error 429: Too Many Requests",
    "bny": "değişmedi: https://www.bny.com/assets/investments/imemea/pdfs/emea_fp_checkpoints_nov26.pdf: HTTPError HTTP Error 404: Not Found | https://www.bny.com/assets/investments/imemea/pdfs/emea_fp_checkpoints_oct26.pdf: HTTPError HTTP Error 404: Not Found | https://www.bny.com/assets/investments/imemea/pdfs/emea_fp_checkpoints_sep26.pdf: HTTPError HTTP Error 404: Not Found | https://www.bny.com/assets/investments/imemea/pdfs/emea_fp_checkpoints_aug26.pdf: HTTPError HTTP Error 404: Not Found | arama: RuntimeError grounding başarısız: HTTP Error 429: Too Many Requests",
-   "blackrock": "güncellendi → 2026-11-02 (2 görüş)",
-   "vanguard": "değişmedi: https://corporate.vanguard.com/content/corporatesite/us/en/corp/vemo/vemo-return-forecasts.html: yeni değil (2026-10-21 ≤ 2026-10-21) | arama: RuntimeError grounding başarısız: HTTP Error 429: Too Many Requests",
-   "jpmorgan": "değişmedi: https://am.jpmorgan.com/us/en/asset-management/adv/insights/portfolio-insights/ltcma/: tarih geçersiz/eski: 2027-09-01 | https://am.jpmorgan.com/jp/en/asset-management/institutional/insights/portfolio-insights/ltcma/executive-summary/: yeni değil (2026-09-01 ≤ 2026-10-01)",
-   "goldman": "süre doldu, bir sonraki çalışmaya kaldı",
-   "statestreet": "süre doldu, bir sonraki çalışmaya kaldı"
+   "blackrock": "değişmedi: https://www.blackrock.com/corporate/insights/blackrock-investment-institute/publications/weekly-commentary: yeni değil (2026-11-02 ≤ 2026-11-02) | https://www.blackrock.com/us/individual/insights/blackrock-investment-institute/weekly-commentary: yeni değil (2026-11-02 ≤ 2026-11-02) | arama: RuntimeError grounding başarısız: HTTP Error 429: Too Many Requests",
+   "vanguard": "değişmedi: https://corporate.vanguard.com/content/corporatesite/us/en/corp/vemo/vemo-return-forecasts.html: yeni değil (2026-10-21 ≤ 2026-10-21)",
+   "jpmorgan": "süre doldu, bir sonraki çalışmaya kaldı"
   },
   "checked": {
-   "blackrock": "2026-11-03T11:11:35Z",
-   "vanguard": "2026-11-03T11:13:20Z",
+   "blackrock": "2026-11-06T11:20:15Z",
+   "vanguard": "2026-11-06T11:21:38Z",
    "jpmorgan": "2026-11-03T11:14:32Z",
-   "goldman": "2026-10-30T10:23:20Z",
-   "statestreet": "2026-10-30T10:26:08Z",
-   "pimco": "2026-11-03T11:03:05Z",
-   "amundi": "2026-11-03T11:04:17Z",
-   "capitalgroup": "2026-11-03T11:06:35Z",
-   "fidelity": "2026-11-03T11:08:47Z",
-   "bny": "2026-11-03T11:09:25Z"
+   "goldman": "2026-11-06T11:10:40Z",
+   "statestreet": "2026-11-06T11:11:52Z",
+   "pimco": "2026-11-06T11:12:28Z",
+   "amundi": "2026-11-06T11:13:40Z",
+   "capitalgroup": "2026-11-06T11:14:53Z",
+   "fidelity": "2026-11-06T11:16:05Z",
+   "bny": "2026-11-06T11:16:42Z"
   },
-  "sec": 719
+  "sec": 729
  }
 }
