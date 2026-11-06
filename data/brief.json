@@ -1,40 +1,42 @@
 {
- "publishedAt": "2026-11-05T05:58:03Z",
- "asOf": "2026-11-04",
- "title": "Seçim rallisi S&P'yi %1,65 taşıdı; VRT, DELL ve CRDO sert ayrıştı",
+ "publishedAt": "2026-11-06T05:57:32Z",
+ "asOf": "2026-11-05",
+ "title": "Yapay zekâ satışı derinleşti: AMD −%17, SMH −%10, S&P −%4,4; gözler istihdamda",
  "sections": [
   {
    "h": "Dün",
    "items": [
-    "S&P 500 (SPY) +%1,65: Demokratların Kongre zaferi ve WTI'daki −%9,0'luk düşüş endeksleri taşıdı.",
-    "En sert düşüşler veri merkezi cephesinde: VRT −%12,9, CRDO −%9,6, DELL −%8,8; ASML −%3,6, SOXX −%3,1, SMH −%2,8. AMD +%1,0 ile ayrıştı.",
-    "En iyiler: SLV +%5,2, COPX +%4,0, IAU +%3,7, AGNG +%3,6, XBI +%2,7. Moderna FDA grip aşısı onayıyla +%13,1."
+    "S&P 500 (SPY) −%4,41 ile 733,00'e indi; satışın merkezinde çip ve yapay zekâ hisseleri vardı.",
+    "En sert düşüşler: CRDO −%17,71 (112,33), AMD −%17,26 (404,40), DELL −%14,89 (316,91), VRT −%14,02 (176,73), ASML −%9,33 (1.356,65).",
+    "Fonlar: SOXX −%11,3 (3'e 1 bölünme düzeltmeli), SMH −%10,4, XBI −%6,7, COPX −%5,7. ETF rakamları kapanıştan yaklaşık 20 dakika önceki son veridir.",
+    "Görece sağlam kalanlar: IAU +%0,9, SLV −%0,7, AGNG −%0,8."
    ]
   },
   {
    "h": "Bugün",
    "items": [
-    "Bugün 16:30 TRT ABD haftalık işsizlik başvuruları (beklenti 197 bin); 23:30 TRT Natera bilançosu (saat tahmini, XBI).",
-    "Yarın 15:30 TRT Moderna bilançosu (saat tahmini): XBI'nin en büyük holdingi FDA onayı ve %13'lük sıçrama sonrası sınanacak.",
-    "Yarın 16:30 TRT tarım dışı istihdam (beklenti 63 bin, önceki 29 bin; işsizlik %4,2): SMH, SOXX, XBI, IAU ve SLV için faiz beklentisi belirleyici."
+    "15:30 TRT (saat tahmini): Moderna 3. çeyrek bilançosu, HBK beklentisi −1,28 $. Moderna XBI'ın büyük holdinglerinden.",
+    "16:30 TRT: ABD tarım dışı istihdam (beklenti 65 bin, önceki 29 bin), işsizlik (beklenti %4,2), saatlik kazanç (beklenti %0,3). Faiz beklentisi üzerinden SMH, SOXX, XBI, IAU ve SLV'yi ilgilendiriyor.",
+    "18:00 TRT: Michigan tüketici güveni öncü (beklenti 47,8).",
+    "Natera dün kapanış sonrası sonuç açıkladı; fiyat tepkisi bugünkü seansta XBI'a yansıyacak."
    ]
   },
   {
    "h": "Teknik durum",
    "items": [
-    "IAU 76,37 $ ile alım bölgesinde (74,64–76,59); stop 73,01 $, %4,6 uzakta.",
-    "Kapanışlar bölgenin hemen üzerinde: COPX 74,56 $ (73,97–74,44), SLV 47,16 $ (46,53–46,82), XBI 159,10 $ (151,94–156,83). DELL 372,36 $ ile bölgeye (357,85–365,69) yaklaştı, RSI 31.",
-    "AGNG aşırı ısınmış: 41,11 $, RSI 79, plan bölgesi 37,23–38,33 $.",
-    "Stop'a %3'ten yakın enstrüman yok."
+    "Alım bölgesi durumunda: IAU 77,06 (bölge 74,83–76,56, stop 73,19), SLV 46,81 (46,53–46,82, stop 44,58), XBI 148,51 (141,93–147,48, stop 136,72).",
+    "Aşırı ısınmış: AGNG 40,77 (RSI 74), TP1 41,64.",
+    "Sert düşüş sonrası RSI düşük: DELL 26, ASML 27, SMH 27, SOXX 27, CRDO 31, VRT 34. Hiçbir enstrüman stop'a %3'ten yakın değil.",
+    "SOXX seviyeleri bölünme düzeltmesiyle hesaplandı: 133,18 (bölge 104,71–105,51, stop 95,20)."
    ]
   },
   {
    "h": "Beklenti → gerçekleşen",
    "items": [
-    "Novo Nordisk bilançosu (Q3 2026): HBK beklenti 0,81 → 0,87 (+%7,4, beklentinin üstünde) · AGNG +%3,6.",
-    "AMD bilançosu (Q3 2026): HBK beklenti 1,97 → 2,09 (+%6,1, beklentinin üstünde); ertesi seans AMD +%1,0, SMH −%2,8, SOXX −%3,1.",
-    "FDA, Moderna'nın mRNA grip aşısını onayladı: beklenti olumlu → fiyat beklenen yönde (XBI +%2,7).",
-    "ABD ara seçimleri: sonuç henüz işlenmedi."
+    "Natera (Q3): HBK beklenti −0,27 → −0,42 (−%55,6, beklentinin altında); XBI −%6,7.",
+    "Novo Nordisk (Q3): HBK beklenti 0,81 → 0,87 (+%7,4, beklentinin üstünde); AGNG +%3,6.",
+    "AMD (Q3): HBK beklenti 1,97 → 2,09 (+%6,1, beklentinin üstünde); AMD tepkisi −%0,2, ardından AMD +%3,7, SOXX +%2,5, SMH +%2,0.",
+    "Micron'un Tayvan fabrika inşasını askıya alması: beklenti olumsuz → fiyat beklenen yönde (SOXX −%12,2, SMH −%11,2). ABD ara seçimleri: sonuç henüz işlenmedi."
    ]
   }
  ]

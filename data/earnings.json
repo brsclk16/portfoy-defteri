@@ -1,6 +1,54 @@
 {
- "updatedAt": "2026-11-05T05:57:12Z",
+ "updatedAt": "2026-11-06T05:56:14Z",
  "cards": [
+  {
+   "id": "NTRA-2026Q3",
+   "t": "NTRA",
+   "company": "Natera",
+   "date": "2026-11-05",
+   "quarter": "Q3 2026",
+   "time": "piyasa sonrası",
+   "eps": {
+    "act": -0.42,
+    "est": -0.27,
+    "surprisePct": -55.6
+   },
+   "rev": {
+    "act": 0.794,
+    "est": 0.7075,
+    "unit": "mlr $",
+    "yoy": 34.1,
+    "surprisePct": 12.2
+   },
+   "guidance": "2026 gelir beklentisi 2,85–2,91 mlr $'dan 3,005–3,035 mlr $'a yükseltildi; brüt marj %64–66, nakit akışı pozitif bekleniyor.",
+   "highlights": [
+    "İşlenen test sayısı %22,3 artışla yaklaşık 1,09 milyon; onkoloji testleri %60,9 artışla 339,5 bin.",
+    "Brüt marj %64,7 (geçen yıl %64,9); net zarar 59,9 mln $, hisse başı zarar 0,64 $'dan 0,42 $'a daraldı.",
+    "Solomon Moshkevich, Steve Chapman'ın yerine CEO olarak atandı.",
+    "HBK GAAP bazında; Finnhub verisinde −0,39/−0,30 (%−30,7), kaynaklar arası fark var. Fiyat tepkisi henüz kapanışa yansımadı."
+   ],
+   "affects": [
+    {
+     "t": "XBI",
+     "note": "holding"
+    }
+   ],
+   "summary": "Natera gelirde beklentiyi belirgin aştı ve 2026 gelir beklentisini orta noktada 140 mln $ yükseltti; ancak hisse başı zarar tahminden kötü geldi. Sonuçla birlikte CEO değişimi de duyuruldu.",
+   "sources": [
+    {
+     "title": "SEC 8-K Ek 99.1 — Natera Q3 2026",
+     "url": "https://www.sec.gov/Archives/edgar/data/0001604821/000160482126000032/ntra-20260930xex991.htm"
+    },
+    {
+     "title": "RTTNews — Natera Q3 Loss Narrows; Raises FY26 Outlook",
+     "url": "https://www.nasdaq.com/articles/natera-q3-loss-narrows-raises-fy26-outlook"
+    },
+    {
+     "title": "Seeking Alpha — Natera GAAP EPS",
+     "url": "https://seekingalpha.com/news/4667338-natera-gaap-eps-of-0_42-misses-by-0_15-revenue-of-794m-beats-by-86_5m"
+    }
+   ]
+  },
   {
    "id": "NOVO.B-2026Q3",
    "t": "NOVO.B",
