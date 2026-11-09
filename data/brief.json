@@ -1,42 +1,39 @@
 {
- "publishedAt": "2026-11-06T05:57:32Z",
+ "publishedAt": "2026-11-09T05:56:19Z",
  "asOf": "2026-11-05",
- "title": "Yapay zekâ satışı derinleşti: AMD −%17, SMH −%10, S&P −%4,4; gözler istihdamda",
+ "title": "Sakin pazartesi: AMD, VRT, COPX ve IAU teknik alım bölgesinde",
  "sections": [
   {
    "h": "Dün",
    "items": [
-    "S&P 500 (SPY) −%4,41 ile 733,00'e indi; satışın merkezinde çip ve yapay zekâ hisseleri vardı.",
-    "En sert düşüşler: CRDO −%17,71 (112,33), AMD −%17,26 (404,40), DELL −%14,89 (316,91), VRT −%14,02 (176,73), ASML −%9,33 (1.356,65).",
-    "Fonlar: SOXX −%11,3 (3'e 1 bölünme düzeltmeli), SMH −%10,4, XBI −%6,7, COPX −%5,7. ETF rakamları kapanıştan yaklaşık 20 dakika önceki son veridir.",
-    "Görece sağlam kalanlar: IAU +%0,9, SLV −%0,7, AGNG −%0,8."
+    "Fiyat verisi 5 Kasım kapanışında kaldı (hafta sonu güncellenmedi). O gün en sert düşenler CRDO −%17,7, AMD −%17,3, DELL −%14,9 ve VRT −%14,0 oldu; SOXX −%12,2, SMH −%11,2.",
+    "Aynı gün yalnızca IAU (+%0,8) artıda kapandı; SLV −%0,5 ve AGNG −%1,3 ile sınırlı kayıp yaşadı. S&P 500 (SPY) −%4,3 düştü.",
+    "Cuma günü çipler toparlandı: AMD %11 yükselerek 449,04 $'dan kapandı, güçlü istihdam verisiyle Nasdaq 100 %2,1 arttı."
    ]
   },
   {
    "h": "Bugün",
    "items": [
-    "15:30 TRT (saat tahmini): Moderna 3. çeyrek bilançosu, HBK beklentisi −1,28 $. Moderna XBI'ın büyük holdinglerinden.",
-    "16:30 TRT: ABD tarım dışı istihdam (beklenti 65 bin, önceki 29 bin), işsizlik (beklenti %4,2), saatlik kazanç (beklenti %0,3). Faiz beklentisi üzerinden SMH, SOXX, XBI, IAU ve SLV'yi ilgilendiriyor.",
-    "18:00 TRT: Michigan tüketici güveni öncü (beklenti 47,8).",
-    "Natera dün kapanış sonrası sonuç açıkladı; fiyat tepkisi bugünkü seansta XBI'a yansıyacak."
+    "Bugün ve yarın takvimde portföyü ilgilendiren önemli bir olay yok.",
+    "12 Kasım Perşembe: Twist Bioscience bilançosu (XBI) ve Hudbay Minerals bilançosu (COPX), ayrıca 16:30 TRT'de ABD haftalık işsizlik başvuruları.",
+    "17 Kasım: Nvidia bilançosu (piyasa sonrası, saat tahmini) SMH ve SOXX için haftanın asıl olayı olacak."
    ]
   },
   {
    "h": "Teknik durum",
    "items": [
-    "Alım bölgesi durumunda: IAU 77,06 (bölge 74,83–76,56, stop 73,19), SLV 46,81 (46,53–46,82, stop 44,58), XBI 148,51 (141,93–147,48, stop 136,72).",
-    "Aşırı ısınmış: AGNG 40,77 (RSI 74), TP1 41,64.",
-    "Sert düşüş sonrası RSI düşük: DELL 26, ASML 27, SMH 27, SOXX 27, CRDO 31, VRT 34. Hiçbir enstrüman stop'a %3'ten yakın değil.",
-    "SOXX seviyeleri bölünme düzeltmesiyle hesaplandı: 133,18 (bölge 104,71–105,51, stop 95,20)."
+    "Alım bölgesinde: AMD 449,04 $ (bölge 448,01–450,70, stop 401,55), VRT 182,86 $ (182,13–183,23, stop 154,81).",
+    "Alım bölgesinde: COPX 71,25 $ (70,89–71,32, stop 67,65) ve IAU 76,38 $ (74,83–76,43, stop 72,31).",
+    "AGNG RSI 68 ile ısınmaya yakın ve bölgenin üzerinde (40,28 $); stop'a %3'ten yakın enstrüman yok."
    ]
   },
   {
    "h": "Beklenti → gerçekleşen",
    "items": [
-    "Natera (Q3): HBK beklenti −0,27 → −0,42 (−%55,6, beklentinin altında); XBI −%6,7.",
-    "Novo Nordisk (Q3): HBK beklenti 0,81 → 0,87 (+%7,4, beklentinin üstünde); AGNG +%3,6.",
-    "AMD (Q3): HBK beklenti 1,97 → 2,09 (+%6,1, beklentinin üstünde); AMD tepkisi −%0,2, ardından AMD +%3,7, SOXX +%2,5, SMH +%2,0.",
-    "Micron'un Tayvan fabrika inşasını askıya alması: beklenti olumsuz → fiyat beklenen yönde (SOXX −%12,2, SMH −%11,2). ABD ara seçimleri: sonuç henüz işlenmedi."
+    "ABD tarım dışı istihdam (Ekim): beklenti 65 K → 165 K; işsizlik oranı beklenti %4,2 → %4,1 · SMH +%3,6, SOXX +%3,5, XBI +%2,6",
+    "Moderna bilançosu (Q3 26): HBK beklenti -1,28 → 0,38 (+%129,8, beklentinin üstünde) · XBI +%2,6",
+    "Natera bilançosu (Q3 2026): HBK beklenti -0,27 → -0,42 (−%55,6, beklentinin altında) · XBI −%6,7",
+    "Çip panik satışı haberleri olumsuz beklentiye rağmen ters yönde sonuçlandı: AMD +%11,0, ASML +%5,0, SMH +%3,6"
    ]
   }
  ]
