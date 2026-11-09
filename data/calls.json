@@ -888,6 +888,45 @@
   ],
   "MRNA": [
    {
+    "q": "Q3 2026",
+    "date": "2026-11-06",
+    "tone": "olumlu",
+    "toneChg": "önceki çeyreğe göre daha olumlu",
+    "summary": "Moderna üçüncü çeyrekte, özellikle uluslararası COVID-19 aşısı teslimatlarının etkisiyle geliri yıllık %29 artırarak 1,31 mlr$'a çıkardı ve 162 mn$ net kârla (hisse başı 0,38$) kâra geçti; sonuçlar piyasa beklentisinin (yaklaşık 892 mn$ gelir, hisse başı 1,09$ zarar) belirgin şekilde üzerinde kaldı. Yönetim yıllık gelir büyümesi rehberliğini yükseltti, Ar-Ge harcamalarını kısmaya devam etti ve mFLUSIVA onayı ile intismeran'ın olumlu Faz 3 sonucunu ön plana çıkardı. Norovirüs aşısındaki başarısızlık ise programı belirsizlikte bırakıyor.",
+    "guidance": "2026 gelir büyümesi beklentisi önceki 'en fazla %10' seviyesinden %15-25 aralığına çekildi; Ar-Ge tahmini yaklaşık 2,9 mlr$'dan 2,7 mlr$'a, düzeltilmiş nakit maliyet tahmini 3,8 mlr$'a indirildi. Yıl sonu nakit ve yatırım beklentisi 8,1-8,3 mlr$ oldu; bu rakam yeni konvertibl tahvil gelirini içeriyor, tahvil hariç beklenti 5,5-5,7 mlr$ (önceki 4,7-5,2 mlr$).",
+    "highlights": [
+     "Gelir 1,313 mlr$ (geçen yıl 1,016 mlr$, +%29): ABD 780 mn$, uluslararası 533 mn$; yılbaşından bu yana uluslararası gelir 900 mn$ ile 2025'in tamamını 200 mn$ geçti.",
+     "Ar-Ge gideri yıllık %27 azalarak 583 mn$'a indi; faaliyet kârı 130 mn$ (geçen yıl 260 mn$ faaliyet zararı), net kâr 162 mn$.",
+     "Nakit ve yatırımlar çeyrek içinde 6,9 mlr$'dan 8,0 mlr$'a çıktı; artışın ana kaynağı 3 mlr$'lık %0 kuponlu konvertibl tahvil (net yaklaşık 2,6 mlr$), buna karşın 950 mn$ dava uzlaşma ödemesi yapıldı.",
+     "mFLUSIVA (grip aşısı) ABD'de 50-64 yaş için onay, 65 yaş üstü için hızlandırılmış onay aldı; intismeran melanom Faz 3'te nüks veya ölüm riskini %42 azalttı (HR 0,58), BLA başvurusu bu yıl, onay 2027'de hedefleniyor."
+    ],
+    "qa": [
+     "Onkoloji soruların ağırlığını oluşturdu: Goldman Sachs, Barclays, TD Cowen ve RBC analistleri böbrek hücreli kanser (RCC) ara analizinin zamanlamasını sordu (olay bazlı; yıl sonu veya 2027 başı denildi), istatistiksel plan ayrıntısı ise paylaşılmadı.",
+     "Intismeran'ın BLA süreci, Merck'in rolü, fiyatlandırma ve yapay zekâ tabanlı neoantijen seçim algoritmasının rekabet avantajı (Morgan Stanley, Piper Sandler, Jefferies, UBS) soruldu; başvurunun bu yıl yapılacağı, fiyatlama için erken olduğu belirtildi.",
+     "Bank of America ve Bernstein, rehberlik artışının 2027'den öne çekilen sevkiyatlardan mı kaynaklandığını ve uluslararası gelirin kalıcılığını sordu; CFO büyümenin geniş tabanlı olduğunu ve uluslararası gelirin %50'den fazlasının stratejik ortaklıklardan geldiğini söyledi.",
+     "William Blair norovirüs programında ek kohort açılmama kararını, RBC ise grip-COVID kombinasyon aşısı için FDA görüşmelerini sordu; her ikisinde de düzenleyici kurumlarla görüşmelerin sürdüğü, netliğin önümüzdeki aylarda geleceği ifade edildi."
+    ],
+    "risks": [
+     "Gelir hâlâ büyük ölçüde COVID-19 aşısına ve hükümet tedarik anlaşmalarına bağlı; ABD'de aşılanma oranlarının yatay seyretmesi bekleniyor.",
+     "Yıl sonu nakit beklentisinin önemli kısmı 3 mlr$'lık konvertibl borçtan geliyor; tahvil hariç nakit 5,5-5,7 mlr$ seviyesinde.",
+     "Norovirüs aşısı ara analizde başarısız oldu, grip-COVID kombinasyon aşısının ABD yolu belirsiz; intismeran onayı ve RCC ara analizi düzenleyici/klinik risk taşıyor."
+    ],
+    "sources": [
+     {
+      "title": "Moderna (MRNA) Q3 2026 Earnings Call Transcript - The Motley Fool",
+      "url": "https://www.fool.com/earnings/call-transcripts/2026/11/06/moderna-mrna-q3-2026-earnings-call-transcript/"
+     },
+     {
+      "title": "Moderna Q3 2026 basın bülteni (Form 8-K, Exhibit 99.1) - SEC",
+      "url": "https://www.sec.gov/Archives/edgar/data/0001682852/000168285226000194/exhibit9912026q3pressrelea.htm"
+     },
+     {
+      "title": "Moderna shares jump 10% as Q3 earnings beat forecasts and revenue outlook improves - Finviz",
+      "url": "https://finviz.com/news/418355/moderna-shares-jump-10-as-q3-earnings-beat-forecasts-and-revenue-outlook-improves"
+     }
+    ]
+   },
+   {
     "q": "Q2 2026",
     "date": "2026-07-31",
     "tone": "temkinli",
@@ -923,6 +962,53 @@
    }
   ],
   "NTRA": [
+   {
+    "q": "Q3 2026",
+    "date": "2026-11-05",
+    "tone": "olumlu",
+    "toneChg": "benzer",
+    "summary": "Natera üçüncü çeyrekte geliri yıllık yaklaşık %34 artırarak 794,0 mn$'a çıkardı, beklentileri geçti ve 2026 gelir rehberliğini bu yıl üçüncü kez yükseltti; Signatera (MRD) hacmi büyümenin ana sürükleyicisi olmaya devam etti. Aynı görüşmede CEO Steve Chapman'ın görevi bıraktığı ve yerine Solomon Moshkevich'in geçtiği açıklandı, ayrıca 2029 için 6 mlr$ gelir hedefi paylaşıldı. Güçlü sonuçlara rağmen hisse ertesi gün yaklaşık %14-16 geriledi; haberlere göre tepkinin ana nedenleri yükseltilen SG&A/Ar-Ge harcama rehberliği, beklenenden geniş hisse başı zarar, kârlılığın gecikebileceği endişesi ve beklenmedik CEO değişikliğiydi.",
+    "guidance": "2026 gelir rehberliği 2,85-2,91 mlr$'dan 3,005-3,035 mlr$'a yükseltildi (orta noktada +140 mn$); brüt marj yaklaşık %64-66 ve pozitif nakit akışı korunurken SG&A 1,225-1,300 mlr$'a (önceki 1,125-1,225 mlr$), Ar-Ge 825-925 mn$'a (önceki 800-900 mn$) çıkarıldı. Yönetim 2027'de faaliyet giderlerinde %10-12 artış ve 2029'da 6 mlr$ gelir hedefliyor.",
+    "highlights": [
+     "Gelir 794,0 mn$ (geçen yıl 592,2 mn$, yıllık +%34,1); true-up'lar hariç büyüme %40'ın üzerinde. True-up katkısı Q2'deki 52,3 mn$'dan 32,3 mn$'a geriledi.",
+     "Klinik MRD (Signatera) birimleri yaklaşık 316 bin ile yıllık %56 arttı (çeyreklik +~33 bin); Signatera ortalama satış fiyatı yaklaşık 1.290$'a yükseldi. Medicare, erken evre karaciğer kanseri (HCC) için Signatera kapsamını onayladı.",
+     "Brüt marj %64,7 (true-up hariç %63,2, Q2'ye göre ~140 baz puan artış); net zarar 59,9 mn$ (hisse başı -0,42$), geçen yılın 87,5 mn$'lık zararından daraldı ancak hisse başı zarar beklentinin (-0,28$) altında kaldı.",
+     "Nakit ve benzerleri 1.097,2 mn$ (çeyrekte +5,7 mn$), çeyrekte pozitif nakit akışı; organ sağlığı hacmi yıllık ~%40, kadın sağlığı orta-yüksek tek haneli büyüdü."
+    ],
+    "qa": [
+     "CEO geçişi ve strateji: TD Cowen ve Leerink, Moshkevich'in önceliklerini ve değişikliğin zamanlamasını sordu; yönetim stratejide köklü bir değişiklik olmayacağını, geçişin güçlü bir konumdan yapıldığını vurguladı.",
+     "2029'daki 6 mlr$ hedefi: JPMorgan ve TD Cowen hedefin varsayımlarını sorguladı; CFO hedefi 'agresif ama ulaşılabilir' olarak niteledi, erken kanser taraması katkısı olmadan da mümkün olduğunu ve ilaç/veri lisanslamanın 2029'da birkaç yüz milyon dolar getirmesi gerektiğini belirtti.",
+     "Harcama ve marj görünümü: Leerink 2027 giderlerini sordu (yanıt: %10-12 artış, ana kalem klinik çalışmalar); Evercore ISI brüt marjın seyrini sordu, yönetim uzun vadede %70 üzerini hedeflediğini ama yeni ürünlerin (Fetal Focus, Signatera Genome) kısa vadede marjı baskılayabileceğini söyledi.",
+     "Kapsam, Japonya ve rekabet: Evercore kalan 9-10 MolDX başvurusunu, Jefferies Japonya lansmanı ve rekabeti, Guggenheim ise Labcorp'un prenatal konsolidasyonunun etkisini sordu; yönetim rekabet ortamında belirgin bir değişiklik görmediğini ifade etti."
+    ],
+    "risks": [
+     "Yükseltilen SG&A ve Ar-Ge harcamaları ile 2027'de süren gider artışı kârlılığı ve serbest nakit akışını geciktirebilir; yeni ürünler kısa vadede brüt marjı baskılayabilir.",
+     "CEO değişikliği yönetim geçişi konusunda belirsizlik yaratıyor; haberlere göre hisse görüşmenin ertesi günü %14-16 geriledi.",
+     "Gelirin bir kısmı true-up tahakkuk düzeltmelerine dayanıyor ve bu katkı azalıyor; değerleme yüksek (haberde ileriye dönük satışların ~17 katı) ve büyüme beklentilerine duyarlı."
+    ],
+    "sources": [
+     {
+      "title": "Natera (NTRA) Q3 2026 Earnings Call Transcript - The Motley Fool",
+      "url": "https://www.fool.com/earnings/call-transcripts/2026/11/06/natera-ntra-q3-2026-earnings-call-transcript/"
+     },
+     {
+      "title": "Natera Reports Third Quarter 2026 Financial Results",
+      "url": "https://www.natera.com/company/news/natera-reports-third-quarter-2026-financial-results/"
+     },
+     {
+      "title": "Natera Sinks 14% as CEO Steve Chapman Steps Down Despite Q3 Beat - TIKR",
+      "url": "https://www.tikr.com/blog/natera-sinks-14-as-ceo-steve-chapman-steps-down-despite-q3-beat-an-excellent-time-to-transition"
+     },
+     {
+      "title": "Natera lifted its 2026 outlook but shares still slid - Finimize",
+      "url": "https://finimize.com/content/natera-lifted-its-2026-outlook-but-shares-still-slid"
+     },
+     {
+      "title": "Natera (NTRA) Q3 2026 earnings review - Finsee",
+      "url": "https://finsee.ai/earnings/ntra/2026/q3/en/"
+     }
+    ]
+   },
    {
     "q": "Q2 2026",
     "date": "2026-08-06",
@@ -1098,6 +1184,45 @@
    }
   ],
   "HALO": [
+   {
+    "q": "Q3 2026",
+    "date": "2026-11-05",
+    "tone": "olumlu",
+    "toneChg": "daha temkinli",
+    "summary": "Halozyme üçüncü çeyrekte rekor royalty geliriyle hem gelirde hem HBK'da konsensüsün hafif üzerinde kaldı ve 2026 rehberliğinin tüm kalemlerini ikinci kez yukarı çekti. Avrupa'da Merck'e karşı Keytruda Qlex tedbir kararı lehine sonuçlanırken, ABD'de ilk patent kararlarının Merck lehine çıkması ve temyizin 2028'e uzayabilecek olması önceki çeyreğe göre belirsizliği artırdı. Yönetim 2027 rehberliğini Şubat'a bıraktı; açıklama sonrası hisse geriledi.",
+    "guidance": "2026 rehberliği yükseltildi: toplam gelir 1,86-1,925 mlr$ (önceki 1,835-1,91), royalty 1,235-1,255 mlr$ (önceki 1,22-1,245), düz. FAVÖK 1,24-1,29 mlr$ (önceki 1,225-1,28), düz. HBK 8,75-9,05$ (önceki 8,65-9,00). İşbirliği geliri için 110-130 mn$ beklentisi korundu; 2027 rehberliği Q4 sonuçlarıyla Şubat'ta verilecek.",
+    "highlights": [
+     "Toplam gelir yıllık %39 artışla 493 mn$ (konsensüs 491 mn$); royalty geliri %44 artışla rekor 341 mn$, ürün satışları %46 artışla 137,3 mn$.",
+     "Düz. HBK 2,39$ (geçen yıl 1,72$, konsensüs 2,35$), GAAP HBK 2,01$; düz. FAVÖK %35 artışla 336,2 mn$ (marj %68), net kâr 247 mn$.",
+     "Royalty dağılımı: Darzalex SC 153,5 mn$ (+%20), Vyvgart Hytrulo 88,1 mn$ (+%89), Phesgo 34,3 mn$ (+%23), diğer ürünler 65,1 mn$ (+%92; Ocrevus Zunovo, Opdivo Qvantig, Rybrevant Faspro, Tecentriq Hybreza).",
+     "Yıl içinde 400 mn$ hisse geri alımı ve 1,5 mlr$ konvertibl tahvil ihracı tamamlandı; dönem sonu nakit ve menkul kıymetler 1,08 mlr$, uzun vadeli borç 3,3 mlr$, net kaldıraç 2,4x. Klinikteki ENHANZE programı sayısı 12'ye çıktı, Hypercon'da 5 anlaşma ve 20'den fazla hedef var."
+    ],
+    "qa": [
+     "Merck / Keytruda Qlex: Morgan Stanley ve Leerink, Hollanda kararının İtalya'daki üretim üzerinden ABD tedarikine etkisini ve Avrupa-ABD farkını sordu; yönetim Merck ile görüşme olmadığını, tedbir kapsamındaki ülkelerle Almanya'nın küresel subkutan royalty potansiyelinin yaklaşık %20'sini temsil ettiğini söyledi.",
+     "ABD patent süreci: Yönetim, ABD'de ilk kararların Merck lehine çıktığını ve bazı PGR'lerde aleyhte geçerlilik kararları alındığını kabul etti; temyizin 2028'e kadar sürebileceğini ancak kazanacaklarına inandıklarını belirtti.",
+     "Darzalex patent bitişi ve 2027: Wells Fargo, 2029-2030 civarındaki olası Darzalex royalty düşüşünün yeni lansmanlarla telafisini sordu; yönetim rakam vermedi, Opdivo Qvantig, Ocrevus Zunovo ve Rybrevant Faspro büyümesine işaret etti ve 2027 görünümünü Şubat'a bıraktı.",
+     "Hypercon ve sermaye dağıtımı: Citizens JMP, Evercore ISI, TD Cowen ve JPMorgan, Hypercon'un klinik kanıtını, yaklaşık 1 mlr$ royalty fırsatının dayanağını (2030'ların ortasından önce kliniğe girecek 5-7 ürün) ve kilometre taşı ağırlıklı gelir modelini sordu; ilk iki klinik başlangıç 2027'nin ilk yarısına hedefleniyor. Satın alma sorusuna CFO disiplinli olacaklarını söyledi."
+    ],
+    "risks": [
+     "Merck ile patent anlaşmazlığı: ABD'de ilk kararlar aleyhte, temyiz 2028'e uzayabilir; dava kaynaklı hukuk giderleri SG&A'yı artırıyor (58,2 mn$, geçen yıl 46,1 mn$).",
+     "Gelirin büyük kısmının Darzalex SC başta olmak üzere birkaç ortak ürüne bağlı olması ve 2029-2030 civarında Darzalex royalty düşüşü riski.",
+     "Artan borç yükü (3,3 mlr$ uzun vadeli borç, 2027-2028 vadeli konvertibller); açıklamanın ardından hisse geriledi."
+    ],
+    "sources": [
+     {
+      "title": "Halozyme (HALO) Q3 2026 Earnings Call Transcript - The Motley Fool",
+      "url": "https://www.fool.com/earnings/call-transcripts/2026/11/06/halozyme-halo-q3-2026-earnings-call-transcript/"
+     },
+     {
+      "title": "Halozyme Reports Third Quarter 2026 Results and Raises Full Year 2026 Financial Guidance - Finviz (PR Newswire)",
+      "url": "https://finviz.com/news/417648/halozyme-reports-third-quarter-2026-results-and-raises-full-year-2026-financial-guidance"
+     },
+     {
+      "title": "Halozyme Q3 2026: Record Royalties Drive a Guidance Raise - 24/7 Wall St.",
+      "url": "https://247wallst.com/cards/halozyme-therapeutics-q3-2026-earnings-halo-01m6prps2mjnj2wsmdj9kwnv8s"
+     }
+    ]
+   },
    {
     "q": "Q2 2026",
     "date": "2026-08-06",
@@ -1542,5 +1667,5 @@
    }
   ]
  },
- "updatedAt": "2026-11-05T07:44:16Z"
+ "updatedAt": "2026-11-09T07:47:23Z"
 }
