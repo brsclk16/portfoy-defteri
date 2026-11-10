@@ -1,39 +1,40 @@
 {
- "publishedAt": "2026-11-09T05:56:19Z",
- "asOf": "2026-11-05",
- "title": "Sakin pazartesi: AMD, VRT, COPX ve IAU teknik alım bölgesinde",
+ "publishedAt": "2026-11-10T05:56:08Z",
+ "asOf": "2026-11-09",
+ "title": "Çipte sert toparlanma, gözler bugün 16:30'daki ABD enflasyonunda",
  "sections": [
   {
    "h": "Dün",
    "items": [
-    "Fiyat verisi 5 Kasım kapanışında kaldı (hafta sonu güncellenmedi). O gün en sert düşenler CRDO −%17,7, AMD −%17,3, DELL −%14,9 ve VRT −%14,0 oldu; SOXX −%12,2, SMH −%11,2.",
-    "Aynı gün yalnızca IAU (+%0,8) artıda kapandı; SLV −%0,5 ve AGNG −%1,3 ile sınırlı kayıp yaşadı. S&P 500 (SPY) −%4,3 düştü.",
-    "Cuma günü çipler toparlandı: AMD %11 yükselerek 449,04 $'dan kapandı, güçlü istihdam verisiyle Nasdaq 100 %2,1 arttı."
+    "Tüm portföy yeşil kapattı: AMD +%13,26, CRDO +%10,27, VRT +%9,63 ile öne çıktı; SOXX +%7,49, SMH +%5,05.",
+    "En zayıflar da artıda: AGNG +%1,62, IAU +%1,83, SLV +%2,71.",
+    "S&P 500 (SPY) +%2,37 yükseldi; çip fonları ve doğrudan hisseler endeksin belirgin üzerinde kaldı."
    ]
   },
   {
    "h": "Bugün",
    "items": [
-    "Bugün ve yarın takvimde portföyü ilgilendiren önemli bir olay yok.",
-    "12 Kasım Perşembe: Twist Bioscience bilançosu (XBI) ve Hudbay Minerals bilançosu (COPX), ayrıca 16:30 TRT'de ABD haftalık işsizlik başvuruları.",
-    "17 Kasım: Nvidia bilançosu (piyasa sonrası, saat tahmini) SMH ve SOXX için haftanın asıl olayı olacak."
+    "16:30 TRT ABD Ekim TÜFE: aylık beklenti %0,3 (önceki %0,6), çekirdek %0,2. Faiz beklentisi üzerinden XBI, çip fonları ve altın/gümüş için yön belirleyici.",
+    "Nvidia tarafında CEO soruşturması ve olası yeni Çin ihracat kısıtları gündemde; NVDA'nın yüksek ağırlığı nedeniyle SMH/SOXX için risk başlığı.",
+    "12 Kasım 15:30 TRT (tahmini): Hudbay (COPX) ve Twist Bioscience (XBI) bilançoları; 17 Kasım akşamı Nvidia."
    ]
   },
   {
    "h": "Teknik durum",
    "items": [
-    "Alım bölgesinde: AMD 449,04 $ (bölge 448,01–450,70, stop 401,55), VRT 182,86 $ (182,13–183,23, stop 154,81).",
-    "Alım bölgesinde: COPX 71,25 $ (70,89–71,32, stop 67,65) ve IAU 76,38 $ (74,83–76,43, stop 72,31).",
-    "AGNG RSI 68 ile ısınmaya yakın ve bölgenin üzerinde (40,28 $); stop'a %3'ten yakın enstrüman yok."
+    "AMD alım bölgesinde: $508,58 (bölge $491,41–$509,37), stop $417,70, TP1 $616,23.",
+    "XBI alım bölgesinin üst ucunda: $156,90 (bölge $152,06–$156,83), stop $140,65, TP1 $162,89.",
+    "AGNG aşırı ısınmış (RSI 71): $40,93, TP1 $41,51'e yakın; stop $35,38.",
+    "Stop seviyesine %3'ten yakın enstrüman yok."
    ]
   },
   {
    "h": "Beklenti → gerçekleşen",
    "items": [
-    "ABD tarım dışı istihdam (Ekim): beklenti 65 K → 165 K; işsizlik oranı beklenti %4,2 → %4,1 · SMH +%3,6, SOXX +%3,5, XBI +%2,6",
-    "Moderna bilançosu (Q3 26): HBK beklenti -1,28 → 0,38 (+%129,8, beklentinin üstünde) · XBI +%2,6",
-    "Natera bilançosu (Q3 2026): HBK beklenti -0,27 → -0,42 (−%55,6, beklentinin altında) · XBI −%6,7",
-    "Çip panik satışı haberleri olumsuz beklentiye rağmen ters yönde sonuçlandı: AMD +%11,0, ASML +%5,0, SMH +%3,6"
+    "ABD tarım dışı istihdam (Ekim): beklenti 65 K → 165 K; işsizlik %4,2 → %4,1 · SMH +%3,6, SOXX +%3,5, XBI +%2,6.",
+    "Moderna bilançosu (Q3 26): HBK beklenti -1,28 → 0,38 (+%129,8) · XBI +%2,6.",
+    "AMD rekor çeyrek haberi: beklenti olumlu → fiyat beklenen yönde (AMD +%13,3, SOXX +%7,5).",
+    "Nvidia CEO soruşturması: beklenti olumsuz → fonlar ters yönde (SMH +%5,1, SOXX +%7,5)."
    ]
   }
  ]
