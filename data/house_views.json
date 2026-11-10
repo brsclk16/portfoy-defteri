@@ -1,5 +1,5 @@
 {
- "updatedAt": "2026-11-03",
+ "updatedAt": "2026-11-10",
  "note": "Büyük varlık yöneticilerinin yayımlanmış görünümlerinden derlendi. Duruş: 1 olumlu/ağırlık artır, 0 nötr, -1 olumsuz/ağırlık azalt. Her görüş kendi yayın tarihindedir; her görüşün geçerlilik tarihi (validUntil) yayının ufkuna göre konur; geçenler 'eski' sayılır ve uzlaşıya katılmaz. Kaynak bağlantıları birincil yayın ya da yayını aktaran haber/uygulayıcı sayfasıdır (tür alanında belirtilir). Bu kurumların kısa vadeli görünümleri sık yanılır; sitede her görüş, yayın tarihinden bu yana temanın gerçekte ne yaptığıyla karnelenir.",
  "themes": {
   "us_eq": {
@@ -382,24 +382,25 @@
    "n": "Amundi",
    "brand": "Amundi (ETF'leri çoğunlukla Avrupa borsalarında, UCITS)",
    "pub": "Amundi Research Center",
-   "date": "2026-10-26",
+   "date": "2026-11-09",
    "type": "otomatik: kaynak metninden özet",
    "url": "https://research-center.amundi.com/",
    "views": {
-    "india_eq": [
-     0,
-     "Hindistan, Amundi Research Center'ın ana sayfasındaki filtreler ve içerik başlıkları arasında yer almaktadır."
+    "us_eq": [
+     -1,
+     "ABD teknolojisinden ve büyük sermaye harcamaları incelemesinden uzaklaşma (rotasyon) görülmüştür."
     ]
    },
    "strengths": [
-    "Sabit getirili ve seçilmiş hisse senedi piyasalarında beklenen getirilerin iyileştiği doğrulanmıştır."
+    "Sabit gelir ve seçilmiş hisse senedi piyasalarında beklenen getirilerin iyileşmesi"
    ],
    "risks": [
-    "Artan tahvil oynaklığı ve daha yüksek getirilerin sabit getirili menkul kıymetler ile hisse senetleri üzerindeki olası etkileri."
+    "ABD teknoloji sektöründeki büyük sermaye harcamalarına yönelik incelemeler",
+    "ABD ara seçim sonuçlarının piyasalara olası etkileri"
    ],
-   "validUntil": "2027-10-26",
+   "validUntil": "2027-11-09",
    "horizon": "2026 yıllık görünümü",
-   "context": "Yükselen tahvil getirileri, değişen para politikaları ve jeopolitik gelişmeler makro ortamı ve yeni yatırım fırsatlarını şekillendirmektedir.",
+   "context": "Metin, sermaye piyasalarındaki son kaymaları, para politikası ve varlık sınıflarına ilişkin makro kanaatleri ele almaktadır.",
    "auto": true
   },
   {
@@ -862,34 +863,49 @@
    "id": "blackrock",
    "n": "BlackRock",
    "archivedAt": "2026-11-03"
+  },
+  {
+   "date": "2026-10-26",
+   "pub": "Amundi Research Center",
+   "views": {
+    "india_eq": [
+     0,
+     "Hindistan, Amundi Research Center'ın ana sayfasındaki filtreler ve içerik başlıkları arasında yer almaktadır."
+    ]
+   },
+   "url": "https://research-center.amundi.com/",
+   "type": "otomatik: kaynak metninden özet",
+   "id": "amundi",
+   "n": "Amundi",
+   "archivedAt": "2026-11-10"
   }
  ],
  "autoRun": {
-  "at": "2026-11-06T11:21:38Z",
+  "at": "2026-11-10T11:35:59Z",
   "log": {
+   "jpmorgan": "değişmedi: https://am.jpmorgan.com/us/en/asset-management/adv/insights/portfolio-insights/ltcma/: tarih geçersiz/eski: 2027-09-01 | https://am.jpmorgan.com/jp/en/asset-management/institutional/insights/portfolio-insights/ltcma/executive-summary/: yeni değil (2026-09-30 ≤ 2026-10-01) | arama: RuntimeError grounding başarısız: HTTP Error 429: Too Many Requests",
    "goldman": "değişmedi: https://am.gs.com/en-us/advisors/insights/article/investment-outlook: tarih geçersiz/eski: 2025-10-24 | arama: RuntimeError grounding başarısız: HTTP Error 429: Too Many Requests",
    "statestreet": "değişmedi: https://www.ssga.com/us/en/intermediary/insights/global-market-outlook: tarih geçersiz/eski: 2025-11-30 | arama: RuntimeError grounding başarısız: HTTP Error 429: Too Many Requests",
    "pimco": "değişmedi: https://www.pimco.com/us/en/insights/cyclical-outlook: HTTPError HTTP Error 404: Not Found | arama: RuntimeError grounding başarısız: HTTP Error 429: Too Many Requests",
-   "amundi": "değişmedi: https://research-center.amundi.com/: yeni değil (2026-10-01 ≤ 2026-10-26) | arama: RuntimeError grounding başarısız: HTTP Error 429: Too Many Requests",
+   "amundi": "güncellendi → 2026-11-09 (1 görüş)",
    "capitalgroup": "değişmedi: https://www.capitalgroup.com/individual/insights/categories/outlook.html: yeni değil (2026-06-24 ≤ 2026-06-24) | arama: RuntimeError grounding başarısız: HTTP Error 429: Too Many Requests",
    "fidelity": "değişmedi: https://institutional.fidelity.com/advisors/insights/topics/market-commentary: tarih okunamadı | arama: RuntimeError grounding başarısız: HTTP Error 429: Too Many Requests",
-   "bny": "değişmedi: https://www.bny.com/assets/investments/imemea/pdfs/emea_fp_checkpoints_nov26.pdf: HTTPError HTTP Error 404: Not Found | https://www.bny.com/assets/investments/imemea/pdfs/emea_fp_checkpoints_oct26.pdf: HTTPError HTTP Error 404: Not Found | https://www.bny.com/assets/investments/imemea/pdfs/emea_fp_checkpoints_sep26.pdf: HTTPError HTTP Error 404: Not Found | https://www.bny.com/assets/investments/imemea/pdfs/emea_fp_checkpoints_aug26.pdf: HTTPError HTTP Error 404: Not Found | arama: RuntimeError grounding başarısız: HTTP Error 429: Too Many Requests",
-   "blackrock": "değişmedi: https://www.blackrock.com/corporate/insights/blackrock-investment-institute/publications/weekly-commentary: yeni değil (2026-11-02 ≤ 2026-11-02) | https://www.blackrock.com/us/individual/insights/blackrock-investment-institute/weekly-commentary: yeni değil (2026-11-02 ≤ 2026-11-02) | arama: RuntimeError grounding başarısız: HTTP Error 429: Too Many Requests",
-   "vanguard": "değişmedi: https://corporate.vanguard.com/content/corporatesite/us/en/corp/vemo/vemo-return-forecasts.html: yeni değil (2026-10-21 ≤ 2026-10-21)",
-   "jpmorgan": "süre doldu, bir sonraki çalışmaya kaldı"
+   "bny": "süre doldu, bir sonraki çalışmaya kaldı",
+   "blackrock": "süre doldu, bir sonraki çalışmaya kaldı",
+   "vanguard": "süre doldu, bir sonraki çalışmaya kaldı"
   },
   "checked": {
    "blackrock": "2026-11-06T11:20:15Z",
    "vanguard": "2026-11-06T11:21:38Z",
-   "jpmorgan": "2026-11-03T11:14:32Z",
-   "goldman": "2026-11-06T11:10:40Z",
-   "statestreet": "2026-11-06T11:11:52Z",
-   "pimco": "2026-11-06T11:12:28Z",
-   "amundi": "2026-11-06T11:13:40Z",
-   "capitalgroup": "2026-11-06T11:14:53Z",
-   "fidelity": "2026-11-06T11:16:05Z",
+   "jpmorgan": "2026-11-10T11:27:58Z",
+   "goldman": "2026-11-10T11:29:19Z",
+   "statestreet": "2026-11-10T11:30:31Z",
+   "pimco": "2026-11-10T11:31:07Z",
+   "amundi": "2026-11-10T11:32:01Z",
+   "capitalgroup": "2026-11-10T11:34:23Z",
+   "fidelity": "2026-11-10T11:35:59Z",
    "bny": "2026-11-06T11:16:42Z"
   },
-  "sec": 729
+  "sec": 685
  }
 }
