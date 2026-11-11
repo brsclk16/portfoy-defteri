@@ -1,40 +1,39 @@
 {
- "publishedAt": "2026-11-10T05:56:08Z",
+ "publishedAt": "2026-11-11T05:56:00Z",
  "asOf": "2026-11-09",
- "title": "Çipte sert toparlanma, gözler bugün 16:30'daki ABD enflasyonunda",
+ "title": "Çip rallisinin ardından DELL, IAU ve XBI alım bölgesinde; yarın HBM ve TWST",
  "sections": [
   {
    "h": "Dün",
    "items": [
-    "Tüm portföy yeşil kapattı: AMD +%13,26, CRDO +%10,27, VRT +%9,63 ile öne çıktı; SOXX +%7,49, SMH +%5,05.",
-    "En zayıflar da artıda: AGNG +%1,62, IAU +%1,83, SLV +%2,71.",
-    "S&P 500 (SPY) +%2,37 yükseldi; çip fonları ve doğrudan hisseler endeksin belirgin üzerinde kaldı."
+    "Son tam fiyat günü 9 Kasım: tüm pozisyonlar yükseldi; en iyiler AMD +%13,3, CRDO +%10,3, VRT +%9,6.",
+    "Çip fonları da güçlüydü: SOXX +%7,5, SMH +%5,1; ASML +%6,2.",
+    "En zayıflar AGNG +%1,6, IAU +%1,8 ve SLV +%2,7; S&P 500 (SPY) aynı gün +%2,4 ile çip ve veri merkezi grubunun gerisinde kaldı."
    ]
   },
   {
    "h": "Bugün",
    "items": [
-    "16:30 TRT ABD Ekim TÜFE: aylık beklenti %0,3 (önceki %0,6), çekirdek %0,2. Faiz beklentisi üzerinden XBI, çip fonları ve altın/gümüş için yön belirleyici.",
-    "Nvidia tarafında CEO soruşturması ve olası yeni Çin ihracat kısıtları gündemde; NVDA'nın yüksek ağırlığı nedeniyle SMH/SOXX için risk başlığı.",
-    "12 Kasım 15:30 TRT (tahmini): Hudbay (COPX) ve Twist Bioscience (XBI) bilançoları; 17 Kasım akşamı Nvidia."
+    "12 Kasım 15:30 TRT (saat tahmini): Hudbay Minerals Q3 bilançosu; COPX'in bakır madencisi holdingi.",
+    "12 Kasım 15:30 TRT (saat tahmini): Twist Bioscience Q4 FY26 bilançosu; XBI holdingi, son çeyrekte HBK beklentiyi %11 kaçırmıştı.",
+    "12 Kasım 16:30 TRT: ABD haftalık işsizlik başvuruları (beklenti 194 bin); faiz beklentileri üzerinden tüm risk varlıklarını ilgilendirir.",
+    "Takvime yeni eklendi: Credo (CRDO) bilançosu 2 Aralık, 23:30 TRT civarı (saat tahmini)."
    ]
   },
   {
    "h": "Teknik durum",
    "items": [
-    "AMD alım bölgesinde: $508,58 (bölge $491,41–$509,37), stop $417,70, TP1 $616,23.",
-    "XBI alım bölgesinin üst ucunda: $156,90 (bölge $152,06–$156,83), stop $140,65, TP1 $162,89.",
-    "AGNG aşırı ısınmış (RSI 71): $40,93, TP1 $41,51'e yakın; stop $35,38.",
-    "Stop seviyesine %3'ten yakın enstrüman yok."
+    "DELL alım bölgesinde: $334,38 (bölge $334,35–$336,35), RSI 31; stop $296,35, TP1 $365,69.",
+    "IAU alım bölgesinde: $75,74 (bölge $74,80–$75,85); stop $72,29, TP1 $79,00. XBI de bölgede: $155,06 (bölge $152,06–$155,28), stop $140,66.",
+    "AGNG ısınıyor: RSI 68, fiyat $40,71 ile TP1 $41,59'a yakın.",
+    "Hiçbir enstrüman stop seviyesine %3'ten yakın değil."
    ]
   },
   {
    "h": "Beklenti → gerçekleşen",
    "items": [
-    "ABD tarım dışı istihdam (Ekim): beklenti 65 K → 165 K; işsizlik %4,2 → %4,1 · SMH +%3,6, SOXX +%3,5, XBI +%2,6.",
-    "Moderna bilançosu (Q3 26): HBK beklenti -1,28 → 0,38 (+%129,8) · XBI +%2,6.",
-    "AMD rekor çeyrek haberi: beklenti olumlu → fiyat beklenen yönde (AMD +%13,3, SOXX +%7,5).",
-    "Nvidia CEO soruşturması: beklenti olumsuz → fonlar ters yönde (SMH +%5,1, SOXX +%7,5)."
+    "ABD TÜFE (Ekim): sayısal beklenti yok · takip edilenler SLV −%3,5, IAU −%2,6, XBI −%1,2",
+    "Nvidia CEO'su hakkında bağımsız soruşturma haberi: beklenti olumsuz → fiyat ters yönde (SMH +%5,1, SOXX +%7,5); casusluk/ihracat kısıtı haberlerinde belirgin tepki yok (SMH −%0,8, SOXX −%0,1)."
    ]
   }
  ]
