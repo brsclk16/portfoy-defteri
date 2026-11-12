@@ -1,40 +1,6 @@
-{
- "publishedAt": "2026-11-11T05:56:00Z",
- "asOf": "2026-11-09",
- "title": "Çip rallisinin ardından DELL, IAU ve XBI alım bölgesinde; yarın HBM ve TWST",
- "sections": [
-  {
-   "h": "Dün",
-   "items": [
-    "Son tam fiyat günü 9 Kasım: tüm pozisyonlar yükseldi; en iyiler AMD +%13,3, CRDO +%10,3, VRT +%9,6.",
-    "Çip fonları da güçlüydü: SOXX +%7,5, SMH +%5,1; ASML +%6,2.",
-    "En zayıflar AGNG +%1,6, IAU +%1,8 ve SLV +%2,7; S&P 500 (SPY) aynı gün +%2,4 ile çip ve veri merkezi grubunun gerisinde kaldı."
-   ]
-  },
-  {
-   "h": "Bugün",
-   "items": [
-    "12 Kasım 15:30 TRT (saat tahmini): Hudbay Minerals Q3 bilançosu; COPX'in bakır madencisi holdingi.",
-    "12 Kasım 15:30 TRT (saat tahmini): Twist Bioscience Q4 FY26 bilançosu; XBI holdingi, son çeyrekte HBK beklentiyi %11 kaçırmıştı.",
-    "12 Kasım 16:30 TRT: ABD haftalık işsizlik başvuruları (beklenti 194 bin); faiz beklentileri üzerinden tüm risk varlıklarını ilgilendirir.",
-    "Takvime yeni eklendi: Credo (CRDO) bilançosu 2 Aralık, 23:30 TRT civarı (saat tahmini)."
-   ]
-  },
-  {
-   "h": "Teknik durum",
-   "items": [
-    "DELL alım bölgesinde: $334,38 (bölge $334,35–$336,35), RSI 31; stop $296,35, TP1 $365,69.",
-    "IAU alım bölgesinde: $75,74 (bölge $74,80–$75,85); stop $72,29, TP1 $79,00. XBI de bölgede: $155,06 (bölge $152,06–$155,28), stop $140,66.",
-    "AGNG ısınıyor: RSI 68, fiyat $40,71 ile TP1 $41,59'a yakın.",
-    "Hiçbir enstrüman stop seviyesine %3'ten yakın değil."
-   ]
-  },
-  {
-   "h": "Beklenti → gerçekleşen",
-   "items": [
-    "ABD TÜFE (Ekim): sayısal beklenti yok · takip edilenler SLV −%3,5, IAU −%2,6, XBI −%1,2",
-    "Nvidia CEO'su hakkında bağımsız soruşturma haberi: beklenti olumsuz → fiyat ters yönde (SMH +%5,1, SOXX +%7,5); casusluk/ihracat kısıtı haberlerinde belirgin tepki yok (SMH −%0,8, SOXX −%0,1)."
-   ]
-  }
- ]
-}
+{"publishedAt":"2026-11-12T06:10:00Z","asOf":"2026-11-10","title":"Nvidia'da CEO krizi: kurul kararı SMH/SOXX için günün ana belirleyicisi","sections":[
+{"h":"Dün","items":["10 Kasım kapanış verisi: portföyde tek yükselen AMD (+%1,3); SOXX −%0,12, ASML −%0,36, SMH −%0,78 ile sınırlı kayıpta.","En sert düşüşler SLV −%3,45, DELL −%3,44, COPX −%3,16, VRT −%3,12 ve IAU −%2,62.","S&P 500 (SPY) aynı gün −%0,37; portföyün büyük kısmı endeksin altında kaldı, yalnızca AMD, SOXX ve ASML endeksten iyi."]},
+{"h":"Bugün","items":["15:30 TRT: Hudbay Minerals (Q3, COPX) ve Twist Bioscience (Q4 FY26, XBI) bilançoları piyasa öncesi bekleniyor (saat tahmini).","16:30 TRT: ABD haftalık işsizlik başvuruları (beklenti 194 bin, önceki 189 bin) — faiz beklentisi üzerinden IAU/SLV'yi etkileyebilir.","Nvidia yönetim kurulunun Jensen Huang hakkındaki kararı bekleniyor; NVDA mesai sonrası ~%8 düştü, AMD ve AVGO ise yükseldi. SMH/SOXX açılışta bu haberle şekillenecek; NVDA bilançosu 17 Kasım."]},
+{"h":"Teknik durum","items":["Alım bölgesinde: AMD 556,10 $ (bölge 485,68–557,23, stop 412,83), DELL 377,46 $ (365,69–379,29, stop 326,55), VRT 208,75 $ (205,79–209,50, stop 177,59), XBI 155,87 $ (152,06–155,88, stop 140,73).","Isınmaya yakın: AGNG 40,64 $ ile bölgenin üzerinde, RSI 67; TP1 41,64.","Stop'a %3'ten yakın enstrüman yok."]},
+{"h":"Beklenti → gerçekleşen","items":["CoreWeave Bilançosu Çip Hisselerini Toparladı: beklenti olumlu → fiyat beklenen yönde (SMH +%4,8, SOXX +%6,0).","Nvidia Casusluk Skandalı Yeni Çip İhracat Kısıtlamalarını Tetikleyebilir: beklenti olumsuz → belirgin tepki yok (SMH −%0,8, SOXX −%0,1).","ABD TÜFE (Ekim): sayısal beklenti yok · takip edilenler SLV −%3,5, IAU −%2,6, XBI −%1,2."]}
+]}
