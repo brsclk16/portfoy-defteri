@@ -1665,7 +1665,43 @@
      }
     ]
    }
+  ],
+  "FM": [
+   {
+    "q": "Q3 2026",
+    "date": "2026-10-29",
+    "tone": "nötr",
+    "summary": "First Quantum, rekor bakır fiyatlarının desteğiyle üçüncü çeyrekte FAVÖK'ünü bir önceki çeyreğe göre yaklaşık iki katına çıkararak 844 milyon dolara taşıdı ve net borcunu 5,3 milyar dolara indirdi. Buna karşın dizel ve kwacha kaynaklı maliyet baskısı nedeniyle yıllık maliyet rehberliği yukarı çekildi, bakır üretim aralığı da alt tarafa daraltıldı. Cobre Panamá'da hükümet komisyonunun yeni bir anlaşmanın değerlendirilmesini önermesi yönetim tarafından olumlu bir adım olarak sunuldu, ancak nihai karar henüz verilmiş değil.",
+    "guidance": "2026 bakır üretim rehberliği 405-435 bin tona daraltıldı; bakır C1 maliyeti 2,50-2,65 $/lb'ye, AISC 4,10-4,25 $/lb'ye yükseltildi. Nikel rehberliği 40-45 bin tona çıkarıldı, toplam yatırım harcaması 1,15-1,25 milyar dolar; 2027 için sayısal rehberlik Ocak-Şubat'ta verilecek.",
+    "highlights": [
+     "Gelir çeyreklik bazda %37 artışla yaklaşık 2,1 milyar dolar, düzeltilmiş hisse başına kâr 0,29 dolar oldu (Q2'de -0,13 dolar).",
+     "Bakır üretimi yaklaşık 109 bin ton; Cobre Panamá hariç C1 maliyeti 2,40 $/lb'ye geriledi, Panama dahil 2,59 $/lb.",
+     "Kansanshi'de yaklaşık 70 bin ton fazla asit satışından 33 milyon dolar gelir elde edildi.",
+     "Net kaldıraç 2,6x ile Q3 2023'ten bu yana en düşük seviyede; şirketin artık bakır fiyatı korunma (hedge) pozisyonu bulunmuyor."
+    ],
+    "qa": [
+     "Cobre Panamá: analistler müzakere takvimini, yasal yapı/ÇED/ticari şartlar başlıklarını ve yeniden başlatmada 6-9 ayda %80 kapasite hedefinin gerçekçiliğini sorguladı; onay sonrası ek 250 milyon dolar harcama gerekeceği belirtildi.",
+     "Maliyet artışı: 0,25 $/lb'lik artışın yaklaşık yarısının dizel, yarısının kwacha kaynaklı olduğu, baskının 2027'ye uzanabileceği konuşuldu.",
+     "Kansanshi Southeast Dome'daki sıyırma gecikmesinin 2027 tenörlerine etkisi soruldu; yönetim süreyi netleştirmedi, güncellemeyi 2027 rehberliğine bıraktı.",
+     "Taca Taca finansmanı: proje onayı öncesi net borç/FAVÖK'ün yaklaşık 1,0x'e indirilmesi hedefleniyor; azınlık hissesi satışı, akım anlaşması ve proje finansmanı seçenekleri masada."
+    ],
+    "risks": [
+     "Cobre Panamá'da yeniden başlatmanın zamanlaması ve maden ayak izinin küçülme ihtimali belirsiz; 9 Ekim depremi müzakereleri geciktirebilir.",
+     "Dizel fiyatı ve Zambiya kwachası kaynaklı maliyet baskısı ile korumasız kur/emtia pozisyonu.",
+     "Kansanshi'deki sıyırma gecikmesi ve 2027 ortasındaki Sentinel değirmen bakımı üretimi sınırlayabilir."
+    ],
+    "sources": [
+     {
+      "title": "First Quantum Minerals Reports Third Quarter 2026 Results (Investing News Network)",
+      "url": "https://investingnews.com/first-quantum-minerals-reports-third-quarter-2026-results/"
+     },
+     {
+      "title": "Earnings call transcript: First Quantum Minerals Q3 2026 (Investing.com)",
+      "url": "https://www.investing.com/news/transcripts/earnings-call-transcript-first-quantum-minerals-posts-stronger-q3-2026-results-93CH-4989497"
+     }
+    ]
+   }
   ]
  },
- "updatedAt": "2026-11-09T07:47:23Z"
+ "updatedAt": "2026-11-12T07:40:19Z"
 }
