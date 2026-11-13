@@ -1,6 +1,109 @@
 {
- "updatedAt": "2026-11-06T05:56:14Z",
+ "updatedAt": "2026-11-13T06:00:00Z",
  "cards": [
+  {
+   "id": "HBM-2026Q3",
+   "t": "HBM",
+   "company": "Hudbay Minerals",
+   "date": "2026-11-12",
+   "quarter": "Q3 2026",
+   "time": "piyasa öncesi",
+   "eps": {
+    "act": 0.34,
+    "est": 0.356,
+    "surprisePct": -4.5
+   },
+   "rev": {
+    "act": 0.7659,
+    "est": 0.7255,
+    "unit": "mlr $",
+    "surprisePct": 5.6
+   },
+   "guidance": "Copper Mountain'daki iyileşme sayesinde 2026 maliyet beklentisi aşağı çekildi; Copper World projesi inşaat aşamasına ilerliyor.",
+   "reaction": {
+    "pct": -1.46,
+    "from": 21.94,
+    "to": 21.62
+   },
+   "highlights": [
+    "Gelir 766 mln $ ile rekor; düzeltilmiş FAVÖK 413 mln $ ile rekor.",
+    "Düzeltilmiş HBK 0,34 $ ile beklentinin hafif altında kaldı (kaynağa göre sapma %-3 ile %-8 arası).",
+    "Şirket 0,01 CAD hisse başı temettü açıkladı.",
+    "Gelir beklentisi kaynaklar arasında farklı: Benzinga 725,5 mln $ (aşım), Zacks ise gelirde ıskalama raporladı."
+   ],
+   "affects": [
+    {
+     "t": "COPX",
+     "note": "holding"
+    }
+   ],
+   "summary": "Hudbay rekor gelir ve FAVÖK açıkladı, maliyet beklentisini iyileştirdi; ancak düzeltilmiş HBK beklentinin hafif altında kaldı. Hisse gün içinde yükselişle açılsa da günü %1,5 düşüşle kapattı.",
+   "sources": [
+    {
+     "title": "Hudbay — Record Third Quarter 2026 Results (GlobeNewswire)",
+     "url": "https://finnhub.io/api/news?id=6bee51c2a98a5f925f11e27db9e9efd267da3133d0480f8405fa07bc3a76b11b"
+    },
+    {
+     "title": "Benzinga — Hudbay Q3 Adj. EPS $0.34 Misses, Sales Beat",
+     "url": "https://finnhub.io/api/news?id=930c1112197b81e02a129024d8a59c7d3580436543e6d59d65b1877197e50a00"
+    },
+    {
+     "title": "Mining.com — Hudbay cuts cost outlook as Copper Mountain improves",
+     "url": "https://www.mining.com/hudbay-cuts-cost-outlook-as-copper-mountain-improves/"
+    }
+   ]
+  },
+  {
+   "id": "TWST-2026Q4",
+   "t": "TWST",
+   "company": "Twist Bioscience",
+   "date": "2026-11-12",
+   "quarter": "Q4 FY2026",
+   "time": "piyasa öncesi",
+   "eps": {
+    "act": -0.32,
+    "est": -0.3746,
+    "surprisePct": 14.6
+   },
+   "rev": {
+    "unit": "mlr $",
+    "yoy": 28,
+    "surprisePct": 2.63
+   },
+   "guidance": "2027 mali yılı için 550–560 mln $ gelir öngörüldü; piyasa bunu büyümede yavaşlama sinyali olarak okudu.",
+   "reaction": {
+    "pct": -6.83,
+    "from": 122.59,
+    "to": 114.22
+   },
+   "highlights": [
+    "Çeyrek geliri yıllık %28 arttı; tam yıl satışlar %22 büyüdü.",
+    "Düzeltilmiş FAVÖK 2,2 mln $ ile pozitife döndü.",
+    "Yapay zeka destekli ilaç keşfi geliri %175 arttı; DNA yazıcı sayısı 10'dan 16'ya çıkarılıyor.",
+    "Hisse açılış öncesi %18'e kadar düştü, günü yaklaşık %7 kayıpla kapattı."
+   ],
+   "affects": [
+    {
+     "t": "XBI",
+     "note": "holding"
+    }
+   ],
+   "summary": "Twist Bioscience gelir ve zararda beklentileri aştı, düzeltilmiş FAVÖK'te pozitife geçti. Ancak 2027 gelir beklentisinin büyümede yavaşlamaya işaret etmesi hisseyi sert düşürdü.",
+   "sources": [
+    {
+     "title": "SEC 8-K — Twist Bioscience (Item 2.02)",
+     "url": "https://www.sec.gov/Archives/edgar/data/1581280/000158128026000053/twist-20261112.htm"
+    },
+    {
+     "title": "Twist Bioscience Q4 Earnings Call Highlights",
+     "url": "https://finnhub.io/api/news?id=ba3e1a3fa69b12be2a1903f6234dbb4991182c2d08d51d2c9e50a30c4d568c00"
+    },
+    {
+     "title": "Seeking Alpha — Twist Bio slips despite Q4 beat",
+     "url": "https://seekingalpha.com/news/4671482-twist-bioscience-stock-slips-despite-q4-beat"
+    }
+   ]
+  },
   {
    "id": "NTRA-2026Q3",
    "t": "NTRA",
