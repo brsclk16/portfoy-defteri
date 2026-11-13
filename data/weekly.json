@@ -1,6 +1,89 @@
 {
  "reports": [
   {
+   "id": "2026-W46",
+   "weekEnd": "2026-11-13",
+   "range": "9–13 Kasım 2026",
+   "publishedAt": "2026-11-13T22:40:40Z",
+   "title": "Nvidia'da Huang şoku AMD'yi uçurdu, altın 4 gün üst üste düştü",
+   "movers": [
+    {
+     "t": "AMD",
+     "pct": 18.5
+    },
+    {
+     "t": "VRT",
+     "pct": 10.49
+    },
+    {
+     "t": "CRDO",
+     "pct": 9.39
+    },
+    {
+     "t": "SOXX",
+     "pct": 9.12
+    },
+    {
+     "t": "SMH",
+     "pct": 4.68
+    },
+    {
+     "t": "ASML",
+     "pct": 4.52
+    },
+    {
+     "t": "DELL",
+     "pct": 4.48
+    },
+    {
+     "t": "AGNG",
+     "pct": 2.18
+    },
+    {
+     "t": "XBI",
+     "pct": -0.74
+    },
+    {
+     "t": "COPX",
+     "pct": -2.79
+    },
+    {
+     "t": "IAU",
+     "pct": -4.63
+    },
+    {
+     "t": "SLV",
+     "pct": -5.82
+    }
+   ],
+   "summary": [
+    "Geçen haftaki sert satışın ardından çipler toparlandı ama haftanın hikâyesi Nvidia'daki liderlik krizi oldu. Kurucu CEO Jensen Huang hakkında başlatılan soruşturma, 12 Kasım'da istifasıyla sonuçlandı; yatırımcılar bu boşluğun rakiplere yarayacağını fiyatladı. 12 enstrümanın 8'i artıda kapattı: en iyisi %18,5 ile AMD, en kötüsü %5,8 kayıpla gümüş (SLV) oldu. S&P 500 (SPY) haftayı %2,4 artıyla kapatırken eşit ağırlıklı portföy ortalaması yaklaşık %4,1 yükseldi; yani endeksin yaklaşık 1,7 puan önüne geçildi. Ancak haftanın son iki günü yarı iletkenlerde kâr realizasyonu geldi ve kazançların bir kısmı geri verildi.",
+    "Yarı iletkenlerde ayrışma belirgindi: Nvidia'nın ağırlığı yüksek olan SMH %4,7 ile sınırlı kalırken SOXX %9,1 kazandı. AMD, Oppenheimer ve William Blair'in not artışları, Google Cloud anlaşması ve Nvidia'dan kayacağı düşünülen talep beklentisiyle perşembe 582 $'a kadar çıktı; cuma %8,6 düşse de haftayı %18,5 artıda bitirdi. ASML %4,5 yükseldi. AI altyapı tarafında Vertiv %10,5, Credo %9,4, Dell %4,5 kazandı; CoreWeave'in 2026 gelir tahminini yükseltmesi çarşamba günü veri merkezi tedarikçilerinde güçlü bir alım getirdi (Dell o gün %12,9 yükseldi), ama hafta sonuna doğru veri merkezi projelerine yönelik siyasi tepki ve SoftBank'ın güç ekipmanı değer düşüklüğü kaygıları geri döndü. Biyotekte XBI %0,7 geriledi; AGNG ise Eli Lilly'nin satış tahminini yükseltmesi ve Merck'teki olumlu klinik/düzenleyici haberlerle %2,2 kazandı. Değerli metaller haftanın kaybedeni oldu: ABD'de Ekim TÜFE'si beklentinin üzerinde gelince (aylık %0,4; çekirdek %0,3, beklenti %0,2) ve Fed Guvernörü Waller Aralık'ta faiz artırımını, hatta 50 baz puanı açıkça gündeme getirince tahvil getirileri ve dolar yükseldi; ons altın dört gün üst üste düşerek %4,9 kayıpla 3.879 $'a indi. IAU %4,6, SLV %5,8 geriledi. Bakır madencileri (COPX) %2,8 kaybetti.",
+    "Dolar/TL %0,5 yükselerek 50,36'ya çıktı. TL bazında SPY yaklaşık %2,9, eşit ağırlıklı portföy ortalaması yaklaşık %4,6 kazandırdı; AMD TL'de %19,0, Vertiv %11,0 getirirken gümüş %5,4, altın fonu %4,2 kaybettirdi. Çeşitlendirme bu hafta geçen haftanın tersine çalıştı: hisse tarafı toparlanırken metaller, faiz artırımı beklentisinin güçlenmesiyle aşağı yönlü ayrıştı. Bu tablo, altın ve gümüşün her ortamda değil, özellikle faiz beklentisi sabitken ya da düşerken hisselere karşı tampon olduğunu hatırlatıyor; reel faizler yükselirken iki taraf aynı anda da zayıflayabilir."
+   ],
+   "highlights": [
+    "Nvidia: Jensen Huang, bir Çin istihbaratı bağlantılı olduğu iddia edilen kişiyle ilişkisine dair soruşturmanın ardından 12 Kasım'da istifa etti; CFO Colette Kress geçici CEO, Harvey C. Jones yönetim kurulu başkanı oldu. 11–12 Kasım'da 9 kurum Nvidia notunu düşürdü (Bernstein, Evercore, Baird, KeyBanc, Oppenheimer vb.); hedef fiyatlar çoğunlukla 300–500 $ bandından 180–280 $ bandına çekildi. Skandal, Çin'e gelişmiş çip ihracatına ek kısıtlama tartışmasını da yeniden alevlendirdi.",
+    "AMD: Hafta %18,5 yükseldi. Oppenheimer notu 'Outperform'a çekip 600 $ hedef verdi, William Blair da 'Outperform'a yükseltti; BofA hedefini 650 $'dan 700 $'a çıkardı. 5. nesil EPYC işlemcilerin Google Cloud TPU altyapısında kullanılması ve DRAM kullanımını yarıya indiren yeni yazılım/donanım çözümü haftanın şirket haberleri oldu.",
+    "Vertiv: Yıllık temettüsünü %60 artırarak hisse başına 0,25 $'dan 0,40 $'a çıkardı (çeyreklik 0,10 $, 17 Aralık'ta ödenecek); 1,45 milyar $'lık UtilityInnovation Group satın alımını tamamladı ve Infineon ile yeni yarı iletken tedarik anlaşması imzaladı.",
+    "AI talebine dair veriler güçlü kaldı: CoreWeave 2026 gelir ve faaliyet kârı tahminini yükseltip yatırım bütçesini artırdı; TSMC'nin Ekim satışları hem aylık hem yıllık bazda arttı. Bu iki haber, çarşamba günkü çip rallisinin ana tetikleyicisi oldu.",
+    "Sağlık: Eli Lilly 2026 satış tahminini 92 milyar $'a kadar yükseltti ve 3,4 milyar $'lık yeni üretim tesisinin temelini attı; Merck'in efinopegdutide adayı MASH'te Faz 2'de olumlu sonuç verdi, ENFLONSIA aşısı için AB'de olumlu CHMP görüşü çıktı. FDA'nın GLP-1 ürünlerine görme kaybı uyarısı eklemesi Lilly ve Novo hisselerini etkilemedi.",
+    "Bakır: Teck'in Kanada'daki Highland Valley Copper madenindeki grev genişleyerek limana uzandı; Hudbay ise Copper Mountain'daki iyileşmeyle maliyet beklentisini düşürdü. Buna rağmen faiz kaygısı ağır bastı ve COPX haftayı %2,8 ekside kapattı."
+   ],
+   "nextWeek": [
+    "17 Kasım Salı, ABD piyasa kapanışı sonrası (TR saatiyle 18 Kasım gece 00:20 civarı): Nvidia 3. çeyrek bilançosu. Huang sonrası ilk sınav; gelir beklentisi yaklaşık 111 milyar $. SMH ve SOXX'taki en büyük ağırlıklardan biri olduğu için doğrudan, AMD, ASML, Credo, Vertiv ve Dell için ise AI harcama sinyali olarak dolaylı önemli.",
+    "17 Kasım Salı: ABD Ekim perakende satışları. Tüketimdeki güç, Aralık faiz artırımı beklentisini besleyebilir; altın (IAU), gümüş (SLV) ve değerlemesi yüksek büyüme hisseleri için önemli.",
+    "18 Kasım Çarşamba: FOMC toplantı tutanakları. Waller'ın 50 baz puan açıklamasının ardından kurulda ne kadar geniş bir artırım eğilimi olduğu görülecek; metaller ve çip ETF'leri faiz yoluna duyarlı.",
+    "19–20 Kasım: Haftalık işsizlik başvuruları ve Michigan tüketici güveni (nihai; beklenti 51). Enflasyon beklentisi bileşeni Fed fiyatlamasını etkileyebilir.",
+    "23 Kasım Pazartesi (hafta sonrası): Dell bilançosu; 30 Kasım'da Credo. Nvidia'nın mesajı, bu iki AI altyapı hissesinin bilanço öncesi seyrini belirleyecek."
+   ],
+   "watch": [
+    "Nvidia belirsizliği iki yönlü: liderlik boşluğu ve olası yeni ihracat kısıtlamaları SMH/SOXX'u baskılayabilir; aynı gelişme AMD'ye talep kayması beklentisi yaratıyor. AMD'nin bir haftada %18,5 yükselip cuma %8,6 geri vermesi oynaklığın çok yüksek olduğunu gösteriyor.",
+    "Fed artık faiz indirimi değil artırımı tartışıyor. Aralık'ta 50 baz puanlık bir artırım ihtimali hem altın/gümüş hem de yüksek değerlemeli AI hisseleri için aynı anda olumsuz olabilir; bu, portföydeki çeşitlendirmenin tampon etkisini zayıflatır.",
+    "Veri merkezlerine yönelik siyasi ve yerel tepki (ara seçim sonrası oylamalar, SoftBank'ın Ohio projesini yeniden değerlendirmesi) Vertiv, Dell ve Credo için talep tarafındaki en önemli risk olmaya devam ediyor.",
+    "13F: Fidelity (FMR) 3. çeyrekte AMD payını %108,5 artırarak 53,3 milyon hisseye (yaklaşık 29,5 milyar $) çıkardı; Capital Research Global Investors da Credo payını %324 artırdı. Büyük kurumların AI tedarikçilerine ilgisi güçlü, ama bu veriler 30 Eylül itibarıyla ve son oynaklığı yansıtmıyor."
+   ]
+  },
+  {
    "id": "2026-W45",
    "weekEnd": "2026-11-06",
    "range": "2–6 Kasım 2026",
