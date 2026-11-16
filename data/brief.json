@@ -1,40 +1,39 @@
 {
- "publishedAt": "2026-11-13T06:05:00Z",
- "asOf": "2026-11-11",
- "title": "Nvidia'da liderlik belirsizliği sürüyor; DELL, VRT, COPX ve IAU alım bölgesinde",
- "sections": [
-  {
-   "h": "Dün",
-   "items": [
-    "11 Kasım kapanışında çip tarafı sert toparlandı: DELL +%11,75, CRDO +%8,94, AMD +%7,32, VRT +%6,33; SOXX +%6,01, SMH +%4,82.",
-    "Zayıf kalanlar: IAU −%1,15; AGNG (+%0,22) ve SLV (+%0,37) yatay.",
-    "12 Kasım'da S&P 500 (SPY) −%0,35 geriledi; Nvidia −%4,34, bilanço sonrası Twist −%6,83, Hudbay −%1,46 kapattı (portföy fiyatları henüz 11 Kasım verisiyle)."
-   ]
-  },
-  {
-   "h": "Bugün",
-   "items": [
-    "Bugün ve hafta sonu takvimde portföyü ilgilendiren önemli olay yok; gündem Jensen Huang'ın istifası ve Nvidia'da CFO Colette Kress'in geçici CEO'luğu — SMH/SOXX ve AMD için belirsizlik kaynağı.",
-    "Sıradaki büyük olay: Nvidia bilançosu 17 Kasım ~23:30 TRT (saat tahmini, HBK beklentisi ~2,52 $) — SMH ve SOXX'in en büyük holdingi.",
-    "18 Kasım 22:00 TRT FOMC tutanakları: faiz yolu sinyali çip ETF'leri ile IAU/SLV için önemli."
-   ]
-  },
-  {
-   "h": "Teknik durum",
-   "items": [
-    "Alım bölgesinde: DELL 370,93 $ (365,36–370,81), VRT 209,40 $ (205,25–209,24), COPX 71,19 $ (70,89–71,32), AGNG 40,65 $ (RSI 68, bölgenin üst ucunda).",
-    "IAU 72,89 $ ile alım bölgesinde (72,50–72,94) ama stop'a (70,72 $) yalnızca ~%3 mesafede.",
-    "AMD 582,24 $ ile aşırı ısınmış görünümde; TP1 651,89 $, alım bölgesi 494,58–557,23 $."
-   ]
-  },
-  {
-   "h": "Beklenti → gerçekleşen",
-   "items": [
-    "Hudbay Minerals bilançosu (Q3 2026): HBK beklenti 0,36 → 0,34 (−%4,5, beklentinin altında) · takip edilenler COPX −%3,3",
-    "Twist Bioscience bilançosu (Q4 FY26): HBK beklenti -0,37 → -0,32 (+%14,6, beklentinin üstünde) · takip edilenler XBI −%3,3",
-    "ABD TÜFE (Ekim): sayısal beklenti yok · takip edilenler SLV −%3,5, IAU −%2,6, XBI −%1,2",
-    "CoreWeave Bilançosu Çip Hisselerini Toparladı: beklenti olumlu → fiyat beklenen yönde (SMH +%4,8, SOXX +%6,0)"
-   ]
-  }
- ]
+  "publishedAt": "2026-11-16T06:02:00Z",
+  "asOf": "2026-11-12",
+  "title": "Nvidia bilançosu yarın gece: çip ETF'leri liderlik krizi gölgesinde",
+  "sections": [
+    {
+      "h": "Dün",
+      "items": [
+        "Son işlenen fiyat günü 12 Kasım: en iyi AMD +%5,86 ve VRT +%1,52; en zayıf COPX ve SLV −%3,28, XBI −%3,27, IAU −%2,78.",
+        "Çip tarafında SMH −%1,03, SOXX −%0,26, ASML −%2,43; S&P 500 kıyası için güncel veri yok.",
+        "Haberlere göre 13 Kasım'da (fiyatlara henüz yansımadı) AMD %8,75 düştü; Nvidia 2012'den beri en uzun haftalık düşüş serisine girdi ve HSBC notunu \"Tut\"a indirdi."
+      ]
+    },
+    {
+      "h": "Bugün",
+      "items": [
+        "Yarın (17 Kasım) 16:30 TRT: ABD perakende satışları. Faiz beklentileri üzerinden çip ETF'lerini ve altın/gümüşü etkileyebilir.",
+        "Yarın gece ~23:30 TRT (saat tahmini): Nvidia Q3 FY27 bilançosu. HBK beklentisi ~2,53 $. SMH ve SOXX'un en büyük holdinglerinden; Huang'ın istifası sonrası ilk çağrı.",
+        "18 Kasım 22:00 TRT: FOMC tutanakları. 10 yıllık tahvil faizinin %5'e çıktığı bir ortamda büyüme hisseleri açısından kritik."
+      ]
+    },
+    {
+      "h": "Teknik durum",
+      "items": [
+        "Alım bölgesinde: SMH 485,69 $ (bölge 484,97–487,89), DELL 343,24 $ (338,05–340,11), CRDO 131,82 $ (126,76–132,07), IAU 72,84 $ (72,50–72,94).",
+        "IAU stop'a yakın: 72,84 $ fiyat, stop 70,79 $ (yaklaşık %2,8 mesafe).",
+        "AGNG aşırı ısınmış: 41,16 $, RSI 71, TP1 41,87 $. SOXX'ta RSI 17 ile aşırı satım bölgesi."
+      ]
+    },
+    {
+      "h": "Beklenti → gerçekleşen",
+      "items": [
+        "Twist Bioscience (Q4 FY26): HBK beklenti -0,37 → -0,32 (+%14,6, beklentinin üstünde) · XBI −%3,3.",
+        "Hudbay Minerals (Q3 2026): HBK beklenti 0,36 → 0,34 (−%4,5, beklentinin altında) · COPX −%3,3.",
+        "Jensen Huang'ın istifası: beklenti olumsuz → fiyat beklenen yönde (SMH −%3,0, SOXX −%3,7)."
+      ]
+    }
+  ]
 }
