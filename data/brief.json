@@ -1,39 +1,19 @@
-{
-  "publishedAt": "2026-11-16T06:02:00Z",
-  "asOf": "2026-11-12",
-  "title": "Nvidia bilançosu yarın gece: çip ETF'leri liderlik krizi gölgesinde",
-  "sections": [
-    {
-      "h": "Dün",
-      "items": [
-        "Son işlenen fiyat günü 12 Kasım: en iyi AMD +%5,86 ve VRT +%1,52; en zayıf COPX ve SLV −%3,28, XBI −%3,27, IAU −%2,78.",
-        "Çip tarafında SMH −%1,03, SOXX −%0,26, ASML −%2,43; S&P 500 kıyası için güncel veri yok.",
-        "Haberlere göre 13 Kasım'da (fiyatlara henüz yansımadı) AMD %8,75 düştü; Nvidia 2012'den beri en uzun haftalık düşüş serisine girdi ve HSBC notunu \"Tut\"a indirdi."
-      ]
-    },
-    {
-      "h": "Bugün",
-      "items": [
-        "Yarın (17 Kasım) 16:30 TRT: ABD perakende satışları. Faiz beklentileri üzerinden çip ETF'lerini ve altın/gümüşü etkileyebilir.",
-        "Yarın gece ~23:30 TRT (saat tahmini): Nvidia Q3 FY27 bilançosu. HBK beklentisi ~2,53 $. SMH ve SOXX'un en büyük holdinglerinden; Huang'ın istifası sonrası ilk çağrı.",
-        "18 Kasım 22:00 TRT: FOMC tutanakları. 10 yıllık tahvil faizinin %5'e çıktığı bir ortamda büyüme hisseleri açısından kritik."
-      ]
-    },
-    {
-      "h": "Teknik durum",
-      "items": [
-        "Alım bölgesinde: SMH 485,69 $ (bölge 484,97–487,89), DELL 343,24 $ (338,05–340,11), CRDO 131,82 $ (126,76–132,07), IAU 72,84 $ (72,50–72,94).",
-        "IAU stop'a yakın: 72,84 $ fiyat, stop 70,79 $ (yaklaşık %2,8 mesafe).",
-        "AGNG aşırı ısınmış: 41,16 $, RSI 71, TP1 41,87 $. SOXX'ta RSI 17 ile aşırı satım bölgesi."
-      ]
-    },
-    {
-      "h": "Beklenti → gerçekleşen",
-      "items": [
-        "Twist Bioscience (Q4 FY26): HBK beklenti -0,37 → -0,32 (+%14,6, beklentinin üstünde) · XBI −%3,3.",
-        "Hudbay Minerals (Q3 2026): HBK beklenti 0,36 → 0,34 (−%4,5, beklentinin altında) · COPX −%3,3.",
-        "Jensen Huang'ın istifası: beklenti olumsuz → fiyat beklenen yönde (SMH −%3,0, SOXX −%3,7)."
-      ]
-    }
-  ]
-}
+{"publishedAt":"2026-11-17T06:05:00Z","asOf":"2026-11-16","title":"Çip satışı derinleşti; gözler bu gece Nvidia bilançosunda","sections":[
+{"h":"Dün","items":[
+"Portföyün tamamı ekside kapandı; S&P 500 (SPY) −%1,91 iken çip ve veri merkezi tarafı endeksin çok gerisinde kaldı.",
+"En sert düşüşler: CRDO −%8,21, DELL −%6,96, VRT −%6,63, ASML −%5,91, AMD −%5,58; SOXX −%5,41, SMH −%5,11.",
+"Emtiada COPX −%5,37 ve SLV −%3,94 geriledi; XBI −%3,10.",
+"En dayanıklılar AGNG −%0,57 ve IAU −%0,74 oldu."]},
+{"h":"Bugün","items":[
+"16:30 (TRT): ABD perakende satışları (Ekim; beklenti %0,1, önceki %0,8) — risk iştahı ve faiz beklentileri için genel tablo.",
+"23:30 (TRT): Nvidia 3. çeyrek (FY27) bilançosu; HBK beklentisi 2,53 $. CEO değişimi ve yeni Çin kısıtları sonrası ilk rapor olduğu için SMH, SOXX ve dolaylı olarak AMD, CRDO, VRT, DELL için belirleyici.",
+"Yarın 22:00 (TRT): FOMC tutanakları (Ekim toplantısı) — çip fonları ile IAU/SLV'yi ilgilendiriyor."]},
+{"h":"Teknik durum","items":[
+"Alım bölgesinde: AMD 504,28 $ (bölge 494,58–504,96, stop 420,39), DELL 320,55 $ (306,07–317,50, stop 264,61), ASML 1.406,79 $ (1.390,59–1.399,03, stop 1.263,11), XBI 145,88 $ (142,19–145,61, stop 136,74).",
+"SOXX'te RSI 16 ile aşırı satım bölgesi; fiyat 141,22 $, plan bölgesi 131,40–132,24.",
+"Aşırı ısınmış ya da stop'a %3'ten yakın enstrüman yok."]},
+{"h":"Beklenti → gerçekleşen","items":[
+"Intel dolandırıcılık davası: beklenti olumsuz → fiyat beklenen yönde (SOXX −%5,4).",
+"AMD'nin çip satış dalgasında %8,75 düşüşü: beklenti olumsuz → fiyat beklenen yönde (AMD −%5,6, SMH −%5,1, SOXX −%5,4).",
+"Nvidia'nın 2012'den beri en uzun haftalık düşüş serisi: beklenti olumsuz → fiyat beklenen yönde (SMH −%5,1, SOXX −%5,4)."]}
+]}
