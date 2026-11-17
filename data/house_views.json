@@ -1,5 +1,5 @@
 {
- "updatedAt": "2026-11-13",
+ "updatedAt": "2026-11-17",
  "note": "Büyük varlık yöneticilerinin yayımlanmış görünümlerinden derlendi. Duruş: 1 olumlu/ağırlık artır, 0 nötr, -1 olumsuz/ağırlık azalt. Her görüş kendi yayın tarihindedir; her görüşün geçerlilik tarihi (validUntil) yayının ufkuna göre konur; geçenler 'eski' sayılır ve uzlaşıya katılmaz. Kaynak bağlantıları birincil yayın ya da yayını aktaran haber/uygulayıcı sayfasıdır (tür alanında belirtilir). Bu kurumların kısa vadeli görünümleri sık yanılır; sitede her görüş, yayın tarihinden bu yana temanın gerçekte ne yaptığıyla karnelenir.",
  "themes": {
   "us_eq": {
@@ -138,31 +138,42 @@
    "id": "blackrock",
    "n": "BlackRock",
    "brand": "iShares",
-   "pub": "Weekly market commentary",
-   "date": "2026-11-09",
+   "pub": "Weekly market commentary | BlackRock AI: looking beyond the buildout",
+   "date": "2026-11-16",
    "type": "otomatik: kaynak metninden özet",
    "url": "https://www.blackrock.com/corporate/insights/blackrock-investment-institute/publications/weekly-commentary",
    "views": {
     "us_eq": [
-     0,
-     "ABD hisselerinde nötr konuma geçilmiştir."
-    ],
-    "ust_long": [
      1,
-     "ABD Hazineleri (U.S. Treasuries) yükseltilmiştir."
+     "Uzun vadeli yapay zeka potansiyeline olan inanç, ABD hisselerinde stratejik ağırlık artır (overweight) pozisyonumuzu destekliyor."
+    ],
+    "healthcare": [
+     1,
+     "Yapay zekanın yaygınlaşması sürecinde ABD sağlık sektöründe özel fırsatlar görüyoruz."
+    ],
+    "financials": [
+     1,
+     "Yapay zekanın yaygınlaşması sürecinde finans şirketlerinde özel fırsatlar görüyoruz."
+    ],
+    "tips": [
+     1,
+     "Yüksek piyasa getirileri ve tahvillerin cazibesiyle birlikte, özellikle enflasyona endeksli tahvilleri favori görüyoruz."
     ]
    },
    "strengths": [
-    "Güçlü ABD istihdam raporu."
+    "Yapay zeka dönüşümünün verimlilik, kar marjları ve kazançları zamanla artıracak olması.",
+    "Yatırımcıların yapay zeka kazanç iyimserliğinin yüksek faiz baskısını dengelemesi.",
+    "Materyal olarak yüksek piyasa verimlerinin tahvilleri daha cazip hale getirmesi."
    ],
    "risks": [
-    "Yapay zeka altyapı inşasının hızı ve ölçeğine dair belirsizlikler.",
-    "Sermaye rekabeti ve artan finansman maliyetleri.",
-    "Yapısal olarak yüksek kalması beklenen faiz oranları."
+    "Daha ucuz bilgi işlem (computing) maliyetlerinin yapay zeka tedarikçilerinin karlarını sıkıştırması.",
+    "Darboğazların işletmelerin yapay zekayı benimseme hızını yavaşlatması.",
+    "Şirketlerin yapay zeka altyapısını ihtiyaçtan fazla inşa etmesiyle işletmeler fayda görmeden karların yavaşlaması.",
+    "Şirketlerin yapay zeka inşa ederken devletlerle fonlama için rekabet etmesi ve faiz oranları üzerinde baskı yaratması."
    ],
-   "validUntil": "2027-02-09",
+   "validUntil": "2027-02-16",
    "horizon": "taktik görüş, bir sonraki yeniden dengelemeye kadar",
-   "context": "Metin, ABD ara seçimleri, yapay zeka yatırımları ve sermaye rekabeti odaklı 2027 Forum değerlendirmelerini ve piyasa arka planını aktarmaktadır.",
+   "context": "ABD hisselerindeki stratejik ağırlık artır pozisyonumuz uzun vadeli yapay zeka inancımıza dayanırken, 6-12 aylık taktiksel ufukta ise temkinli bir şekilde nötr duruş sergiliyoruz.",
    "auto": true
   },
   {
@@ -894,34 +905,53 @@
    "id": "blackrock",
    "n": "BlackRock",
    "archivedAt": "2026-11-13"
+  },
+  {
+   "date": "2026-11-09",
+   "pub": "Weekly market commentary",
+   "views": {
+    "us_eq": [
+     0,
+     "ABD hisselerinde nötr konuma geçilmiştir."
+    ],
+    "ust_long": [
+     1,
+     "ABD Hazineleri (U.S. Treasuries) yükseltilmiştir."
+    ]
+   },
+   "url": "https://www.blackrock.com/corporate/insights/blackrock-investment-institute/publications/weekly-commentary",
+   "type": "otomatik: kaynak metninden özet",
+   "id": "blackrock",
+   "n": "BlackRock",
+   "archivedAt": "2026-11-17"
   }
  ],
  "autoRun": {
-  "at": "2026-11-13T11:26:14Z",
+  "at": "2026-11-17T12:18:02Z",
   "log": {
+   "pimco": "değişmedi: https://www.pimco.com/us/en/insights/cyclical-outlook: HTTPError HTTP Error 404: Not Found | arama: RuntimeError grounding başarısız: HTTP Error 429: Too Many Requests",
+   "amundi": "değişmedi: https://research-center.amundi.com/: RuntimeError gemini-3.8-flash: TimeoutError The read operation timed out | gemini-flash-latest: TimeoutError The read operation timed | arama: RuntimeError grounding başarısız: HTTP Error 429: Too Many Requests",
+   "capitalgroup": "değişmedi: https://www.capitalgroup.com/individual/insights/categories/outlook.html: yeni değil (2026-06-24 ≤ 2026-06-24) | arama: RuntimeError grounding başarısız: HTTP Error 429: Too Many Requests",
+   "fidelity": "değişmedi: https://institutional.fidelity.com/advisors/insights/topics/market-commentary: tarih okunamadı | arama: RuntimeError grounding başarısız: HTTP Error 429: Too Many Requests",
    "bny": "değişmedi: https://www.bny.com/assets/investments/imemea/pdfs/emea_fp_checkpoints_nov26.pdf: HTTPError HTTP Error 404: Not Found | https://www.bny.com/assets/investments/imemea/pdfs/emea_fp_checkpoints_oct26.pdf: HTTPError HTTP Error 404: Not Found | https://www.bny.com/assets/investments/imemea/pdfs/emea_fp_checkpoints_sep26.pdf: HTTPError HTTP Error 404: Not Found | https://www.bny.com/assets/investments/imemea/pdfs/emea_fp_checkpoints_aug26.pdf: HTTPError HTTP Error 404: Not Found | arama: RuntimeError grounding başarısız: HTTP Error 429: Too Many Requests",
-   "blackrock": "güncellendi → 2026-11-09 (2 görüş)",
+   "blackrock": "güncellendi → 2026-11-16 (4 görüş)",
    "vanguard": "değişmedi: https://corporate.vanguard.com/content/corporatesite/us/en/corp/vemo/vemo-return-forecasts.html: yeni değil (2026-10-21 ≤ 2026-10-21) | arama: RuntimeError grounding başarısız: HTTP Error 429: Too Many Requests",
-   "jpmorgan": "değişmedi: https://am.jpmorgan.com/us/en/asset-management/adv/insights/portfolio-insights/ltcma/: tarih geçersiz/eski: 2027-01-01 | https://am.jpmorgan.com/jp/en/asset-management/institutional/insights/portfolio-insights/ltcma/executive-summary/: yeni değil (2026-10-01 ≤ 2026-10-01) | arama: RuntimeError grounding başarısız: HTTP Error 429: Too Many Requests",
-   "goldman": "değişmedi: https://am.gs.com/en-us/advisors/insights/article/investment-outlook: tarih geçersiz/eski: 2025-10-24 | arama: RuntimeError grounding başarısız: HTTP Error 429: Too Many Requests",
-   "statestreet": "değişmedi: https://www.ssga.com/us/en/intermediary/insights/global-market-outlook: tarih geçersiz/eski: 2025-11-30 | arama: RuntimeError grounding başarısız: HTTP Error 429: Too Many Requests",
-   "pimco": "süre doldu, bir sonraki çalışmaya kaldı",
-   "amundi": "süre doldu, bir sonraki çalışmaya kaldı",
-   "capitalgroup": "süre doldu, bir sonraki çalışmaya kaldı",
-   "fidelity": "süre doldu, bir sonraki çalışmaya kaldı"
+   "jpmorgan": "değişmedi: https://am.jpmorgan.com/us/en/asset-management/adv/insights/portfolio-insights/ltcma/: tarih geçersiz/eski: 2027-09-01 | https://am.jpmorgan.com/jp/en/asset-management/institutional/insights/portfolio-insights/ltcma/executive-summary/: RuntimeError gemini-3.8-flash: TimeoutError The read operation timed out",
+   "goldman": "süre doldu, bir sonraki çalışmaya kaldı",
+   "statestreet": "süre doldu, bir sonraki çalışmaya kaldı"
   },
   "checked": {
-   "blackrock": "2026-11-13T11:17:15Z",
-   "vanguard": "2026-11-13T11:19:13Z",
-   "jpmorgan": "2026-11-13T11:21:34Z",
+   "blackrock": "2026-11-17T12:14:36Z",
+   "vanguard": "2026-11-17T12:15:50Z",
+   "jpmorgan": "2026-11-17T12:18:02Z",
    "goldman": "2026-11-13T11:23:26Z",
    "statestreet": "2026-11-13T11:26:14Z",
-   "pimco": "2026-11-10T11:31:07Z",
-   "amundi": "2026-11-10T11:32:01Z",
-   "capitalgroup": "2026-11-10T11:34:23Z",
-   "fidelity": "2026-11-10T11:35:59Z",
-   "bny": "2026-11-13T11:15:41Z"
+   "pimco": "2026-11-17T12:06:19Z",
+   "amundi": "2026-11-17T12:09:19Z",
+   "capitalgroup": "2026-11-17T12:10:31Z",
+   "fidelity": "2026-11-17T12:11:49Z",
+   "bny": "2026-11-17T12:12:26Z"
   },
-  "sec": 671
+  "sec": 734
  }
 }
