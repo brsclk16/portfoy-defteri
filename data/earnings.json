@@ -1,6 +1,61 @@
 {
- "updatedAt": "2026-11-13T06:00:00Z",
+ "updatedAt": "2026-11-18T05:55:56Z",
  "cards": [
+  {
+   "id": "NVDA-2027Q3",
+   "t": "NVDA",
+   "company": "NVIDIA",
+   "date": "2026-11-17",
+   "quarter": "Q3 FY2027",
+   "time": "piyasa sonrası",
+   "eps": {
+    "act": 2.68,
+    "est": 2.525,
+    "surprisePct": 6.1
+   },
+   "rev": {
+    "act": 115.84,
+    "est": 111.28,
+    "unit": "mlr $",
+    "surprisePct": 4.1
+   },
+   "guidance": "Bir sonraki çeyrek için yaklaşık 130 mlr $ gelir öngördü; 2028 mali yılı için ~%75 gelir büyümesi hedefledi.",
+   "highlights": [
+    "Çeyreklik gelir 115,8 mlr $ ile rekor; Vera Rubin platformunun devreye girmesi büyümeyi destekledi.",
+    "Jensen Huang'ın istifasından sonraki ilk bilanço; yönetim kurulu başkanı Huang'ın CEO olarak geri dönmeyeceğini açıkladı, geçici CEO Colette Kress.",
+    "Hisse sonuç sonrası uzatılmış seansta yükseldi; normal seans tepkisi henüz veride yok.",
+    "Şirket, veri merkezi projelerini finanse etme taahhütlerinde daha seçici davranacağını belirtti."
+   ],
+   "affects": [
+    {
+     "t": "SMH",
+     "note": "holding (ağırlık %19,14)"
+    },
+    {
+     "t": "SOXX",
+     "note": "holding (ağırlık %7,29)"
+    },
+    {
+     "t": "AMD",
+     "note": "yapay zekâ çip talebi göstergesi"
+    }
+   ],
+   "summary": "NVIDIA, HBK'da %6,1, gelirde %4,1 pozitif sürpriz yaparak 115,8 mlr $ rekor gelir açıkladı. ~130 mlr $'lık çeyrek öngörüsü, liderlik belirsizliğine rağmen yapay zekâ talebinin güçlü kaldığı mesajını verdi.",
+   "sources": [
+    {
+     "title": "SEC 8-K — NVIDIA Q3 FY27 sonuçları",
+     "url": "https://www.sec.gov/Archives/edgar/data/1045810/000104581026000088/nvda-20261117.htm"
+    },
+    {
+     "title": "MarketWatch — Nvidia's stock rises as blowout numbers help ease CEO transition fears",
+     "url": "https://www.marketwatch.com/story/nvidias-stock-rises-as-blowout-numbers-help-ease-ceo-transition-fears-2f20d38a?mod=mw_rss_topstories"
+    },
+    {
+     "title": "Seeking Alpha — NVIDIA projects ~75% fiscal 2028 revenue growth",
+     "url": "https://seekingalpha.com/news/4673972-nvidia-projects-75-percent-fiscal-2028-revenue-growth-amid-leadership-transition"
+    }
+   ]
+  },
   {
    "id": "HBM-2026Q3",
    "t": "HBM",
