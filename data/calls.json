@@ -266,6 +266,44 @@
   ],
   "NVDA": [
    {
+    "q": "Q3 2027",
+    "date": "2026-11-17",
+    "tone": "olumlu",
+    "toneChg": "benzer",
+    "summary": "NVIDIA çeyreği beklentilerin belirgin üzerinde kapattı: gelir yıllık %103 artışla 115,8 milyar dolara, veri merkezi geliri 107,6 milyar dolara ulaştı. Rakamlar güçlü olsa da görüşme, Jensen Huang'ın CEO'luktan ayrılmasının gölgesinde geçti; geçici CEO ve CFO Colette Kress talebin sürdüğünü ve Vera Rubin geçişinin şirketin en hızlı mimari geçişi olduğunu vurguladı.",
+    "guidance": "Ek bir hafta içeren 4. çeyrek için gelir beklentisi 130 milyar dolar (±%3), brüt marj %71–72; Çin'den veri merkezi hesaplama geliri varsayılmıyor. 2028 mali yılı gelir büyümesi beklentisi yaklaşık %70'ten yaklaşık %75'e çıkarıldı.",
+    "highlights": [
+     "Brüt marj GAAP %74,8, non-GAAP %74,9; non-GAAP hisse başı kâr 2,68 dolar",
+     "Edge computing geliri yıllık %42 artışla 8,2 milyar dolar; ağ geliri 21 milyar doları aştı",
+     "Vera Rubin çeyreklik bazda gelire yaklaşık 20 milyar dolar ekledi; Çin'e 2,4 milyar dolarlık Hopper sevkiyatı yapıldı",
+     "Hisse geri alım yetkisine 150 milyar dolar eklendi; çeyrekte hissedarlara 28,1 milyar dolar döndürüldü"
+    ],
+    "qa": [
+     "Yönetim Huang ve bağımsız soruşturmayla ilgili soruları yanıtlamadı",
+     "Liderlik değişikliği sonrası çalışan bağlılığı ve yetenek kaybı riski soruldu",
+     "Neocloud müşterilerinin finansmanına NVIDIA'nın ne ölçüde katıldığı sorgulandı; yönetim sermaye taahhüdünde disiplinli kalacağını söyledi"
+    ],
+    "risks": [
+     "Kalıcı CEO henüz atanmadı; yönetim ve soruşturma belirsizliği sürüyor",
+     "Bellek fiyat artışları nedeniyle 4. çeyrekte brüt marjın %71–72'ye gerilemesi bekleniyor",
+     "Garantiler kapsamında 118 milyar dolara varan olası ödeme yükümlülüğü ve uzayan tahsilat süreleri (60'tan 64 güne)"
+    ],
+    "sources": [
+     {
+      "title": "NVIDIA – Q3 FY2027 finansal sonuçlar basın bülteni",
+      "url": "https://investor.nvidia.com/news/press-release-details/2026/NVIDIA-Announces-Financial-Results-for-Third-Quarter-Fiscal-2027/default.aspx"
+     },
+     {
+      "title": "Constellation Research – Nvidia Q3 ve Huang'ın ayrılığı",
+      "url": "https://www.constellationr.com/insights/news/nvidia-posts-strong-q3-ups-q4-fiscal-2028-outlook-amid-huang-resignation"
+     },
+     {
+      "title": "Stock Titan – Nvidia Q3 FY2027 gelir ve görünüm",
+      "url": "https://www.stocktitan.net/articles/nvidia-q3-fiscal-2027-earnings-revenue-outlook"
+     }
+    ]
+   },
+   {
     "q": "Q2 2027",
     "date": "2026-08-26",
     "tone": "olumlu",
@@ -1335,6 +1373,37 @@
   ],
   "TWST": [
    {
+    "q": "Q4 2026",
+    "date": "2026-11-12",
+    "tone": "olumlu",
+    "toneChg": "benzer",
+    "summary": "Twist Bioscience mali 4. çeyrekte geliri yıllık %28 artışla 126,6 milyon dolara çıkardı ve ilk kez pozitif düzeltilmiş FAVÖK'e (2,2 milyon dolar) ulaştı. Büyümeyi yapay zekâ destekli ilaç keşfi müşterileri taşıdı; yönetim kapasite yatırımlarını hızlandırırken marjlarda geçici baskı uyarısı yaptı.",
+    "guidance": "Mali 2027 gelir beklentisi 550–560 milyon dolar (orta noktada ~%21 büyüme), brüt marj ~%52,5–53 ve yıl genelinde pozitif düzeltilmiş FAVÖK; 1. çeyrek geliri 130–132 milyon dolar. Yatırım harcaması ~75 milyon dolar.",
+    "highlights": [
+     "Yıllık gelir %22 artışla 459,4 milyon dolar; Q4 brüt marj %53,1",
+     "Terapötik segmenti Q4'te %44 büyüdü; yapay zekâ kaynaklı ilaç keşfi geliri yılda %175 artışla 59,1 milyon dolar",
+     "DNA sentezi ve protein çözümleri Q4'te %33, NGS %24 büyüdü",
+     "Yıl sonu nakit ve kısa vadeli yatırımlar 582 milyon dolar; 1,3 milyon gen sevk edildi (+%43)"
+    ],
+    "qa": [
+     "Yapay zekâ gelirinin sürdürülebilirliği, sipariş birikimi ve müşteri yoğunlaşması",
+     "Yapay zekâ hariç temel işin büyüme hızı",
+     "Yeni kapasite yatırımlarının marjlara ve artımlı kârlılığa etkisi",
+     "MRD (moleküler kalıntı hastalık) işinin 2027'de ne kadar hızlanabileceği"
+    ],
+    "risks": [
+     "Yeni kapasite amortismanı nedeniyle 2027'de 2–3 puanlık brüt marj baskısı",
+     "Yapay zekâ odağının diğer alanlardaki büyümeyi yavaşlatması",
+     "NGS'de ilk 10 müşterinin gelirin ~%40'ını oluşturması"
+    ],
+    "sources": [
+     {
+      "title": "Nasdaq – Twist Bioscience (TWST) Q4 2026 earnings call transcript",
+      "url": "https://www.nasdaq.com/articles/twist-bioscience-twst-q4-2026-earnings-call-transcript"
+     }
+    ]
+   },
+   {
     "q": "Q3 2026",
     "date": "2026-08-03",
     "tone": "olumlu",
@@ -1529,6 +1598,36 @@
   ],
   "HBM": [
    {
+    "q": "Q3 2026",
+    "date": "2026-11-12",
+    "tone": "olumlu",
+    "toneChg": "benzer",
+    "summary": "Hudbay üçüncü çeyrekte rekor gelir (765,9 milyon dolar) ve rekor düzeltilmiş FAVÖK (413,4 milyon dolar) açıkladı; artışı yüksek metal fiyatları, düşen arıtma ücretleri ve artan satış hacmine bağladı. Copper World projesi için Mitsubishi ile nihai yatırım kararı alındı.",
+    "guidance": "2026 bakır üretimi 110–138 bin ton, altın 217–272 bin ons olarak teyit edildi; konsolide nakit maliyet rehberliği libre başına (0,55)–(0,35) dolara iyileştirildi. 2027'de bakır üretiminin ~%25 artması (ağırlıkla ikinci yarıda) bekleniyor.",
+    "highlights": [
+     "Düzeltilmiş hisse başı kâr 0,34 dolar; serbest nakit akışı 201,9 milyon dolar",
+     "Çeyrekte bakır üretimi 30,2 bin ton; altın gelirin %34'ünü oluşturdu",
+     "Net borç/FAVÖK 0,0x, eylül sonu likidite 964 milyon dolar",
+     "Sürdürme yatırımının rehberliğin 35 milyon dolar altında kalması bekleniyor; Copper World'de ilk üretim 2029 ikinci yarısı hedefleniyor"
+    ],
+    "qa": [],
+    "risks": [
+     "British Columbia nakit maliyetlerinin 1,50–2,50 dolar/libre aralığının üst ucuna yakın olması bekleniyor",
+     "2027 üretim artışının ikinci yarıya yığılması zamanlama riski taşıyor",
+     "Copper World gibi büyük projelerde uzun yatırım süresi ve uygulama riski"
+    ],
+    "sources": [
+     {
+      "title": "Quartr – Hudbay Minerals Q3 2026 earnings summary",
+      "url": "https://quartr.com/events/hudbay-minerals-inc-hbm-q3-2026_oqKMOyOl"
+     },
+     {
+      "title": "AllInvestView – HBM Q3 2026 earnings recap",
+      "url": "https://www.allinvestview.com/earnings/HBM/q3-2026/"
+     }
+    ]
+   },
+   {
     "q": "Q2 2026",
     "date": "2026-07-29",
     "tone": "olumlu",
@@ -1703,5 +1802,5 @@
    }
   ]
  },
- "updatedAt": "2026-11-12T07:40:19Z"
+ "updatedAt": "2026-11-19T07:40:09Z"
 }
