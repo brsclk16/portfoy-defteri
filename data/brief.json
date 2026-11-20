@@ -1,40 +1,39 @@
 {
- "publishedAt": "2026-11-19T06:05:00Z",
- "asOf": "2026-11-18",
- "title": "AMD %5,3 yükseldi, metaller sert düştü; Nvidia sonrası çipte ayrışma",
+ "publishedAt": "2026-11-20T06:05:00Z",
+ "asOf": "2026-11-19",
+ "title": "AMD %7,7 düştü, Çin kısıtları çipleri vurdu; VRT tek yükselen",
  "sections": [
   {
    "h": "Dün",
    "items": [
-    "En iyi: AMD +%5,31, VRT +%2,16, ASML +%0,88; SOXX +%0,28, SMH −%0,12 ile yatay.",
-    "En kötü: COPX −%6,31, SLV −%4,55, IAU −%3,20, DELL −%3,00; değerli metal ve bakırda sert satış.",
-    "Biyoteknoloji sakin: XBI −%0,17, AGNG −%0,95 (aynı gün Merck nemtabrutinib Faz 3 programını durdurdu).",
-    "S&P 500 kıyası için bu sabah veri yok."
+    "En kötü: AMD −%7,72 (Hunterbrook açığa satış raporu), COPX −%3,12, DELL −%3,00, ASML −%2,80; SOXX −%2,75, SMH −%2,62.",
+    "Tek pozitif: VRT +%2,16. Savunmada XBI −%0,63, CRDO −%0,81, AGNG −%0,95; metallerde IAU −%1,77, SLV −%2,60.",
+    "S&P 500 (SPY) −%1,96: portföyün çip ve metal ağırlıklı kısmı piyasanın gerisinde, biyoteknoloji ve VRT önünde kaldı."
    ]
   },
   {
    "h": "Bugün",
    "items": [
-    "16:30 TRT: ABD haftalık işsizlik başvuruları (beklenti 198 bin); faiz beklentisi üzerinden IAU/SLV ve büyüme hisselerini ilgilendiriyor.",
-    "Yarın 18:00 TRT: Michigan tüketici güveni (nihai, beklenti 51).",
-    "Portföyde sıradaki büyük olay: Dell bilançosu 24 Kasım ~23:30 TRT (saat tahmini, HBK beklentisi ~6,71 $)."
+    "18:00 TRT: Michigan tüketici güveni (nihai, beklenti 51); faiz beklentileri üzerinden IAU/SLV ve büyüme hisselerini ilgilendiriyor.",
+    "Gündem Çin: TSMC ve Samsung'un yeni ABD kısıtları nedeniyle Çin sevkiyatlarını durdurması ve Nvidia'ya Kaliforniya celbi SMH/SOXX/AMD/ASML üzerinde baskı yaratıyor.",
+    "Sıradaki büyük olay: Dell bilançosu 24 Kasım Salı ~23:30 TRT (saat tahmini, HBK beklentisi ~6,71 $)."
    ]
   },
   {
    "h": "Teknik durum",
    "items": [
-    "Alım bölgesinde: AMD 530,14 $ (bölge 494,58–525,94, stop 420,39, TP1 598,98), ASML 1.395,27 $ (bölge 1.390,62–1.398,99, stop 1.263,78).",
-    "XBI 145,04 $ ile alım bölgesinde (142,19–145,61, stop 136,79, TP1 153,07).",
-    "SOXX'ta RSI 17 ile aşırı satım; DELL RSI 33, SMH RSI 35. Stop'a %3'ten yakın enstrüman yok."
+    "Alım bölgesinde: DELL 312,54 $ (bölge 312,93–314,81, stop 274,25, TP1 365,69, RSI 33), XBI 144,12 $ (143,01–143,88, stop 136,77), AGNG 39,23 $ (37,78–39,37, stop 37,11).",
+    "SOXX RSI 16 ile derin aşırı satımda (137,95 $); ASML RSI 34, SMH RSI 33. Aşırı ısınan enstrüman yok.",
+    "Stop'a %3'ten yakın enstrüman yok; en yakınları XBI (~%5,1) ve AGNG (~%5,4)."
    ]
   },
   {
    "h": "Beklenti → gerçekleşen",
    "items": [
-    "Nvidia bilançosu (Q3 FY27): HBK beklenti 2,53 → 2,68 (+%6,1, beklentinin üstünde) · SMH −%0,4, SOXX +%0,2.",
-    "FOMC tutanakları (Ekim): sayısal beklenti yok · SLV −%4,6, IAU −%3,2, SOXX +%0,3.",
-    "Nvidia rekor gelir haberi: beklenti olumlu → fiyat beklenen yönde (AMD +%5,3, SMH −%0,1, SOXX +%0,3).",
-    "Merck Faz 3 programını sonlandırdı: beklenti olumsuz → fiyat beklenen yönde (AGNG −%1,0)."
+    "FOMC tutanakları (Ekim toplantısı): sayısal beklenti yok · takip edilenler SLV −%4,6, IAU −%3,2, SOXX +%0,3",
+    "Nvidia bilançosu (Q3 FY27): HBK beklenti 2,53 → 2,68 (+%6,1, beklentinin üstünde) · takip edilenler SMH −%0,4, SOXX +%0,2",
+    "TSMC ve Samsung'un Çin sevkiyatlarını durdurması: beklenti olumsuz → fiyat beklenen yönde (SMH −%2,6)",
+    "Anthropic'in 81 milyar $+ halka arzı: beklenti olumlu → fiyat ters yönde (AMD −%7,7, SMH −%2,6, SOXX −%2,8)"
    ]
   }
  ]
