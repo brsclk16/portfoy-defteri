@@ -1,6 +1,89 @@
 {
  "reports": [
   {
+   "id": "2026-W47",
+   "weekEnd": "2026-11-20",
+   "range": "16–20 Kasım 2026",
+   "publishedAt": "2026-11-20T22:40:42Z",
+   "title": "AI satışı derinleşti: Çipler %17 düştü, altın da tampon olmadı",
+   "movers": [
+    {
+     "t": "AGNG",
+     "pct": -5.61
+    },
+    {
+     "t": "XBI",
+     "pct": -7.37
+    },
+    {
+     "t": "IAU",
+     "pct": -9.24
+    },
+    {
+     "t": "ASML",
+     "pct": -14.97
+    },
+    {
+     "t": "SLV",
+     "pct": -16.45
+    },
+    {
+     "t": "SOXX",
+     "pct": -17.18
+    },
+    {
+     "t": "SMH",
+     "pct": -17.74
+    },
+    {
+     "t": "VRT",
+     "pct": -18.13
+    },
+    {
+     "t": "COPX",
+     "pct": -18.83
+    },
+    {
+     "t": "DELL",
+     "pct": -19.61
+    },
+    {
+     "t": "AMD",
+     "pct": -20.25
+    },
+    {
+     "t": "CRDO",
+     "pct": -24.25
+    }
+   ],
+   "summary": [
+    "Hafta, yapay zekâ temalı hisselerde sert bir tasfiyeye dönüştü ve 12 enstrümanın tamamı ekside kapattı. S&P 500 (SPY) yedi işlem günü üst üste düşerek haftayı %8,7 kayıpla bitirdi; cuma günkü %3,9'luk düşüşle endeks rekorunun %10'dan fazla altına inip teknik düzeltmeye girdi, Nasdaq ise yılbaşından bu yana kazancının tamamını geri verdi. Eşit ağırlıklı portföy ortalaması yaklaşık %15,8 geriledi; yani endeksin yaklaşık 7 puan gerisinde kalındı. En az kaybeden %5,6 düşüşle AGNG, en çok kaybeden %24,3 düşüşle Credo (CRDO) oldu. Kayıpların büyük kısmı cuma günü geldi: SMH tek günde %10,7, AMD %13,3, Credo %15,2 düştü.",
+    "Yarı iletkenlerde (SMH -%17,7, SOXX -%17,2) baskı birkaç kaynaktan birleşti: ABD'nin Çinli şirketlerin üçüncü ülkelerdeki veri merkezleri üzerinden çiplere uzaktan erişimini kısıtlayan yeni ihracat kuralları, TSMC ve Samsung'un bazı Çin sevkiyatlarını askıya alması, Nvidia'da yönetim krizinin hukuki boyuta taşınması (Kaliforniya Başsavcılığı'nın celbi, cuma günü olası bir SEC incelemesi haberleri) ve AMD'yi Çin bağlantılarıyla suçlayan açığa satış raporu. Nvidia'nın 115,8 milyar $'lık rekor çeyrek geliri bile havayı değiştiremedi; ASML %15 geriledi. AI altyapı cephesinde Dell %19,6, Vertiv %18,1, Credo %24,3 kaybetti; tarihin en büyük halka arzı olan Anthropic'in ikinci gününde %9 civarı düşmesi 'AI harcaması zirve mi yaptı' sorusunu büyüttü. Biyotek (XBI -%7,4) ve AGNG (-%5,6) piyasayla birlikte düştü ama görece dirençli kaldı. Değerli metaller de koruma sağlamadı: 18 Kasım'da yayımlanan Fed tutanaklarında katılımcıların neredeyse tamamının yeni faiz artırımlarını uygun görmesi, Aralık artırım olasılığını %90'ın üzerine taşıdı; dolar endeksi Nisan 2025'ten beri en yüksek seviyeye çıkarken 10 yıllık getiri %5 civarında kaldı. Ons altın %9,3 düşüşle 3.524 $'a indi (14 ayın en düşüğü), IAU %9,2, SLV %16,5 geriledi. Bakır fiyatının LME'de yedi ayın dibine inmesiyle COPX %18,8 kaybetti.",
+    "Dolar/TL %0,4 artışla 50,54'e çıktı; kurdaki bu sınırlı artış kayıpları çok az hafifletti. TL bazında SPY yaklaşık %8,3, eşit ağırlıklı portföy ortalaması yaklaşık %15,5 kaybettirdi; Credo TL'de %24,0, AMD %19,9 düşerken en az kaybeden AGNG oldu (-%5,2). Çeşitlendirme bu hafta neredeyse hiç çalışmadı: AI hisselerindeki çöküşe yükselen faiz ve güçlenen dolar eşlik edince altın, gümüş ve bakır da aynı yönde, hatta bazıları hisselerden sert düştü. Görece koruma yalnızca sağlık tarafından (AGNG, XBI) geldi. Bu tablo, portföyün AI altyapısı ve metaller ağırlığının 'yükselen reel faiz + risk iştahında çöküş' senaryosuna karşı ortak bir zaafı olduğunu gösteriyor."
+   ],
+   "highlights": [
+    "Nvidia: 3. çeyrekte 115,8 milyar $ ile rekor gelir açıkladı ve beklentileri yükseltti; ancak yönetim kurulu Jensen Huang'ın geri dönüşünü reddetti, geçici CEO Colette Kress Çin'e H200 satışlarını durdurdu, Moody's kredi görünümünü pozitiften durağana çekti. Kaliforniya Başsavcılığı Çin bağlantıları ve yatırımcıların yanıltılmış olabileceği iddiasıyla celp gönderdi; cuma günü olası SEC muhasebe incelemesi haberleriyle hisse yaklaşık %14 düştü.",
+    "AMD: Hafta %20,3 geriledi. Hunterbrook'un, AMD ürünlerini kara listedeki bir Çinli sunucu üreticisiyle ilişkilendiren açığa satış raporu perşembe %7,7, cuma %13,3'lük düşüşlerin başlıca nedeni oldu. Çarşamba ise OpenAI'ın AMD GPU IP'sinde %14'e varan verim artışı açıklaması ve Core Scientific'in Teksas veri merkezinde ana kiracılık haberiyle hisse %5,3 yükselmişti.",
+    "Anthropic: 83 $'dan fiyatlanan halka arzla 81,3 milyar $ toplayarak tarihin en büyük halka arzını yaptı (yaklaşık 1,41 trilyon $ değerleme). İlk gün %17 yükselen hisse cuma %9 civarı düştü; Asya'da SoftBank %15 geriledi, Tayvan borsası on yılların en kötü haftasını yaşadı.",
+    "Vertiv ve Credo: Vertiv, Infineon ile üç yıllık güç yarı iletkeni tedarik anlaşması ve Solenis ile sıvı soğutma ortaklığı duyurdu; Evercore 325 $ hedefini korudu, buna rağmen hisse %18,1 düştü. Credo, Marvell ile kablo teknolojisi patent davasını uzlaşmayla kapattı; yine de haftayı %24,3 kayıpla bitirdi.",
+    "AGNG holdingleri: Eli Lilly, Calytrix Bio'yu 1,5 milyar $'a kadar nakitle alıyor, Stipple Bio ile 5,9 milyar $'lık onkoloji ortaklığı kurdu ve Pennsylvania'da 3,5 milyar $'lık obezite ilacı fabrikasının inşasına başladı. Merck üç Faz 3 kan kanseri çalışmasını (nemtabrutinib) durdurdu, ancak sac-TMT mide-yemek borusu kanserinde Faz 3'te genel sağkalım hedefine ulaştı. CVS'nin GLP-1 fiyat baskısı raporu sektör için olumsuz bir not oldu.",
+    "Metaller: Fed tutanakları sonrası altın 3.700 $'ın altını gördü; Tudor, Druckenmiller'ın ardından bakır madencilerini satıp altın ve gümüş pozisyonunu artırdı. UBS bakırdaki satışın uzun vadede fırsat olabileceğini, LME'de 12.000 $/ton seviyesini teknik destek olarak gördüğünü belirtti."
+   ],
+   "nextWeek": [
+    "24 Kasım Salı, ABD kapanış sonrası (TR saatiyle 25 Kasım gece): Dell 3. çeyrek (FY27) bilançosu. Beklenti hisse başı ~6,63 $ ve ~50,6 milyar $ gelir; 95 milyar $'lık AI sunucu siparişinin gelire dönüşüp dönüşmediği, AI harcamasına dair kaygıların ortasında DELL'in yanı sıra Vertiv, Credo, AMD ve SMH/SOXX için de önemli bir sinyal olacak.",
+    "24 Kasım Salı: ABD Conference Board tüketici güveni (beklenti 92,0, önceki 91,7). Hisse satışının tüketiciye yansıyıp yansımadığını gösterecek.",
+    "25 Kasım Çarşamba: ABD dayanıklı mal siparişleri (beklenti %0,0, önceki %1,9) ve haftalık işsizlik başvuruları (önceki 203 bin). Güçlü veri, 9 Aralık Fed toplantısında faiz artırımı beklentisini pekiştirerek altın (IAU), gümüş (SLV) ve büyüme hisselerine baskı yapabilir.",
+    "26 Kasım Perşembe ABD piyasaları Şükran Günü nedeniyle kapalı, 27 Kasım Cuma yarım gün. Düşük işlem hacmi, zaten yüksek olan oynaklığı (VIX 30'un üzerinde) büyütebilir.",
+    "Bir sonraki hafta için erken not: 1 Aralık'ta Credo bilançosu (beklenti hisse başı 1,31 $, gelir ~542 milyon $) ve ISM imalat endeksi; 4 Aralık'ta Kasım istihdam raporu."
+   ],
+   "watch": [
+    "Fed'in Aralık'ta faiz artırması neredeyse tamamen fiyatlanmış durumda; 50 baz puan ya da 2027 için daha sert bir sinyal, hem AI hisselerini hem de altın/gümüşü aynı anda baskılamayı sürdürebilir.",
+    "Nvidia ve AMD'deki hukuki riskler (Kaliforniya celbi, olası SEC incelemesi, Çin bağlantılı açığa satış iddiaları) ve genişleyen ihracat kısıtlamaları, SMH/SOXX'taki en büyük ağırlıklar üzerinden portföyü doğrudan etkiliyor; yeni haber akışı ani hareketlere yol açabilir.",
+    "AI altyapı talebine dair sorgulama: Anthropic'in halka arz sonrası düşüşü, Google'ın çip sevkiyatlarını kısacağına dair doğrulanmamış haberler ve Trump'ın yurt dışında veri merkezi kuran şirketlere vergi tehdidi, Dell, Vertiv ve Credo için değerleme baskısını uzatabilir.",
+    "Kurumsal 13F verisinde (30 Eylül itibarıyla) Capital Research'ün Credo pozisyonunu yaklaşık 4,2 katına, Fidelity'nin AMD pozisyonunu iki katına çıkardığı görülüyor; bu fonların sert düşüşte nasıl davrandığı bir sonraki dönem açıklamalarında izlenmeli."
+   ]
+  },
+  {
    "id": "2026-W46",
    "weekEnd": "2026-11-13",
    "range": "9–13 Kasım 2026",
