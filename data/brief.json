@@ -1,39 +1,40 @@
 {
- "publishedAt": "2026-11-20T06:05:00Z",
- "asOf": "2026-11-19",
- "title": "AMD %7,7 düştü, Çin kısıtları çipleri vurdu; VRT tek yükselen",
+ "publishedAt": "2026-11-23T05:56:41Z",
+ "asOf": "2026-11-20",
+ "title": "Cuma çip çöküşü: SMH/SOXX −%10,6; gözler Salı akşamki Dell bilançosunda",
  "sections": [
   {
    "h": "Dün",
    "items": [
-    "En kötü: AMD −%7,72 (Hunterbrook açığa satış raporu), COPX −%3,12, DELL −%3,00, ASML −%2,80; SOXX −%2,75, SMH −%2,62.",
-    "Tek pozitif: VRT +%2,16. Savunmada XBI −%0,63, CRDO −%0,81, AGNG −%0,95; metallerde IAU −%1,77, SLV −%2,60.",
-    "S&P 500 (SPY) −%1,96: portföyün çip ve metal ağırlıklı kısmı piyasanın gerisinde, biyoteknoloji ve VRT önünde kaldı."
+    "Son seans (Cuma 20 Kasım) tüm portföy ekside kapandı; S&P 500 (SPY) −%3,6 düşerken çip ağırlıklı pozisyonlar çok daha sert geriledi.",
+    "En kötüler: CRDO −%15,2, AMD −%13,3, DELL −%11,0, SMH −%10,6, SOXX −%10,6, VRT −%10,1. Nvidia'ya yönelik SEC muhasebe incelemesi iddiası ve AMD hakkındaki açığa satış raporu baskıyı derinleştirdi.",
+    "En az kayıp: AGNG −%1,1, XBI −%2,7, IAU −%3,6. Bakır ayı piyasasına girdi; COPX −%5,0, SLV −%6,7."
    ]
   },
   {
    "h": "Bugün",
    "items": [
-    "18:00 TRT: Michigan tüketici güveni (nihai, beklenti 51); faiz beklentileri üzerinden IAU/SLV ve büyüme hisselerini ilgilendiriyor.",
-    "Gündem Çin: TSMC ve Samsung'un yeni ABD kısıtları nedeniyle Çin sevkiyatlarını durdurması ve Nvidia'ya Kaliforniya celbi SMH/SOXX/AMD/ASML üzerinde baskı yaratıyor.",
-    "Sıradaki büyük olay: Dell bilançosu 24 Kasım Salı ~23:30 TRT (saat tahmini, HBK beklentisi ~6,71 $)."
+    "Salı 18:00 TRT: ABD CB tüketici güveni (beklenti 92,0, önceki 91,7); piyasa yönü için izlenecek.",
+    "Salı ~23:30 TRT (saat tahmini): Dell 3. çeyrek (FY27) bilançosu, HBK beklentisi 6,71 $. Doğrudan DELL pozisyonu ve AI sunucu talebi üzerinden SMH/SOXX/CRDO duyarlılığı için kritik.",
+    "Çarşamba 16:30 TRT: dayanıklı mal siparişleri ve haftalık işsizlik başvuruları."
    ]
   },
   {
    "h": "Teknik durum",
    "items": [
-    "Alım bölgesinde: DELL 312,54 $ (bölge 312,93–314,81, stop 274,25, TP1 365,69, RSI 33), XBI 144,12 $ (143,01–143,88, stop 136,77), AGNG 39,23 $ (37,78–39,37, stop 37,11).",
-    "SOXX RSI 16 ile derin aşırı satımda (137,95 $); ASML RSI 34, SMH RSI 33. Aşırı ısınan enstrüman yok.",
-    "Stop'a %3'ten yakın enstrüman yok; en yakınları XBI (~%5,1) ve AGNG (~%5,4)."
+    "AMD alım bölgesinde: 424,39 $ (bölge 424,23–426,78 $), stop 370,68 $, TP1 463,85 $; RSI 38.",
+    "SOXX alım bölgesinde: 123,40 $ (bölge 121,83–122,57 $), stop 103,56 $, TP1 218,65 $; RSI 16 ile aşırı satım.",
+    "AGNG alım bölgesinde: 38,81 $ (bölge 37,78–38,69 $), stop 37,11 $.",
+    "SMH (RSI 26) ve DELL (RSI 29) aşırı satım bölgesinde; stop'a %3'ten yakın enstrüman yok."
    ]
   },
   {
    "h": "Beklenti → gerçekleşen",
    "items": [
-    "FOMC tutanakları (Ekim toplantısı): sayısal beklenti yok · takip edilenler SLV −%4,6, IAU −%3,2, SOXX +%0,3",
-    "Nvidia bilançosu (Q3 FY27): HBK beklenti 2,53 → 2,68 (+%6,1, beklentinin üstünde) · takip edilenler SMH −%0,4, SOXX +%0,2",
-    "TSMC ve Samsung'un Çin sevkiyatlarını durdurması: beklenti olumsuz → fiyat beklenen yönde (SMH −%2,6)",
-    "Anthropic'in 81 milyar $+ halka arzı: beklenti olumlu → fiyat ters yönde (AMD −%7,7, SMH −%2,6, SOXX −%2,8)"
+    "Kaliforniya Başsavcılığından Nvidia'ya Çin soruşturması ve celp: beklenti olumsuz → fiyat beklenen yönde (SMH −%10,6, SOXX −%10,6).",
+    "Açığa satış raporu sonrası AMD sert düştü: beklenti olumsuz → fiyat beklenen yönde (AMD −%13,3, SMH −%10,6, SOXX −%10,6).",
+    "Bakır fiyatları ayı piyasasına girdi: beklenti olumsuz → fiyat beklenen yönde (COPX −%5,0).",
+    "TSMC ve Samsung ihracat kısıtları nedeniyle Çin sevkiyatlarını durdurdu: beklenti olumsuz → fiyat beklenen yönde (SMH −%2,6)."
    ]
   }
  ]
