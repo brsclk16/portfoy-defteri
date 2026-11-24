@@ -927,31 +927,31 @@
   }
  ],
  "autoRun": {
-  "at": "2026-11-20T12:06:19Z",
+  "at": "2026-11-24T14:08:53Z",
   "log": {
+   "vanguard": "değişmedi: https://corporate.vanguard.com/content/corporatesite/us/en/corp/vemo/vemo-return-forecasts.html: yeni değil (2026-10-21 ≤ 2026-10-21) | arama: RuntimeError grounding başarısız: HTTP Error 429: Too Many Requests",
+   "jpmorgan": "değişmedi: https://am.jpmorgan.com/us/en/asset-management/adv/insights/portfolio-insights/ltcma/: RuntimeError gemini-3.8-flash: HTTPError HTTP Error 503: Service Unavailable | gemini-flash-latest: HTTPError HTTP Error 503: Service | https://am.jpmorgan.com/jp/en/asset-management/institutional/insights/portfolio-insights/ltcma/executive-summary/: RuntimeError gemini-3.8-flash: HTTPError HTTP Error 503: Service Unavailable | gemini-flash-latest: HTTPError HTTP Error 503: Service | arama: RuntimeError grounding başarısız: HTTP Error 429: Too Many Requests",
    "goldman": "değişmedi: https://am.gs.com/en-us/advisors/insights/article/investment-outlook: HTTPError HTTP Error 404: Not Found | arama: RuntimeError grounding başarısız: HTTP Error 429: Too Many Requests",
-   "statestreet": "değişmedi: https://www.ssga.com/us/en/intermediary/insights/global-market-outlook: tarih geçersiz/eski: 2025-11-30 | arama: RuntimeError grounding başarısız: HTTP Error 429: Too Many Requests",
+   "statestreet": "değişmedi: https://www.ssga.com/us/en/intermediary/insights/global-market-outlook: RuntimeError gemini-3.8-flash: HTTPError HTTP Error 503: Service Unavailable | gemini-flash-latest: HTTPError HTTP Error 503: Service | arama: RuntimeError grounding başarısız: HTTP Error 429: Too Many Requests",
    "pimco": "değişmedi: https://www.pimco.com/us/en/insights/cyclical-outlook: HTTPError HTTP Error 404: Not Found | arama: RuntimeError grounding başarısız: HTTP Error 429: Too Many Requests",
    "amundi": "değişmedi: https://research-center.amundi.com/: tarih okunamadı | arama: RuntimeError grounding başarısız: HTTP Error 429: Too Many Requests",
    "capitalgroup": "değişmedi: https://www.capitalgroup.com/individual/insights/categories/outlook.html: yeni değil (2026-06-24 ≤ 2026-06-24) | arama: RuntimeError grounding başarısız: HTTP Error 429: Too Many Requests",
-   "fidelity": "değişmedi: https://institutional.fidelity.com/advisors/insights/topics/market-commentary: tarih okunamadı | arama: RuntimeError grounding başarısız: HTTP Error 429: Too Many Requests",
+   "fidelity": "değişmedi: https://institutional.fidelity.com/advisors/insights/topics/market-commentary: RuntimeError gemini-3.8-flash: HTTPError HTTP Error 503: Service Unavailable | gemini-flash-latest: HTTPError HTTP Error 503: Service | arama: RuntimeError grounding başarısız: HTTP Error 429: Too Many Requests",
    "bny": "değişmedi: https://www.bny.com/assets/investments/imemea/pdfs/emea_fp_checkpoints_nov26.pdf: HTTPError HTTP Error 404: Not Found | https://www.bny.com/assets/investments/imemea/pdfs/emea_fp_checkpoints_oct26.pdf: HTTPError HTTP Error 404: Not Found | https://www.bny.com/assets/investments/imemea/pdfs/emea_fp_checkpoints_sep26.pdf: HTTPError HTTP Error 404: Not Found | https://www.bny.com/assets/investments/imemea/pdfs/emea_fp_checkpoints_aug26.pdf: HTTPError HTTP Error 404: Not Found | arama: RuntimeError grounding başarısız: HTTP Error 429: Too Many Requests",
-   "blackrock": "değişmedi: https://www.blackrock.com/corporate/insights/blackrock-investment-institute/publications/weekly-commentary: yeni değil (2026-11-16 ≤ 2026-11-16) | https://www.blackrock.com/us/individual/insights/blackrock-investment-institute/weekly-commentary: yeni değil (2026-11-16 ≤ 2026-11-16)",
-   "vanguard": "süre doldu, bir sonraki çalışmaya kaldı",
-   "jpmorgan": "süre doldu, bir sonraki çalışmaya kaldı"
+   "blackrock": "süre doldu, bir sonraki çalışmaya kaldı"
   },
   "checked": {
    "blackrock": "2026-11-20T12:06:19Z",
-   "vanguard": "2026-11-17T12:15:50Z",
-   "jpmorgan": "2026-11-17T12:18:02Z",
-   "goldman": "2026-11-20T11:55:19Z",
-   "statestreet": "2026-11-20T11:57:21Z",
-   "pimco": "2026-11-20T11:57:57Z",
-   "amundi": "2026-11-20T11:59:42Z",
-   "capitalgroup": "2026-11-20T12:01:35Z",
-   "fidelity": "2026-11-20T12:03:35Z",
-   "bny": "2026-11-20T12:04:13Z"
+   "vanguard": "2026-11-24T13:58:35Z",
+   "jpmorgan": "2026-11-24T14:00:48Z",
+   "goldman": "2026-11-24T14:01:23Z",
+   "statestreet": "2026-11-24T14:03:03Z",
+   "pimco": "2026-11-24T14:03:39Z",
+   "amundi": "2026-11-24T14:04:51Z",
+   "capitalgroup": "2026-11-24T14:06:03Z",
+   "fidelity": "2026-11-24T14:08:15Z",
+   "bny": "2026-11-24T14:08:53Z"
   },
-  "sec": 691
+  "sec": 683
  }
 }
