@@ -1,40 +1,37 @@
 {
- "publishedAt": "2026-11-23T05:56:41Z",
- "asOf": "2026-11-20",
- "title": "Cuma çip çöküşü: SMH/SOXX −%10,6; gözler Salı akşamki Dell bilançosunda",
+ "publishedAt": "2026-11-24T05:56:07Z",
+ "asOf": "2026-11-23",
+ "title": "Huang'ın dönüşüyle çipler uçtu; bu akşam Dell, yarın PCE",
  "sections": [
   {
    "h": "Dün",
    "items": [
-    "Son seans (Cuma 20 Kasım) tüm portföy ekside kapandı; S&P 500 (SPY) −%3,6 düşerken çip ağırlıklı pozisyonlar çok daha sert geriledi.",
-    "En kötüler: CRDO −%15,2, AMD −%13,3, DELL −%11,0, SMH −%10,6, SOXX −%10,6, VRT −%10,1. Nvidia'ya yönelik SEC muhasebe incelemesi iddiası ve AMD hakkındaki açığa satış raporu baskıyı derinleştirdi.",
-    "En az kayıp: AGNG −%1,1, XBI −%2,7, IAU −%3,6. Bakır ayı piyasasına girdi; COPX −%5,0, SLV −%6,7."
+    "Jensen Huang'ın Nvidia CEO'luğuna dönüşüyle teknoloji rallisi: CRDO +%22,6, DELL +%20,5, SMH +%15,0, SOXX +%13,6, VRT +%12,1.",
+    "S&P 500 (SPY) +%4,7; portföydeki 12 enstrümanın tamamı yükseldi, en zayıfı AGNG +%1,8 ve IAU +%3,1.",
+    "Bakır da toparlandı: COPX +%6,8; gümüş (SLV) +%5,3."
    ]
   },
   {
    "h": "Bugün",
    "items": [
-    "Salı 18:00 TRT: ABD CB tüketici güveni (beklenti 92,0, önceki 91,7); piyasa yönü için izlenecek.",
-    "Salı ~23:30 TRT (saat tahmini): Dell 3. çeyrek (FY27) bilançosu, HBK beklentisi 6,71 $. Doğrudan DELL pozisyonu ve AI sunucu talebi üzerinden SMH/SOXX/CRDO duyarlılığı için kritik.",
-    "Çarşamba 16:30 TRT: dayanıklı mal siparişleri ve haftalık işsizlik başvuruları."
+    "Dell Q3 FY27 bilançosu bu gece ~23:30 TRT (saat tahmini, piyasa sonrası); HBK beklentisi ~6,7 $. Dünkü +%20,5'lik sıçramanın ardından doğrudan DELL pozisyonunu ilgilendiriyor.",
+    "Yarın 16:30 TRT: ABD çekirdek PCE (Ekim, beklenti %0,3) ve Q3 GSYH fiyat endeksi (beklenti %2,3) — faiz beklentisi üzerinden SMH/SOXX, XBI ve IAU/SLV'ye dokunur."
    ]
   },
   {
    "h": "Teknik durum",
    "items": [
-    "AMD alım bölgesinde: 424,39 $ (bölge 424,23–426,78 $), stop 370,68 $, TP1 463,85 $; RSI 38.",
-    "SOXX alım bölgesinde: 123,40 $ (bölge 121,83–122,57 $), stop 103,56 $, TP1 218,65 $; RSI 16 ile aşırı satım.",
-    "AGNG alım bölgesinde: 38,81 $ (bölge 37,78–38,69 $), stop 37,11 $.",
-    "SMH (RSI 26) ve DELL (RSI 29) aşırı satım bölgesinde; stop'a %3'ten yakın enstrüman yok."
+    "Alım bölgesinde: CRDO 122,46 $ (bölge 122,69–123,42, stop 104,28), DELL 334,91 $ (317,50–335,89, stop 272,45), SOXX 140,22 $ (122,20–140,38, stop 103,87), AGNG 39,52 $ (37,78–39,37, stop 37,11).",
+    "Bölgenin üzerinde: SMH 460,18 $, AMD 453,46 $, VRT 186,35 $, ASML 1.383,78 $, XBI 147,16 $.",
+    "Stop'a %3'ten yakın ya da aşırı ısınmış enstrüman yok."
    ]
   },
   {
    "h": "Beklenti → gerçekleşen",
    "items": [
-    "Kaliforniya Başsavcılığından Nvidia'ya Çin soruşturması ve celp: beklenti olumsuz → fiyat beklenen yönde (SMH −%10,6, SOXX −%10,6).",
-    "Açığa satış raporu sonrası AMD sert düştü: beklenti olumsuz → fiyat beklenen yönde (AMD −%13,3, SMH −%10,6, SOXX −%10,6).",
-    "Bakır fiyatları ayı piyasasına girdi: beklenti olumsuz → fiyat beklenen yönde (COPX −%5,0).",
-    "TSMC ve Samsung ihracat kısıtları nedeniyle Çin sevkiyatlarını durdurdu: beklenti olumsuz → fiyat beklenen yönde (SMH −%2,6)."
+    "SEC muhasebe soruşturması iddiası ve Nvidia düşüşü: beklenti olumsuz → fiyat ters yönde (SMH +%15,0, SOXX +%13,6).",
+    "Açığa satış raporu sonrası AMD düşüşü: beklenti olumsuz → fiyat beklenen yönde (AMD −%13,3, SMH −%10,6, SOXX −%10,6).",
+    "Bakır ayı piyasasına girdi: beklenti olumsuz → fiyat beklenen yönde (COPX −%5,0)."
    ]
   }
  ]
