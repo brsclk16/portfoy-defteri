@@ -1,6 +1,54 @@
 {
- "updatedAt": "2026-11-18T05:55:56Z",
+ "updatedAt": "2026-11-25T06:00:00Z",
  "cards": [
+  {
+   "id": "DELL-2027Q3",
+   "t": "DELL",
+   "company": "Dell Technologies",
+   "date": "2026-11-24",
+   "quarter": "Q3 FY27",
+   "time": "piyasa sonrası",
+   "eps": {
+    "act": 9.45,
+    "est": 6.745,
+    "surprisePct": 40.1
+   },
+   "rev": {
+    "act": 54.94,
+    "est": 50.3,
+    "unit": "mlr $",
+    "yoy": 103,
+    "surprisePct": 9.2
+   },
+   "guidance": "Yıllık gelir ve kâr beklentisi bu yıl üçüncü kez yükseltildi; 4. çeyrek için 56,25 milyar $ gelir ve 8,40 $ düzeltilmiş HBK öngörülüyor.",
+   "highlights": [
+    "Gelir yıllık %103 artışla 54,9 milyar $'a çıkarak rekor kırdı.",
+    "Yapay zekâ sipariş birikimi 132,3 milyar $'a ulaştı.",
+    "25 milyar $'lık yeni hisse geri alım yetkisi onaylandı.",
+    "Hisse, rakibin AI sunucu marjı uyarısıyla seans içinde ~%12 düştükten sonra mesai sonrası ~%4-5 toparlandı."
+   ],
+   "affects": [
+    {
+     "t": "DELL",
+     "note": "doğrudan pozisyon"
+    }
+   ],
+   "summary": "Düzeltilmiş HBK beklentiyi %40, gelir %9 aştı ve rehberlik yeniden yükseltildi. Bilanço, seans içindeki AI sunucu marjı endişesine karşı güçlü bir yanıt oldu; izlenecek nokta bileşen arzı ve marjlar.",
+   "sources": [
+    {
+     "title": "SEC 8-K — Dell Technologies",
+     "url": "https://www.sec.gov/Archives/edgar/data/1571996/000157199626000050/dell-20261124.htm"
+    },
+    {
+     "title": "CNBC — Dell earnings",
+     "url": "https://www.cnbc.com/2026/11/24/dell-earnings-report-q3-2027.html"
+    },
+    {
+     "title": "CRN — Dell AI backlog",
+     "url": "https://www.crn.com/news/ai/2026/dell-ai-backlog-hits-132-3b-vast-majority-of-sales-profits-now-come-from-infrastructure-solutions-group"
+    }
+   ]
+  },
   {
    "id": "NVDA-2027Q3",
    "t": "NVDA",
