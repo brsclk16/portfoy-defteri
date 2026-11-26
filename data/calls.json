@@ -152,6 +152,37 @@
   ],
   "DELL": [
    {
+    "q": "Q3 2027",
+    "date": "2026-11-24",
+    "tone": "olumlu",
+    "toneChg": "benzer",
+    "summary": "Dell, yapay zekâ sunucularındaki talep patlamasıyla çeyreklik gelirini bir yılda iki katın üzerine çıkararak 54,9 milyar dolarla rekor kırdı ve yıllık hedeflerini yine yukarı taşıdı. Yönetim talebin kalıcı olduğunu ve arzın önünde gittiğini savunurken bellek kaynaklı maliyet baskısının 2027'ye kadar süreceğini kabul etti.",
+    "guidance": "4. çeyrek için orta noktada 56,25 milyar dolar gelir (yıllık %69 artış) ve 8,40 dolar düzeltilmiş HBK bekleniyor. 2027 mali yılı gelir beklentisi 202 milyar dolara (%80'e yakın büyüme), HBK beklentisi 29,68 dolara, yapay zekâ sunucu geliri hedefi 78 milyar dolara yükseltildi.",
+    "highlights": [
+     "Toplam gelir yıllık %103 artışla 54,9 milyar dolar; faaliyet marjı 490 baz puan genişleyerek %14,2'ye çıktı",
+     "ISG geliri %198 artışla 42 milyar dolar, faaliyet marjı %17; yapay zekâ sunucu geliri rekor 22 milyar dolar",
+     "Çeyrekte 60,2 milyar dolarlık yapay zekâ siparişi; birikmiş sipariş 132,3 milyar dolara ulaştı",
+     "Düzeltilmiş HBK %265 artışla 9,45 dolar; çeyrekte rekor 4,9 milyar dolar hissedara dağıtıldı, geri alım yetkisi 25 milyar dolar artırıldı"
+    ],
+    "qa": [
+     "ISG marjlarının sürdürülebilirliği: yönetim kazanımları ölçek ve gider disiplinine bağlayıp yapısal olduğunu söyledi, 4. çeyrek ötesi marj rakamı vermedi",
+     "Talep-arz dengesi: yönetim talep ile arz arasındaki farkın 2027'de 2026'dan daha geniş olacağını, son üç çeyrekte 4.500 yeni yapay zekâ müşterisi eklendiğini belirtti",
+     "Birikmiş siparişlerin ertelenme riski: müşteri ertelemesi olmadığı, siparişlerin yaklaşık 100 sahaya yayılan çok çeyreklik teslimatlar olduğu ifade edildi",
+     "Bellek maliyetleri ve fiyatlama: sunucu DRAM/NAND fiyatlarında düşüş işareti görülmediği, kıtlığın 2027'ye uzanacağı vurgulandı"
+    ],
+    "risks": [
+     "DRAM ve NAND kıtlığının maliyetleri yükseltmesi ve sunucu adetlerini baskılaması",
+     "PC (CSG) tarafında zayıf talep ve %5,5 seviyesindeki düşük faaliyet marjı",
+     "Büyümenin büyük ölçüde yapay zekâ altyapı harcamalarının sürmesine bağlı olması"
+    ],
+    "sources": [
+     {
+      "title": "Dell (DELL) Q3 2027 Earnings Call Transcript (The Motley Fool)",
+      "url": "https://www.fool.com/earnings/call-transcripts/2026/11/24/dell-dell-q3-2027-earnings-call-transcript/"
+     }
+    ]
+   },
+   {
     "q": "Q2 2027",
     "date": "2026-09-01",
     "tone": "olumlu",
@@ -1802,5 +1833,5 @@
    }
   ]
  },
- "updatedAt": "2026-11-19T07:40:09Z"
+ "updatedAt": "2026-11-26T07:40:52Z"
 }
