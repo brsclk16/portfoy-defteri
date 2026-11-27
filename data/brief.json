@@ -1,39 +1,18 @@
-{
- "publishedAt": "2026-11-26T05:55:57Z",
- "asOf": "2026-11-25",
- "title": "Sakin gün: metaller toparlandı, çipler hafif ekside; VRT alım bölgesinde",
- "sections": [
-  {
-   "h": "Dün",
-   "items": [
-    "Metaller ve sağlık önde: COPX +%1,88, SLV +%0,71, AGNG +%0,68, IAU +%0,64; DELL bilanço sonrası +%0,6.",
-    "Çipler gerileme sürdü: ASML −%2,47, AMD −%1,75, SMH −%1,01, SOXX −%0,5; VRT −%0,26, XBI −%0,14.",
-    "S&P 500 (SPY) −%0,29 ile sınırlı düştü; portföyde ayrışma sektöre göre oldu."
-   ]
-  },
-  {
-   "h": "Bugün",
-   "items": [
-    "ABD piyasaları bugün Şükran Günü nedeniyle kapalı; cuma kısa seans. Bugün/yarın için takvimde portföyü ilgilendiren olay yok.",
-    "Yeni haftanın ilk önemli verisi: 1 Aralık 18:00 TRT ISM imalat; aynı gün 23:30 TRT (tahmini) Credo bilançosu — CRDO doğrudan.",
-    "Nvidia'ya yönelik yeni ihracat soruşturması ve olası S&P not indirimi haberleri SMH/SOXX'teki NVDA ağırlığı üzerinden izlenmeli."
-   ]
-  },
-  {
-   "h": "Teknik durum",
-   "items": [
-    "VRT alım bölgesinde: 173,37 $ (bölge 171,05–172,10, stop 149,69, TP1 206,88, RSI 40).",
-    "SOXX RSI 20 ile aşırı satımda: 127,98 $ (bölge 117,80–118,56, stop 100,13); SMH 422,46 $ bölgenin (413,83–416,36) hemen üzerinde, RSI 37.",
-    "AGNG 40,72 $ ile TP1'e (41,51) yakın; stop'a %3'ten yakın enstrüman yok."
-   ]
-  },
-  {
-   "h": "Beklenti → gerçekleşen",
-   "items": [
-    "Dell bilançosu (Q3 FY27): HBK beklenti 6,75 → 9,45 (+%40,1, beklentinin üstünde); DELL tepkisi +%0,6.",
-    "ABD PCE/GSYH günü: dayanıklı mal siparişleri beklenti %0,7 → %0,2; haftalık işsizlik başvuruları 201 K → 189 K · SMH −%1,0, SLV +%0,7, IAU +%0,6.",
-    "Huang'ın Nvidia'ya dönüşü haberi: beklenti olumlu → fiyat ters yönde (SMH −%7,3, SOXX −%8,3)."
-   ]
-  }
- ]
-}
+{"publishedAt":"2026-11-27T06:10:00Z","asOf":"2026-11-25","title":"Çip cephesinde ihracat baskısı sürüyor; VRT alım bölgesinde, haftaya Credo ve ISM var","sections":[
+{"h":"Dün","items":[
+"Son işlem günü (25 Kasım) en iyi: COPX +%1,88, SLV +%0,71, AGNG +%0,68, IAU +%0,64.",
+"En zayıf: ASML −%2,47, AMD −%1,75, SMH −%1,01, SOXX −%0,50.",
+"26 Kasım'da ABD piyasaları Şükran Günü nedeniyle kapalıydı; bugün kısaltılmış seans var. S&P 500 kıyası için veri bu çalışmada mevcut değildi."]},
+{"h":"Bugün","items":[
+"Bugün ve yarın takvimde portföyü doğrudan ilgilendiren önemli olay yok.",
+"1 Aralık Pazartesi 18:00 TRT ABD ISM imalat endeksi (önceki 55,5) — SMH/SOXX ve metaller için risk iştahı göstergesi.",
+"1 Aralık 23:30 TRT (saat tahmini) Credo bilançosu; HBK beklentisi 1,31 $ — doğrudan CRDO pozisyonu.",
+"Haber akışı: Nvidia'nın Güneydoğu Asya'ya sunucu sevkiyatını durdurması ve Micron'a yönelik TrendForce/işgücü haberleri SMH ve SOXX için olumsuz başlıklar."]},
+{"h":"Teknik durum","items":[
+"VRT teknik alım bölgesinde: fiyat 173,37 $, bölge 171,05–172,10 $, stop 149,69 $, TP1 206,88 $.",
+"SOXX'te RSI 20 ile aşırı satım bölgesinde (fiyat 127,98 $, alım bölgesi 117,80–118,56 $).",
+"AGNG, CRDO, SMH ve XBI alım bölgelerinin üzerinde; hiçbir enstrüman stop seviyesine %3'ten yakın değil, aşırı ısınan da yok."]},
+{"h":"Beklenti → gerçekleşen","items":[
+"Dell bilançosu (Q3 FY27): HBK beklenti 6,75 → 9,45 (+%40,1, beklentinin üstünde); DELL tepkisi +%0,6 · takip edilenler DELL −%11,8.",
+"Jensen Huang'ın Nvidia'ya dönüşü: beklenti olumlu → fiyat ters yönde (SMH −%7,3, SOXX −%8,3)."]}
+]}
