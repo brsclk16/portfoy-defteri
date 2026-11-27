@@ -1,1 +1,1 @@
-{"at":"2026-11-26T13:55:13Z","sec":263,"errors":{"BOL":"HTTPError: HTTP Error 404: Not Found","GLEN":"HTTPError: HTTP Error 404: Not Found","KGH":"KeyError: 'timestamp'"},"fiyat":{"sembol":306,"gün":4251,"ilk":"2010-01-04","son":"2026-11-25"},"canliEklenen":1}
+{"at":"2026-11-27T13:52:20Z","sec":238,"errors":{"BOL":"HTTPError: HTTP Error 404: Not Found","GLEN":"HTTPError: HTTP Error 404: Not Found","KGH":"KeyError: 'timestamp'"},"fiyat":{"sembol":306,"gün":4251,"ilk":"2010-01-04","son":"2026-11-25"},"canliEklenen":0}
