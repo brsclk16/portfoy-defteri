@@ -1,5 +1,5 @@
 {
- "updatedAt": "2026-11-17",
+ "updatedAt": "2026-11-27",
  "note": "Büyük varlık yöneticilerinin yayımlanmış görünümlerinden derlendi. Duruş: 1 olumlu/ağırlık artır, 0 nötr, -1 olumsuz/ağırlık azalt. Her görüş kendi yayın tarihindedir; her görüşün geçerlilik tarihi (validUntil) yayının ufkuna göre konur; geçenler 'eski' sayılır ve uzlaşıya katılmaz. Kaynak bağlantıları birincil yayın ya da yayını aktaran haber/uygulayıcı sayfasıdır (tür alanında belirtilir). Bu kurumların kısa vadeli görünümleri sık yanılır; sitede her görüş, yayın tarihinden bu yana temanın gerçekte ne yaptığıyla karnelenir.",
  "themes": {
   "us_eq": {
@@ -138,42 +138,34 @@
    "id": "blackrock",
    "n": "BlackRock",
    "brand": "iShares",
-   "pub": "Weekly market commentary | BlackRock AI: looking beyond the buildout",
-   "date": "2026-11-16",
+   "pub": "BlackRock Investment Institute Market Take",
+   "date": "2026-11-23",
    "type": "otomatik: kaynak metninden özet",
    "url": "https://www.blackrock.com/corporate/insights/blackrock-investment-institute/publications/weekly-commentary",
    "views": {
-    "us_eq": [
+    "ust_mid": [
      1,
-     "Uzun vadeli yapay zeka potansiyeline olan inanç, ABD hisselerinde stratejik ağırlık artır (overweight) pozisyonumuzu destekliyor."
+     "Cazip gelir sağlaması ve oran dalgalanmalarına karşı daha fazla koruma sunması nedeniyle kısa ve orta vadeli ABD devlet tahvilleri tercih edilmektedir."
     ],
-    "healthcare": [
+    "short_bonds": [
      1,
-     "Yapay zekanın yaygınlaşması sürecinde ABD sağlık sektöründe özel fırsatlar görüyoruz."
-    ],
-    "financials": [
-     1,
-     "Yapay zekanın yaygınlaşması sürecinde finans şirketlerinde özel fırsatlar görüyoruz."
-    ],
-    "tips": [
-     1,
-     "Yüksek piyasa getirileri ve tahvillerin cazibesiyle birlikte, özellikle enflasyona endeksli tahvilleri favori görüyoruz."
+     "Cazip gelir sağlaması ve oran dalgalanmalarına karşı daha fazla koruma sunması nedeniyle kısa ve orta vadeli ABD devlet tahvilleri tercih edilmektedir."
     ]
    },
    "strengths": [
-    "Yapay zeka dönüşümünün verimlilik, kar marjları ve kazançları zamanla artıracak olması.",
-    "Yatırımcıların yapay zeka kazanç iyimserliğinin yüksek faiz baskısını dengelemesi.",
-    "Materyal olarak yüksek piyasa verimlerinin tahvilleri daha cazip hale getirmesi."
+    "ABD ekonomisi, güçlü istihdam ve ücret artışlarıyla desteklenerek direncini korumaktadır.",
+    "Orta Doğu enerji şokunun ABD enflasyonu üzerindeki etkisinin zirveye ulaştığı düşünülmektedir.",
+    "Düşen enerji fiyatları ve yavaşlayan yapay zeka sermaye harcaması büyümesi enflasyon baskılarını hafifletmeye yardımcı olabilmektedir."
    ],
    "risks": [
-    "Daha ucuz bilgi işlem (computing) maliyetlerinin yapay zeka tedarikçilerinin karlarını sıkıştırması.",
-    "Darboğazların işletmelerin yapay zekayı benimseme hızını yavaşlatması.",
-    "Şirketlerin yapay zeka altyapısını ihtiyaçtan fazla inşa etmesiyle işletmeler fayda görmeden karların yavaşlaması.",
-    "Şirketlerin yapay zeka inşa ederken devletlerle fonlama için rekabet etmesi ve faiz oranları üzerinde baskı yaratması."
+    "Güçlü ücret büyümesi çekirdek hizmetler enflasyonunun maliyetini yüksek tutmaya devam etmektedir.",
+    "Nasdaq, sağlam Nvidia kazançlarına ve Anthropic'in halka arzına rağmen yapay zeka duyarlılığını yükseltemeyerek ayı piyasası bölgesine %10 düşüş kaydetmiştir.",
+    "Piyasalar, Fed'in gelecek yıl boyunca yapabileceği öngörülen oran artışlarında aşırı fiyatlama yapmaktadır.",
+    "Çekirdek fiyat baskılarının kalıcılığı ve ekim ayı PCE verileri Fed'in sıkılaştırma hamlelerini masada tutabilmektedir."
    ],
-   "validUntil": "2027-02-16",
+   "validUntil": "2027-02-23",
    "horizon": "taktik görüş, bir sonraki yeniden dengelemeye kadar",
-   "context": "ABD hisselerindeki stratejik ağırlık artır pozisyonumuz uzun vadeli yapay zeka inancımıza dayanırken, 6-12 aylık taktiksel ufukta ise temkinli bir şekilde nötr duruş sergiliyoruz.",
+   "context": "ABD ekonomik büyümesinin enflasyon soğurken dirençli kalması beklenmekte, ancak çekirdek fiyat baskılarının sürmesi nedeniyle görünüm net değildir.",
    "auto": true
   },
   {
@@ -924,34 +916,61 @@
    "id": "blackrock",
    "n": "BlackRock",
    "archivedAt": "2026-11-17"
+  },
+  {
+   "date": "2026-11-16",
+   "pub": "Weekly market commentary | BlackRock AI: looking beyond the buildout",
+   "views": {
+    "us_eq": [
+     1,
+     "Uzun vadeli yapay zeka potansiyeline olan inanç, ABD hisselerinde stratejik ağırlık artır (overweight) pozisyonumuzu destekliyor."
+    ],
+    "healthcare": [
+     1,
+     "Yapay zekanın yaygınlaşması sürecinde ABD sağlık sektöründe özel fırsatlar görüyoruz."
+    ],
+    "financials": [
+     1,
+     "Yapay zekanın yaygınlaşması sürecinde finans şirketlerinde özel fırsatlar görüyoruz."
+    ],
+    "tips": [
+     1,
+     "Yüksek piyasa getirileri ve tahvillerin cazibesiyle birlikte, özellikle enflasyona endeksli tahvilleri favori görüyoruz."
+    ]
+   },
+   "url": "https://www.blackrock.com/corporate/insights/blackrock-investment-institute/publications/weekly-commentary",
+   "type": "otomatik: kaynak metninden özet",
+   "id": "blackrock",
+   "n": "BlackRock",
+   "archivedAt": "2026-11-27"
   }
  ],
  "autoRun": {
-  "at": "2026-11-24T14:08:53Z",
+  "at": "2026-11-27T12:57:37Z",
   "log": {
+   "blackrock": "güncellendi → 2026-11-23 (2 görüş)",
    "vanguard": "değişmedi: https://corporate.vanguard.com/content/corporatesite/us/en/corp/vemo/vemo-return-forecasts.html: yeni değil (2026-10-21 ≤ 2026-10-21) | arama: RuntimeError grounding başarısız: HTTP Error 429: Too Many Requests",
-   "jpmorgan": "değişmedi: https://am.jpmorgan.com/us/en/asset-management/adv/insights/portfolio-insights/ltcma/: RuntimeError gemini-3.8-flash: HTTPError HTTP Error 503: Service Unavailable | gemini-flash-latest: HTTPError HTTP Error 503: Service | https://am.jpmorgan.com/jp/en/asset-management/institutional/insights/portfolio-insights/ltcma/executive-summary/: RuntimeError gemini-3.8-flash: HTTPError HTTP Error 503: Service Unavailable | gemini-flash-latest: HTTPError HTTP Error 503: Service | arama: RuntimeError grounding başarısız: HTTP Error 429: Too Many Requests",
+   "jpmorgan": "değişmedi: https://am.jpmorgan.com/us/en/asset-management/adv/insights/portfolio-insights/ltcma/: yeni değil (2026-09-01 ≤ 2026-10-01) | https://am.jpmorgan.com/jp/en/asset-management/institutional/insights/portfolio-insights/ltcma/executive-summary/: yeni değil (2026-10-01 ≤ 2026-10-01) | arama: RuntimeError grounding başarısız: HTTP Error 429: Too Many Requests",
    "goldman": "değişmedi: https://am.gs.com/en-us/advisors/insights/article/investment-outlook: HTTPError HTTP Error 404: Not Found | arama: RuntimeError grounding başarısız: HTTP Error 429: Too Many Requests",
-   "statestreet": "değişmedi: https://www.ssga.com/us/en/intermediary/insights/global-market-outlook: RuntimeError gemini-3.8-flash: HTTPError HTTP Error 503: Service Unavailable | gemini-flash-latest: HTTPError HTTP Error 503: Service | arama: RuntimeError grounding başarısız: HTTP Error 429: Too Many Requests",
+   "statestreet": "değişmedi: https://www.ssga.com/us/en/intermediary/insights/global-market-outlook: tarih geçersiz/eski: 2025-11-30 | arama: RuntimeError grounding başarısız: HTTP Error 429: Too Many Requests",
    "pimco": "değişmedi: https://www.pimco.com/us/en/insights/cyclical-outlook: HTTPError HTTP Error 404: Not Found | arama: RuntimeError grounding başarısız: HTTP Error 429: Too Many Requests",
-   "amundi": "değişmedi: https://research-center.amundi.com/: tarih okunamadı | arama: RuntimeError grounding başarısız: HTTP Error 429: Too Many Requests",
+   "amundi": "değişmedi: https://research-center.amundi.com/: tarih geçersiz/eski: 2027-01-01 | arama: RuntimeError grounding başarısız: HTTP Error 429: Too Many Requests",
    "capitalgroup": "değişmedi: https://www.capitalgroup.com/individual/insights/categories/outlook.html: yeni değil (2026-06-24 ≤ 2026-06-24) | arama: RuntimeError grounding başarısız: HTTP Error 429: Too Many Requests",
-   "fidelity": "değişmedi: https://institutional.fidelity.com/advisors/insights/topics/market-commentary: RuntimeError gemini-3.8-flash: HTTPError HTTP Error 503: Service Unavailable | gemini-flash-latest: HTTPError HTTP Error 503: Service | arama: RuntimeError grounding başarısız: HTTP Error 429: Too Many Requests",
-   "bny": "değişmedi: https://www.bny.com/assets/investments/imemea/pdfs/emea_fp_checkpoints_nov26.pdf: HTTPError HTTP Error 404: Not Found | https://www.bny.com/assets/investments/imemea/pdfs/emea_fp_checkpoints_oct26.pdf: HTTPError HTTP Error 404: Not Found | https://www.bny.com/assets/investments/imemea/pdfs/emea_fp_checkpoints_sep26.pdf: HTTPError HTTP Error 404: Not Found | https://www.bny.com/assets/investments/imemea/pdfs/emea_fp_checkpoints_aug26.pdf: HTTPError HTTP Error 404: Not Found | arama: RuntimeError grounding başarısız: HTTP Error 429: Too Many Requests",
-   "blackrock": "süre doldu, bir sonraki çalışmaya kaldı"
+   "fidelity": "süre doldu, bir sonraki çalışmaya kaldı",
+   "bny": "süre doldu, bir sonraki çalışmaya kaldı"
   },
   "checked": {
-   "blackrock": "2026-11-20T12:06:19Z",
-   "vanguard": "2026-11-24T13:58:35Z",
-   "jpmorgan": "2026-11-24T14:00:48Z",
-   "goldman": "2026-11-24T14:01:23Z",
-   "statestreet": "2026-11-24T14:03:03Z",
-   "pimco": "2026-11-24T14:03:39Z",
-   "amundi": "2026-11-24T14:04:51Z",
-   "capitalgroup": "2026-11-24T14:06:03Z",
+   "blackrock": "2026-11-27T12:47:48Z",
+   "vanguard": "2026-11-27T12:49:03Z",
+   "jpmorgan": "2026-11-27T12:52:49Z",
+   "goldman": "2026-11-27T12:53:25Z",
+   "statestreet": "2026-11-27T12:54:37Z",
+   "pimco": "2026-11-27T12:55:13Z",
+   "amundi": "2026-11-27T12:56:25Z",
+   "capitalgroup": "2026-11-27T12:57:37Z",
    "fidelity": "2026-11-24T14:08:15Z",
    "bny": "2026-11-24T14:08:53Z"
   },
-  "sec": 683
+  "sec": 664
  }
 }
