@@ -1,6 +1,89 @@
 {
  "reports": [
   {
+   "id": "2026-W48",
+   "weekEnd": "2026-11-27",
+   "range": "23–27 Kasım 2026",
+   "publishedAt": "2026-11-27T22:40:35Z",
+   "title": "Huang'ın dönüşüyle sert toparlanma: Credo %15,7, AMD yerinde saydı",
+   "movers": [
+    {
+     "t": "CRDO",
+     "pct": 15.73
+    },
+    {
+     "t": "DELL",
+     "pct": 14.01
+    },
+    {
+     "t": "XBI",
+     "pct": 13.07
+    },
+    {
+     "t": "SMH",
+     "pct": 10.0
+    },
+    {
+     "t": "COPX",
+     "pct": 8.89
+    },
+    {
+     "t": "SOXX",
+     "pct": 8.65
+    },
+    {
+     "t": "VRT",
+     "pct": 7.5
+    },
+    {
+     "t": "SLV",
+     "pct": 6.57
+    },
+    {
+     "t": "AGNG",
+     "pct": 5.23
+    },
+    {
+     "t": "ASML",
+     "pct": 4.71
+    },
+    {
+     "t": "IAU",
+     "pct": 3.49
+    },
+    {
+     "t": "AMD",
+     "pct": 0.04
+    }
+   ],
+   "summary": [
+    "Önceki haftanın tasfiyesinden sonra bu kısa tatil haftasında 12 enstrümanın tamamı artıda kapattı. S&P 500 (SPY) %5,6 yükseldi; eşit ağırlıklı portföy ortalaması yaklaşık %8,2 ile endeksin 2,6 puan önüne geçti. Yine de bu, bir önceki haftadaki yaklaşık %15,8'lik kaybın ancak yarısını telafi ediyor. En iyi performansı %15,7 ile Credo (CRDO), en zayıfını yatay (+%0,04) kapanışla AMD gösterdi. Hareketin neredeyse tamamı pazartesi geldi: Nvidia yönetim kurulunun Jensen Huang'ı CEO olarak geri getirmesiyle SPY %4,7, SMH %15,0, Credo %22,6, Dell %20,5 yükseldi. Salı günü kazancın bir kısmı geri verildi (SMH -%7,3, Credo -%13,1). Perşembe Şükran Günü tatili ve cuma yarım gün işlemle hafta yeniden yükselişle bitti.",
+    "Yarı iletkenlerde (SMH +%10,0, SOXX +%8,7) toparlanmayı yönetim belirsizliğinin azalması getirdi, ama Çin kaynaklı riskler azalmadı. Yeni ABD ihracat kuralları sonrasında Nvidia, Malezya, Singapur, Tayland ve Endonezya'ya sunucu sevkiyatını durdurdu. Bloomberg ise yasaklı Blackwell çiplerinin Şanghay'da bir veri merkezinde kurulu olduğunu ortaya çıkardı. Hollanda hükümetinin ASML'ye yönelik önerilen MATCH Act kısıtlamalarına karşı çıkacağını açıklamasına rağmen ASML %4,7 ile sınırlı kaldı. AMD'de, OpenAI ve Meta varantlarını da kapsayan 337 milyon hisselik satış kaydı ve Erste Group'un notu 'Tut'a indirmesi yükselişi sildi. AI altyapı tarafında Dell (+%14,0) güçlü bilançoyla, Vertiv (+%7,5) ve Credo genel toparlanmayla yükseldi. Biyotek (XBI +%13,1) haftanın sürprizi oldu: sektör pazartesi %5,0, salı ise teknoloji satılırken %6,6 yükseldi. Bu, AI'dan sağlığa dönüşün ve süren satın alma/lisans anlaşmalarının (Lilly–LoQus23, AbbVie–Disco) etkisi gibi görünüyor. AGNG de %5,2 yükseldi. Metaller de toparlandı: ons altın %3,7 artışla 3.668 $'a çıktı (IAU +%3,5), SLV %6,6, COPX %8,9 yükseldi. Ancak 25 Kasım'da 3. çeyrek büyümesi %4,3'e revize edildi ve çekirdek PCE yıllık %3,3 ile Kasım 2023'ten beri en yüksek seviyeye çıktı; bu veriler Aralık'ta faiz artırımı beklentisini canlı tutuyor.",
+    "Dolar/TL %0,5 artışla 50,75'e çıktı ve TL bazındaki getirileri biraz artırdı. TL bazında SPY yaklaşık %6,1, eşit ağırlıklı portföy ortalaması yaklaşık %8,7 kazandırdı; Credo TL'de %16,3, Dell %14,6 yükselirken AMD yalnızca %0,5 getirdi. Çeşitlendirme bu hafta ters yönden çalıştı: önceki hafta her şey birlikte düşmüştü, bu hafta her şey birlikte yükseldi. Bu, portföyün büyük kısmının aynı 'risk iştahı + faiz' etkenine bağlı olduğunu yeniden gösteriyor. Ayrışma yalnızca salı günü görüldü: AI hisseleri sert düşerken XBI ve AGNG yükseldi, altın ise sınırlı düştü. Sağlık bacağı bu hafta da portföyün en istikrarlı parçasıydı."
+   ],
+   "highlights": [
+    "Nvidia: Yönetim kurulu 23 Kasım'da Jensen Huang'ı oybirliğiyle yeniden CEO ve başkan olarak atadı; Başkan Trump kurulu 'ikna ettiğini' söyledi. Hisse tek günde %30'dan fazla yükseldi, ancak S&P kredi notunu olası indirim için izlemeye aldı (Moody's Aa1 notunu korudu). Blackwell çiplerinin Şanghay'da tespit edilmesi ve Güneydoğu Asya sevkiyatlarının durdurulması SMH/SOXX'un en büyük holdingi için hukuki ve ticari riski canlı tutuyor.",
+    "Dell: 3. çeyrekte geliri yıllık bazda iki katından fazla arttı; AI sunucu geliri %291 artışla 22 milyar $'a, sipariş birikimi ise rekor 132,3 milyar $'a çıktı. Şirket 25 milyar $'lık hisse geri alımını onayladı ve yıllık tahminini yükseltti. Buna rağmen UBS hedef fiyatı 500 $'dan 365 $'a indirdi; Güneydoğu Asya sevkiyat durdurması da yeni bir belirsizlik.",
+    "AMD: Haftayı yatay kapattı (+%0,04). OpenAI ve Meta'ya verilen varantlarla ilgili hisseleri de kapsayan 337 milyon hisselik satış kaydı ve Erste Group'un değerleme gerekçesiyle not indirimi baskı yarattı; cuma günü %4,6'lık yükseliş haftalık kaybı kapattı.",
+    "ASML: Hollanda hükümeti, Çin satışlarını kısıtlamayı amaçlayan ABD MATCH Act önerisine direneceğini açıkladı; CEO Christophe Fouquet de sert kontrollerin Çin'in yerli üretimini hızlandıracağı uyarısında bulundu. Bernstein 'Al' tavsiyesini sürdürdü. Hisse %4,7 yükseldi.",
+    "Vertiv ve Credo: Vertiv 800 VDC güç ürün ailesini raf, pod ve veri salonu seviyesine genişletti (+%7,5). Credo, 1 Aralık bilançosu öncesinde pazartesi %22,6 yükseldi, Stifel'in hedef fiyat indirimine rağmen haftayı %15,7 artıda bitirdi.",
+    "AGNG ve XBI holdingleri: Eli Lilly, Huntington hastalığına yönelik MSH3 inhibitörü geliştiren LoQus23'ü 725 milyon $'a varan bir anlaşmayla alıyor; AbbVie'nin Rinvoq'u nonsegmental vitiligoda ilk ağızdan sistemik tedavi olarak FDA onayı aldı. Novo Nordisk ve Lilly, GLP-1 ilaçlarına göz riski uyarısı ekleyecek."
+   ],
+   "nextWeek": [
+    "1 Aralık Salı, ABD kapanış sonrası (TR saatiyle 2 Aralık 01:00 civarı): Credo 2. çeyrek (FY27) bilançosu. Beklenti hisse başı ~1,31 $ ve ~542 milyon $ gelir. Haftanın en iyi performansını gösteren ve en oynak pozisyon olan CRDO için doğrudan, Vertiv ve SMH için de AI ağ talebine dair bir sinyal.",
+    "1 Aralık Salı: ABD ISM imalat endeksi (beklenti 55,2, önceki 55,5) ve JOLTS iş ilanları. Sanayi döngüsü COPX ve yarı iletken fonlarını (SMH/SOXX) ilgilendiriyor.",
+    "2–3 Aralık: ADP özel sektör istihdamı (önceki 86 bin), haftalık işsizlik başvuruları (önceki 189 bin) ve ISM hizmet endeksi (beklenti 54,5). Güçlü veriler, faiz artırımı beklentisini pekiştirerek IAU/SLV ve büyüme hisselerine baskı yapabilir.",
+    "4 Aralık Cuma: Kasım tarım dışı istihdam raporu (beklenti 90 bin, önceki 165 bin; işsizlik beklentisi %4,1). 8–9 Aralık Fed toplantısı öncesindeki son büyük veri olduğu için tüm portföyü ilgilendiriyor. Aynı gün Başkan Trump TSMC'nin Arizona fabrika genişlemesinin temel atma törenine katılacak.",
+    "Hafta içinde: Jensen Huang'ın Kongre'deki görüşmesi bekleniyor. Nvidia'yla ilgili yeni bir hukuki gelişme SMH, SOXX, Dell ve Credo'yu birlikte hareket ettirebilir. Erken not: 9 Aralık'ta Fed kararı ve Broadcom bilançosu, 10 Aralık'ta TCMB faiz kararı var."
+   ],
+   "watch": [
+    "Enflasyon ve Fed: Çekirdek PCE'nin yıllık %3,3'e çıkması ve 3. çeyrek büyümesinin %4,3'e revize edilmesiyle piyasa 9 Aralık'ta çeyrek puan artırım fiyatlıyor; Fed üyesi Waller'ın yarım puanı destekleyebileceğine işaret ettiği belirtiliyor. Daha sert bir sinyal AI hisselerini ve değerli metalleri bir önceki haftadaki gibi aynı anda baskılayabilir.",
+    "İhracat kontrolleri ve Çin: Güneydoğu Asya'ya sunucu sevkiyatının durması (yeni kuralın 90 günlük süresi işliyor), Kongre'deki MATCH Act tartışması ve Blackwell çiplerinin Çin'de bulunması; Nvidia, AMD, ASML ve Dell üzerinden portföyün yarı iletken/AI ağırlığını doğrudan etkiliyor.",
+    "Oynaklık: Pazartesi %15, salı %-7 gibi günlük hareketler SMH'de; Credo ve Dell'de ise %20'yi aşan günlük salınımlar görüldü. Toparlanma henüz önceki haftanın kaybını kapatmadı; Credo bilançosu ya da istihdam verisi gibi tek bir olay haftalık sonucu kolayca tersine çevirebilir.",
+    "Kurumsal 13F verisinde (30 Eylül itibarıyla) Capital Research'ün Credo pozisyonunu yaklaşık 4,2 katına, UBS'in 2,4 katına çıkardığı, Fidelity'nin AMD pozisyonunu iki katına çıkardığı görülüyor. Bu alımlar sert düşüş öncesinde yapıldığı için bir sonraki dönem açıklamaları ilgiyle izlenmeli."
+   ]
+  },
+  {
    "id": "2026-W47",
    "weekEnd": "2026-11-20",
    "range": "16–20 Kasım 2026",
